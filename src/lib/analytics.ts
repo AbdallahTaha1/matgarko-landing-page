@@ -8,22 +8,13 @@ declare global {
 }
 
 export function initAnalytics() {
-  if (!GA_MEASUREMENT_ID || window.gtag) {
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
+  // The Google tag is loaded in index.html so Google/Netlify tag scanners can detect it.
+  // This fallback only exists for local builds where the static tag may be removed later.
+  if (!GA_MEASUREMENT_ID || window.gtag) return;
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = (...args: unknown[]) => {
-    window.dataLayer?.push(args);
-  };
-
+  window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
   window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: false });
 }
 
 export function trackPageView(path: string) {
