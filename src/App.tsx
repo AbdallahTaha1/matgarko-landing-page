@@ -10,10 +10,12 @@ import RegisterPage from "./pages/RegisterPage";
 import { TermsPage } from "./pages/TermsPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { IntegrationsPage } from "./pages/IntegrationsPage";
+import { Analytics } from "./components/Analytics";
 
 function App() {
   return (
     <BrowserRouter>
+      <Analytics />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />

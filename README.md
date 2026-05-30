@@ -68,6 +68,18 @@ Preview the production build:
 npm run preview
 ```
 
+## Analytics
+
+The site supports optional Google Analytics page tracking.
+
+Create a `.env` file and add your GA4 measurement ID:
+
+```bash
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+If this value is not set, analytics will stay disabled.
+
 ## Deployment Notes
 
 The production build is generated in `dist/`.
