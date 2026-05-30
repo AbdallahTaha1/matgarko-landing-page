@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# Matgarko Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Landing page for **Matgarko | متجركو**, an Arabic ecommerce SaaS product for merchants in Egypt who want to create an online store quickly and affordably.
 
-Currently, two official plugins are available:
+## Product Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Matgarko helps merchants start selling online without hiring a software company or waiting months for custom development. The site explains the product, pricing, setup steps, contact channels, privacy policy, and terms.
 
-## React Compiler
+Core product message:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Create an online store in minutes.
+- Start from an affordable monthly price.
+- Try the platform with a limited-time free month.
+- Manage products, orders, customers, payment, and shipping from one dashboard.
+- Designed for Arabic-speaking merchants and the Egyptian market.
 
-## Expanding the ESLint configuration
+## Main Pages
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `/` - Home page
+- `/solutions` - Product solutions and store management features
+- `/getting-started` - Steps to create and prepare a store
+- `/pricing` - Monthly pricing plans
+- `/about` - About Matgarko
+- `/contact` - WhatsApp, email, phone, and Facebook contact options
+- `/integrations` - Integrations and app store information
+- `/terms` - Terms and conditions
+- `/privacy` - Privacy policy
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Contact Information
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- WhatsApp / phone: `+20 108 031 2538`
+- Email: `matgarko.help@gmail.com`
+- Facebook: `https://www.facebook.com/matgarko2/`
+- Signup: `https://signup.matgarko.com/signup`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Lucide React icons
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Deployment Notes
+
+The production build is generated in `dist/`.
+
+The app is a single-page React site, so production hosting should route unknown paths back to `index.html`. An example nginx config is included in `nginx.conf`.
