@@ -14,9 +14,9 @@ import { Analytics } from "./components/Analytics";
 import { SEO } from "./components/SEO";
 import { ThemesPage } from "./pages/ThemesPage";
 
-function App() {
+export function AppRoutes() {
   return (
-    <BrowserRouter>
+    <>
       <SEO />
       <Analytics />
       <Routes>
@@ -34,6 +34,14 @@ function App() {
           <Route path="privacy" element={<PrivacyPage />} />
         </Route>
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
