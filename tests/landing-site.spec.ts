@@ -60,6 +60,10 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   });
 
   test('crawl files are available from public assets', async ({ request }) => {
+    const redirects = await request.get('/_redirects');
+    await expect(redirects).toBeOK();
+    await expect(await redirects.text()).toContain('/* /index.html 200');
+
     const robots = await request.get('/robots.txt');
     await expect(robots).toBeOK();
     await expect(await robots.text()).toContain('Sitemap: https://matgarko.com/sitemap.xml');
