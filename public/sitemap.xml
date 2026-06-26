@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core pages -->
   <url>
     <loc>https://matgarko.com/</loc>
     <lastmod>2026-06-26</lastmod>
@@ -7,7 +8,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://matgarko.com/solutions</loc>
+    <loc>https://matgarko.com/pricing</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -25,13 +26,13 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://matgarko.com/getting-started</loc>
+    <loc>https://matgarko.com/solutions</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://matgarko.com/pricing</loc>
+    <loc>https://matgarko.com/getting-started</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -49,12 +50,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://matgarko.com/register</loc>
-    <lastmod>2026-06-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://matgarko.com/terms</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>yearly</changefreq>
@@ -65,5 +60,102 @@
     <lastmod>2026-06-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <!-- Industry landing pages -->
+  <url>
+    <loc>https://matgarko.com/store/restaurants</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/store/clothing</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/store/electronics</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/store/cosmetics</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/store/furniture</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Compare / competitor pages - high priority for commercial intent -->
+  <url>
+    <loc>https://matgarko.com/compare</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/compare/easyorders</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/compare/shopify</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/compare/salla</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/compare/woocommerce</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog -->
+
+  <url>
+    <loc>https://matgarko.com/blog</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/blog/how-to-create-online-store-egypt</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/blog/cost-of-online-store-egypt-2026</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/blog/best-ecommerce-platform-egypt</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://matgarko.com/blog/free-online-store-pros-cons</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
 </urlset>

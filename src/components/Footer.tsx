@@ -10,10 +10,10 @@ export function Footer() {
   return (
     <footer className="bg-gray-50 pt-20 pb-10 border-t border-gray-200">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-10 mb-16">
+
           {/* Brand Column */}
-          <div className="col-span-1 md:col-span-1">
+          <div className="col-span-1">
             <div className="flex items-center gap-2 mb-6">
               <img src={logo} alt="متجركو" className="h-12 w-12 object-contain" />
               <span className="text-2xl font-bold text-gray-900 font-heading">متجركو</span>
@@ -36,9 +36,9 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links Columns */}
+          {/* About Links */}
           <div>
-            <h4 className="text-gray-900 font-bold mb-6 font-heading">عن متجركو</h4>
+            <h3 className="text-gray-900 font-bold mb-6 font-heading">عن متجركو</h3>
             <ul className="space-y-4">
               <li><Link to="/about" className="text-gray-500 hover:text-primary transition-colors">من نحن</Link></li>
               <li><Link to="/solutions" className="text-gray-500 hover:text-primary transition-colors">حلول المتجر</Link></li>
@@ -48,18 +48,45 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Resources */}
           <div>
-             <h4 className="text-gray-900 font-bold mb-6 font-heading">المصادر والدعم</h4>
+            <h3 className="text-gray-900 font-bold mb-6 font-heading">المصادر والدعم</h3>
             <ul className="space-y-4">
-              <li><Link to="/contact" className="text-gray-500 hover:text-primary transition-colors">مركز المساعدة</Link></li>
+              <li><Link to="/contact" className="text-gray-500 hover:text-primary transition-colors">تواصل معنا</Link></li>
               <li><Link to="/themes" className="text-gray-500 hover:text-primary transition-colors">قوالب المتجر</Link></li>
               <li><Link to="/integrations" className="text-gray-500 hover:text-primary transition-colors">الدفع والشحن</Link></li>
               <li><Link to="/getting-started" className="text-gray-500 hover:text-primary transition-colors">خطوات البدء</Link></li>
+              <li><Link to="/blog" className="text-gray-500 hover:text-primary transition-colors">المدونة</Link></li>
             </ul>
           </div>
 
+          {/* Industry Pages */}
           <div>
-            <h4 className="text-gray-900 font-bold mb-6 font-heading">تواصل معنا</h4>
+            <h3 className="text-gray-900 font-bold mb-6 font-heading">متاجر حسب النشاط</h3>
+            <ul className="space-y-4">
+              <li><Link to="/store/restaurants" className="text-gray-500 hover:text-primary transition-colors">متجر المطاعم</Link></li>
+              <li><Link to="/store/clothing" className="text-gray-500 hover:text-primary transition-colors">متجر الملابس</Link></li>
+              <li><Link to="/store/electronics" className="text-gray-500 hover:text-primary transition-colors">متجر الإلكترونيات</Link></li>
+              <li><Link to="/store/cosmetics" className="text-gray-500 hover:text-primary transition-colors">متجر التجميل</Link></li>
+              <li><Link to="/store/furniture" className="text-gray-500 hover:text-primary transition-colors">متجر الأثاث</Link></li>
+            </ul>
+          </div>
+
+          {/* Competitor Comparisons */}
+          <div>
+            <h3 className="text-gray-900 font-bold mb-6 font-heading">مقارنة المنصات</h3>
+            <ul className="space-y-4">
+              <li><Link to="/compare/easyorders" className="text-gray-500 hover:text-primary transition-colors">متجركو vs إيزي أوردرز</Link></li>
+              <li><Link to="/compare/salla" className="text-gray-500 hover:text-primary transition-colors">متجركو vs سلة</Link></li>
+              <li><Link to="/compare/shopify" className="text-gray-500 hover:text-primary transition-colors">متجركو vs شوبيفاي</Link></li>
+              <li><Link to="/compare/woocommerce" className="text-gray-500 hover:text-primary transition-colors">متجركو vs ووكومرس</Link></li>
+              <li><Link to="/compare" className="text-emerald-700 hover:text-emerald-800 font-medium transition-colors">كل المقارنات ←</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-gray-900 font-bold mb-6 font-heading">تواصل معنا</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-gray-500">
                 <span className="w-20">الهاتف:</span>
@@ -74,7 +101,7 @@ export function Footer() {
                 <span className="text-gray-900">القاهرة الجديدة، مصر</span>
               </li>
               <li className="pt-2">
-                <Link to="/contact" className="text-primary hover:underline font-medium">
+                <Link to="/contact" className="text-emerald-700 hover:text-emerald-800 font-medium transition-colors">
                   صفحة التواصل ←
                 </Link>
               </li>
@@ -85,7 +112,7 @@ export function Footer() {
 
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © 2024 متجركو. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} متجركو. جميع الحقوق محفوظة.
           </p>
           <div className="flex gap-6 items-center">
             {["Mastercard", "Visa", "Fawry", "Meeza"].map((method) => (

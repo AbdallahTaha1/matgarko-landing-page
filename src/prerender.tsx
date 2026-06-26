@@ -51,7 +51,7 @@ function renderHead(page: SeoPage) {
     <title>${escapeHtml(page.title)}</title>
     <meta name="description" content="${escapeHtml(page.description)}" />
     <meta name="keywords" content="${escapeHtml(page.keywords.join(", "))}" />
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <meta name="robots" content="${page.noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"}" />
     <meta name="author" content="${escapeHtml(SITE_NAME)}" />
     <meta name="theme-color" content="#0d9488" />
     <link rel="canonical" href="${escapeHtml(canonical)}" />

@@ -64,7 +64,7 @@ export function SEO() {
 
     upsertMeta("name", "description", page.description);
     upsertMeta("name", "keywords", page.keywords.join(", "));
-    upsertMeta("name", "robots", "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1");
+    upsertMeta("name", "robots", page.noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1");
     upsertMeta("name", "author", SITE_NAME);
     upsertMeta("name", "theme-color", "#0d9488");
     upsertMeta("property", "og:locale", "ar_EG");

@@ -60,7 +60,7 @@ export const AboutPage = () => {
                 ابدأ بتكلفة بسيطة
               </h2>
               <div className="grid gap-3">
-                {["بداية من 50 ج", "شهر مجاني", "تجربة عربية سهلة"].map((item) => (
+                {["بدون رسوم تأسيس", "باقات تناسب الجميع", "تجربة عربية سهلة"].map((item) => (
                   <div key={item} className="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 px-4 py-3">
                     <span className="text-sm font-bold text-gray-700">{item}</span>
                     <Check className="h-4 w-4 text-emerald-700" />
