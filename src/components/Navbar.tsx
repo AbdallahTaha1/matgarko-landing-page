@@ -27,7 +27,8 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             <Link to="/" className="text-gray-600 hover:text-primary transition-colors font-medium">الرئيسية</Link>
             <Link to="/solutions" className="text-gray-600 hover:text-primary transition-colors font-medium">الحلول</Link>
-            <Link to="/integrations" className="text-gray-600 hover:text-primary transition-colors font-medium">المتجر</Link>
+            <Link to="/themes" className="text-gray-600 hover:text-primary transition-colors font-medium">القوالب</Link>
+            <Link to="/integrations" className="text-gray-600 hover:text-primary transition-colors font-medium">الدفع والشحن</Link>
             <Link to="/getting-started" className="text-gray-600 hover:text-primary transition-colors font-medium">خطوات البدء</Link>
             <Link to="/pricing" className="text-gray-600 hover:text-primary transition-colors font-medium">الأسعار</Link>
             <Link to="/contact" className="text-gray-600 hover:text-primary transition-colors font-medium">تواصل معنا</Link>
@@ -56,6 +57,8 @@ export function Navbar() {
             <div className="flex flex-col gap-4">
               <Link to="/" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">الرئيسية</Link>
               <Link to="/solutions" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">الحلول</Link>
+              <Link to="/themes" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">القوالب</Link>
+              <Link to="/integrations" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">الدفع والشحن</Link>
               <Link to="/getting-started" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">خطوات البدء</Link>
               <Link to="/pricing" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">الأسعار</Link>
               <Link to="/contact" onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-primary font-medium px-4">تواصل معنا</Link>

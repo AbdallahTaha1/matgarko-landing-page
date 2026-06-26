@@ -40,6 +40,7 @@ export function Footer() {
             <h4 className="text-gray-900 font-bold mb-6 font-heading">عن متجركو</h4>
             <ul className="space-y-4">
               <li><a href="/about" className="text-gray-500 hover:text-primary transition-colors">من نحن</a></li>
+              <li><a href="/solutions" className="text-gray-500 hover:text-primary transition-colors">حلول المتجر</a></li>
               <li><a href="/pricing" className="text-gray-500 hover:text-primary transition-colors">الأسعار</a></li>
               <li><a href="/terms" className="text-gray-500 hover:text-primary transition-colors">الشروط والأحكام</a></li>
               <li><a href="/privacy" className="text-gray-500 hover:text-primary transition-colors">سياسة الخصوصية</a></li>
@@ -47,10 +48,11 @@ export function Footer() {
           </div>
 
           <div>
-             <h4 className="text-gray-900 font-bold mb-6 font-heading">المصادر الدعم</h4>
+             <h4 className="text-gray-900 font-bold mb-6 font-heading">المصادر والدعم</h4>
             <ul className="space-y-4">
               <li><a href="/contact" className="text-gray-500 hover:text-primary transition-colors">مركز المساعدة</a></li>
-              <li><a href="/integrations" className="text-gray-500 hover:text-primary transition-colors">متجر التطبيقات</a></li>
+              <li><a href="/themes" className="text-gray-500 hover:text-primary transition-colors">قوالب المتجر</a></li>
+              <li><a href="/integrations" className="text-gray-500 hover:text-primary transition-colors">الدفع والشحن</a></li>
               <li><a href="/getting-started" className="text-gray-500 hover:text-primary transition-colors">خطوات البدء</a></li>
             </ul>
           </div>

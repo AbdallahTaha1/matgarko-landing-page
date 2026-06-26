@@ -1,0 +1,19 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0F172A"/>
+  <path d="M0 430C170 350 330 360 480 430C650 510 800 500 970 410C1070 360 1140 340 1200 350V630H0V430Z" fill="#0D9488" opacity="0.9"/>
+  <circle cx="1010" cy="120" r="170" fill="#14B8A6" opacity="0.16"/>
+  <circle cx="220" cy="520" r="180" fill="#22C55E" opacity="0.16"/>
+  <rect x="710" y="145" width="310" height="260" rx="28" fill="white" opacity="0.96"/>
+  <rect x="742" y="183" width="120" height="18" rx="9" fill="#0D9488"/>
+  <rect x="742" y="227" width="230" height="18" rx="9" fill="#CBD5E1"/>
+  <rect x="742" y="271" width="196" height="18" rx="9" fill="#CBD5E1"/>
+  <rect x="742" y="327" width="78" height="42" rx="12" fill="#ECFDF5"/>
+  <rect x="842" y="327" width="78" height="42" rx="12" fill="#F0FDFA"/>
+  <rect x="942" y="327" width="46" height="42" rx="12" fill="#F8FAFC"/>
+  <text x="600" y="184" fill="#5EEAD4" font-family="Cairo, Arial, sans-serif" font-size="34" font-weight="800" text-anchor="end">متجركو</text>
+  <text x="600" y="265" fill="white" font-family="Cairo, Arial, sans-serif" font-size="66" font-weight="900" text-anchor="end">أنشئ متجر إلكتروني</text>
+  <text x="600" y="345" fill="white" font-family="Cairo, Arial, sans-serif" font-size="66" font-weight="900" text-anchor="end">بدون برمجة</text>
+  <text x="600" y="415" fill="#CBD5E1" font-family="Cairo, Arial, sans-serif" font-size="30" font-weight="600" text-anchor="end">منتجات، طلبات، دفع وشحن من لوحة عربية واحدة</text>
+  <rect x="322" y="465" width="278" height="58" rx="29" fill="#0D9488"/>
+  <text x="461" y="503" fill="white" font-family="Cairo, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">ابدأ من 50 جنيه</text>
+</svg>

@@ -6,6 +6,7 @@ import { Testimonials } from "../components/Testimonials";
 import { Stats } from "../components/Stats";
 import { CTA } from "../components/CTA";
 import { WhyEcommerce } from "../components/WhyEcommerce";
+import { MarketReadiness } from "../components/MarketReadiness";
 
 export const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ export const HomePage = () => {
       <Stats />
       <WhyEcommerce />
       <Features />
+      <MarketReadiness />
       <HowItWorks />
       <Testimonials />
       <FAQ />

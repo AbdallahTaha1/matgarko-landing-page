@@ -11,16 +11,20 @@ import { TermsPage } from "./pages/TermsPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { IntegrationsPage } from "./pages/IntegrationsPage";
 import { Analytics } from "./components/Analytics";
+import { SEO } from "./components/SEO";
+import { ThemesPage } from "./pages/ThemesPage";
 
 function App() {
   return (
     <BrowserRouter>
+      <SEO />
       <Analytics />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="solutions" element={<SolutionsPage />} />
           <Route path="integrations" element={<IntegrationsPage />} />
+          <Route path="themes" element={<ThemesPage />} />
           <Route path="getting-started" element={<DevelopersPage />} />
           <Route path="pricing" element={<PricingPage />} />
           <Route path="contact" element={<ContactPage />} />

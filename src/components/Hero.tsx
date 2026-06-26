@@ -38,20 +38,20 @@ export function Hero() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8 border border-primary/10">
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              شهر مجاني لفترة محدودة
+              منصة إنشاء متجر إلكتروني في مصر
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold font-heading mb-6 leading-tight tracking-tighter-heading">
-              متجرك الإلكتروني جاهز{" "}
+              أنشئ متجر إلكتروني{" "}
               <span className="relative inline-block">
-                <span className="text-primary">في ثواني</span>
+                <span className="text-primary">بدون برمجة</span>
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-xl">
-              ليه تدفع مبلغ كبير عشان تعمل متجر إلكتروني؟ مع متجركو تقدر تبدأ
-              أونلاين بسهولة باشتراك شهري يبدأ من 50 جنيه بس، من غير شركة
-              برمجة، من غير شهور انتظار، ومن غير مصاريف ضخمة.
+              مع متجركو تقدر تبدأ البيع أونلاين في دقائق: متجر عربي باسمك،
+              قوالب جاهزة، منتجات وطلبات وعملاء من لوحة واحدة، وباقات شهرية
+              تبدأ من 50 جنيه بس.
             </p>
             <p className="text-base text-gray-500 mb-8 leading-relaxed max-w-xl">
               اعرض منتجاتك واستقبل طلباتك فورًا، وجرب المنصة من غير مخاطرة.
