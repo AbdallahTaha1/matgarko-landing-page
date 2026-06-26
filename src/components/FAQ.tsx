@@ -10,7 +10,7 @@ export function FAQ() {
     <section className="py-24 bg-gray-50" dir="rtl">
       <div className="container px-4 mx-auto md:px-6 max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-heading tracking-tighter-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-heading tracking-tighter-heading">
             أسئلة شائعة
           </h2>
         </div>

@@ -74,7 +74,7 @@ export function Features() {
             <Store className="w-4 h-4 text-primary" />
             <span>كل ما تحتاجه للبيع أونلاين</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
+          <h2 className="text-3xl md:text-5xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
             أدوات تخلي متجرك جاهز للبيع
           </h2>
           <p className="text-lg font-medium leading-8 text-gray-600">
@@ -96,7 +96,7 @@ export function Features() {
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-gray-50 border border-gray-100 shadow-sm transition-transform group-hover:-rotate-3 group-hover:scale-110">
                     {feature.icon}
                   </div>
-                  <h3 className="text-2xl font-black text-gray-950 mb-3 font-heading">
+                  <h3 className="text-xl font-black text-gray-950 mb-3 font-heading">
                     {feature.title}
                   </h3>
                   <p className="font-medium text-gray-600 leading-8">

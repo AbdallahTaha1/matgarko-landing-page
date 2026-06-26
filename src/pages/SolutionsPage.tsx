@@ -40,37 +40,37 @@ const solutionBlocks = [
 
 export const SolutionsPage = () => {
   return (
-    <div className="bg-white" dir="rtl">
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/10 to-white pt-28 pb-16">
+    <div className="bg-white text-right" dir="rtl">
+      <section className="page-hero">
         <div className="container px-4 mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+          <div className="section-kicker mb-5">
             <ShieldCheck className="w-4 h-4" />
             <span>حلول عملية للبيع أونلاين</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 font-heading">
+          <h1 className="page-title mb-5">
             كل ما تحتاجه لإدارة متجرك من مكان واحد
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="page-lead mb-7">
             متجركو يساعدك تعرض منتجاتك، تستقبل الطلبات، وتتابع العملاء والدفع
             والشحن من لوحة عربية بسيطة، بدون تكلفة كبيرة أو تعقيد تقني.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90 px-8">
+            <Button asChild size="lg" className="h-14 bg-gray-950 px-7 font-extrabold text-white shadow-xl shadow-emerald-900/10 hover:bg-emerald-700">
               <a href={SIGNUP_URL}>أنشئ متجرك</a>
             </Button>
-            <Button asChild size="lg" className="border border-gray-200 bg-white text-gray-700 hover:bg-gray-50">
+            <Button asChild size="lg" variant="outline" className="h-14 border-2 border-gray-200 bg-white px-7 font-extrabold text-gray-900 hover:border-emerald-300 hover:bg-emerald-50">
               <Link to="/pricing">راجع الباقات</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-16">
         <div className="container px-4 mx-auto">
-          <div className="max-w-5xl mx-auto rounded-3xl border border-gray-100 bg-white p-8 shadow-xl md:p-10">
+          <div className="premium-card max-w-5xl mx-auto p-6 md:p-8">
             <div className="grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-heading">
+                <h2 className="text-2xl md:text-4xl font-black text-gray-950 mb-4 font-heading">
                   من أول منتج لأول طلب
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-6">
@@ -80,7 +80,7 @@ export const SolutionsPage = () => {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {["منتجات", "طلبات", "عملاء", "شحن ودفع"].map((item) => (
-                    <span key={item} className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+                    <span key={item} className="rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-700">
                       {item}
                     </span>
                   ))}
@@ -94,11 +94,11 @@ export const SolutionsPage = () => {
                   { icon: <Truck className="h-5 w-5" />, title: "خيارات شحن" },
                   { icon: <FileText className="h-5 w-5" />, title: "صفحات مهمة" },
                 ].map((item) => (
-                  <div key={item.title} className="rounded-2xl bg-gray-50 p-5">
-                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white text-primary shadow-sm">
+                  <div key={item.title} className="rounded-lg border border-gray-200 bg-gray-50 p-5">
+                    <div className="icon-tile mb-3 h-10 w-10">
                       {item.icon}
                     </div>
-                    <h3 className="font-bold text-gray-900">{item.title}</h3>
+                    <h3 className="font-extrabold text-gray-950">{item.title}</h3>
                   </div>
                 ))}
               </div>
@@ -107,10 +107,10 @@ export const SolutionsPage = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="container px-4 mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-heading">
+            <h2 className="text-3xl md:text-5xl font-black text-gray-950 mb-5 font-heading">
               ماذا تدير من لوحة التحكم؟
             </h2>
             <p className="text-lg text-gray-600">
@@ -121,11 +121,11 @@ export const SolutionsPage = () => {
 
           <div className="grid gap-6 md:grid-cols-2">
             {solutionBlocks.map((block) => (
-              <div key={block.title} className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6">
+              <div key={block.title} className="premium-card p-7">
+                <div className="icon-tile mb-5 h-12 w-12">
                   {block.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 font-heading">
+                <h3 className="text-xl font-black text-gray-950 mb-3 font-heading">
                   {block.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">{block.text}</p>
@@ -135,9 +135,9 @@ export const SolutionsPage = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-16 bg-white">
         <div className="container px-4 mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-heading">
+          <h2 className="text-3xl md:text-5xl font-black text-gray-950 mb-5 font-heading">
             مناسب للتاجر الذي يريد بداية سهلة
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
@@ -150,14 +150,14 @@ export const SolutionsPage = () => {
               { title: "رابط خاص", desc: "استخدم رابط واضح لمتجرك تشاركه مع العملاء." },
               { title: "إدارة يومية", desc: "منتجات وطلبات وعملاء وعروض من مكان واحد." },
             ].map((card) => (
-              <div key={card.title} className="p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all bg-white">
-                <FileText className="w-8 h-8 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{card.title}</h3>
+              <div key={card.title} className="premium-card p-7 text-center">
+                <FileText className="w-8 h-8 text-emerald-600 mx-auto mb-4" />
+                <h3 className="text-lg font-black text-gray-950 mb-3">{card.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
-          <div className="inline-flex items-center gap-2 text-green-600 bg-green-50 px-4 py-2 rounded-full font-medium mt-12">
+          <div className="section-kicker mt-12">
             <Zap className="w-4 h-4" />
             <span>ابدأ بتكلفة بسيطة وطور متجرك مع الوقت</span>
           </div>

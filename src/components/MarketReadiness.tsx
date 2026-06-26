@@ -55,7 +55,7 @@ export function MarketReadiness() {
               <ShieldCheck className="h-4 w-4" />
               جاهز للتسويق والبيع
             </div>
-            <h2 className="mb-6 max-w-2xl text-4xl font-black leading-tight text-gray-950 font-heading md:text-6xl">
+            <h2 className="mb-6 max-w-2xl text-3xl font-black leading-tight text-gray-950 font-heading md:text-5xl">
               متجر واضح، سريع، ومجهز لتحويل الزائر إلى طلب
             </h2>
             <p className="mb-8 text-lg font-medium leading-8 text-gray-600">
@@ -92,7 +92,7 @@ export function MarketReadiness() {
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white text-primary shadow-sm transition-transform group-hover:-rotate-3 group-hover:scale-110">
                   {card.icon}
                 </div>
-                <h3 className="mb-3 text-2xl font-black text-gray-950 font-heading">{card.title}</h3>
+                <h3 className="mb-3 text-xl font-black text-gray-950 font-heading">{card.title}</h3>
                 <p className="font-medium leading-8 text-gray-600">{card.text}</p>
               </article>
             ))}
@@ -103,7 +103,7 @@ export function MarketReadiness() {
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-emerald-300">
                     <BarChart3 className="h-6 w-6" />
                   </div>
-                  <h3 className="mb-3 text-3xl font-black font-heading">صفحة واضحة لمحركات البحث والعملاء</h3>
+                  <h3 className="mb-3 text-2xl font-black font-heading">صفحة واضحة لمحركات البحث والعملاء</h3>
                   <p className="font-medium leading-8 text-gray-300">
                     المحتوى المنظم حول السعر، طريقة البدء، الدفع، الشحن،
                     القوالب، والأسئلة الشائعة يساعد Google والعملاء يفهموا
@@ -134,7 +134,7 @@ export function MarketReadiness() {
                     <BadgePercent className="h-4 w-4" />
                     ميزة تنافسية مهمة
                   </div>
-                  <h3 className="mb-2 text-3xl font-black text-gray-950 font-heading">
+                  <h3 className="mb-2 text-2xl font-black text-gray-950 font-heading">
                     ابدأ بسعر بسيط ثم طور المتجر مع نمو الطلبات
                   </h3>
                   <p className="font-medium leading-8 text-gray-600">

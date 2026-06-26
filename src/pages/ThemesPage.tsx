@@ -60,25 +60,28 @@ const features = [
 
 export function ThemesPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-24" dir="rtl">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="mx-auto mb-14 max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-6">
+    <div className="min-h-screen bg-white text-right" dir="rtl">
+      <section className="page-hero">
+        <div className="container mx-auto px-4 text-center md:px-6">
+          <div className="section-kicker mb-5">
             <LayoutTemplate className="w-4 h-4" />
             قوالب جاهزة لتبدأ أسرع
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-gray-900">
+          <h1 className="page-title mb-5">
             اختر شكل المتجر المناسب لنشاطك
           </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="page-lead">
             بدل ما تبدأ من صفحة فارغة، اختر قالب مناسب لنوع تجارتك ثم عدل
             الألوان والمحتوى والصفحات بما يناسب علامتك التجارية.
           </p>
         </div>
+      </section>
+
+      <div className="container mx-auto px-4 py-16 md:px-6">
 
         <div className="mx-auto mb-10 flex max-w-4xl flex-wrap justify-center gap-3">
           {["الكل", "متاجر عامة", "إلكترونيات", "مطاعم", "ديكور", "جمال"].map((label, index) => (
-            <Button key={label} variant={index === 0 ? "outline" : "ghost"} className="rounded-full">
+            <Button key={label} variant={index === 0 ? "outline" : "ghost"} className="rounded-full border-gray-200 font-bold hover:bg-emerald-50 hover:text-emerald-700">
               {label}
             </Button>
           ))}
@@ -88,18 +91,18 @@ export function ThemesPage() {
           {themes.map((theme) => (
             <article
               key={theme.name}
-              className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+              className="premium-card group p-7"
             >
               <div className="mb-6 flex items-start justify-between gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
+                <div className="icon-tile h-12 w-12 transition-transform group-hover:scale-110">
                   {theme.icon}
                 </div>
-                <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+                <span className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-bold text-gray-600">
                   {theme.category}
                 </span>
               </div>
 
-              <h3 className="mb-3 text-2xl font-bold text-gray-900 font-heading">
+              <h3 className="mb-3 text-xl font-black text-gray-950 font-heading">
                 {theme.name}
               </h3>
               <p className="mb-6 leading-relaxed text-gray-600">{theme.description}</p>
@@ -116,14 +119,14 @@ export function ThemesPage() {
           ))}
         </div>
 
-        <div className="mx-auto mt-12 max-w-4xl rounded-3xl border border-primary/10 bg-white p-8 text-center shadow-sm">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <div className="mx-auto mt-12 max-w-4xl rounded-lg border border-gray-200 bg-gray-950 p-8 text-center text-white shadow-xl">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-md bg-white/10 text-emerald-300">
             <Brush className="h-6 w-6" />
           </div>
-          <h2 className="mb-3 text-2xl font-bold text-gray-900 font-heading">
+          <h2 className="mb-3 text-2xl font-black text-white font-heading">
             كل قالب قابل للتعديل
           </h2>
-          <p className="mx-auto max-w-2xl text-gray-600 leading-relaxed">
+          <p className="mx-auto max-w-2xl text-gray-300 leading-relaxed">
             يمكنك تغيير الألوان، ترتيب الأقسام، النصوص، الصفحات، وبيانات التواصل
             حتى يظهر المتجر بشكل مناسب لنشاطك.
           </p>

@@ -29,18 +29,18 @@ const steps = [
 
 export const DevelopersPage = () => {
   return (
-    <div className="bg-white" dir="rtl">
-      <section className="relative overflow-hidden bg-gray-900 py-24 text-white">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#4b5563_1px,transparent_1px)] [background-size:16px_16px]" />
+    <div className="bg-white text-right" dir="rtl">
+      <section className="relative overflow-hidden bg-gray-950 py-20 text-white">
+        <div className="absolute inset-0 opacity-20 noise-grid" />
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/20 px-3 py-1 text-sm font-medium text-primary-foreground">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-bold text-emerald-200">
                 <ClipboardList className="h-4 w-4" />
                 <span>خطوات البدء</span>
               </div>
-              <h1 className="mb-6 max-w-3xl text-4xl font-bold leading-tight font-heading md:text-6xl">
+              <h1 className="mb-5 max-w-3xl text-3xl font-black leading-tight font-heading md:text-5xl">
                 من إنشاء المتجر إلى أول طلب بخطوات واضحة
               </h1>
               <p className="mb-8 max-w-2xl text-lg leading-relaxed text-gray-300">
@@ -48,24 +48,24 @@ export const DevelopersPage = () => {
                 منتجاتك، تضبط الدفع والشحن، ثم تبدأ استقبال الطلبات من لوحة سهلة.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" className="bg-white text-gray-900 hover:bg-gray-100">
+                <Button asChild size="lg" className="h-14 bg-emerald-500 px-7 font-extrabold text-gray-950 hover:bg-emerald-400">
                   <a href={SIGNUP_URL}>ابدأ متجرك الآن</a>
                 </Button>
-                <Button asChild size="lg" className="border border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
+                <Button asChild size="lg" className="h-14 border border-white/20 bg-transparent px-7 font-extrabold text-white hover:bg-white/10 hover:text-white">
                   <Link to="/pricing">راجع الباقات</Link>
                 </Button>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <div className="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur shadow-2xl">
               <div className="mb-5 flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-300">ملخص الرحلة</span>
                 <Zap className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-3">
                 {["تسجيل سريع", "إضافة المنتجات", "تجهيز الدفع والشحن", "استقبال أول طلب"].map((item, index) => (
-                  <div key={item} className="flex items-center gap-3 rounded-2xl bg-white/10 p-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
+                  <div key={item} className="flex items-center gap-3 rounded-lg bg-white/10 p-4">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-sm font-black text-gray-950">
                       {index + 1}
                     </span>
                     <span className="text-gray-100">{item}</span>
@@ -77,10 +77,10 @@ export const DevelopersPage = () => {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="mx-auto mb-12 max-w-3xl text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 font-heading md:text-5xl">
+            <h2 className="mb-4 text-3xl font-black text-gray-950 font-heading md:text-5xl">
               ماذا تفعل داخل متجرك؟
             </h2>
             <p className="text-lg leading-relaxed text-gray-600">
@@ -91,11 +91,11 @@ export const DevelopersPage = () => {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step) => (
-              <article key={step.title} className="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <article key={step.title} className="premium-card p-7">
+                <div className="icon-tile mb-5 h-12 w-12">
                   {step.icon}
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-gray-900 font-heading">
+                <h3 className="mb-3 text-lg font-black text-gray-950 font-heading">
                   {step.title}
                 </h3>
                 <p className="leading-relaxed text-gray-600">{step.desc}</p>
@@ -107,10 +107,10 @@ export const DevelopersPage = () => {
 
       <section className="pb-20">
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-5xl rounded-3xl border border-primary/10 bg-primary/5 p-8 md:p-10">
+          <div className="mx-auto max-w-5xl rounded-lg border border-gray-200 bg-gray-50 p-8 md:p-10">
             <div className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-center">
               <div>
-                <h2 className="mb-4 text-3xl font-bold text-gray-900 font-heading">
+                <h2 className="mb-4 text-2xl font-black text-gray-950 font-heading">
                   جاهز تبدأ؟
                 </h2>
                 <p className="leading-relaxed text-gray-600">
@@ -120,8 +120,8 @@ export const DevelopersPage = () => {
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {["لا تحتاج خبرة تقنية", "كل شيء من لوحة واحدة", "تقدر تبدأ بسعر بسيط", "تطور متجرك لاحقًا"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 rounded-xl bg-white p-4">
-                    <Check className="h-5 w-5 shrink-0 text-primary" />
+                  <div key={item} className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4">
+                    <Check className="h-5 w-5 shrink-0 text-emerald-700" />
                     <span className="text-sm font-medium text-gray-700">{item}</span>
                   </div>
                 ))}

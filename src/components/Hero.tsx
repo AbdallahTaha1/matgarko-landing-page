@@ -48,7 +48,7 @@ export function Hero() {
               منصة إنشاء متجر إلكتروني في مصر
             </div>
 
-            <h1 className="max-w-3xl text-4xl font-black leading-[1.14] text-gray-950 font-heading sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-3xl text-4xl font-black leading-[1.14] text-gray-950 font-heading sm:text-5xl lg:text-5xl">
               أنشئ متجر إلكتروني
               <span className="mt-2 block text-conversion-gradient">
                 جاهز للبيع في دقائق

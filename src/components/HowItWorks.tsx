@@ -33,7 +33,7 @@ export function HowItWorks() {
             <Settings className="h-4 w-4" />
             رحلة بسيطة
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
+          <h2 className="text-3xl md:text-5xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
             ابدأ متجرك في 3 خطوات واضحة
           </h2>
           <p className="text-lg font-medium leading-8 text-gray-600">
@@ -55,7 +55,7 @@ export function HowItWorks() {
               >
                 {step.icon}
               </div>
-              <h3 className="text-2xl font-black font-heading mb-4 text-gray-950">
+              <h3 className="text-xl font-black font-heading mb-4 text-gray-950">
                 {step.title}
               </h3>
               <p className="font-medium text-gray-600 leading-8 max-w-sm mx-auto">

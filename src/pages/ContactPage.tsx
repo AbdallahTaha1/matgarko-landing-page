@@ -8,7 +8,7 @@ const FACEBOOK_URL = "https://www.facebook.com/matgarko2/";
 
 const contactMethods = [
   {
-    icon: <MessageCircle className="w-6 h-6 text-green-500" />,
+    icon: <MessageCircle className="w-6 h-6 text-current" />,
     title: "واتساب",
     value: PHONE_DISPLAY,
     description: "الأسرع للتواصل والاستفسار عن إنشاء المتجر",
@@ -16,7 +16,7 @@ const contactMethods = [
     action: "تواصل على واتساب",
   },
   {
-    icon: <Mail className="w-6 h-6 text-blue-500" />,
+    icon: <Mail className="w-6 h-6 text-current" />,
     title: "البريد الإلكتروني",
     value: EMAIL,
     description: "للاستفسارات التفصيلية أو طلبات الدعم",
@@ -24,7 +24,7 @@ const contactMethods = [
     action: "أرسل إيميل",
   },
   {
-    icon: <Facebook className="w-6 h-6 text-blue-600" />,
+    icon: <Facebook className="w-6 h-6 text-current" />,
     title: "فيسبوك",
     value: "Matgarko",
     description: "تابع آخر الأخبار أو تواصل معنا من خلال الصفحة",
@@ -32,7 +32,7 @@ const contactMethods = [
     action: "افتح فيسبوك",
   },
   {
-    icon: <Phone className="w-6 h-6 text-purple-500" />,
+    icon: <Phone className="w-6 h-6 text-current" />,
     title: "الهاتف",
     value: PHONE_DISPLAY,
     description: "يمكنك استخدام نفس الرقم للتواصل أو واتساب",
@@ -43,24 +43,24 @@ const contactMethods = [
 
 export const ContactPage = () => {
   return (
-    <div className="bg-white" dir="rtl">
-      <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white pt-32 pb-16">
+    <div className="bg-white text-right" dir="rtl">
+      <section className="page-hero">
         <div className="container px-4 mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-6">
+          <div className="section-kicker mb-5">
             <MessageCircle className="h-4 w-4" />
             تواصل معنا
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 font-heading">
+          <h1 className="page-title mb-5">
             نحن هنا لمساعدتك
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="page-lead">
             عندك سؤال عن الباقات أو إنشاء المتجر؟ تواصل معنا بالطريقة الأنسب لك،
             والأفضل البدء من واتساب لرد أسرع.
           </p>
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-16">
         <div className="container px-4 mx-auto">
           <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_0.9fr]">
             <div className="grid gap-6 md:grid-cols-2">
@@ -70,50 +70,50 @@ export const ContactPage = () => {
                   href={method.href}
                   target={method.href.startsWith("http") ? "_blank" : undefined}
                   rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group rounded-2xl border border-gray-100 bg-gray-50 p-6 transition-all hover:-translate-y-1 hover:border-primary/30 hover:bg-white hover:shadow-lg"
+                  className="premium-card group p-6"
                 >
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm transition-transform group-hover:scale-110">
+                  <div className="icon-tile mb-5 h-12 w-12 transition-transform group-hover:scale-110">
                     {method.icon}
                   </div>
-                  <h2 className="mb-2 text-xl font-bold text-gray-900 font-heading">
+                  <h2 className="mb-2 text-xl font-black text-gray-950 font-heading">
                     {method.title}
                   </h2>
-                  <p className="mb-2 font-medium text-primary" dir={method.title === "الهاتف" ? "ltr" : undefined}>
+                  <p className="mb-2 font-bold text-emerald-700" dir={method.title === "الهاتف" ? "ltr" : undefined}>
                     {method.value}
                   </p>
                   <p className="mb-5 text-sm leading-relaxed text-gray-500">
                     {method.description}
                   </p>
-                  <span className="text-sm font-semibold text-gray-700 group-hover:text-primary">
+                  <span className="text-sm font-bold text-gray-700 group-hover:text-emerald-700">
                     {method.action}
                   </span>
                 </a>
               ))}
             </div>
 
-            <aside className="rounded-3xl border border-primary/10 bg-primary/5 p-8 lg:p-10">
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-primary shadow-sm">
+            <aside className="rounded-lg border border-gray-200 bg-gray-950 p-8 text-white shadow-xl lg:p-10">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-md bg-white/10 text-emerald-300 shadow-sm">
                 <Clock className="h-7 w-7" />
               </div>
-              <h2 className="mb-4 text-3xl font-bold text-gray-900 font-heading">
+              <h2 className="mb-4 text-2xl font-black text-white font-heading">
                 أفضل طريقة للتواصل
               </h2>
-              <p className="mb-6 leading-relaxed text-gray-600">
+              <p className="mb-6 leading-relaxed text-gray-300">
                 استخدم واتساب لو عندك سؤال سريع عن الأسعار، التجربة المجانية،
                 أو خطوات إنشاء المتجر. ولو الاستفسار يحتاج تفاصيل أكثر، أرسل
                 لنا على البريد الإلكتروني.
               </p>
-              <div className="space-y-3 rounded-2xl bg-white p-5">
+              <div className="space-y-3 rounded-lg bg-white/10 p-5">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-gray-500">واتساب</span>
-                  <span className="font-semibold text-gray-900" dir="ltr">{PHONE_DISPLAY}</span>
+                  <span className="text-gray-300">واتساب</span>
+                  <span className="font-semibold text-white" dir="ltr">{PHONE_DISPLAY}</span>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-gray-500">الإيميل</span>
-                  <span className="font-semibold text-gray-900">{EMAIL}</span>
+                  <span className="text-gray-300">الإيميل</span>
+                  <span className="font-semibold text-white">{EMAIL}</span>
                 </div>
               </div>
-              <Button asChild size="lg" className="mt-6 w-full bg-primary text-white hover:bg-primary/90">
+              <Button asChild size="lg" className="mt-6 w-full bg-emerald-500 font-extrabold text-gray-950 hover:bg-emerald-400">
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                   ابدأ المحادثة على واتساب
                 </a>

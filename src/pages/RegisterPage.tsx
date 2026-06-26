@@ -113,21 +113,23 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" dir="rtl">
+    <div className="hero-band noise-grid flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8" dir="rtl">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-            <Store className="h-12 w-12 text-primary" />
+            <div className="icon-tile h-14 w-14">
+              <Store className="h-7 w-7" />
+            </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 font-heading">
+        <h2 className="mt-6 text-center text-3xl font-black text-gray-950 font-heading">
           أنشئ متجرك الآن
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm font-medium leading-6 text-gray-600">
           اختر اسم المتجر والرابط، ثم أكمل رحلة الإعداد بنفسك
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="rounded-lg border border-gray-200 bg-white px-4 py-8 shadow-2xl shadow-emerald-900/10 sm:px-10">
             <form onSubmit={handleSubmit} className="space-y-6">
               
               {step === 1 && (
@@ -146,7 +148,7 @@ export default function RegisterPage() {
                       onChange={handleChange}
                       placeholder="متجري الرائع"
                       required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                      className="block h-12 w-full appearance-none rounded-lg border border-gray-300 px-4 py-2 shadow-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 sm:text-sm"
                     />
                   </div>
 
@@ -165,10 +167,10 @@ export default function RegisterPage() {
                           }}
                           placeholder="mystore"
                           required
-                          className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none sm:text-sm ${
-                            subdomainStatus === 'available' ? 'border-green-500 focus:ring-green-500 focus:border-green-500' :
-                            subdomainStatus === 'taken' ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 
-                            'border-gray-300 focus:ring-primary focus:border-primary'
+                          className={`block h-12 w-full appearance-none rounded-lg border px-4 py-2 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 sm:text-sm ${
+                            subdomainStatus === 'available' ? 'border-emerald-500 focus:ring-emerald-100 focus:border-emerald-500' :
+                            subdomainStatus === 'taken' ? 'border-red-500 focus:ring-red-100 focus:border-red-500' :
+                            'border-gray-300 focus:ring-emerald-100 focus:border-emerald-500'
                           }`}
                         />
                         <div className="absolute inset-y-0 right-0 max-w-7 pr-3 flex items-center pointer-events-none">
@@ -189,7 +191,7 @@ export default function RegisterPage() {
                     type="button" 
                     onClick={handleNext}
                     disabled={subdomainStatus !== 'available' || !formData.storeName}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex h-12 w-full justify-center rounded-lg border border-transparent bg-gray-950 px-4 py-3 text-sm font-extrabold text-white shadow-lg shadow-emerald-900/10 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     التالي <ArrowLeft className="mr-2 h-4 w-4" />
                   </button>
@@ -212,7 +214,7 @@ export default function RegisterPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                      className="block h-12 w-full appearance-none rounded-lg border border-gray-300 px-4 py-2 shadow-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 sm:text-sm"
                     />
                   </div>
 
@@ -225,7 +227,7 @@ export default function RegisterPage() {
                       value={formData.password}
                       onChange={handleChange}
                       required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                      className="block h-12 w-full appearance-none rounded-lg border border-gray-300 px-4 py-2 shadow-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 sm:text-sm"
                     />
                   </div>
 
@@ -238,7 +240,7 @@ export default function RegisterPage() {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+                      className="block h-12 w-full appearance-none rounded-lg border border-gray-300 px-4 py-2 shadow-sm placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100 sm:text-sm"
                     />
                   </div>
 
@@ -249,7 +251,7 @@ export default function RegisterPage() {
                       type="checkbox"
                       checked={formData.installSampleData}
                       onChange={handleChange}
-                      className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                      className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
                     />
                     <label htmlFor="installSampleData" className="text-sm font-medium text-gray-700">إضافة بيانات تجريبية لمساعدتي في البداية</label>
                   </div>
@@ -261,7 +263,7 @@ export default function RegisterPage() {
                       type="checkbox"
                       checked={formData.acceptTerms}
                       onChange={handleChange}
-                      className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                      className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
                       required
                     />
                      <label htmlFor="acceptTerms" className="text-sm font-medium text-gray-700">أوافق على <a href="#" className="text-primary hover:underline">الشروط والأحكام</a></label>
@@ -274,10 +276,10 @@ export default function RegisterPage() {
                   )}
 
                   <div className="flex space-x-2 space-x-reverse mt-4">
-                     <button type="button" onClick={() => setStep(1)} disabled={loading} className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                     <button type="button" onClick={() => setStep(1)} disabled={loading} className="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
                         <ArrowRight className="ml-2 h-4 w-4" /> السابق
                      </button>
-                     <button type="submit" disabled={loading || !formData.acceptTerms} className="flex-1 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed">
+                     <button type="submit" disabled={loading || !formData.acceptTerms} className="flex flex-1 justify-center rounded-lg border border-transparent bg-gray-950 px-4 py-2 text-sm font-extrabold text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                         {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'إنشاء المتجر المستقل'}
                      </button>
                   </div>

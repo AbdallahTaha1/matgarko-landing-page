@@ -98,6 +98,31 @@
       linear-gradient(180deg, #f3fbf8 0%, #ffffff 56%, #f8fafc 100%);
   }
 
+  .page-hero {
+    @apply relative overflow-hidden border-b border-emerald-100/80 pb-14 pt-20 md:pb-16 md:pt-24;
+    background:
+      linear-gradient(180deg, #f3fbf8 0%, #ffffff 56%, #f8fafc 100%),
+      linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: auto, 28px 28px, 28px 28px;
+  }
+
+  .page-title {
+    @apply mx-auto max-w-4xl text-3xl font-black leading-tight text-gray-950 font-heading md:text-5xl;
+  }
+
+  .page-lead {
+    @apply mx-auto max-w-3xl text-base font-medium leading-8 text-gray-700 md:text-lg;
+  }
+
+  .premium-card {
+    @apply rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-900/5;
+  }
+
+  .icon-tile {
+    @apply flex items-center justify-center rounded-md bg-emerald-100 text-emerald-700;
+  }
+
   @keyframes marquee-rtl {
     from {
       transform: translateX(0);

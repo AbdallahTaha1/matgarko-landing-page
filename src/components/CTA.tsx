@@ -9,7 +9,7 @@ export function CTA() {
     <section className="py-24 bg-gray-950 text-white relative overflow-hidden" dir="rtl">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-emerald-400 to-transparent" />
       <div className="container px-4 mx-auto md:px-6 relative z-10 text-center">
-        <h2 className="text-4xl md:text-7xl font-black mb-8 font-heading leading-tight">
+        <h2 className="text-3xl md:text-5xl font-black mb-8 font-heading leading-tight">
           جاهز تبني متجرك وتبدأ البيع؟
         </h2>
         <p className="text-xl font-medium leading-9 text-gray-300 mb-10 max-w-2xl mx-auto">

@@ -27,7 +27,7 @@ export function Testimonials() {
             <BookOpen className="w-4 h-4" />
             مناسب لمين؟
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
+          <h2 className="text-3xl md:text-5xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
             مصمم للتاجر اللي عايز يتحرك بسرعة
           </h2>
           <p className="mx-auto max-w-3xl text-lg font-medium leading-8 text-gray-600">
@@ -43,7 +43,7 @@ export function Testimonials() {
               className="bg-gray-50 rounded-lg p-8 border border-gray-200 relative group hover:bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
               <Quote className="w-10 h-10 text-primary/20 absolute top-6 left-6" />
-              <h3 className="text-2xl font-black text-gray-950 font-heading mb-4">
+              <h3 className="text-xl font-black text-gray-950 font-heading mb-4">
                 {item.title}
               </h3>
               <p className="font-medium text-gray-600 leading-8 relative z-10">
