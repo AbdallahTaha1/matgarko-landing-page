@@ -6,12 +6,13 @@ const SIGNUP_URL = "https://signup.matgarko.com/signup";
 
 export function CTA() {
   return (
-    <section className="py-24 bg-gray-900 text-white relative overflow-hidden" dir="rtl">
+    <section className="py-24 bg-gray-950 text-white relative overflow-hidden" dir="rtl">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-emerald-400 to-transparent" />
       <div className="container px-4 mx-auto md:px-6 relative z-10 text-center">
-        <h2 className="text-4xl md:text-6xl font-bold mb-8 font-heading tracking-tight leading-tight">
-          جاهز تبدأ بيع أونلاين؟
+        <h2 className="text-4xl md:text-7xl font-black mb-8 font-heading leading-tight">
+          جاهز تبني متجرك وتبدأ البيع؟
         </h2>
-        <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+        <p className="text-xl font-medium leading-9 text-gray-300 mb-10 max-w-2xl mx-auto">
           أنشئ متجرك، أضف منتجاتك، وابدأ استقبال الطلبات من لوحة سهلة.
           جرب متجركو الآن واستفد من الشهر المجاني لفترة محدودة.
         </p>
@@ -20,14 +21,14 @@ export function CTA() {
           <Button
             asChild
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-white h-16 px-10 text-xl rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:-translate-y-1"
+            className="bg-emerald-500 hover:bg-emerald-400 text-gray-950 h-16 px-10 text-xl font-black shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:-translate-y-1"
           >
             <a href={SIGNUP_URL}>أنشئ متجرك الآن</a>
           </Button>
           <Button
             asChild
             size="lg"
-            className="h-16 px-10 text-xl rounded-full border border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white gap-2 group"
+            className="h-16 px-10 text-xl font-black border border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white gap-2 group"
           >
             <Link to="/getting-started">
               اعرف الخطوات{" "}

@@ -23,14 +23,14 @@ export function Testimonials() {
     <section className="py-24 bg-white relative overflow-hidden" dir="rtl">
       <div className="container px-4 mx-auto md:px-6 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+          <div className="section-kicker mb-6">
             <BookOpen className="w-4 h-4" />
             مناسب لمين؟
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-heading tracking-tighter-heading">
-            مناسب لبداية مشروعك أونلاين
+          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
+            مصمم للتاجر اللي عايز يتحرك بسرعة
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="mx-auto max-w-3xl text-lg font-medium leading-8 text-gray-600">
             سواء بتبدأ أول متجر أو عندك بيع بالفعل، متجركو يساعدك تنتقل
             لتجربة أونلاين أبسط وأكثر تنظيمًا.
           </p>
@@ -40,13 +40,13 @@ export function Testimonials() {
           {highlights.map((item) => (
             <div
               key={item.title}
-              className="bg-gray-50 rounded-2xl p-8 border border-gray-100 relative group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              className="bg-gray-50 rounded-lg p-8 border border-gray-200 relative group hover:bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
               <Quote className="w-10 h-10 text-primary/20 absolute top-6 left-6" />
-              <h3 className="text-xl font-bold text-gray-900 font-heading mb-4">
+              <h3 className="text-2xl font-black text-gray-950 font-heading mb-4">
                 {item.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed relative z-10">
+              <p className="font-medium text-gray-600 leading-8 relative z-10">
                 {item.content}
               </p>
             </div>

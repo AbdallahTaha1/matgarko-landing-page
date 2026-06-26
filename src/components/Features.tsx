@@ -67,19 +67,19 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="py-24 bg-gray-50/50" dir="rtl">
+    <section id="features" className="bg-[#f6fbf8] py-24" dir="rtl">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 text-gray-600 text-sm font-medium mb-6 shadow-sm">
+          <div className="section-kicker mb-6">
             <Store className="w-4 h-4 text-primary" />
             <span>كل ما تحتاجه للبيع أونلاين</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-heading tracking-tighter-heading">
-            أدوات بسيطة لإدارة متجرك
+          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
+            أدوات تخلي متجرك جاهز للبيع
           </h2>
-          <p className="text-lg text-gray-600">
-            متجركو يساعدك تعرض منتجاتك، تستقبل الطلبات، وتتابع عملاءك من
-            لوحة واحدة سهلة ومناسبة لبداية مشروعك أونلاين.
+          <p className="text-lg font-medium leading-8 text-gray-600">
+            من إضافة المنتج حتى متابعة الطلب، كل جزء في الصفحة مصمم ليخدم
+            التحويل والثقة بدل ما يكون مجرد شكل جميل.
           </p>
         </div>
 
@@ -87,21 +87,19 @@ export function Features() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`${feature.colSpan} relative min-h-[240px] overflow-hidden rounded-2xl p-7 bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group ${feature.border}`}
+              className={`${feature.colSpan} group relative min-h-[250px] overflow-hidden rounded-lg border border-gray-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${feature.border}`}
             >
-              <div
-                className={`absolute top-0 right-0 h-28 w-28 ${feature.bg} rounded-bl-full -mr-8 -mt-8 opacity-60 group-hover:scale-125 transition-transform duration-500`}
-              ></div>
+              <div className="absolute right-0 top-0 h-1 w-full bg-gradient-to-l from-emerald-500 via-teal-400 to-lime-300 opacity-80"></div>
 
               <div className="relative z-10 flex h-full flex-col">
                 <div>
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-gray-100 shadow-sm group-hover:scale-110 transition-transform">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-gray-50 border border-gray-100 shadow-sm transition-transform group-hover:-rotate-3 group-hover:scale-110">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 font-heading">
+                  <h3 className="text-2xl font-black text-gray-950 mb-3 font-heading">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-500 leading-relaxed">
+                  <p className="font-medium text-gray-600 leading-8">
                     {feature.description}
                   </p>
                 </div>

@@ -51,14 +51,14 @@ export function MarketReadiness() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="lg:sticky lg:top-28">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+            <div className="section-kicker mb-6">
               <ShieldCheck className="h-4 w-4" />
               جاهز للتسويق والبيع
             </div>
-            <h2 className="mb-6 max-w-2xl text-3xl font-bold leading-tight text-gray-900 font-heading md:text-5xl">
-              لا يكفي أن يكون عندك متجر، لازم يكون جاهز لتحويل الزائر إلى طلب
+            <h2 className="mb-6 max-w-2xl text-4xl font-black leading-tight text-gray-950 font-heading md:text-6xl">
+              متجر واضح، سريع، ومجهز لتحويل الزائر إلى طلب
             </h2>
-            <p className="mb-8 text-lg leading-relaxed text-gray-600">
+            <p className="mb-8 text-lg font-medium leading-8 text-gray-600">
               متجركو يركز على العناصر التي يبحث عنها التاجر والعميل: شكل واضح،
               صفحات ثقة، طرق دفع وشحن، وعروض تجعل تجربة الشراء أسهل من الرسائل
               والتعليقات العشوائية.
@@ -66,7 +66,7 @@ export function MarketReadiness() {
 
             <div className="grid gap-3 sm:grid-cols-2">
               {conversionPoints.map((point) => (
-                <div key={point} className="flex items-center gap-3 rounded-xl bg-gray-50 p-3 text-sm font-medium text-gray-700">
+                <div key={point} className="flex items-center gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm font-bold text-gray-800">
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-primary" />
                   <span>{point}</span>
                 </div>
@@ -74,7 +74,7 @@ export function MarketReadiness() {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-primary text-white hover:bg-primary/90">
+              <Button asChild size="lg" className="bg-gray-950 text-white hover:bg-emerald-700">
                 <a href={SIGNUP_URL}>ابدأ متجرك الآن</a>
               </Button>
               <Button asChild size="lg" variant="outline">
@@ -87,31 +87,31 @@ export function MarketReadiness() {
             {readinessCards.map((card) => (
               <article
                 key={card.title}
-                className="rounded-2xl border border-gray-100 bg-gray-50 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white hover:shadow-xl"
+                className="group rounded-lg border border-gray-200 bg-gray-50 p-7 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-200 hover:bg-white hover:shadow-2xl"
               >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-primary shadow-sm">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white text-primary shadow-sm transition-transform group-hover:-rotate-3 group-hover:scale-110">
                   {card.icon}
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-gray-900 font-heading">{card.title}</h3>
-                <p className="leading-relaxed text-gray-600">{card.text}</p>
+                <h3 className="mb-3 text-2xl font-black text-gray-950 font-heading">{card.title}</h3>
+                <p className="font-medium leading-8 text-gray-600">{card.text}</p>
               </article>
             ))}
 
-            <article className="rounded-2xl border border-gray-900 bg-gray-900 p-7 text-white sm:col-span-2">
+            <article className="rounded-lg border border-gray-900 bg-gray-950 p-7 text-white shadow-2xl shadow-gray-950/20 sm:col-span-2">
               <div className="grid gap-6 md:grid-cols-[1fr_1fr] md:items-center">
                 <div>
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-primary">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-emerald-300">
                     <BarChart3 className="h-6 w-6" />
                   </div>
-                  <h3 className="mb-3 text-2xl font-bold font-heading">صفحة واضحة لمحركات البحث والعملاء</h3>
-                  <p className="leading-relaxed text-gray-300">
+                  <h3 className="mb-3 text-3xl font-black font-heading">صفحة واضحة لمحركات البحث والعملاء</h3>
+                  <p className="font-medium leading-8 text-gray-300">
                     المحتوى المنظم حول السعر، طريقة البدء، الدفع، الشحن،
                     القوالب، والأسئلة الشائعة يساعد Google والعملاء يفهموا
                     ماذا تقدم بسرعة.
                   </p>
                 </div>
 
-                <div className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
+                <div className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10">
                   {[
                     ["نية البحث", "إنشاء متجر إلكتروني"],
                     ["مرحلة القرار", "أسعار وخطوات واضحة"],
@@ -120,29 +120,29 @@ export function MarketReadiness() {
                   ].map(([label, value]) => (
                     <div key={label} className="flex items-center justify-between gap-4 border-b border-white/10 py-3 last:border-b-0">
                       <span className="text-sm text-gray-400">{label}</span>
-                      <span className="text-sm font-semibold text-white">{value}</span>
+                      <span className="text-sm font-extrabold text-white">{value}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </article>
 
-            <article className="rounded-2xl border border-primary/15 bg-primary/5 p-7 sm:col-span-2">
+            <article className="rounded-lg border border-emerald-200 bg-[#effdf6] p-7 sm:col-span-2">
               <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-medium text-primary">
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-bold text-primary">
                     <BadgePercent className="h-4 w-4" />
                     ميزة تنافسية مهمة
                   </div>
-                  <h3 className="mb-2 text-2xl font-bold text-gray-900 font-heading">
+                  <h3 className="mb-2 text-3xl font-black text-gray-950 font-heading">
                     ابدأ بسعر بسيط ثم طور المتجر مع نمو الطلبات
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="font-medium leading-8 text-gray-600">
                     هذا يعالج أكبر اعتراض عند التجار الجدد: تكلفة إنشاء متجر
                     إلكتروني كامل قبل اختبار السوق.
                   </p>
                 </div>
-                <Button asChild className="shrink-0 bg-primary text-white hover:bg-primary/90">
+                <Button asChild className="shrink-0 bg-gray-950 text-white hover:bg-emerald-700">
                   <Link to="/pricing">راجع الأسعار</Link>
                 </Button>
               </div>

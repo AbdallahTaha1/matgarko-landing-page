@@ -34,8 +34,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --font-sans: Cairo, Inter, sans-serif;
-  --font-heading: Cairo, sans-serif;
+  --font-sans: Alexandria, Cairo, Inter, sans-serif;
+  --font-heading: Alexandria, Cairo, sans-serif;
 }
 
 /* Premium Utilities */
@@ -71,11 +71,70 @@
   }
 
   .tracking-tighter-heading {
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
   
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600;
+  }
+
+  .text-conversion-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-l from-emerald-700 via-teal-600 to-gray-950;
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-bold text-emerald-700 shadow-sm;
+  }
+
+  .noise-grid {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .hero-band {
+    background:
+      linear-gradient(180deg, #f3fbf8 0%, #ffffff 56%, #f8fafc 100%);
+  }
+
+  @keyframes marquee-rtl {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(50%);
+    }
+  }
+
+  .animate-marquee-rtl {
+    animation: marquee-rtl 28s linear infinite;
+  }
+
+  @keyframes float-panel {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float-panel {
+    animation: float-panel 5s ease-in-out infinite;
+  }
+
+  @keyframes shine-sweep {
+    from {
+      transform: translateX(120%) skewX(-12deg);
+    }
+    to {
+      transform: translateX(-220%) skewX(-12deg);
+    }
+  }
+
+  .animate-shine-sweep {
+    animation: shine-sweep 4.5s ease-in-out infinite;
   }
 
   @keyframes pulse-subtle {
@@ -222,6 +281,12 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Alexandria', 'Cairo', sans-serif;
+    letter-spacing: 0;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: white;
   }
 }

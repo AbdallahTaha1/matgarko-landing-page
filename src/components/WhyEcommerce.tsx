@@ -20,13 +20,17 @@ const pillars = [
 
 export function WhyEcommerce() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden" dir="rtl">
+    <section className="relative overflow-hidden bg-white py-24" dir="rtl">
       <div className="container px-4 mx-auto relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 font-heading tracking-tighter-heading">
-            لماذا تختار متجركو؟
+          <div className="section-kicker mb-6">
+            <Store className="h-4 w-4" />
+            لماذا متجركو؟
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
+            بداية أسرع من البرمجة التقليدية
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg font-medium leading-8 text-gray-600 max-w-2xl mx-auto">
             لأنك تحتاج طريقة سهلة ومناسبة التكلفة لبدء البيع أونلاين، بدون
             شركة برمجة وبدون شهور انتظار.
           </p>
@@ -36,21 +40,21 @@ export function WhyEcommerce() {
           {pillars.map((pillar) => (
             <div
               key={pillar.title}
-              className="bg-white rounded-3xl p-8 text-center shadow-lg hover:shadow-2xl transition-shadow border border-gray-100"
+              className="group rounded-lg border border-gray-200 bg-gray-50 p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:shadow-2xl"
             >
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gray-50 flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-lg bg-white flex items-center justify-center shadow-sm transition-transform group-hover:-rotate-3 group-hover:scale-110">
                 {pillar.icon}
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 font-heading">
+              <h3 className="text-2xl font-black text-gray-950 mb-4 font-heading">
                 {pillar.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">{pillar.text}</p>
+              <p className="font-medium text-gray-600 leading-8">{pillar.text}</p>
             </div>
           ))}
         </div>
 
         <div className="text-center mt-12 inline-flex items-center justify-center w-full">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-600">
+          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 font-bold">
             <Plug className="w-4 h-4 text-primary" />
             من التسجيل إلى أول طلب بخطوات بسيطة
           </div>

@@ -7,11 +7,13 @@ import { Stats } from "../components/Stats";
 import { CTA } from "../components/CTA";
 import { WhyEcommerce } from "../components/WhyEcommerce";
 import { MarketReadiness } from "../components/MarketReadiness";
+import { FeatureRibbon } from "../components/FeatureRibbon";
 
 export const HomePage = () => {
   return (
     <>
       <Hero />
+      <FeatureRibbon />
       <Stats />
       <WhyEcommerce />
       <Features />
