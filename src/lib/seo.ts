@@ -1,4 +1,5 @@
 import { faqs } from "@/data/faqs";
+import { blogArticles } from "@/data/blog";
 
 export const SITE_NAME = "متجركو";
 export const DEFAULT_SITE_URL = "https://matgarko.com";
@@ -226,6 +227,24 @@ export const seoPages: Record<string, SeoPage> = {
 
 export const indexableSeoPages = Object.values(seoPages).filter((p) => !p.noindex);
 
+export const sitemapPages = indexableSeoPages.map((page) => {
+  const isHome = page.path === "/";
+  const isLegal = page.path === "/terms" || page.path === "/privacy";
+  const isArticle = page.type === "article";
+  const isCommercial =
+    page.path === "/pricing" ||
+    page.path === "/themes" ||
+    page.path === "/solutions" ||
+    page.path === "/integrations" ||
+    page.path.startsWith("/compare");
+
+  return {
+    ...page,
+    changefreq: isHome || page.path === "/blog" ? "weekly" : isLegal ? "yearly" : "monthly",
+    priority: isHome ? "1.0" : isCommercial ? "0.9" : isArticle ? "0.8" : isLegal ? "0.3" : "0.7",
+  };
+});
+
 export const orderedSeoPages = [
   seoPages["/"],
   seoPages["/solutions"],
@@ -321,12 +340,59 @@ export function websiteSchema() {
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
+  };
+}
+
+export function articleSchema(page: SeoPage) {
+  if (page.type !== "article") {
+    return null;
+  }
+
+  const article = blogArticles.find((item) => page.path === `/blog/${item.slug}`);
+
+  if (!article) {
+    return null;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${canonicalUrl(page.path)}#article`,
+    mainEntityOfPage: canonicalUrl(page.path),
+    headline: article.title,
+    description: article.description,
+    image: socialImageUrl(),
+    datePublished: article.publishDate,
+    dateModified: article.publishDate,
+    inLanguage: "ar-EG",
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
     },
   };
+}
+
+export function sitemapXml(lastmod = new Date().toISOString().slice(0, 10)) {
+  const urls = sitemapPages
+    .map(
+      (page) => `  <url>
+    <loc>${canonicalUrl(page.path)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`,
+    )
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`;
 }
 
 export function softwareSchema() {

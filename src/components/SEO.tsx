@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
+  articleSchema,
   breadcrumbSchema,
   canonicalUrl,
   faqSchema,
-  orderedSeoPages,
+  indexableSeoPages,
   organizationSchema,
   seoPages,
   SITE_NAME,
@@ -82,18 +83,20 @@ export function SEO() {
 
     upsertLink("canonical", canonical);
 
+    const pageArticleSchema = articleSchema(page);
     const jsonLd = [
       organizationSchema(),
       websiteSchema(),
       softwareSchema(),
       breadcrumbSchema(page),
+      ...(pageArticleSchema ? [pageArticleSchema] : []),
       ...(page.path === "/" ? [faqSchema()] : []),
     ];
 
     upsertJsonLd("matgarko-route-schema", jsonLd);
     upsertJsonLd(
       "matgarko-site-navigation",
-      orderedSeoPages.map((route) => ({
+      indexableSeoPages.map((route) => ({
         "@context": "https://schema.org",
         "@type": "SiteNavigationElement",
         name: route.title.split("|")[0].trim(),

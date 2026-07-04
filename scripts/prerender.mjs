@@ -25,7 +25,7 @@ const vite = await createServer({
 
 try {
   const template = await fs.readFile(templatePath, "utf8");
-  const { prerenderRoutes, render } = await vite.ssrLoadModule("/src/prerender.tsx");
+  const { prerenderRoutes, render, sitemapXml } = await vite.ssrLoadModule("/src/prerender.tsx");
   const builtLogoPath = await findBuiltLogoPath();
 
   await Promise.all(
@@ -47,6 +47,9 @@ try {
       console.log(`prerendered ${route}`);
     }),
   );
+
+  await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml());
+  console.log("generated sitemap.xml");
 } finally {
   await vite.close();
 }

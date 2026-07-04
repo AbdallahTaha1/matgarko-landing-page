@@ -3,13 +3,16 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { AppRoutes } from "./App";
 import {
+  articleSchema,
   breadcrumbSchema,
   canonicalUrl,
   faqSchema,
+  indexableSeoPages,
   orderedSeoPages,
   organizationSchema,
   type SeoPage,
   SITE_NAME,
+  sitemapXml,
   socialImageUrl,
   softwareSchema,
   websiteSchema,
@@ -25,17 +28,20 @@ const escapeHtml = (value: string) =>
 const escapeJson = (value: unknown) => JSON.stringify(value).replace(/</g, "\\u003c");
 
 function schemaForPage(page: SeoPage) {
+  const pageArticleSchema = articleSchema(page);
+
   return [
     organizationSchema(),
     websiteSchema(),
     softwareSchema(),
     breadcrumbSchema(page),
+    ...(pageArticleSchema ? [pageArticleSchema] : []),
     ...(page.path === "/" ? [faqSchema()] : []),
   ];
 }
 
 function siteNavigationSchema() {
-  return orderedSeoPages.map((route) => ({
+  return indexableSeoPages.map((route) => ({
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
     name: route.title.split("|")[0].trim(),
@@ -74,6 +80,7 @@ function renderHead(page: SeoPage) {
 }
 
 export const prerenderRoutes = orderedSeoPages.map((page) => page.path);
+export { sitemapXml };
 
 export function render(path: string) {
   const page = orderedSeoPages.find((route) => route.path === path) || orderedSeoPages[0];

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /register
 
 Sitemap: https://matgarko.com/sitemap.xml
