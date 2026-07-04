@@ -74,7 +74,10 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(sitemap).toBeOK();
     const sitemapText = await sitemap.text();
     await expect(sitemapText).toContain('<loc>https://matgarko.com/themes</loc>');
+    await expect(sitemapText).toContain('<loc>https://matgarko.com/en/pricing</loc>');
+    await expect(sitemapText).toContain('<loc>https://matgarko.com/en/blog/how-to-create-online-store-egypt</loc>');
     await expect(sitemapText).not.toContain('<loc>https://matgarko.com/register</loc>');
+    await expect(sitemapText).not.toContain('<loc>https://matgarko.com/en/register</loc>');
 
     const llms = await request.get('/llms.txt');
     await expect(llms).toBeOK();
@@ -82,6 +85,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(llmsText).toContain('# Matgarko');
     await expect(llmsText).toContain('## Best Pages For AI Answers');
     await expect(llmsText).toContain('https://matgarko.com/pricing');
+    await expect(llmsText).toContain('Languages: Arabic (Egypt) and English');
+    await expect(llmsText).toContain('https://matgarko.com/en/blog/how-to-create-online-store-egypt');
 
     const llmsFull = await request.get('/llms-full.txt');
     await expect(llmsFull).toBeOK();
@@ -106,6 +111,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     expect(routeSchema).not.toContain('SearchAction');
     expect(routeSchema).not.toContain('search_term_string');
     expect(navigationSchema).not.toContain('https://matgarko.com/register');
+    expect(navigationSchema).not.toContain('https://matgarko.com/en/register');
   });
 
   test('blog articles expose article structured data', async ({ page }) => {
@@ -115,5 +121,40 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     expect(routeSchema).toContain('"@type":"Article"');
     expect(routeSchema).toContain('https://matgarko.com/blog/how-to-create-online-store-egypt#article');
+  });
+
+  test('english homepage exposes LTR content and hreflang SEO metadata', async ({ page }) => {
+    await page.goto('/en');
+
+    await expect(page).toHaveTitle('Ecommerce platform for MENA merchants | Matgarko');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/en');
+    await expect(page.locator('link[rel="alternate"][hreflang="ar-EG"]')).toHaveAttribute('href', 'https://matgarko.com/');
+    await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', 'https://matgarko.com/en');
+    await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveAttribute('href', 'https://matgarko.com/');
+    await expect(page.getByRole('heading', { name: /Create an online store for Egypt and the Middle East/ })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Pricing' })).toHaveAttribute('href', '/en/pricing');
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'العربية' })).toHaveAttribute('href', '/');
+  });
+
+  test('english route family is crawlable with localized content', async ({ page }) => {
+    await page.goto('/en/pricing');
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/en/pricing');
+    await expect(page.getByRole('heading', { name: 'Start free, then upgrade when lower commission saves money' })).toBeVisible();
+    await expect(page.getByText('399 EGP')).toBeVisible();
+
+    await page.goto('/en/store/restaurants');
+    await expect(page.getByRole('heading', { name: /Online store builder for restaurants/ })).toBeVisible();
+
+    await page.goto('/en/compare/shopify');
+    await expect(page.getByRole('heading', { name: 'Shopify alternative for Egypt and MENA merchants' })).toBeVisible();
+
+    await page.goto('/en/blog/how-to-create-online-store-egypt');
+    await expect(page.getByRole('heading', { name: 'How to create an online store in Egypt in 2026' })).toBeVisible();
+    const routeSchema = await page.locator('#matgarko-route-schema').textContent();
+    expect(routeSchema).toContain('"@type":"Article"');
+    expect(routeSchema).toContain('"inLanguage":"en"');
+    expect(routeSchema).toContain('https://matgarko.com/en/blog/how-to-create-online-store-egypt#article');
   });
 });

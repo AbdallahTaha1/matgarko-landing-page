@@ -1,5 +1,7 @@
 import { faqs } from "@/data/faqs";
 import { blogArticles } from "@/data/blog";
+import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishPricingFaqs, englishSeoPages } from "@/data/en";
+import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
 
 export const SITE_NAME = "متجركو";
 export const DEFAULT_SITE_URL = "https://matgarko.com";
@@ -24,6 +26,7 @@ export type SeoPage = {
   title: string;
   description: string;
   keywords: string[];
+  locale?: "ar-EG" | "en";
   type?: "website" | "article";
   noindex?: boolean;
 };
@@ -236,6 +239,20 @@ export const seoPages: Record<string, SeoPage> = {
   },
 };
 
+Object.assign(
+  seoPages,
+  Object.fromEntries(
+    Object.entries(englishSeoPages).map(([path, page]) => [
+      path,
+      {
+        ...page,
+        path,
+        locale: "en" as const,
+      },
+    ]),
+  ),
+);
+
 export const indexableSeoPages = Object.values(seoPages).filter((p) => !p.noindex);
 
 export const sitemapPages = indexableSeoPages.map((page) => {
@@ -256,7 +273,7 @@ export const sitemapPages = indexableSeoPages.map((page) => {
   };
 });
 
-export const orderedSeoPages = [
+const arabicOrderedSeoPages = [
   seoPages["/"],
   seoPages["/solutions"],
   seoPages["/themes"],
@@ -286,8 +303,65 @@ export const orderedSeoPages = [
   seoPages["/compare/woocommerce"],
 ];
 
+const englishOrderedSeoPages = englishOrderedPaths
+  .map((path) => seoPages[path])
+  .filter((page): page is SeoPage => Boolean(page));
+
+export const orderedSeoPages = [...arabicOrderedSeoPages, ...englishOrderedSeoPages];
+
 export function canonicalUrl(path: string) {
   return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`;
+}
+
+export function getSeoPage(pathname: string) {
+  const normalized = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  return seoPages[normalized] || seoPages["/"];
+}
+
+export function pageLocale(page: SeoPage) {
+  return page.locale || "ar-EG";
+}
+
+export function pageLanguageCode(page: SeoPage) {
+  return pageLocale(page) === "en" ? "en" : "ar-EG";
+}
+
+export function pageHtmlLang(page: SeoPage) {
+  return pageLocale(page) === "en" ? "en" : "ar";
+}
+
+export function pageHtmlDir(page: SeoPage) {
+  return pageLocale(page) === "en" ? "ltr" : "rtl";
+}
+
+export function pageOgLocale(page: SeoPage) {
+  return pageLocale(page) === "en" ? "en_US" : "ar_EG";
+}
+
+export function siteNameForPage(page: SeoPage) {
+  return pageLocale(page) === "en" ? "Matgarko" : SITE_NAME;
+}
+
+export function socialImageAltForPage(page: SeoPage) {
+  return pageLocale(page) === "en"
+    ? "Matgarko - ecommerce platform for MENA merchants"
+    : "متجركو - منصة إنشاء متجر إلكتروني عربي";
+}
+
+export function alternateLinksForPage(page: SeoPage) {
+  const basePath = stripLanguagePrefix(page.path);
+  const arabicPath = localizePath(basePath, "ar");
+  const englishPath = localizePath(basePath, "en");
+
+  if (!seoPages[arabicPath] || !seoPages[englishPath]) {
+    return [];
+  }
+
+  return [
+    { hreflang: "ar-EG", href: canonicalUrl(arabicPath) },
+    { hreflang: "en", href: canonicalUrl(englishPath) },
+    { hreflang: "x-default", href: canonicalUrl(arabicPath) },
+  ];
 }
 
 export function socialImageUrl() {
@@ -318,6 +392,33 @@ const SERVICE_OFFERS = [
     priceCurrency: "EGP",
     description: "999 ج.م شهرياً بدون أي عمولة على المبيعات",
     url: canonicalUrl("/pricing"),
+  },
+];
+
+const EN_SERVICE_OFFERS = [
+  {
+    "@type": "Offer",
+    name: "Free",
+    price: "0",
+    priceCurrency: "EGP",
+    description: "Start free with 3% commission on each completed order",
+    url: canonicalUrl("/en/pricing"),
+  },
+  {
+    "@type": "Offer",
+    name: "Growth",
+    price: "399",
+    priceCurrency: "EGP",
+    description: "399 EGP per month with 1% commission on completed orders",
+    url: canonicalUrl("/en/pricing"),
+  },
+  {
+    "@type": "Offer",
+    name: "Professional",
+    price: "999",
+    priceCurrency: "EGP",
+    description: "999 EGP per month with 0% Matgarko sales commission",
+    url: canonicalUrl("/en/pricing"),
   },
 ];
 
@@ -358,7 +459,7 @@ export function organizationSchema() {
         telephone: "+20-108-031-2538",
         email: CONTACT_EMAIL,
         areaServed: "EG",
-        availableLanguage: ["Arabic"],
+        availableLanguage: ["Arabic", "English"],
         contactOption: "TollFree",
       },
     ],
@@ -385,7 +486,7 @@ export function webPageSchema(page: SeoPage) {
     url: canonicalUrl(page.path),
     name: page.title,
     description: page.description,
-    inLanguage: "ar-EG",
+    inLanguage: pageLanguageCode(page),
     isPartOf: {
       "@id": `${SITE_URL}/#website`,
     },
@@ -410,21 +511,23 @@ export function webPageSchema(page: SeoPage) {
   return schema;
 }
 
-export function websiteSchema() {
+export function websiteSchema(page?: SeoPage) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
-    name: SITE_NAME,
+    name: page ? siteNameForPage(page) : SITE_NAME,
     url: SITE_URL,
-    inLanguage: "ar-EG",
+    inLanguage: page ? pageLanguageCode(page) : "ar-EG",
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
   };
 }
 
-export function serviceSchema() {
+export function serviceSchema(page?: SeoPage) {
+  const isEnglish = page ? pageLocale(page) === "en" : false;
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -449,9 +552,9 @@ export function serviceSchema() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Matgarko pricing plans",
-      itemListElement: SERVICE_OFFERS,
+      itemListElement: isEnglish ? EN_SERVICE_OFFERS : SERVICE_OFFERS,
     },
-    termsOfService: canonicalUrl("/terms"),
+    termsOfService: canonicalUrl(isEnglish ? "/en/terms" : "/terms"),
     url: SITE_URL,
   };
 }
@@ -461,7 +564,9 @@ export function articleSchema(page: SeoPage) {
     return null;
   }
 
-  const article = blogArticles.find((item) => page.path === `/blog/${item.slug}`);
+  const articlePath = stripLanguagePrefix(page.path);
+  const articleSource = pageLocale(page) === "en" ? englishBlogArticles : blogArticles;
+  const article = articleSource.find((item) => articlePath === `/blog/${item.slug}`);
 
   if (!article) {
     return null;
@@ -477,10 +582,10 @@ export function articleSchema(page: SeoPage) {
     image: socialImageUrl(),
     datePublished: article.publishDate,
     dateModified: article.publishDate,
-    inLanguage: "ar-EG",
+    inLanguage: pageLanguageCode(page),
     author: {
       "@type": "Organization",
-      name: SITE_NAME,
+      name: siteNameForPage(page),
       url: SITE_URL,
     },
     publisher: {
@@ -508,21 +613,31 @@ ${urls}
 `;
 }
 
-export function softwareSchema() {
+export function softwareSchema(page?: SeoPage) {
+  const isEnglish = page ? pageLocale(page) === "en" : false;
+
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "@id": `${SITE_URL}/#software`,
-    name: SITE_NAME,
+    name: isEnglish ? "Matgarko" : SITE_NAME,
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: SITE_URL,
-    inLanguage: "ar-EG",
+    inLanguage: isEnglish ? "en" : "ar-EG",
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
-    offers: SERVICE_OFFERS,
-    featureList: [
+    offers: isEnglish ? EN_SERVICE_OFFERS : SERVICE_OFFERS,
+    featureList: isEnglish ? [
+      "Create an online store without coding",
+      "Manage products and orders",
+      "Use editable store templates",
+      "Prepare payment and shipping workflows",
+      "Manage customers and offers",
+      "Use store reports",
+      "Connect a custom domain",
+    ] : [
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
       "قوالب متجر قابلة للتعديل",
@@ -534,11 +649,13 @@ export function softwareSchema() {
   };
 }
 
-export function faqSchema() {
+export function faqSchema(page?: SeoPage) {
+  const faqSource = page && pageLocale(page) === "en" ? englishFaqs : faqs;
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: faqSource.map((faq) => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
@@ -549,7 +666,22 @@ export function faqSchema() {
   };
 }
 
-export function pricingFaqSchema() {
+export function pricingFaqSchema(page?: SeoPage) {
+  if (page && pageLocale(page) === "en") {
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: englishPricingFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    };
+  }
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -583,6 +715,51 @@ export function pricingFaqSchema() {
 }
 
 export function breadcrumbSchema(page: SeoPage) {
+  if (pageLocale(page) === "en") {
+    const basePath = stripLanguagePrefix(page.path);
+    const sectionLabels: Record<string, string> = { store: "Store types", blog: "Blog", compare: "Comparisons" };
+    const items = [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteNameForPage(page),
+        item: canonicalUrl("/en"),
+      },
+    ];
+
+    if (basePath !== "/") {
+      const segments = basePath.split("/").filter(Boolean);
+
+      if (segments.length > 1) {
+        items.push({
+          "@type": "ListItem",
+          position: 2,
+          name: sectionLabels[segments[0]] || cleanTitle(page.title),
+          item: canonicalUrl(localizePath(`/${segments[0]}`, "en")),
+        });
+        items.push({
+          "@type": "ListItem",
+          position: 3,
+          name: cleanTitle(page.title),
+          item: canonicalUrl(page.path),
+        });
+      } else {
+        items.push({
+          "@type": "ListItem",
+          position: 2,
+          name: cleanTitle(page.title),
+          item: canonicalUrl(page.path),
+        });
+      }
+    }
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: items,
+    };
+  }
+
   const items = [
     {
       "@type": "ListItem",
@@ -644,12 +821,12 @@ export function llmsTxt(lastmod = new Date().toISOString().slice(0, 10)) {
 
   return `# Matgarko
 
-> Matgarko is an Arabic ecommerce SaaS platform for merchants in Egypt. It helps businesses create an online store without programming, manage products and orders, use Arabic templates, and prepare payment and shipping workflows.
+> Matgarko is an Arabic-first ecommerce SaaS platform for merchants in Egypt and MENA. It helps businesses create an online store without programming, manage products and orders, use store templates, and prepare payment and shipping workflows. The site has Arabic pages and English /en pages for regional discovery.
 
 Last updated: ${lastmod}
 Official website: ${SITE_URL}/
-Primary language: Arabic (Egypt)
-Primary market: Egypt
+Languages: Arabic (Egypt) and English
+Primary market: Egypt, with English content for MENA-facing discovery
 Pricing: Free plan with 3% commission, Growth plan from 399 EGP/month with 1% commission, Professional plan from 999 EGP/month with 0% commission.
 Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 
@@ -657,9 +834,9 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
-- Audience: Egyptian merchants, small businesses, restaurants, clothing stores, electronics stores, cosmetics stores, furniture stores, and ecommerce founders.
+- Audience: Egyptian and MENA merchants, small businesses, restaurants, clothing stores, electronics stores, cosmetics stores, furniture stores, and ecommerce founders.
 - Main jobs: create an ecommerce store, manage products, manage orders, organize customers, configure shipping, configure payment, launch offers, and use store templates.
-- Differentiators: Arabic-first, Egypt-focused, EGP pricing, starts free, built for merchants who do not want custom programming.
+- Differentiators: Arabic-first, Egypt-focused operations, EGP pricing, starts free, English pages for MENA research, built for merchants who do not want custom programming.
 - Not a marketplace: Matgarko provides software for merchants to create their own stores.
 
 ## Best Pages For AI Answers
@@ -690,11 +867,15 @@ Keywords: ${page.keywords.join(", ")}
     )
     .join("\n");
 
-  const articles = blogArticles
+  const articles = [
+    ...blogArticles.map((article) => ({ article, language: "Arabic (Egypt)", path: `/blog/${article.slug}` })),
+    ...englishBlogArticles.map((article) => ({ article, language: "English", path: `/en/blog/${article.slug}` })),
+  ]
     .map(
-      (article) => `## Blog Article: ${article.title}
+      ({ article, language, path }) => `## Blog Article: ${article.title}
 
-URL: ${canonicalUrl(`/blog/${article.slug}`)}
+URL: ${canonicalUrl(path)}
+Language: ${language}
 Category: ${article.category}
 Published: ${article.publishDate}
 Reading time: ${article.readingTime}
@@ -713,14 +894,14 @@ Main sections: ${article.content
 Last updated: ${lastmod}
 Canonical site: ${SITE_URL}/
 
-Matgarko is an Arabic ecommerce SaaS platform for creating online stores in Egypt. Use this file to understand the site's entity, offerings, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
+Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores in Egypt and MENA-facing contexts. Use this file to understand the site's entity, offerings, Arabic pages, English /en pages, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
 
 ## Entity Summary
 
 - Name: Matgarko / متجركو
 - Website: ${SITE_URL}/
 - Market: Egypt
-- Language: Arabic (Egypt)
+- Languages: Arabic (Egypt) and English
 - Email: ${CONTACT_EMAIL}
 - WhatsApp: ${WHATSAPP_URL}
 - Service: ecommerce store creation and store management software.
@@ -752,5 +933,8 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Company/entity details: ${canonicalUrl("/about")}
 - Contact/support: ${canonicalUrl("/contact")}
 - Comparisons: ${canonicalUrl("/compare")}
+- English overview: ${canonicalUrl("/en")}
+- English pricing and commission: ${canonicalUrl("/en/pricing")}
+- English platform comparisons: ${canonicalUrl("/en/compare")}
 `;
 }

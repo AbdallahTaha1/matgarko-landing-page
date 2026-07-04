@@ -30,8 +30,9 @@ try {
 
   await Promise.all(
     prerenderRoutes.map(async (route) => {
-      const { html, head } = render(route);
+      const { html, head, lang, dir } = render(route);
       const output = template
+        .replace(/<html\s+lang="[^"]+"\s+dir="[^"]+">/, `<html lang="${lang}" dir="${dir}">`)
         .replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, head)
         .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
         .replaceAll("/src/assets/logo.png", builtLogoPath);

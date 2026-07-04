@@ -28,6 +28,32 @@ import { VsEasyOrdersPage } from "./pages/compare/VsEasyOrdersPage";
 import { VsShopifyPage } from "./pages/compare/VsShopifyPage";
 import { VsSallaPage } from "./pages/compare/VsSallaPage";
 import { VsWooCommercePage } from "./pages/compare/VsWooCommercePage";
+// English route tree
+import {
+  EnglishAboutPage,
+  EnglishBlogArticlePage,
+  EnglishBlogIndexPage,
+  EnglishClothingPage,
+  EnglishCompareIndexPage,
+  EnglishContactPage,
+  EnglishCosmeticsPage,
+  EnglishElectronicsPage,
+  EnglishFurniturePage,
+  EnglishGettingStartedPage,
+  EnglishHomePage,
+  EnglishIntegrationsPage,
+  EnglishPricingPage,
+  EnglishPrivacyPage,
+  EnglishRegisterPage,
+  EnglishRestaurantsPage,
+  EnglishSolutionsPage,
+  EnglishTermsPage,
+  EnglishThemesPage,
+  EnglishVsEasyOrdersPage,
+  EnglishVsSallaPage,
+  EnglishVsShopifyPage,
+  EnglishVsWooCommercePage,
+} from "./pages/english/EnglishPages";
 
 export function AppRoutes() {
   return (
@@ -62,6 +88,30 @@ export function AppRoutes() {
           <Route path="compare/shopify" element={<VsShopifyPage />} />
           <Route path="compare/salla" element={<VsSallaPage />} />
           <Route path="compare/woocommerce" element={<VsWooCommercePage />} />
+          {/* English localized pages */}
+          <Route path="en" element={<EnglishHomePage />} />
+          <Route path="en/solutions" element={<EnglishSolutionsPage />} />
+          <Route path="en/integrations" element={<EnglishIntegrationsPage />} />
+          <Route path="en/themes" element={<EnglishThemesPage />} />
+          <Route path="en/getting-started" element={<EnglishGettingStartedPage />} />
+          <Route path="en/pricing" element={<EnglishPricingPage />} />
+          <Route path="en/contact" element={<EnglishContactPage />} />
+          <Route path="en/about" element={<EnglishAboutPage />} />
+          <Route path="en/register" element={<EnglishRegisterPage />} />
+          <Route path="en/terms" element={<EnglishTermsPage />} />
+          <Route path="en/privacy" element={<EnglishPrivacyPage />} />
+          <Route path="en/store/restaurants" element={<EnglishRestaurantsPage />} />
+          <Route path="en/store/clothing" element={<EnglishClothingPage />} />
+          <Route path="en/store/electronics" element={<EnglishElectronicsPage />} />
+          <Route path="en/store/cosmetics" element={<EnglishCosmeticsPage />} />
+          <Route path="en/store/furniture" element={<EnglishFurniturePage />} />
+          <Route path="en/blog" element={<EnglishBlogIndexPage />} />
+          <Route path="en/blog/:slug" element={<EnglishBlogArticlePage />} />
+          <Route path="en/compare" element={<EnglishCompareIndexPage />} />
+          <Route path="en/compare/easyorders" element={<EnglishVsEasyOrdersPage />} />
+          <Route path="en/compare/shopify" element={<EnglishVsShopifyPage />} />
+          <Route path="en/compare/salla" element={<EnglishVsSallaPage />} />
+          <Route path="en/compare/woocommerce" element={<EnglishVsWooCommercePage />} />
         </Route>
       </Routes>
     </>

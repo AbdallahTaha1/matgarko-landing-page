@@ -3,14 +3,14 @@
 Last updated: 2026-07-04
 Canonical site: https://matgarko.com/
 
-Matgarko is an Arabic ecommerce SaaS platform for creating online stores in Egypt. Use this file to understand the site's entity, offerings, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
+Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores in Egypt and MENA-facing contexts. Use this file to understand the site's entity, offerings, Arabic pages, English /en pages, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
 
 ## Entity Summary
 
 - Name: Matgarko / متجركو
 - Website: https://matgarko.com/
 - Market: Egypt
-- Language: Arabic (Egypt)
+- Languages: Arabic (Egypt) and English
 - Email: matgarko.help@gmail.com
 - WhatsApp: https://wa.me/201080312538
 - Service: ecommerce store creation and store management software.
@@ -200,12 +200,188 @@ Type: Landing page
 Description: ووكومرس مجاني لكن يحتاج سيرفر ومطوراً. متجركو تمنحك متجراً كاملاً في 5 دقائق بدون تعقيدات تقنية وبأسعار بالجنيه المصري.
 Keywords: بديل ووكومرس في مصر, ووكومرس مقارنة, متجركو vs ووكومرس, woocommerce alternative egypt, بديل WooCommerce
 
+## Ecommerce platform for MENA merchants
+
+URL: https://matgarko.com/en
+Type: Landing page
+Description: Create an online store for Egypt and MENA with Matgarko. Launch without coding, manage products and orders, prepare payment and shipping workflows, and start free in EGP.
+Keywords: ecommerce platform MENA, online store builder Middle East, create online store Egypt, Arabic ecommerce platform, Matgarko
+
+## Ecommerce store management solutions
+
+URL: https://matgarko.com/en/solutions
+Type: Landing page
+Description: Manage storefronts, products, orders, customers, offers, payment setup, and shipping workflows in one Arabic-first ecommerce platform.
+Keywords: ecommerce store management, online store dashboard, product and order management, Arabic ecommerce software
+
+## Payment and shipping setup for ecommerce
+
+URL: https://matgarko.com/en/integrations
+Type: Landing page
+Description: Prepare cash on delivery, payment workflows, shipping zones, delivery fees, and operational settings for ecommerce stores in Egypt and MENA.
+Keywords: ecommerce payment Egypt, cash on delivery ecommerce, shipping setup online store, MENA ecommerce logistics
+
+## Online store templates for MENA businesses
+
+URL: https://matgarko.com/en/themes
+Type: Landing page
+Description: Start from mobile-ready ecommerce templates for restaurants, clothing, electronics, cosmetics, furniture, and other product businesses.
+Keywords: online store templates, ecommerce themes MENA, mobile store template, Arabic online store design
+
+## How to start an online store with Matgarko
+
+URL: https://matgarko.com/en/getting-started
+Type: Landing page
+Description: A clear launch path for creating your store, adding products, setting delivery and payment details, and publishing your first ecommerce catalog.
+Keywords: start online store, ecommerce launch checklist, create online store Egypt, Matgarko guide
+
+## Online store pricing in Egypt
+
+URL: https://matgarko.com/en/pricing
+Type: Landing page
+Description: Start free with 3% commission, or choose monthly EGP plans from 399 EGP with lower or zero Matgarko commission.
+Keywords: online store pricing Egypt, ecommerce platform pricing, free online store Egypt, EGP ecommerce plans
+
+## About Matgarko
+
+URL: https://matgarko.com/en/about
+Type: Landing page
+Description: Matgarko helps merchants in Egypt and Arabic-speaking markets launch online stores faster without custom development or heavy technical setup.
+Keywords: about Matgarko, Arabic ecommerce platform, Egypt ecommerce software, MENA ecommerce SaaS
+
+## Contact Matgarko
+
+URL: https://matgarko.com/en/contact
+Type: Landing page
+Description: Contact Matgarko by WhatsApp or email to ask about ecommerce pricing, store setup, migration, or launching your online store.
+Keywords: contact Matgarko, ecommerce setup support, online store support Egypt, Matgarko WhatsApp
+
+## Terms and conditions
+
+URL: https://matgarko.com/en/terms
+Type: Landing page
+Description: English summary of Matgarko terms covering merchant responsibility, platform use, plan fees, commissions, content, and service changes.
+Keywords: Matgarko terms, ecommerce platform terms, online store terms
+
+## Privacy policy
+
+URL: https://matgarko.com/en/privacy
+Type: Landing page
+Description: English privacy summary explaining how Matgarko handles account, store, support, and operational data for the ecommerce service.
+Keywords: Matgarko privacy, ecommerce privacy policy, store data privacy
+
+## Online store builder for restaurants in Egypt and MENA
+
+URL: https://matgarko.com/en/store/restaurants
+Type: Landing page
+Description: Create an online restaurant store or delivery menu with clear products, prices, delivery expectations, and order handling.
+Keywords: online store for restaurants, restaurant ecommerce Egypt, food delivery store builder, online menu builder
+
+## Online clothing store builder for Egypt and MENA
+
+URL: https://matgarko.com/en/store/clothing
+Type: Landing page
+Description: Launch a fashion ecommerce store with mobile-ready product pages, collection structure, size notes, color details, and simple order handling.
+Keywords: online clothing store builder, fashion ecommerce Egypt, sell clothes online MENA, clothing ecommerce platform
+
+## Electronics ecommerce store builder
+
+URL: https://matgarko.com/en/store/electronics
+Type: Landing page
+Description: Create an electronics store with clear specifications, pricing, product details, stock visibility, and local ecommerce workflows.
+Keywords: electronics ecommerce store, sell electronics online Egypt, gadget store builder, tech ecommerce platform
+
+## Cosmetics and beauty online store builder
+
+URL: https://matgarko.com/en/store/cosmetics
+Type: Landing page
+Description: Build an online cosmetics store with product benefits, shade notes, routines, offers, and a cleaner path from social content to orders.
+Keywords: cosmetics online store, beauty ecommerce Egypt, skincare store builder, sell cosmetics online
+
+## Furniture and home decor online store builder
+
+URL: https://matgarko.com/en/store/furniture
+Type: Landing page
+Description: Open a furniture or home decor ecommerce store with dimensions, materials, colors, delivery details, and structured product pages.
+Keywords: furniture ecommerce store, home decor online store, sell furniture online Egypt, furniture store builder
+
+## Matgarko blog
+
+URL: https://matgarko.com/en/blog
+Type: Landing page
+Description: Practical ecommerce guides about creating online stores, pricing, platform comparisons, free plans, and growth for merchants in Egypt and MENA.
+Keywords: ecommerce blog Egypt, MENA ecommerce guides, online store tips, Matgarko blog
+
+## How to create an online store in Egypt in 2026
+
+URL: https://matgarko.com/en/blog/how-to-create-online-store-egypt
+Type: Guide article
+Description: A practical step-by-step guide for launching an ecommerce store in Egypt: product choice, platform setup, payment, shipping, and first-order readiness.
+Keywords: how to create online store Egypt, start ecommerce Egypt 2026, online store launch guide, create ecommerce store
+
+## Cost of creating an online store in Egypt in 2026
+
+URL: https://matgarko.com/en/blog/cost-of-online-store-egypt-2026
+Type: Guide article
+Description: Understand ecommerce costs in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.
+Keywords: online store cost Egypt, ecommerce pricing Egypt, cost to start ecommerce store, Matgarko pricing
+
+## Best ecommerce platform for Egypt: what to compare
+
+URL: https://matgarko.com/en/blog/best-ecommerce-platform-egypt
+Type: Guide article
+Description: A practical framework for Egyptian merchants comparing local ecommerce platforms, Shopify, WooCommerce, and social selling.
+Keywords: best ecommerce platform Egypt, Shopify alternative Egypt, WooCommerce alternative Egypt, Arabic ecommerce platform
+
+## Free online store builders: benefits and limits
+
+URL: https://matgarko.com/en/blog/free-online-store-pros-cons
+Type: Guide article
+Description: Learn when a free ecommerce plan is useful, what limits to expect, and how to decide when commission becomes more expensive than a paid plan.
+Keywords: free online store builder, free ecommerce store Egypt, online store commission, start online store free
+
+## Compare ecommerce platforms for Egypt and MENA
+
+URL: https://matgarko.com/en/compare
+Type: Landing page
+Description: Compare Matgarko with EasyOrders, Shopify, Salla, and WooCommerce for local pricing, setup complexity, Arabic workflows, and ecommerce operations.
+Keywords: compare ecommerce platforms Egypt, Shopify alternative MENA, EasyOrders alternative, WooCommerce alternative Egypt
+
+## Matgarko vs EasyOrders
+
+URL: https://matgarko.com/en/compare/easyorders
+Type: Landing page
+Description: Compare Matgarko and EasyOrders for merchants in Egypt and MENA across pricing context, setup, local workflows, and launch fit.
+Keywords: Matgarko vs EasyOrders, EasyOrders alternative, ecommerce platform Egypt comparison
+
+## Shopify alternative for Egypt and MENA
+
+URL: https://matgarko.com/en/compare/shopify
+Type: Landing page
+Description: Compare Matgarko and Shopify for merchants who need Arabic-first workflows, EGP pricing, and a simpler local ecommerce launch path.
+Keywords: Shopify alternative Egypt, Shopify alternative MENA, Matgarko vs Shopify, Arabic Shopify alternative
+
+## Salla alternative for Egypt-focused merchants
+
+URL: https://matgarko.com/en/compare/salla
+Type: Landing page
+Description: Compare Matgarko and Salla for merchants who need Egypt-first workflows, EGP pricing, and practical Arabic ecommerce setup.
+Keywords: Salla alternative Egypt, Matgarko vs Salla, ecommerce platform Gulf Egypt, Arabic ecommerce platform
+
+## WooCommerce alternative without hosting or plugins
+
+URL: https://matgarko.com/en/compare/woocommerce
+Type: Landing page
+Description: Compare Matgarko and WooCommerce for merchants who want hosted no-code ecommerce instead of WordPress hosting, plugin maintenance, and developer setup.
+Keywords: WooCommerce alternative Egypt, Matgarko vs WooCommerce, hosted ecommerce platform, no-code ecommerce Egypt
+
 
 ## Blog Knowledge Base
 
 ## Blog Article: كيفية إنشاء متجر إلكتروني في مصر خطوة بخطوة 2026
 
 URL: https://matgarko.com/blog/how-to-create-online-store-egypt
+Language: Arabic (Egypt)
 Category: دليل البدء
 Published: 2026-06-26
 Reading time: 8 دقائق
@@ -215,6 +391,7 @@ Main sections: لماذا تنشئ متجراً إلكترونياً في مصر
 ## Blog Article: تكلفة إنشاء متجر إلكتروني في مصر 2026 — حساب دقيق
 
 URL: https://matgarko.com/blog/cost-of-online-store-egypt-2026
+Language: Arabic (Egypt)
 Category: التكاليف والأسعار
 Published: 2026-06-26
 Reading time: 6 دقائق
@@ -224,6 +401,7 @@ Main sections: نماذج التسعير الشائعة لمنصات المتا�
 ## Blog Article: أفضل منصة لإنشاء متجر إلكتروني في مصر 2026 — مقارنة شاملة
 
 URL: https://matgarko.com/blog/best-ecommerce-platform-egypt
+Language: Arabic (Egypt)
 Category: مقارنات ودراسات
 Published: 2026-06-26
 Reading time: 7 دقائق
@@ -233,11 +411,52 @@ Main sections: المعايير الأساسية للاختيار في السو�
 ## Blog Article: إنشاء متجر إلكتروني مجاني — المميزات والقيود
 
 URL: https://matgarko.com/blog/free-online-store-pros-cons
+Language: Arabic (Egypt)
 Category: نصائح البداية
 Published: 2026-06-26
 Reading time: 5 دقائق
 Summary: هل المتجر الإلكتروني المجاني مناسب لتجارتك؟ مقارنة بين المجاني والمدفوع وما الذي تحتاجه فعلاً لتبدأ البيع أونلاين.
 Main sections: مميزات البدء بمتجر مجاني; قيود المتجر المجاني; متى يناسبك المتجر المجاني؟; متى تنتقل للباقة المدفوعة؟; الخلاصة
+
+## Blog Article: How to create an online store in Egypt in 2026
+
+URL: https://matgarko.com/en/blog/how-to-create-online-store-egypt
+Language: English
+Category: Launch guide
+Published: 2026-06-26
+Reading time: 8 min read
+Summary: A practical step-by-step guide for launching an ecommerce store in Egypt: product choice, platform setup, payment, shipping, and first-order readiness.
+Main sections: 1. Start with a focused catalog; 2. Choose a store platform that fits local operations; 3. Build the storefront before running ads; 4. Prepare payment and delivery; 5. Test the first order flow
+
+## Blog Article: Cost of creating an online store in Egypt in 2026
+
+URL: https://matgarko.com/en/blog/cost-of-online-store-egypt-2026
+Language: English
+Category: Pricing
+Published: 2026-06-26
+Reading time: 6 min read
+Summary: Understand the real cost of ecommerce in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.
+Main sections: Common ecommerce cost models; Typical costs to plan for; When does a paid plan make sense?
+
+## Blog Article: Best ecommerce platform for Egypt: what merchants should compare
+
+URL: https://matgarko.com/en/blog/best-ecommerce-platform-egypt
+Language: English
+Category: Comparison
+Published: 2026-06-26
+Reading time: 7 min read
+Summary: A practical comparison framework for Egyptian merchants choosing between local ecommerce platforms, Shopify, WooCommerce, and social selling.
+Main sections: What to compare first; Global platforms vs local platforms; The simple decision
+
+## Blog Article: Free online store builders: benefits, limits, and when to upgrade
+
+URL: https://matgarko.com/en/blog/free-online-store-pros-cons
+Language: English
+Category: Beginner guide
+Published: 2026-06-26
+Reading time: 5 min read
+Summary: Learn when a free ecommerce plan is useful, what limits to expect, and how to decide when commission becomes more expensive than a paid plan.
+Main sections: Why free plans are useful; The limits to watch; When to upgrade
 
 
 ## Citation Preference
@@ -251,3 +470,6 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Company/entity details: https://matgarko.com/about
 - Contact/support: https://matgarko.com/contact
 - Comparisons: https://matgarko.com/compare
+- English overview: https://matgarko.com/en
+- English pricing and commission: https://matgarko.com/en/pricing
+- English platform comparisons: https://matgarko.com/en/compare

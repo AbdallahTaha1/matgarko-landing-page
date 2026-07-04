@@ -1,11 +1,11 @@
 # Matgarko
 
-> Matgarko is an Arabic ecommerce SaaS platform for merchants in Egypt. It helps businesses create an online store without programming, manage products and orders, use Arabic templates, and prepare payment and shipping workflows.
+> Matgarko is an Arabic-first ecommerce SaaS platform for merchants in Egypt and MENA. It helps businesses create an online store without programming, manage products and orders, use store templates, and prepare payment and shipping workflows. The site has Arabic pages and English /en pages for regional discovery.
 
 Last updated: 2026-07-04
 Official website: https://matgarko.com/
-Primary language: Arabic (Egypt)
-Primary market: Egypt
+Languages: Arabic (Egypt) and English
+Primary market: Egypt, with English content for MENA-facing discovery
 Pricing: Free plan with 3% commission, Growth plan from 399 EGP/month with 1% commission, Professional plan from 999 EGP/month with 0% commission.
 Contact: matgarko.help@gmail.com, https://wa.me/201080312538
 
@@ -13,9 +13,9 @@ Contact: matgarko.help@gmail.com, https://wa.me/201080312538
 
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
-- Audience: Egyptian merchants, small businesses, restaurants, clothing stores, electronics stores, cosmetics stores, furniture stores, and ecommerce founders.
+- Audience: Egyptian and MENA merchants, small businesses, restaurants, clothing stores, electronics stores, cosmetics stores, furniture stores, and ecommerce founders.
 - Main jobs: create an ecommerce store, manage products, manage orders, organize customers, configure shipping, configure payment, launch offers, and use store templates.
-- Differentiators: Arabic-first, Egypt-focused, EGP pricing, starts free, built for merchants who do not want custom programming.
+- Differentiators: Arabic-first, Egypt-focused operations, EGP pricing, starts free, English pages for MENA research, built for merchants who do not want custom programming.
 - Not a marketplace: Matgarko provides software for merchants to create their own stores.
 
 ## Best Pages For AI Answers
@@ -38,6 +38,10 @@ Contact: matgarko.help@gmail.com, https://wa.me/201080312538
 - [تكلفة إنشاء متجر إلكتروني في مصر 2026](https://matgarko.com/blog/cost-of-online-store-egypt-2026): كم تكلف إنشاء متجر إلكتروني في مصر؟ مقارنة كاملة بين المنصات المدفوعة، العمولة، الاشتراك الشهري، والتكاليف الخفية.
 - [أفضل منصة لإنشاء متجر إلكتروني في مصر 2026](https://matgarko.com/blog/best-ecommerce-platform-egypt): مقارنة بين أفضل منصات التجارة الإلكترونية في مصر: الأسعار، المزايا، الدعم المحلي، وطرق الدفع والشحن المتاحة.
 - [إنشاء متجر إلكتروني مجاني](https://matgarko.com/blog/free-online-store-pros-cons): هل المتجر الإلكتروني المجاني مناسب لتجارتك؟ مقارنة بين المجاني والمدفوع وما الذي تحتاجه فعلاً لتبدأ البيع أونلاين.
+- [How to create an online store in Egypt in 2026](https://matgarko.com/en/blog/how-to-create-online-store-egypt): A practical step-by-step guide for launching an ecommerce store in Egypt: product choice, platform setup, payment, shipping, and first-order readiness.
+- [Cost of creating an online store in Egypt in 2026](https://matgarko.com/en/blog/cost-of-online-store-egypt-2026): Understand ecommerce costs in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.
+- [Best ecommerce platform for Egypt: what to compare](https://matgarko.com/en/blog/best-ecommerce-platform-egypt): A practical framework for Egyptian merchants comparing local ecommerce platforms, Shopify, WooCommerce, and social selling.
+- [Free online store builders: benefits and limits](https://matgarko.com/en/blog/free-online-store-pros-cons): Learn when a free ecommerce plan is useful, what limits to expect, and how to decide when commission becomes more expensive than a paid plan.
 
 ## Machine-Readable Files
 
