@@ -1,0 +1,253 @@
+# Matgarko Full AI Context
+
+Last updated: 2026-07-04
+Canonical site: https://matgarko.com/
+
+Matgarko is an Arabic ecommerce SaaS platform for creating online stores in Egypt. Use this file to understand the site's entity, offerings, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
+
+## Entity Summary
+
+- Name: Matgarko / متجركو
+- Website: https://matgarko.com/
+- Market: Egypt
+- Language: Arabic (Egypt)
+- Email: matgarko.help@gmail.com
+- WhatsApp: https://wa.me/201080312538
+- Service: ecommerce store creation and store management software.
+- Core offer: start free and pay only when selling, or upgrade to monthly plans for lower commission.
+
+## Pricing Summary
+
+- Free: 0 EGP/month with 3% commission per completed order.
+- Growth: 399 EGP/month with 1% commission per completed order.
+- Professional: 999 EGP/month with 0% commission.
+- Pricing source: https://matgarko.com/pricing
+
+## Public Pages
+
+## إنشاء متجر إلكتروني في مصر مجاناً
+
+URL: https://matgarko.com/
+Type: Landing page
+Description: ابدأ متجرك الإلكتروني مجاناً مع متجركو — ادفع فقط لما تبيع. قوالب عربية جاهزة، دفع وشحن مدمج، وإدارة كاملة للمنتجات والطلبات. بدون برمجة.
+Keywords: إنشاء متجر إلكتروني, متجر إلكتروني مصر, منصة تجارة إلكترونية, متجركو, بيع أونلاين, متجر بدون برمجة, ابدأ مجاناً متجر إلكتروني
+
+## حلول إدارة المتجر الإلكتروني
+
+URL: https://matgarko.com/solutions
+Type: Landing page
+Description: كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، صفحات مهمة، وتجهيزات دفع وشحن تناسب نشاطك.
+Keywords: إدارة متجر إلكتروني, إدارة الطلبات, إدارة المنتجات, لوحة تحكم متجر
+
+## الدفع والشحن والتكاملات
+
+URL: https://matgarko.com/integrations
+Type: Landing page
+Description: جهز طرق الدفع، مناطق الشحن، أدوات التسويق، وإعدادات تشغيل متجرك الإلكتروني بما يناسب عملاءك في السوق العربي.
+Keywords: طرق دفع إلكتروني, شحن متجر إلكتروني, تكاملات متجر, دفع عند الاستلام
+
+## قوالب متجر إلكتروني جاهزة عربية
+
+URL: https://matgarko.com/themes
+Type: Landing page
+Description: ابدأ من قالب متجر إلكتروني جاهز ومتجاوب للجوال والكمبيوتر، ثم عدل الألوان والمحتوى والصفحات حسب نوع نشاطك التجاري.
+Keywords: قوالب متجر إلكتروني, ثيمات متجر, تصميم متجر إلكتروني, قالب متجر عربي, قوالب جاهزة
+
+## كيفية إنشاء متجر إلكتروني خطوة بخطوة
+
+URL: https://matgarko.com/getting-started
+Type: Landing page
+Description: تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تجهيز الدفع والشحن، ثم استقبال أول طلب في وقت قصير.
+Keywords: خطوات إنشاء متجر إلكتروني, كيفية إنشاء متجر إلكتروني, ابدأ البيع أونلاين, إنشاء متجر بدون كود
+
+## تكلفة إنشاء متجر إلكتروني في مصر
+
+URL: https://matgarko.com/pricing
+Type: Landing page
+Description: ابدأ مجاناً مع عمولة 3% فقط على كل طلب، أو اشترك في باقة شهرية تبدأ من 399 ج.م مع عمولة أقل. بدون رسوم مخفية.
+Keywords: تكلفة إنشاء متجر إلكتروني في مصر, أسعار متجر إلكتروني, باقات متجر إلكتروني, متجر إلكتروني مجاني, عمولة متجر إلكتروني
+
+## عن متجركو
+
+URL: https://matgarko.com/about
+Type: Landing page
+Description: متجركو منصة عربية تساعد التجار في مصر على إنشاء متجر إلكتروني بسرعة وبتكلفة مناسبة بدون شركة برمجة.
+Keywords: عن متجركو, منصة متجر إلكتروني عربية, متجر إلكتروني للتجار
+
+## تواصل مع متجركو
+
+URL: https://matgarko.com/contact
+Type: Landing page
+Description: تواصل مع فريق متجركو عبر واتساب أو البريد الإلكتروني للاستفسار عن الباقات، البدء مجاناً، وخطوات إنشاء المتجر.
+Keywords: تواصل متجركو, دعم متجر إلكتروني, واتساب متجركو
+
+## الشروط والأحكام
+
+URL: https://matgarko.com/terms
+Type: Landing page
+Description: تعرف على شروط استخدام منصة متجركو ومسؤوليات تشغيل متجرك الإلكتروني والاشتراكات والمحتوى.
+Keywords: شروط متجركو, شروط استخدام متجر إلكتروني
+
+## سياسة الخصوصية
+
+URL: https://matgarko.com/privacy
+Type: Landing page
+Description: تعرف على كيفية تعامل متجركو مع بيانات حسابك ومتجرك وطرق استخدامها لتشغيل الخدمة وتحسينها.
+Keywords: سياسة الخصوصية متجركو, خصوصية متجر إلكتروني
+
+## إنشاء متجر إلكتروني للمطاعم في مصر
+
+URL: https://matgarko.com/store/restaurants
+Type: Landing page
+Description: أنشئ متجر إلكتروني لمطعمك أو مشروعك الغذائي في دقائق. استقبل طلبات التوصيل أونلاين، أدر القائمة، وجهز الدفع والشحن بسهولة.
+Keywords: إنشاء متجر إلكتروني للمطاعم, متجر أونلاين للمطاعم, طلبات توصيل أونلاين, متجر أكل أونلاين مصر
+
+## إنشاء متجر ملابس إلكتروني في مصر
+
+URL: https://matgarko.com/store/clothing
+Type: Landing page
+Description: افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، وتوصيل سريع لعملاءك.
+Keywords: إنشاء متجر ملابس إلكتروني, متجر ملابس أونلاين مصر, متجر موضة إلكتروني, بيع ملابس أونلاين
+
+## إنشاء متجر إلكترونيات أونلاين في مصر
+
+URL: https://matgarko.com/store/electronics
+Type: Landing page
+Description: افتح متجر إلكترونيات وأجهزة أونلاين بقالب احترافي. عرض المواصفات والأسعار، مقارنة المنتجات، وإدارة المخزون بسهولة.
+Keywords: إنشاء متجر إلكترونيات, متجر أجهزة أونلاين مصر, بيع إلكترونيات أونلاين, متجر تقنية إلكتروني
+
+## إنشاء متجر مستحضرات تجميل أونلاين
+
+URL: https://matgarko.com/store/cosmetics
+Type: Landing page
+Description: أنشئ متجر عناية وجمال احترافي أونلاين. عرض المنتجات بوصف دقيق، إدارة الطلبات، وتوصيل سريع لعملاءك في مصر.
+Keywords: إنشاء متجر تجميل إلكتروني, متجر عناية أونلاين مصر, بيع مستحضرات تجميل أونلاين, متجر جمال إلكتروني
+
+## إنشاء متجر أثاث وديكور أونلاين في مصر
+
+URL: https://matgarko.com/store/furniture
+Type: Landing page
+Description: افتح متجر أثاث وديكور منزلي أونلاين. عرض المنتجات بتفاصيل واضحة ومقاسات دقيقة، وإدارة الطلبات والتوصيل بسهولة.
+Keywords: إنشاء متجر أثاث إلكتروني, متجر ديكور أونلاين مصر, بيع أثاث أونلاين, متجر منزل إلكتروني
+
+## مدونة متجركو
+
+URL: https://matgarko.com/blog
+Type: Landing page
+Description: مقالات ودليل عملي لمساعدتك في إنشاء متجرك الإلكتروني، اختيار المنصة، تكلفة البدء، واستراتيجيات النمو في السوق المصري.
+Keywords: مدونة متجركو, دليل التجارة الإلكترونية مصر, كيفية إنشاء متجر إلكتروني, نصائح التجارة الإلكترونية
+
+## كيفية إنشاء متجر إلكتروني في مصر خطوة بخطوة 2026
+
+URL: https://matgarko.com/blog/how-to-create-online-store-egypt
+Type: Guide article
+Description: دليل كامل خطوة بخطوة لإنشاء متجر إلكتروني في مصر: من اختيار المنتج وتسجيل المتجر حتى استقبال أول طلب وإعداد التوصيل.
+Keywords: كيفية إنشاء متجر إلكتروني في مصر, خطوات إنشاء متجر إلكتروني, دليل متجر إلكتروني مصر 2026
+
+## تكلفة إنشاء متجر إلكتروني في مصر 2026
+
+URL: https://matgarko.com/blog/cost-of-online-store-egypt-2026
+Type: Guide article
+Description: كم تكلف إنشاء متجر إلكتروني في مصر؟ مقارنة كاملة بين المنصات المدفوعة، العمولة، الاشتراك الشهري، والتكاليف الخفية.
+Keywords: تكلفة إنشاء متجر إلكتروني في مصر, سعر متجر إلكتروني مصر, كم يكلف المتجر الإلكتروني 2026
+
+## أفضل منصة لإنشاء متجر إلكتروني في مصر 2026
+
+URL: https://matgarko.com/blog/best-ecommerce-platform-egypt
+Type: Guide article
+Description: مقارنة بين أفضل منصات التجارة الإلكترونية في مصر: الأسعار، المزايا، الدعم المحلي، وطرق الدفع والشحن المتاحة.
+Keywords: أفضل منصة إنشاء متجر إلكتروني مصر, مقارنة منصات التجارة الإلكترونية, أفضل موقع لبيع أونلاين مصر
+
+## إنشاء متجر إلكتروني مجاني
+
+URL: https://matgarko.com/blog/free-online-store-pros-cons
+Type: Guide article
+Description: هل المتجر الإلكتروني المجاني مناسب لتجارتك؟ مقارنة بين المجاني والمدفوع وما الذي تحتاجه فعلاً لتبدأ البيع أونلاين.
+Keywords: إنشاء متجر إلكتروني مجاني, متجر إلكتروني مجاني مصر, الفرق بين المجاني والمدفوع في المتجر الإلكتروني
+
+## مقارنة منصات التجارة الإلكترونية في مصر 2026
+
+URL: https://matgarko.com/compare
+Type: Landing page
+Description: قارن متجركو مع إيزي أوردرز، سلة، شوبيفاي، وووكومرس. أسعار، مزايا، وعيوب كل منصة للتاجر المصري — اتخذ قرارك بمعلومات حقيقية.
+Keywords: مقارنة منصات التجارة الإلكترونية مصر, أفضل منصة متجر إلكتروني مصر, إيزي أوردرز سلة شوبيفاي مقارنة
+
+## متجركو vs إيزي أوردرز
+
+URL: https://matgarko.com/compare/easyorders
+Type: Landing page
+Description: مقارنة تفصيلية بين متجركو وإيزي أوردرز للتاجر المصري. الأسعار، بوابات الدفع، والمزايا — اكتشف البديل الأرخص بالجنيه المصري.
+Keywords: بديل إيزي أوردرز, متجركو vs إيزي أوردرز, إيزي أوردرز مقارنة, easyorders بديل, افضل بديل easyorders مصر
+
+## بديل شوبيفاي في مصر
+
+URL: https://matgarko.com/compare/shopify
+Type: Landing page
+Description: لماذا يبحث التجار المصريون عن بديل لشوبيفاي؟ مقارنة الأسعار والمزايا واكتشف منصة تجارة إلكترونية مصرية بأسعار بالجنيه بدون دولار.
+Keywords: بديل شوبيفاي في مصر, شوبيفاي بالعربي مصر, متجركو vs شوبيفاي, shopify alternative egypt, منصة بديل شوبيفاي
+
+## بديل سلة في مصر
+
+URL: https://matgarko.com/compare/salla
+Type: Landing page
+Description: سلة منصة خليجية رائعة — لكن للتاجر المصري، متجركو مصممة لمصر من البداية. مقارنة الأسعار والمزايا ودعم بوابات الدفع المصرية.
+Keywords: بديل سلة في مصر, سلة مصر مقارنة, متجركو vs سلة, منصة مثل سلة في مصر, بديل منصة سلة
+
+## بديل ووكومرس في مصر
+
+URL: https://matgarko.com/compare/woocommerce
+Type: Landing page
+Description: ووكومرس مجاني لكن يحتاج سيرفر ومطوراً. متجركو تمنحك متجراً كاملاً في 5 دقائق بدون تعقيدات تقنية وبأسعار بالجنيه المصري.
+Keywords: بديل ووكومرس في مصر, ووكومرس مقارنة, متجركو vs ووكومرس, woocommerce alternative egypt, بديل WooCommerce
+
+
+## Blog Knowledge Base
+
+## Blog Article: كيفية إنشاء متجر إلكتروني في مصر خطوة بخطوة 2026
+
+URL: https://matgarko.com/blog/how-to-create-online-store-egypt
+Category: دليل البدء
+Published: 2026-06-26
+Reading time: 8 دقائق
+Summary: دليل كامل خطوة بخطوة لإنشاء متجر إلكتروني في مصر: من اختيار المنتج وتسجيل المتجر حتى استقبال أول طلب وإعداد التوصيل.
+Main sections: لماذا تنشئ متجراً إلكترونياً في مصر؟; الخطوة الأولى: اختر ما ستبيعه; الخطوة الثانية: اختر منصة إنشاء المتجر; الخطوة الثالثة: سجّل متجرك وجهز الإعدادات الأساسية; الخطوة الرابعة: أضف منتجاتك; الخطوة الخامسة: جهز طرق الدفع والشحن; الخطوة السادسة: أطلق متجرك وابدأ التسويق
+
+## Blog Article: تكلفة إنشاء متجر إلكتروني في مصر 2026 — حساب دقيق
+
+URL: https://matgarko.com/blog/cost-of-online-store-egypt-2026
+Category: التكاليف والأسعار
+Published: 2026-06-26
+Reading time: 6 دقائق
+Summary: كم تكلف إنشاء متجر إلكتروني في مصر؟ مقارنة كاملة بين المنصات المدفوعة، العمولة، الاشتراك الشهري، والتكاليف الخفية.
+Main sections: نماذج التسعير الشائعة لمنصات المتاجر الإلكترونية; 1. الاشتراك الشهري الثابت; 2. العمولة على كل طلب; 3. الدمج بين الاثنين; التكاليف الأساسية لمتجر إلكتروني في مصر; متى تكون العمولة أوفر من الاشتراك الشهري؟; التكاليف الخفية التي كثيراً ما تُنسى; الخلاصة
+
+## Blog Article: أفضل منصة لإنشاء متجر إلكتروني في مصر 2026 — مقارنة شاملة
+
+URL: https://matgarko.com/blog/best-ecommerce-platform-egypt
+Category: مقارنات ودراسات
+Published: 2026-06-26
+Reading time: 7 دقائق
+Summary: مقارنة بين أفضل منصات التجارة الإلكترونية في مصر: الأسعار، المزايا، الدعم المحلي، وطرق الدفع والشحن المتاحة.
+Main sections: المعايير الأساسية للاختيار في السوق المصري; المنصات العالمية (Shopify, WooCommerce); المنصات المصرية والعربية; ما الذي يجب البحث عنه في أي منصة؟; الخلاصة
+
+## Blog Article: إنشاء متجر إلكتروني مجاني — المميزات والقيود
+
+URL: https://matgarko.com/blog/free-online-store-pros-cons
+Category: نصائح البداية
+Published: 2026-06-26
+Reading time: 5 دقائق
+Summary: هل المتجر الإلكتروني المجاني مناسب لتجارتك؟ مقارنة بين المجاني والمدفوع وما الذي تحتاجه فعلاً لتبدأ البيع أونلاين.
+Main sections: مميزات البدء بمتجر مجاني; قيود المتجر المجاني; متى يناسبك المتجر المجاني؟; متى تنتقل للباقة المدفوعة؟; الخلاصة
+
+
+## Citation Preference
+
+For factual answers about Matgarko, cite the most specific canonical page:
+
+- Pricing and commission: https://matgarko.com/pricing
+- How to start: https://matgarko.com/getting-started
+- Templates: https://matgarko.com/themes
+- Integrations, payment, and shipping: https://matgarko.com/integrations
+- Company/entity details: https://matgarko.com/about
+- Contact/support: https://matgarko.com/contact
+- Comparisons: https://matgarko.com/compare

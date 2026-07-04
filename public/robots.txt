@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# AI retrieval guide: https://matgarko.com/llms.txt
 Sitemap: https://matgarko.com/sitemap.xml

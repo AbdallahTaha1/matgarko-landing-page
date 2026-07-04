@@ -75,6 +75,21 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     const sitemapText = await sitemap.text();
     await expect(sitemapText).toContain('<loc>https://matgarko.com/themes</loc>');
     await expect(sitemapText).not.toContain('<loc>https://matgarko.com/register</loc>');
+
+    const llms = await request.get('/llms.txt');
+    await expect(llms).toBeOK();
+    const llmsText = await llms.text();
+    await expect(llmsText).toContain('# Matgarko');
+    await expect(llmsText).toContain('## Best Pages For AI Answers');
+    await expect(llmsText).toContain('https://matgarko.com/pricing');
+
+    const llmsFull = await request.get('/llms-full.txt');
+    await expect(llmsFull).toBeOK();
+    await expect(await llmsFull.text()).toContain('## Citation Preference');
+
+    const indexNowKey = await request.get('/43d1ff6a773e42bb8740f69cc3a723b6.txt');
+    await expect(indexNowKey).toBeOK();
+    await expect((await indexNowKey.text()).trim()).toBe('43d1ff6a773e42bb8740f69cc3a723b6');
   });
 
   test('structured data does not advertise non-indexable or missing search pages', async ({ page }) => {
@@ -83,6 +98,11 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     const routeSchema = await page.locator('#matgarko-route-schema').textContent();
     const navigationSchema = await page.locator('#matgarko-site-navigation').textContent();
 
+    await expect(page.locator('link[rel="alternate"][href="/llms.txt"]')).toHaveAttribute('type', 'text/markdown');
+    await expect(page.locator('link[rel="alternate"][href="/llms-full.txt"]')).toHaveAttribute('type', 'text/markdown');
+    expect(routeSchema).toContain('"@type":"Service"');
+    expect(routeSchema).toContain('https://matgarko.com/#ecommerce-service');
+    expect(routeSchema).toContain('https://matgarko.com/#webpage');
     expect(routeSchema).not.toContain('SearchAction');
     expect(routeSchema).not.toContain('search_term_string');
     expect(navigationSchema).not.toContain('https://matgarko.com/register');

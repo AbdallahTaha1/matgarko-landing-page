@@ -8,6 +8,17 @@ export const SIGNUP_URL = "https://signup.matgarko.com/signup";
 export const WHATSAPP_URL = "https://wa.me/201080312538";
 export const CONTACT_EMAIL = "matgarko.help@gmail.com";
 
+const CORE_TOPICS = [
+  "Arabic ecommerce platform",
+  "Create an online store in Egypt",
+  "No-code ecommerce store builder",
+  "Egyptian pound ecommerce pricing",
+  "Cash on delivery",
+  "Payment and shipping setup",
+  "Store templates",
+  "Product and order management",
+];
+
 export type SeoPage = {
   path: string;
   title: string;
@@ -283,6 +294,33 @@ export function socialImageUrl() {
   return `${SITE_URL}/og-image.svg`;
 }
 
+const SERVICE_OFFERS = [
+  {
+    "@type": "Offer",
+    name: "مجاني",
+    price: "0",
+    priceCurrency: "EGP",
+    description: "ابدأ مجاناً مع عمولة 3% على كل طلب",
+    url: canonicalUrl("/pricing"),
+  },
+  {
+    "@type": "Offer",
+    name: "نمو",
+    price: "399",
+    priceCurrency: "EGP",
+    description: "399 ج.م شهرياً مع عمولة 1% فقط على كل طلب",
+    url: canonicalUrl("/pricing"),
+  },
+  {
+    "@type": "Offer",
+    name: "احترافي",
+    price: "999",
+    priceCurrency: "EGP",
+    description: "999 ج.م شهرياً بدون أي عمولة على المبيعات",
+    url: canonicalUrl("/pricing"),
+  },
+];
+
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
@@ -290,6 +328,8 @@ export function organizationSchema() {
     "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
     legalName: "متجركو مصر — منصة إنشاء المتاجر الإلكترونية",
+    alternateName: ["Matgarko", "متجركو"],
+    slogan: "ابدأ متجرك الإلكتروني مجاناً وادفع فقط لما تبيع",
     description:
       "متجركو منصة عربية لإنشاء المتاجر الإلكترونية في مصر. تتيح للتجار بناء متجر احترافي وإدارة منتجاتهم وطلباتهم وتجهيز الدفع والشحن بدون برمجة.",
     url: SITE_URL,
@@ -310,6 +350,7 @@ export function organizationSchema() {
       "https://www.facebook.com/matgarko2/",
       "https://wa.me/201080312538",
     ],
+    knowsAbout: CORE_TOPICS,
     contactPoint: [
       {
         "@type": "ContactPoint",
@@ -329,6 +370,46 @@ export function organizationSchema() {
   };
 }
 
+function webPageSchemaType(page: SeoPage) {
+  if (page.path === "/about") return "AboutPage";
+  if (page.path === "/contact") return "ContactPage";
+  if (page.path === "/blog" || page.path === "/compare") return "CollectionPage";
+  return "WebPage";
+}
+
+export function webPageSchema(page: SeoPage) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": webPageSchemaType(page),
+    "@id": `${canonicalUrl(page.path)}#webpage`,
+    url: canonicalUrl(page.path),
+    name: page.title,
+    description: page.description,
+    inLanguage: "ar-EG",
+    isPartOf: {
+      "@id": `${SITE_URL}/#website`,
+    },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    about: CORE_TOPICS.map((name) => ({
+      "@type": "Thing",
+      name,
+    })),
+  };
+
+  if (page.type === "article") {
+    return {
+      ...schema,
+      mainEntity: {
+        "@id": `${canonicalUrl(page.path)}#article`,
+      },
+    };
+  }
+
+  return schema;
+}
+
 export function websiteSchema() {
   return {
     "@context": "https://schema.org",
@@ -340,6 +421,38 @@ export function websiteSchema() {
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
+  };
+}
+
+export function serviceSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/#ecommerce-service`,
+    name: "متجركو - إنشاء متجر إلكتروني في مصر",
+    alternateName: "Matgarko ecommerce store builder",
+    serviceType: "Ecommerce platform",
+    category: "BusinessApplication",
+    description:
+      "منصة عربية تساعد التجار في مصر على إنشاء متجر إلكتروني بدون برمجة مع قوالب، إدارة منتجات، طلبات، دفع، وشحن.",
+    provider: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Egypt",
+    },
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType: "Merchants and small businesses in Egypt",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Matgarko pricing plans",
+      itemListElement: SERVICE_OFFERS,
+    },
+    termsOfService: canonicalUrl("/terms"),
+    url: SITE_URL,
   };
 }
 
@@ -408,32 +521,7 @@ export function softwareSchema() {
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
-    offers: [
-      {
-        "@type": "Offer",
-        name: "مجاني",
-        price: "0",
-        priceCurrency: "EGP",
-        description: "ابدأ مجاناً مع عمولة 3% على كل طلب",
-        url: canonicalUrl("/pricing"),
-      },
-      {
-        "@type": "Offer",
-        name: "نمو",
-        price: "399",
-        priceCurrency: "EGP",
-        description: "399 ج.م شهرياً مع عمولة 1% فقط على كل طلب",
-        url: canonicalUrl("/pricing"),
-      },
-      {
-        "@type": "Offer",
-        name: "احترافي",
-        price: "999",
-        priceCurrency: "EGP",
-        description: "999 ج.م شهرياً بدون أي عمولة على المبيعات",
-        url: canonicalUrl("/pricing"),
-      },
-    ],
+    offers: SERVICE_OFFERS,
     featureList: [
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
@@ -458,6 +546,39 @@ export function faqSchema() {
         text: faq.answer,
       },
     })),
+  };
+}
+
+export function pricingFaqSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "كيف تُحسب العمولة على الباقة المجانية؟",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "العمولة 3% تُخصم تلقائياً من قيمة كل طلب مكتمل.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "متى يستحق الترقية من المجاني للنمو؟",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "لما تتجاوز 33 طلب شهرياً بمتوسط قيمة 700 ج.م، تبدأ باقة النمو أن تكون أوفر من الباقة المجانية.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "هل يوجد رسوم إضافية على بوابات الدفع؟",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "رسوم بوابات الدفع تفرضها شركات الدفع مباشرة وهي منفصلة عن اشتراك متجركو.",
+        },
+      },
+    ],
   };
 }
 
@@ -502,4 +623,134 @@ export function breadcrumbSchema(page: SeoPage) {
     "@type": "BreadcrumbList",
     itemListElement: items,
   };
+}
+
+function cleanTitle(title: string) {
+  return title.split("|")[0].split("—")[0].trim();
+}
+
+function markdownPageList(pages = sitemapPages) {
+  return pages
+    .map((page) => `- [${cleanTitle(page.title)}](${canonicalUrl(page.path)}): ${page.description}`)
+    .join("\n");
+}
+
+export function llmsTxt(lastmod = new Date().toISOString().slice(0, 10)) {
+  const commercialPages = sitemapPages.filter((page) =>
+    ["/", "/pricing", "/solutions", "/themes", "/integrations", "/getting-started", "/compare"].includes(page.path) ||
+    page.path.startsWith("/compare/"),
+  );
+  const articlePages = sitemapPages.filter((page) => page.type === "article");
+
+  return `# Matgarko
+
+> Matgarko is an Arabic ecommerce SaaS platform for merchants in Egypt. It helps businesses create an online store without programming, manage products and orders, use Arabic templates, and prepare payment and shipping workflows.
+
+Last updated: ${lastmod}
+Official website: ${SITE_URL}/
+Primary language: Arabic (Egypt)
+Primary market: Egypt
+Pricing: Free plan with 3% commission, Growth plan from 399 EGP/month with 1% commission, Professional plan from 999 EGP/month with 0% commission.
+Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
+
+## Key Facts
+
+- Brand: Matgarko / متجركو
+- Category: Arabic ecommerce platform and no-code online store builder.
+- Audience: Egyptian merchants, small businesses, restaurants, clothing stores, electronics stores, cosmetics stores, furniture stores, and ecommerce founders.
+- Main jobs: create an ecommerce store, manage products, manage orders, organize customers, configure shipping, configure payment, launch offers, and use store templates.
+- Differentiators: Arabic-first, Egypt-focused, EGP pricing, starts free, built for merchants who do not want custom programming.
+- Not a marketplace: Matgarko provides software for merchants to create their own stores.
+
+## Best Pages For AI Answers
+
+${markdownPageList(commercialPages)}
+
+## Guides And Comparisons
+
+${markdownPageList(articlePages)}
+
+## Machine-Readable Files
+
+- [Sitemap](${SITE_URL}/sitemap.xml): indexable public pages.
+- [Full LLM Context](${SITE_URL}/llms-full.txt): expanded page-by-page context for AI retrieval.
+`;
+}
+
+export function llmsFullTxt(lastmod = new Date().toISOString().slice(0, 10)) {
+  const pageSections = sitemapPages
+    .map(
+      (page) => `## ${cleanTitle(page.title)}
+
+URL: ${canonicalUrl(page.path)}
+Type: ${page.type === "article" ? "Guide article" : "Landing page"}
+Description: ${page.description}
+Keywords: ${page.keywords.join(", ")}
+`,
+    )
+    .join("\n");
+
+  const articles = blogArticles
+    .map(
+      (article) => `## Blog Article: ${article.title}
+
+URL: ${canonicalUrl(`/blog/${article.slug}`)}
+Category: ${article.category}
+Published: ${article.publishDate}
+Reading time: ${article.readingTime}
+Summary: ${article.description}
+Main sections: ${article.content
+        .filter((section) => section.type === "h2" || section.type === "h3")
+        .map((section) => section.text)
+        .filter(Boolean)
+        .join("; ")}
+`,
+    )
+    .join("\n");
+
+  return `# Matgarko Full AI Context
+
+Last updated: ${lastmod}
+Canonical site: ${SITE_URL}/
+
+Matgarko is an Arabic ecommerce SaaS platform for creating online stores in Egypt. Use this file to understand the site's entity, offerings, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
+
+## Entity Summary
+
+- Name: Matgarko / متجركو
+- Website: ${SITE_URL}/
+- Market: Egypt
+- Language: Arabic (Egypt)
+- Email: ${CONTACT_EMAIL}
+- WhatsApp: ${WHATSAPP_URL}
+- Service: ecommerce store creation and store management software.
+- Core offer: start free and pay only when selling, or upgrade to monthly plans for lower commission.
+
+## Pricing Summary
+
+- Free: 0 EGP/month with 3% commission per completed order.
+- Growth: 399 EGP/month with 1% commission per completed order.
+- Professional: 999 EGP/month with 0% commission.
+- Pricing source: ${canonicalUrl("/pricing")}
+
+## Public Pages
+
+${pageSections}
+
+## Blog Knowledge Base
+
+${articles}
+
+## Citation Preference
+
+For factual answers about Matgarko, cite the most specific canonical page:
+
+- Pricing and commission: ${canonicalUrl("/pricing")}
+- How to start: ${canonicalUrl("/getting-started")}
+- Templates: ${canonicalUrl("/themes")}
+- Integrations, payment, and shipping: ${canonicalUrl("/integrations")}
+- Company/entity details: ${canonicalUrl("/about")}
+- Contact/support: ${canonicalUrl("/contact")}
+- Comparisons: ${canonicalUrl("/compare")}
+`;
 }

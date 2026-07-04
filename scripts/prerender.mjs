@@ -25,7 +25,7 @@ const vite = await createServer({
 
 try {
   const template = await fs.readFile(templatePath, "utf8");
-  const { prerenderRoutes, render, sitemapXml } = await vite.ssrLoadModule("/src/prerender.tsx");
+  const { llmsFullTxt, llmsTxt, prerenderRoutes, render, sitemapXml } = await vite.ssrLoadModule("/src/prerender.tsx");
   const builtLogoPath = await findBuiltLogoPath();
 
   await Promise.all(
@@ -50,6 +50,10 @@ try {
 
   await fs.writeFile(path.join(distDir, "sitemap.xml"), sitemapXml());
   console.log("generated sitemap.xml");
+  await fs.writeFile(path.join(distDir, "llms.txt"), llmsTxt());
+  console.log("generated llms.txt");
+  await fs.writeFile(path.join(distDir, "llms-full.txt"), llmsFullTxt());
+  console.log("generated llms-full.txt");
 } finally {
   await vite.close();
 }

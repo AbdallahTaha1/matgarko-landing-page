@@ -8,13 +8,18 @@ import {
   canonicalUrl,
   faqSchema,
   indexableSeoPages,
+  llmsFullTxt,
+  llmsTxt,
   orderedSeoPages,
   organizationSchema,
+  pricingFaqSchema,
+  serviceSchema,
   type SeoPage,
   SITE_NAME,
   sitemapXml,
   socialImageUrl,
   softwareSchema,
+  webPageSchema,
   websiteSchema,
 } from "./lib/seo";
 
@@ -33,10 +38,13 @@ function schemaForPage(page: SeoPage) {
   return [
     organizationSchema(),
     websiteSchema(),
+    webPageSchema(page),
+    serviceSchema(),
     softwareSchema(),
     breadcrumbSchema(page),
     ...(pageArticleSchema ? [pageArticleSchema] : []),
     ...(page.path === "/" ? [faqSchema()] : []),
+    ...(page.path === "/pricing" ? [pricingFaqSchema()] : []),
   ];
 }
 
@@ -74,13 +82,15 @@ function renderHead(page: SeoPage) {
     <meta name="twitter:title" content="${escapeHtml(page.title)}" />
     <meta name="twitter:description" content="${escapeHtml(page.description)}" />
     <meta name="twitter:image" content="${escapeHtml(image)}" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM summary" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="Full LLM context" />
     <script type="application/ld+json" id="matgarko-route-schema">${escapeJson(schemaForPage(page))}</script>
     <script type="application/ld+json" id="matgarko-site-navigation">${escapeJson(siteNavigationSchema())}</script>
     <!-- seo:end -->`;
 }
 
 export const prerenderRoutes = orderedSeoPages.map((page) => page.path);
-export { sitemapXml };
+export { llmsFullTxt, llmsTxt, sitemapXml };
 
 export function render(path: string) {
   const page = orderedSeoPages.find((route) => route.path === path) || orderedSeoPages[0];

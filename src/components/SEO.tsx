@@ -7,10 +7,13 @@ import {
   faqSchema,
   indexableSeoPages,
   organizationSchema,
+  pricingFaqSchema,
+  serviceSchema,
   seoPages,
   SITE_NAME,
   socialImageUrl,
   softwareSchema,
+  webPageSchema,
   websiteSchema,
 } from "@/lib/seo";
 
@@ -36,6 +39,20 @@ function upsertLink(rel: string, href: string) {
   }
 
   element.href = href;
+}
+
+function upsertAlternateMarkdown(href: string, title: string) {
+  let element = document.head.querySelector<HTMLLinkElement>(`link[rel="alternate"][href="${href}"]`);
+
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = "alternate";
+    element.href = href;
+    document.head.appendChild(element);
+  }
+
+  element.type = "text/markdown";
+  element.title = title;
 }
 
 function upsertJsonLd(id: string, data: unknown) {
@@ -82,15 +99,20 @@ export function SEO() {
     upsertMeta("name", "twitter:image", image);
 
     upsertLink("canonical", canonical);
+    upsertAlternateMarkdown("/llms.txt", "LLM summary");
+    upsertAlternateMarkdown("/llms-full.txt", "Full LLM context");
 
     const pageArticleSchema = articleSchema(page);
     const jsonLd = [
       organizationSchema(),
       websiteSchema(),
+      webPageSchema(page),
+      serviceSchema(),
       softwareSchema(),
       breadcrumbSchema(page),
       ...(pageArticleSchema ? [pageArticleSchema] : []),
       ...(page.path === "/" ? [faqSchema()] : []),
+      ...(page.path === "/pricing" ? [pricingFaqSchema()] : []),
     ];
 
     upsertJsonLd("matgarko-route-schema", jsonLd);
