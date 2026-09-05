@@ -8,9 +8,14 @@
   status = 200
 
 [[headers]]
-  for = "/favicon.ico"
+  for = "/site.webmanifest"
   [headers.values]
-    X-Robots-Tag = "noindex"
+    Content-Type = "application/manifest+json; charset=utf-8"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 [[headers]]
   for = "/assets/*"
