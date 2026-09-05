@@ -66,7 +66,7 @@ export const englishFaqs = [
   {
     question: "Can I start before paying monthly?",
     answer:
-      "Yes. The free plan lets you start with no monthly fee and pay a 3% commission on completed orders. Paid plans lower or remove the commission as your store grows.",
+      "Yes. The free plan lets you start with no monthly fee and pay a 2% commission on completed orders. Paid plans lower or remove the commission as your store grows.",
   },
   {
     question: "Does Matgarko support payment and shipping workflows?",
@@ -79,79 +79,6 @@ export const englishFaqs = [
       "You can start with a Matgarko store link, then connect a custom domain when your plan and store setup are ready for it.",
   },
 ];
-
-export const englishPricingFaqs = [
-  {
-    question: "How is the free plan commission calculated?",
-    answer:
-      "The free plan charges 3% on each completed order. It is useful when you are testing a market or launching with low order volume.",
-  },
-  {
-    question: "When should I upgrade from Free to Growth?",
-    answer:
-      "If your monthly order volume makes the 3% commission higher than the Growth plan cost plus 1% commission, upgrading usually becomes the better financial choice.",
-  },
-  {
-    question: "Are payment gateway fees included?",
-    answer:
-      "No. Payment providers may charge their own transaction fees. Those fees are separate from Matgarko plan fees and commissions.",
-  },
-];
-
-export const englishHome = {
-  hero: {
-    kicker: "Arabic-first ecommerce for MENA merchants",
-    title: "Create an online store for Egypt and the Middle East without custom development",
-    lead:
-      "Matgarko helps merchants launch a branded ecommerce store, manage products and orders, prepare payment and shipping workflows, and grow with pricing that starts free in EGP.",
-    primaryCta: "Start your store free",
-    secondaryCta: "See pricing",
-  },
-  stats: [
-    { value: "0 EGP", label: "monthly fee to start" },
-    { value: "3%", label: "commission on the free plan" },
-    { value: "5 min", label: "to create the first store draft" },
-    { value: "Arabic + English", label: "content for regional teams" },
-  ],
-  features: [
-    {
-      title: "Storefront and catalog",
-      text:
-        "Launch a mobile-ready storefront, organize products, add clear descriptions, and publish categories that shoppers can understand quickly.",
-    },
-    {
-      title: "Orders and customers",
-      text:
-        "Track orders, customer details, delivery status, and operational work from one dashboard instead of scattered chats and spreadsheets.",
-    },
-    {
-      title: "Payment and shipping setup",
-      text:
-        "Prepare cash-on-delivery flows, delivery zones, shipping prices, and payment settings that match how customers buy in Egypt and the region.",
-    },
-    {
-      title: "Templates for real businesses",
-      text:
-        "Use storefront layouts for restaurants, fashion, electronics, cosmetics, furniture, and other product-led businesses.",
-    },
-    {
-      title: "Pricing that fits early stores",
-      text:
-        "Start free, then move to a monthly plan when your order volume makes lower commission more profitable.",
-    },
-    {
-      title: "Built for Arabic commerce",
-      text:
-        "Matgarko is designed around Arabic-first selling habits while giving English pages for partners, researchers, and regional teams.",
-    },
-  ],
-  workflow: [
-    "Choose your store name and link.",
-    "Add products, prices, images, and stock.",
-    "Set up delivery, payment, and contact details.",
-    "Publish the store and start accepting orders.",
-  ],
-};
 
 export const englishSimplePages: Record<string, EnglishPageContent> = {
   solutions: {
@@ -388,33 +315,6 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     ],
   },
 };
-
-export const englishPricingPlans = [
-  {
-    name: "Free",
-    price: "0 EGP",
-    cadence: "per month",
-    commission: "3% commission on completed orders",
-    note: "Best for testing the market before committing to a monthly plan.",
-    features: ["Create your store", "Add products and categories", "Receive orders", "Pay only when you sell"],
-  },
-  {
-    name: "Growth",
-    price: "399 EGP",
-    cadence: "per month",
-    commission: "1% commission on completed orders",
-    note: "Best when order volume is growing and lower commission starts saving money.",
-    features: ["Lower commission", "More room to grow", "Useful for active stores", "Better cost predictability"],
-  },
-  {
-    name: "Professional",
-    price: "999 EGP",
-    cadence: "per month",
-    commission: "0% Matgarko sales commission",
-    note: "Best for established stores that want predictable monthly software cost.",
-    features: ["No Matgarko commission", "For higher-volume stores", "Cleaner margin planning", "Professional growth path"],
-  },
-];
 
 export const englishIndustries: Record<string, EnglishIndustryContent> = {
   restaurants: {
@@ -719,7 +619,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "A new store may pay 0 EGP monthly on a commission plan, then move to 399 EGP or 999 EGP monthly as volume grows. Other costs can include a custom domain, product photos, payment gateway fees, ads, shipping, and returns.",
+          "A new store may pay 0 EGP monthly on a commission plan, then move to 499 EGP or 1,499 EGP monthly as volume grows. Other costs can include a custom domain, product photos, payment gateway fees, ads, shipping, and returns.",
       },
       {
         type: "h2",
@@ -856,7 +756,7 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/pricing": {
     title: "Online store pricing in Egypt | Matgarko plans",
     description:
-      "Start free with 3% commission, or choose monthly EGP plans from 399 EGP with lower or zero Matgarko commission.",
+      "Start free with 2% commission, or choose EGP plans: Growth at 499 EGP + 0.5% or Pro at 1,499 EGP with zero commission.",
     keywords: ["online store pricing Egypt", "ecommerce platform pricing", "free online store Egypt", "EGP ecommerce plans"],
   },
   "/en/about": {

@@ -1,69 +1,46 @@
-import { PackagePlus, Settings, Store } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/SectionHeading";
+import { homeContent } from "@/data/home";
+import { localizePath, type AppLanguage } from "@/lib/i18n";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const steps = [
-  {
-    icon: <Settings className="w-8 h-8 text-white" />,
-    title: "1. سجل واختر اسم متجرك",
-    description:
-      "اكتب اسم المتجر، اختر الرابط المناسب، وأنشئ حسابك في خطوات بسيطة.",
-    color: "bg-primary",
-  },
-  {
-    icon: <PackagePlus className="w-8 h-8 text-white" />,
-    title: "2. أضف منتجاتك وبياناتك",
-    description:
-      "أضف الشعار، بيانات التواصل، الأقسام، المنتجات، الأسعار، وسياسات البيع من لوحة الإدارة.",
-    color: "bg-purple-600",
-  },
-  {
-    icon: <Store className="w-8 h-8 text-white" />,
-    title: "3. ابدأ البيع واستقبل الطلبات",
-    description:
-      "اضبط الدفع والشحن، اختر شكل المتجر، ثم ابدأ استقبال الطلبات ومتابعتها بنفسك.",
-    color: "bg-pink-600",
-  },
-];
+export function HowItWorks({ language }: { language: AppLanguage }) {
+  const t = homeContent[language].steps;
 
-export function HowItWorks() {
   return (
-    <section className="bg-[#f6fbf8] py-24" dir="rtl">
-      <div className="container px-4 mx-auto md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="section-kicker mb-6">
-            <Settings className="h-4 w-4" />
-            رحلة بسيطة
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-gray-950 mb-6 font-heading tracking-tighter-heading">
-            ابدأ متجرك في 3 خطوات واضحة
-          </h2>
-          <p className="text-lg font-medium leading-8 text-gray-600">
-            خطوات واضحة من التسجيل إلى عرض المنتجات واستقبال أول طلب، بدون
-            خبرة تقنية أو انتظار طويل.
-          </p>
-        </div>
+    <section className="section bg-white" aria-labelledby="steps-title">
+      <div className="container-x">
+        <Reveal>
+          <SectionHeading id="steps-title" kicker={t.kicker} title={t.title} lead={t.lead} />
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-emerald-100 -z-10 transform -translate-y-1/2"></div>
-
-          {steps.map((step) => (
-            <div
-              key={step.title}
-              className="relative flex flex-col items-center text-center group rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-all hover:-translate-y-2 hover:shadow-2xl"
-            >
-              <div
-                className={`w-20 h-20 rounded-lg ${step.color} shadow-lg flex items-center justify-center mb-8 transform rotate-3 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300`}
-              >
-                {step.icon}
+        <ol className="mt-10 grid gap-6 sm:grid-cols-3">
+          {t.items.map((step, index) => (
+            <Reveal key={step.title} as="li" delay={index * 100} className="relative flex gap-4 sm:block">
+              <div className="flex flex-col items-center sm:mb-4 sm:items-start">
+                <span className="num flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-950 text-sm font-extrabold text-white shadow-md shadow-gray-950/20">
+                  {index + 1}
+                </span>
+                {index < t.items.length - 1 ? <span className="mt-2 w-px flex-1 bg-gray-200 sm:hidden" aria-hidden="true" /> : null}
               </div>
-              <h3 className="text-xl font-black font-heading mb-4 text-gray-950">
-                {step.title}
-              </h3>
-              <p className="font-medium text-gray-600 leading-8 max-w-sm mx-auto">
-                {step.description}
-              </p>
-            </div>
+              <div className="pb-2 sm:pb-0">
+                <h3 className="text-base font-extrabold text-gray-950 font-heading sm:text-lg">{step.title}</h3>
+                <p className="mt-1.5 text-sm leading-6 text-gray-600 sm:leading-7">{step.text}</p>
+              </div>
+            </Reveal>
           ))}
-        </div>
+        </ol>
+
+        <Reveal className="mt-8 text-center">
+          <Link
+            to={localizePath("/getting-started", language)}
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+          >
+            {t.cta}
+            <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

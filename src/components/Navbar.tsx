@@ -1,14 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { SIGNUP_URL } from "@/data/pricing";
 import { alternateLanguagePath, languageFromPath, localizePath } from "@/lib/i18n";
-import { Languages, Menu } from "lucide-react";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Languages, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
-
 const navItems = [
-  { path: "/", ar: "الرئيسية", en: "Home" },
   { path: "/solutions", ar: "الحلول", en: "Solutions" },
   { path: "/themes", ar: "القوالب", en: "Themes" },
   { path: "/integrations", ar: "الدفع والشحن", en: "Payment and shipping" },
@@ -17,8 +15,8 @@ const navItems = [
 ];
 
 const mobileExtraItems = [
-  { path: "/contact", ar: "تواصل معنا", en: "Contact" },
   { path: "/blog", ar: "المدونة", en: "Blog" },
+  { path: "/contact", ar: "تواصل معنا", en: "Contact" },
 ];
 
 export function Navbar() {
@@ -27,90 +25,119 @@ export function Navbar() {
   const language = languageFromPath(pathname);
   const isEnglish = language === "en";
   const brandName = isEnglish ? "Matgarko" : "متجركو";
-  const signupLabel = isEnglish ? "Start your store free" : "أنشئ متجرك مجاناً";
-  const mobileSignupLabel = isEnglish ? "Start free" : "ابدأ رحلتك مجاناً";
+  const signupLabel = isEnglish ? "Start free" : "أنشئ متجرك مجاناً";
   const languageLabel = isEnglish ? "العربية" : "English";
-  const menuLabel = isEnglish ? "Toggle menu" : "فتح القائمة";
+  const menuLabel = isEnglish ? (isOpen ? "Close menu" : "Open menu") : isOpen ? "إغلاق القائمة" : "فتح القائمة";
+  const navLabel = isEnglish ? "Main navigation" : "القائمة الرئيسية";
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
+
+  const isActive = (path: string) => {
+    const localized = localizePath(path, language);
+    return pathname === localized || pathname.startsWith(`${localized}/`);
+  };
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-emerald-100 bg-white/90 shadow-sm backdrop-blur-xl transition-all duration-300">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex h-20 items-center justify-between">
-          <Link to={localizePath("/", language)} className="group flex items-center gap-2">
-            <img
-              src={logo}
-              alt={brandName}
-              className="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-110"
-            />
-            <span className="text-2xl font-black text-gray-950 font-heading">{brandName}</span>
-          </Link>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200/70 bg-white/85 backdrop-blur-xl" dir={isEnglish ? "ltr" : "rtl"}>
+      <div className="container-x flex h-16 items-center justify-between gap-3">
+        <Link to={localizePath("/", language)} className="flex shrink-0 items-center gap-2" aria-label={brandName}>
+          <img src={logo} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
+          <span className="text-xl font-extrabold text-gray-950 font-heading">{brandName}</span>
+        </Link>
 
-          <div className="hidden items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-2 py-2 xl:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={localizePath(item.path, language)}
-                className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition-colors hover:bg-white hover:text-primary hover:shadow-sm"
-              >
-                {item[language]}
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden items-center gap-3 xl:flex">
+        <nav aria-label={navLabel} className="hidden items-center gap-1 lg:flex">
+          {navItems.map((item) => (
             <Link
-              to={alternateLanguagePath(pathname)}
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-gray-200 bg-white px-3 text-sm font-extrabold text-gray-700 transition-colors hover:border-emerald-200 hover:text-emerald-700"
+              key={item.path}
+              to={localizePath(item.path, language)}
+              aria-current={isActive(item.path) ? "page" : undefined}
+              className={cn(
+                "rounded-lg px-3 py-2 text-sm font-bold transition-colors hover:bg-gray-100 hover:text-gray-950",
+                isActive(item.path) ? "text-emerald-700" : "text-gray-700",
+              )}
             >
-              <Languages className="h-4 w-4" />
-              {languageLabel}
+              {item[language]}
             </Link>
-            <Button asChild className="bg-gray-950 font-extrabold text-white shadow-lg shadow-gray-950/20 transition-all hover:-translate-y-0.5 hover:bg-emerald-700">
-              <a href={SIGNUP_URL}>{signupLabel}</a>
-            </Button>
-          </div>
+          ))}
+        </nav>
 
-          <button
-            className="p-2 text-gray-700 hover:text-primary xl:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={menuLabel}
+        <div className="hidden items-center gap-2 lg:flex">
+          <Link
+            to={alternateLanguagePath(pathname)}
+            hrefLang={isEnglish ? "ar" : "en"}
+            className="inline-flex h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-950"
           >
-            <Menu className="h-6 w-6" />
-          </button>
+            <Languages className="h-4 w-4" aria-hidden="true" />
+            {languageLabel}
+          </Link>
+          <a href={SIGNUP_URL} className="btn btn-primary h-10 px-4 text-sm">
+            {signupLabel}
+          </a>
         </div>
 
-        {isOpen ? (
-          <div className="animate-in slide-in-from-top-2 border-t border-gray-100 py-4 xl:hidden">
-            <div className="flex flex-col gap-4">
-              {[...navItems, ...mobileExtraItems].map((item) => (
-                <Link
-                  key={item.path}
-                  to={localizePath(item.path, language)}
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 font-bold text-gray-700 hover:text-primary"
-                >
-                  {item[language]}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-3 border-t border-gray-50 px-4 pt-4">
-                <Link
-                  to={alternateLanguagePath(pathname)}
-                  onClick={() => setIsOpen(false)}
-                  className="inline-flex items-center gap-2 font-extrabold text-gray-700 hover:text-primary"
-                >
-                  <Languages className="h-4 w-4" />
-                  {languageLabel}
-                </Link>
-                <Button asChild className="w-full justify-center bg-gray-950 text-white hover:bg-emerald-700">
-                  <a href={SIGNUP_URL} onClick={() => setIsOpen(false)}>
-                    {mobileSignupLabel}
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        ) : null}
+        <div className="flex items-center gap-1 lg:hidden">
+          <Link
+            to={alternateLanguagePath(pathname)}
+            hrefLang={isEnglish ? "ar" : "en"}
+            aria-label={languageLabel}
+            onClick={() => setIsOpen(false)}
+            className="inline-flex h-10 items-center gap-1.5 rounded-lg px-2.5 text-xs font-bold text-gray-700 hover:bg-gray-100"
+          >
+            <Languages className="h-4 w-4" aria-hidden="true" />
+            {languageLabel}
+          </Link>
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-gray-800 hover:bg-gray-100"
+            onClick={() => setIsOpen((open) => !open)}
+            aria-label={menuLabel}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+          >
+            {isOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+          </button>
+        </div>
       </div>
-    </nav>
+
+      {isOpen ? (
+        <nav
+          id="mobile-menu"
+          aria-label={navLabel}
+          className="animate-menu-in border-t border-gray-100 bg-white shadow-xl shadow-gray-950/5 lg:hidden"
+        >
+          <div className="container-x py-3">
+            <ul className="divide-y divide-gray-100">
+              {[...navItems, ...mobileExtraItems].map((item) => (
+                <li key={item.path}>
+                  <Link
+                    to={localizePath(item.path, language)}
+                    onClick={() => setIsOpen(false)}
+                    aria-current={isActive(item.path) ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-12 items-center py-3 text-base font-bold",
+                      isActive(item.path) ? "text-emerald-700" : "text-gray-800",
+                    )}
+                  >
+                    {item[language]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <a href={SIGNUP_URL} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">
+              {signupLabel}
+            </a>
+          </div>
+        </nav>
+      ) : null}
+    </header>
   );
 }

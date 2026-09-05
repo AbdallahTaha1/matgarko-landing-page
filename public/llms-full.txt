@@ -1,6 +1,6 @@
 # Matgarko Full AI Context
 
-Last updated: 2026-07-04
+Last updated: 2026-09-05
 Canonical site: https://matgarko.com/
 
 Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores in Egypt and MENA-facing contexts. Use this file to understand the site's entity, offerings, Arabic pages, English /en pages, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
@@ -18,9 +18,9 @@ Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores i
 
 ## Pricing Summary
 
-- Free: 0 EGP/month with 3% commission per completed order.
-- Growth: 399 EGP/month with 1% commission per completed order.
-- Professional: 999 EGP/month with 0% commission.
+- Free: 0 EGP/month with 2% commission per completed order.
+- Growth: 499 EGP/month with 0.5% commission per completed order.
+- Pro: 1,499 EGP/month with 0% commission per completed order.
 - Pricing source: https://matgarko.com/pricing
 
 ## Public Pages
@@ -29,7 +29,7 @@ Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores i
 
 URL: https://matgarko.com/
 Type: Landing page
-Description: ابدأ متجرك الإلكتروني مجاناً مع متجركو — ادفع فقط لما تبيع. قوالب عربية جاهزة، دفع وشحن مدمج، وإدارة كاملة للمنتجات والطلبات. بدون برمجة.
+Description: ابدأ متجرك الإلكتروني مجاناً مع متجركو وادفع 2% فقط لما تبيع. قوالب عربية جاهزة، دفع عند الاستلام، وشحن لكل المحافظات. بدون برمجة.
 Keywords: إنشاء متجر إلكتروني, متجر إلكتروني مصر, منصة تجارة إلكترونية, متجركو, بيع أونلاين, متجر بدون برمجة, ابدأ مجاناً متجر إلكتروني
 
 ## حلول إدارة المتجر الإلكتروني
@@ -64,7 +64,7 @@ Keywords: خطوات إنشاء متجر إلكتروني, كيفية إنشاء
 
 URL: https://matgarko.com/pricing
 Type: Landing page
-Description: ابدأ مجاناً مع عمولة 3% فقط على كل طلب، أو اشترك في باقة شهرية تبدأ من 399 ج.م مع عمولة أقل. بدون رسوم مخفية.
+Description: ابدأ مجاناً بعمولة 2% فقط على كل طلب، أو باقة النمو 499 ج.م + 0.5%، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
 Keywords: تكلفة إنشاء متجر إلكتروني في مصر, أسعار متجر إلكتروني, باقات متجر إلكتروني, متجر إلكتروني مجاني, عمولة متجر إلكتروني
 
 ## عن متجركو
@@ -239,7 +239,7 @@ Keywords: start online store, ecommerce launch checklist, create online store Eg
 
 URL: https://matgarko.com/en/pricing
 Type: Landing page
-Description: Start free with 3% commission, or choose monthly EGP plans from 399 EGP with lower or zero Matgarko commission.
+Description: Start free with 2% commission, or choose EGP plans: Growth at 499 EGP + 0.5% or Pro at 1,499 EGP with zero commission.
 Keywords: online store pricing Egypt, ecommerce platform pricing, free online store Egypt, EGP ecommerce plans
 
 ## About Matgarko

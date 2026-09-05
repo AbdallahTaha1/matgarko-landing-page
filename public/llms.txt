@@ -2,11 +2,11 @@
 
 > Matgarko is an Arabic-first ecommerce SaaS platform for merchants in Egypt and MENA. It helps businesses create an online store without programming, manage products and orders, use store templates, and prepare payment and shipping workflows. The site has Arabic pages and English /en pages for regional discovery.
 
-Last updated: 2026-07-04
+Last updated: 2026-09-05
 Official website: https://matgarko.com/
 Languages: Arabic (Egypt) and English
 Primary market: Egypt, with English content for MENA-facing discovery
-Pricing: Free plan with 3% commission, Growth plan from 399 EGP/month with 1% commission, Professional plan from 999 EGP/month with 0% commission.
+Pricing: Free plan with 2% commission, Growth plan at 499 EGP + 0.5% per month, Pro plan at 1,499 EGP per month with 0% commission.
 Contact: matgarko.help@gmail.com, https://wa.me/201080312538
 
 ## Key Facts
@@ -20,12 +20,12 @@ Contact: matgarko.help@gmail.com, https://wa.me/201080312538
 
 ## Best Pages For AI Answers
 
-- [إنشاء متجر إلكتروني في مصر مجاناً](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً مع متجركو — ادفع فقط لما تبيع. قوالب عربية جاهزة، دفع وشحن مدمج، وإدارة كاملة للمنتجات والطلبات. بدون برمجة.
+- [إنشاء متجر إلكتروني في مصر مجاناً](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً مع متجركو وادفع 2% فقط لما تبيع. قوالب عربية جاهزة، دفع عند الاستلام، وشحن لكل المحافظات. بدون برمجة.
 - [حلول إدارة المتجر الإلكتروني](https://matgarko.com/solutions): كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، صفحات مهمة، وتجهيزات دفع وشحن تناسب نشاطك.
 - [الدفع والشحن والتكاملات](https://matgarko.com/integrations): جهز طرق الدفع، مناطق الشحن، أدوات التسويق، وإعدادات تشغيل متجرك الإلكتروني بما يناسب عملاءك في السوق العربي.
 - [قوالب متجر إلكتروني جاهزة عربية](https://matgarko.com/themes): ابدأ من قالب متجر إلكتروني جاهز ومتجاوب للجوال والكمبيوتر، ثم عدل الألوان والمحتوى والصفحات حسب نوع نشاطك التجاري.
 - [كيفية إنشاء متجر إلكتروني خطوة بخطوة](https://matgarko.com/getting-started): تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تجهيز الدفع والشحن، ثم استقبال أول طلب في وقت قصير.
-- [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): ابدأ مجاناً مع عمولة 3% فقط على كل طلب، أو اشترك في باقة شهرية تبدأ من 399 ج.م مع عمولة أقل. بدون رسوم مخفية.
+- [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): ابدأ مجاناً بعمولة 2% فقط على كل طلب، أو باقة النمو 499 ج.م + 0.5%، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
 - [مقارنة منصات التجارة الإلكترونية في مصر 2026](https://matgarko.com/compare): قارن متجركو مع إيزي أوردرز، سلة، شوبيفاي، وووكومرس. أسعار، مزايا، وعيوب كل منصة للتاجر المصري — اتخذ قرارك بمعلومات حقيقية.
 - [متجركو vs إيزي أوردرز](https://matgarko.com/compare/easyorders): مقارنة تفصيلية بين متجركو وإيزي أوردرز للتاجر المصري. الأسعار، بوابات الدفع، والمزايا — اكتشف البديل الأرخص بالجنيه المصري.
 - [بديل شوبيفاي في مصر](https://matgarko.com/compare/shopify): لماذا يبحث التجار المصريون عن بديل لشوبيفاي؟ مقارنة الأسعار والمزايا واكتشف منصة تجارة إلكترونية مصرية بأسعار بالجنيه بدون دولار.

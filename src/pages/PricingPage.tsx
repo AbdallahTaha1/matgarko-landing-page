@@ -1,318 +1,256 @@
-import { Button } from "@/components/ui/button";
-import { Check, Crown, Zap, BadgePercent, TrendingUp, ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import { FaqList } from "@/components/FaqList";
+import { Reveal } from "@/components/motion/Reveal";
+import { SectionHeading } from "@/components/SectionHeading";
+import {
+  AVERAGE_ORDER_VALUE,
+  FREE_TO_GROWTH_ORDERS,
+  GROWTH_TO_PRO_ORDERS,
+  SIGNUP_URL,
+  costTable,
+  formatCommission,
+  formatEgp,
+  planPriceLabel,
+  plans,
+  pricingFaqs,
+} from "@/data/pricing";
+import type { AppLanguage } from "@/lib/i18n";
+import { WHATSAPP_URL } from "@/lib/seo";
+import { cn } from "@/lib/utils";
+import { ArrowRight, Check, Crown } from "lucide-react";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const EXAMPLE_ORDER = 500;
 
-const plans = [
-  {
-    id: "free",
-    icon: <BadgePercent className="h-6 w-6" />,
-    name: "مجاني",
-    subtitle: "ابدأ بدون مخاطرة",
-    monthlyFee: "0 ج.م",
-    commission: "3%",
-    commissionLabel: "عمولة على كل طلب",
-    description: "ابدأ تجارتك بدون أي رسوم شهرية — ادفع فقط عند البيع.",
-    features: [
-      "متجر إلكتروني جاهز فوراً",
-      "حتى 50 منتج",
-      "رابط متجر على متجركو",
-      "إدارة المنتجات والطلبات",
-      "دفع عند الاستلام مدمج",
-      "دعم عبر واتساب",
-    ],
-    notIncluded: ["دومين خاص", "كوبونات وعروض", "تقارير تفصيلية"],
-    cta: "ابدأ مجاناً الآن",
-    href: SIGNUP_URL,
-    popular: false,
-    color: "border-gray-200",
-    badgeColor: "",
+const copy = {
+  ar: {
+    kicker: "الأسعار",
+    title: "ابدأ مجاناً، وادفع 2% فقط لما تبيع",
+    lead: "بدون رسوم شهرية في البداية. لما يكبر متجرك انتقل للباقة اللي توفرلك أكتر. كل الأسعار بالجنيه المصري.",
+    monthly: "شهرياً",
+    commission: "عمولة على كل طلب مكتمل",
+    noCommission: "بدون أي عمولة",
+    popular: "الأكثر اختياراً",
+    exampleTitle: "مثال: طلب بقيمة 500 ج.م",
+    exampleLead: "كم تدفع لمتجركو على هذا الطلب في كل باقة؟",
+    exampleNet: "يصلك",
+    tableTitle: "أي باقة أوفر لك؟",
+    tableLead: `التكلفة الشهرية الكاملة (اشتراك + عمولة) بمتوسط قيمة طلب ${AVERAGE_ORDER_VALUE} ج.م.`,
+    orders: "طلبات / شهر",
+    cheapest: "الأوفر",
+    breakeven: `باقة النمو أوفر بعد حوالي ${FREE_TO_GROWTH_ORDERS} طلب شهرياً، والاحترافي بعد حوالي ${GROWTH_TO_PRO_ORDERS} طلب.`,
+    faqTitle: "أسئلة حول الأسعار",
+    faqLead: "لو عندك سؤال تاني، كلمنا على واتساب.",
+    ctaTitle: "ابدأ الآن بدون مخاطرة",
+    ctaLead: "لا بطاقة ائتمان ولا التزام. سجّل وابدأ البيع بعمولة 2% فقط.",
+    ctaPrimary: "ابدأ مجاناً الآن",
+    ctaSecondary: "اسأل على واتساب",
+    note: "رسوم بوابات الدفع الإلكتروني منفصلة وتُحصّلها شركة الدفع مباشرة.",
   },
-  {
-    id: "growth",
-    icon: <TrendingUp className="h-6 w-6" />,
-    name: "نمو",
-    subtitle: "للمتجر النشط",
-    monthlyFee: "399 ج.م",
-    commission: "1%",
-    commissionLabel: "عمولة على كل طلب",
-    description: "للتاجر الذي بدأ يستقبل طلبات ويريد أدوات أكثر بتكلفة أقل.",
-    features: [
-      "منتجات غير محدودة",
-      "دومين خاص بمتجرك",
-      "إدارة العملاء والطلبات",
-      "كوبونات وخصومات",
-      "تقارير أساسية للمتجر",
-      "أولوية في الدعم",
-    ],
-    notIncluded: ["تقارير متقدمة", "مستخدمي فريق"],
-    cta: "اختر باقة النمو",
-    href: SIGNUP_URL,
-    popular: true,
-    color: "border-emerald-400",
-    badgeColor: "bg-emerald-600",
+  en: {
+    kicker: "Pricing",
+    title: "Start free, pay 2% only when you sell",
+    lead: "No monthly fee to start. Move to a paid plan when it saves you money. All prices in EGP.",
+    monthly: "per month",
+    commission: "commission on completed orders",
+    noCommission: "no commission at all",
+    popular: "Most popular",
+    exampleTitle: "Example: a 500 EGP order",
+    exampleLead: "What you pay Matgarko on this order in each plan.",
+    exampleNet: "You receive",
+    tableTitle: "Which plan is cheaper for you?",
+    tableLead: `Total monthly cost (subscription + commission) at a ${AVERAGE_ORDER_VALUE} EGP average order.`,
+    orders: "Orders / month",
+    cheapest: "Cheapest",
+    breakeven: `Growth becomes cheaper after about ${FREE_TO_GROWTH_ORDERS} orders a month, and Pro after about ${GROWTH_TO_PRO_ORDERS}.`,
+    faqTitle: "Pricing questions",
+    faqLead: "Have another question? Message us on WhatsApp.",
+    ctaTitle: "Start now with zero risk",
+    ctaLead: "No credit card and no commitment. Sign up and start selling with 2% commission only.",
+    ctaPrimary: "Start free now",
+    ctaSecondary: "Ask on WhatsApp",
+    note: "Online payment gateway fees are separate and charged by the payment provider.",
   },
-  {
-    id: "pro",
-    icon: <ShieldCheck className="h-6 w-6" />,
-    name: "احترافي",
-    subtitle: "للمتاجر الكبيرة",
-    monthlyFee: "999 ج.م",
-    commission: "0%",
-    commissionLabel: "بدون أي عمولة",
-    description: "للمتاجر النشطة التي تريد أقصى مرونة وصفر عمولات.",
-    features: [
-      "كل مزايا باقة النمو",
-      "بدون عمولة على المبيعات",
-      "تقارير تشغيل متقدمة",
-      "مستخدمو فريق متعددون",
-      "إعدادات أكثر مرونة",
-      "دعم أولوية مباشر",
-    ],
-    notIncluded: [],
-    cta: "ابدأ احترافي",
-    href: SIGNUP_URL,
-    popular: false,
-    color: "border-gray-800",
-    badgeColor: "",
-  },
-];
+} as const;
 
-const pricingFaqs = [
-  {
-    q: "كيف تُحسب العمولة على الباقة المجانية؟",
-    a: "العمولة 3% تُخصم تلقائياً من قيمة كل طلب مكتمل. مثلاً: لو الطلب بـ 500 ج.م، تحصل على 485 ج.م صافي.",
-  },
-  {
-    q: "متى يستحق الترقية من المجاني للنمو؟",
-    a: "لما تتجاوز 33 طلب شهرياً بمتوسط قيمة 700 ج.م، ستوفر مع باقة النمو. حساب بسيط: عمولة 3% على 33 × 700 = 693 ج.م، بينما النمو تكلفه 399 + 1% = 629 ج.م.",
-  },
-  {
-    q: "هل يوجد رسوم إضافية على بوابات الدفع؟",
-    a: "رسوم بوابات الدفع (فوري، فيزا، ميزة) تفرضها شركات الدفع مباشرة وهي منفصلة عن اشتراك متجركو. تتراوح عادة بين 1-3% حسب البوابة.",
-  },
-  {
-    q: "ماذا يحدث لو أردت إلغاء الاشتراك؟",
-    a: "يمكنك إلغاء الاشتراك في أي وقت دون التزامات. متجرك يبقى على الباقة المجانية (مع 3% عمولة) ويمكنك مواصلة البيع.",
-  },
-  {
-    q: "هل الدومين الخاص مشمول في السعر؟",
-    a: "ربط الدومين الخاص مشمول في باقتي النمو والاحترافي، لكن تكلفة الدومين نفسه (حوالي 200-500 ج.م سنوياً) تدفعها لدى مزود الدومين مباشرة.",
-  },
-  {
-    q: "هل الأسعار تشمل ضريبة القيمة المضافة؟",
-    a: "الأسعار المعروضة هي الأسعار النهائية دون ضريبة قيمة مضافة إضافية حالياً. سيتم الإفصاح عن أي تغيير مسبقاً.",
-  },
-];
-
-export const PricingPage = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => {
+  const t = copy[language];
 
   return (
-    <div className="bg-white text-right" dir="rtl">
-      {/* Hero */}
-      <section className="page-hero">
-        <div className="container px-4 mx-auto text-center">
-          <div className="section-kicker mb-5">
-            <Crown className="h-4 w-4" />
-            باقات واضحة للنمو
-          </div>
-          <h1 className="page-title mb-5">
-            ابدأ مجاناً — ادفع فقط لما تبيع
+    <div dir={language === "en" ? "ltr" : "rtl"} className="bg-white">
+      <section className="page-hero" aria-labelledby="pricing-page-title">
+        <div className="container-x text-center">
+          <span className="section-kicker">
+            <Crown className="h-3.5 w-3.5" aria-hidden="true" />
+            {t.kicker}
+          </span>
+          <h1 id="pricing-page-title" className="page-title mt-4">
+            {t.title}
           </h1>
-          <p className="page-lead">
-            لا رسوم شهرية في البداية. ابدأ بعمولة 3% على كل طلب، وعندما
-            ينمو متجرك انتقل للباقة التي توفّر لك أكثر.
-          </p>
+          <p className="page-lead mt-4">{t.lead}</p>
         </div>
       </section>
 
-      <div className="container px-4 mx-auto py-16">
-
-        {/* Plans Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan) => (
-            <div
-              key={plan.id}
-              className={`relative rounded-2xl p-8 border-2 transition-all duration-300 hover:-translate-y-1 bg-white ${
-                plan.popular
-                  ? "border-emerald-400 shadow-2xl shadow-emerald-900/10 z-10"
-                  : "border-gray-200 shadow-sm hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-900/5"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1 shadow-lg">
-                  <Crown className="w-3 h-3 fill-current" /> الأنسب للنمو
-                </div>
-              )}
-
-              {/* Plan Header */}
-              <div className="mb-6">
-                <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-4">
-                  {plan.icon}
-                </div>
-                <h3 className="text-xl font-black text-gray-950 font-heading">{plan.name}</h3>
-                <p className="text-sm text-gray-500 mt-1">{plan.subtitle}</p>
-              </div>
-
-              {/* Pricing Display */}
-              <div className="mb-6 p-4 bg-gray-50 rounded-xl">
-                <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-3xl font-black text-gray-950 number-font">{plan.monthlyFee}</span>
-                  {plan.monthlyFee !== "0 ج.م" && (
-                    <span className="text-gray-500 text-sm">/ شهرياً</span>
-                  )}
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className={`text-xl font-black number-font ${plan.commission === "0%" ? "text-emerald-700" : "text-gray-800"}`}>
-                    {plan.commission}
-                  </span>
-                  <span className="text-sm text-gray-500">{plan.commissionLabel}</span>
-                </div>
-              </div>
-
-              <p className="text-gray-500 text-sm mb-6 min-h-12">{plan.description}</p>
-
-              <Button
-                asChild
-                className={`w-full mb-6 h-12 text-base font-extrabold ${
-                  plan.popular
-                    ? "bg-gray-950 text-white hover:bg-emerald-700"
-                    : plan.id === "free"
-                    ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                    : "bg-transparent border-2 border-gray-800 text-gray-800 hover:bg-gray-50"
-                }`}
+      <section className="section" aria-label={t.kicker}>
+        <div className="container-x">
+          <div className="grid gap-5 md:grid-cols-3">
+            {plans.map((plan, index) => (
+              <Reveal
+                key={plan.id}
+                as="article"
+                delay={index * 90}
+                className={cn(
+                  "relative flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
+                  plan.popular ? "border-emerald-600 shadow-xl shadow-emerald-900/10 ring-1 ring-emerald-600" : "border-gray-200",
+                )}
               >
-                <a href={plan.href}>{plan.cta}</a>
-              </Button>
-
-              <div className="space-y-3">
-                {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                      <Check className="w-3 h-3 text-emerald-700" />
-                    </div>
-                    <span className="text-gray-600 text-sm">{feature}</span>
-                  </div>
-                ))}
-                {plan.notIncluded.map((feature) => (
-                  <div key={feature} className="flex items-center gap-3 opacity-40">
-                    <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
-                      <span className="text-gray-400 text-xs font-bold">—</span>
-                    </div>
-                    <span className="text-gray-400 text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Upgrade Calculator */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <div className="bg-gray-950 rounded-2xl p-8 text-white">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-emerald-400" />
-              </div>
-              <h2 className="text-xl font-black text-white font-heading">متى تستفيد من الترقية؟</h2>
-            </div>
-            <p className="text-gray-400 mb-8">
-              الجدول التالي يوضح متى تكون كل باقة أوفر بناءً على عدد طلباتك الشهرية (بمتوسط قيمة طلب 700 ج.م)
-            </p>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm" aria-label="مقارنة تكلفة الباقات حسب عدد الطلبات">
-                <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="text-right py-3 text-gray-400 font-medium">الطلبات / شهر</th>
-                    <th className="text-center py-3 text-gray-400 font-medium">مجاني (3%)</th>
-                    <th className="text-center py-3 text-emerald-400 font-medium">نمو (399 + 1%)</th>
-                    <th className="text-center py-3 text-gray-400 font-medium">احترافي (999 + 0%)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { orders: 10, free: 210, growth: 469, pro: 999 },
-                    { orders: 20, free: 420, growth: 539, pro: 999 },
-                    { orders: 33, free: 693, growth: 630, pro: 999 },
-                    { orders: 50, free: 1050, growth: 749, pro: 999 },
-                    { orders: 100, free: 2100, growth: 1099, pro: 999 },
-                    { orders: 150, free: 3150, growth: 1449, pro: 999 },
-                  ].map((row) => {
-                    const best = Math.min(row.free, row.growth, row.pro);
-                    return (
-                      <tr key={row.orders} className="border-b border-gray-800/50">
-                        <td className="py-3 text-white font-bold number-font">{row.orders} طلب</td>
-                        <td className={`text-center py-3 number-font ${row.free === best ? "text-emerald-400 font-bold" : "text-gray-400"}`}>
-                          {row.free} ج.م
-                        </td>
-                        <td className={`text-center py-3 number-font ${row.growth === best ? "text-emerald-400 font-bold" : "text-gray-400"}`}>
-                          {row.growth} ج.م
-                        </td>
-                        <td className={`text-center py-3 number-font ${row.pro === best ? "text-emerald-400 font-bold" : "text-gray-400"}`}>
-                          {row.pro} ج.م
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-            <p className="text-gray-500 text-xs mt-4">* الأرقام المميزة باللون الأخضر هي الأوفر لكل مستوى طلبات. الحساب على أساس متوسط طلب 700 ج.م.</p>
-          </div>
-        </div>
-
-        {/* CTA Banner */}
-        <div className="mt-10 text-center bg-emerald-50 rounded-2xl p-8 border border-emerald-100 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="text-right">
-            <h3 className="text-xl font-black text-gray-950 mb-2 font-heading flex items-center gap-2">
-              <Zap className="w-5 h-5 text-emerald-600" /> ابدأ الآن — صفر مخاطرة
-            </h3>
-            <p className="text-gray-600">
-              لا بطاقة ائتمان مطلوبة. سجّل وابدأ ببيع منتجاتك بعمولة 3% فقط على كل طلب.
-            </p>
-          </div>
-          <Button asChild className="bg-emerald-600 text-white font-extrabold hover:bg-emerald-700 h-12 px-8 shrink-0">
-            <a href={SIGNUP_URL}>ابدأ مجاناً الآن ←</a>
-          </Button>
-        </div>
-
-        {/* Pricing FAQ */}
-        <div className="mt-16 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-black text-gray-950 mb-8 font-heading text-center">أسئلة حول الأسعار</h2>
-          <div className="space-y-3">
-            {pricingFaqs.map((faq, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl border border-gray-100 overflow-hidden">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-right"
-                  aria-expanded={openFaq === i}
-                >
-                  <span className="font-bold text-gray-900 text-sm">{faq.q}</span>
-                  <span className="text-emerald-600 mr-4 shrink-0 text-lg" aria-hidden="true">
-                    {openFaq === i ? "−" : "+"}
+                {plan.popular ? (
+                  <span className="absolute -top-3 start-6 inline-flex items-center gap-1 rounded-full bg-emerald-600 px-3 py-1 text-[11px] font-extrabold text-white shadow-md">
+                    <Crown className="h-3 w-3" aria-hidden="true" />
+                    {t.popular}
                   </span>
-                </button>
-                {/* Always in DOM for crawlability */}
-                <div
-                  style={{
-                    maxHeight: openFaq === i ? "300px" : "0px",
-                    overflow: "hidden",
-                    transition: "max-height 0.3s ease",
-                  }}
-                >
-                  <p className="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
-                    {faq.a}
+                ) : null}
+
+                <h2 className="text-xl font-extrabold text-gray-950 font-heading">{plan.name[language]}</h2>
+                <p className="mt-1 text-sm text-gray-500">{plan.tagline[language]}</p>
+
+                <div className="mt-5 rounded-xl bg-gray-50 p-4">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="num text-3xl font-extrabold text-gray-950">{formatEgp(plan.monthly, language)}</span>
+                    <span className="text-xs font-semibold text-gray-500">/ {t.monthly}</span>
+                  </div>
+                  <p className={cn("mt-1.5 text-sm font-bold", plan.commission === 0 ? "text-emerald-700" : "text-gray-700")}>
+                    {plan.commission === 0 ? t.noCommission : `+ ${formatCommission(plan)} ${t.commission}`}
                   </p>
                 </div>
-              </div>
+
+                <ul className="mt-5 flex-1 space-y-2.5">
+                  {plan.features[language].map((feature) => (
+                    <li key={feature} className="flex items-start gap-2.5 text-sm text-gray-700">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <a href={SIGNUP_URL} className={cn("btn mt-6 w-full", plan.popular ? "btn-primary" : "btn-secondary")}>
+                  {plan.cta[language]}
+                </a>
+              </Reveal>
             ))}
           </div>
+          <p className="mt-5 text-center text-xs text-gray-500 sm:text-sm">{t.note}</p>
         </div>
+      </section>
 
-      </div>
+      <section className="bg-[#f7faf8] py-12 sm:py-16" aria-labelledby="example-title">
+        <div className="container-x">
+          <Reveal>
+            <SectionHeading id="example-title" title={t.exampleTitle} lead={t.exampleLead} />
+          </Reveal>
+          <Reveal delay={80} className="mx-auto mt-8 grid max-w-3xl grid-cols-3 divide-x divide-gray-200 rounded-2xl border border-gray-200 bg-white rtl:divide-x-reverse">
+            {plans.map((plan) => {
+              const fee = (EXAMPLE_ORDER * plan.commission) / 100;
+              return (
+                <div key={plan.id} className="px-2 py-5 text-center sm:px-4">
+                  <p className="text-xs font-bold text-gray-500 sm:text-sm">{plan.name[language]}</p>
+                  <p className={cn("num mt-1 text-lg font-extrabold sm:text-2xl", fee === 0 ? "text-emerald-700" : "text-gray-950")}>
+                    {formatEgp(fee, language)}
+                  </p>
+                  <p className="num mt-1 text-[11px] text-gray-500 sm:text-xs">
+                    {t.exampleNet} {formatEgp(EXAMPLE_ORDER - fee, language)}
+                  </p>
+                </div>
+              );
+            })}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="cost-table-title">
+        <div className="container-x">
+          <Reveal>
+            <SectionHeading id="cost-table-title" title={t.tableTitle} lead={t.tableLead} />
+          </Reveal>
+
+          <Reveal delay={80} className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-gray-200 bg-white">
+            <table className="w-full text-sm">
+              <caption className="sr-only">{t.tableTitle}</caption>
+              <thead className="bg-gray-50 text-xs text-gray-500">
+                <tr>
+                  <th scope="col" className="px-3 py-3 text-start font-bold sm:px-5">
+                    {t.orders}
+                  </th>
+                  {plans.map((plan) => (
+                    <th key={plan.id} scope="col" className="px-2 py-3 text-center font-bold sm:px-4">
+                      <span className="block text-gray-900">{plan.name[language]}</span>
+                      <span className="num block text-[11px] font-semibold text-gray-500">{planPriceLabel(plan, language)}</span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {costTable.map((row) => {
+                  const cheapest = Math.min(...row.costs.map((cell) => cell.cost));
+                  return (
+                    <tr key={row.orders}>
+                      <th scope="row" className="num px-3 py-3 text-start font-bold text-gray-900 sm:px-5">
+                        {row.orders}
+                      </th>
+                      {row.costs.map((cell) => (
+                        <td
+                          key={cell.id}
+                          className={cn(
+                            "num whitespace-nowrap px-2 py-3 text-center text-xs sm:px-4 sm:text-sm",
+                            cell.cost === cheapest ? "font-extrabold text-emerald-700" : "text-gray-600",
+                          )}
+                        >
+                          {formatEgp(cell.cost, language)}
+                          {cell.cost === cheapest ? <span className="sr-only"> ({t.cheapest})</span> : null}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </Reveal>
+          <p className="mx-auto mt-4 max-w-3xl text-center text-xs text-gray-500 sm:text-sm">{t.breakeven}</p>
+        </div>
+      </section>
+
+      <section className="bg-[#f7faf8] py-12 sm:py-16" aria-labelledby="pricing-faq-title">
+        <div className="container-x">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+            <Reveal>
+              <SectionHeading id="pricing-faq-title" title={t.faqTitle} lead={t.faqLead} align="start" />
+            </Reveal>
+            <Reveal delay={80}>
+              <FaqList items={pricingFaqs[language]} />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="pricing-cta-title">
+        <div className="container-x">
+          <Reveal className="flex flex-col items-center justify-between gap-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center sm:p-8 md:flex-row md:text-start">
+            <div>
+              <h2 id="pricing-cta-title" className="text-xl font-extrabold text-gray-950 font-heading sm:text-2xl">
+                {t.ctaTitle}
+              </h2>
+              <p className="mt-2 text-sm leading-7 text-gray-600 sm:text-base">{t.ctaLead}</p>
+            </div>
+            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <a href={SIGNUP_URL} className="btn btn-primary">
+                {t.ctaPrimary}
+                <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
+              </a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                {t.ctaSecondary}
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,27 +1,22 @@
+import { CTA } from "../components/CTA";
+import { FAQ } from "../components/FAQ";
 import { Features } from "../components/Features";
 import { Hero } from "../components/Hero";
 import { HowItWorks } from "../components/HowItWorks";
-import { FAQ } from "../components/FAQ";
-import { Testimonials } from "../components/Testimonials";
-import { Stats } from "../components/Stats";
-import { CTA } from "../components/CTA";
-import { WhyEcommerce } from "../components/WhyEcommerce";
-import { MarketReadiness } from "../components/MarketReadiness";
-import { FeatureRibbon } from "../components/FeatureRibbon";
+import { PricingPreview } from "../components/PricingPreview";
+import { TrustBar } from "../components/TrustBar";
+import type { AppLanguage } from "@/lib/i18n";
 
-export const HomePage = () => {
+export const HomePage = ({ language = "ar" }: { language?: AppLanguage }) => {
   return (
-    <>
-      <Hero />
-      <FeatureRibbon />
-      <Stats />
-      <WhyEcommerce />
-      <Features />
-      <MarketReadiness />
-      <HowItWorks />
-      <Testimonials />
-      <FAQ />
-      <CTA />
-    </>
+    <div dir={language === "en" ? "ltr" : "rtl"}>
+      <Hero language={language} />
+      <TrustBar language={language} />
+      <Features language={language} />
+      <HowItWorks language={language} />
+      <PricingPreview language={language} />
+      <FAQ language={language} />
+      <CTA language={language} />
+    </div>
   );
 };

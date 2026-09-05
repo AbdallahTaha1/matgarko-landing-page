@@ -9,10 +9,19 @@ Matgarko helps merchants start selling online without hiring a software company 
 Core product message:
 
 - Create an online store in minutes.
-- Start from an affordable monthly price.
-- Try the platform with a limited-time free month.
+- Start free and pay only when you sell.
 - Manage products, orders, customers, payment, and shipping from one dashboard.
-- Designed for Arabic-speaking merchants and the Egyptian market.
+- Designed for Arabic-speaking merchants and the Egyptian market, with a full English site under `/en`.
+
+## Pricing
+
+Pricing lives in one place, `src/data/pricing.ts`, and feeds the pricing pages, the home page preview, structured data, and the AI context files.
+
+| Plan   | Monthly fee | Commission per completed order |
+| ------ | ----------- | ------------------------------ |
+| Free   | 0 EGP       | 2%                             |
+| Growth | 499 EGP     | 0.5%                           |
+| Pro    | 1,499 EGP   | 0%                             |
 
 ## Main Pages
 
@@ -79,6 +88,14 @@ VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 If this value is not set, analytics will stay disabled.
+
+## Assets
+
+Regenerate the social share image and PWA icons from `src/assets/logo.png`:
+
+```bash
+node scripts/generate-assets.mjs
+```
 
 ## Deployment Notes
 

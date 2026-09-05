@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { Check, X, Loader2, Store, ArrowRight, ArrowLeft } from 'lucide-react';
 import { api } from '../lib/api';
 
@@ -133,11 +132,9 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               
               {step === 1 && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="space-y-4"
+                <div
+                  key={step}
+                  className="animate-in fade-in slide-in-from-right-4 space-y-4 duration-300"
                 >
                   <div className="space-y-2">
                     <label htmlFor="storeName" className="block text-sm font-medium text-gray-700">اسم المتجر</label>
@@ -195,15 +192,13 @@ export default function RegisterPage() {
                   >
                     التالي <ArrowLeft className="mr-2 h-4 w-4" />
                   </button>
-                </motion.div>
+                </div>
               )}
 
               {step === 2 && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="space-y-4"
+                <div
+                  key={step}
+                  className="animate-in fade-in slide-in-from-right-4 space-y-4 duration-300"
                 >
                   <div className="space-y-2">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">البريد الإلكتروني</label>
@@ -283,7 +278,7 @@ export default function RegisterPage() {
                         {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'إنشاء المتجر المستقل'}
                      </button>
                   </div>
-                </motion.div>
+                </div>
               )}
 
             </form>

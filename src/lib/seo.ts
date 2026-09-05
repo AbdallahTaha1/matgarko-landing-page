@@ -1,6 +1,7 @@
 import { faqs } from "@/data/faqs";
 import { blogArticles } from "@/data/blog";
-import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishPricingFaqs, englishSeoPages } from "@/data/en";
+import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages } from "@/data/en";
+import { formatCommission, formatEgp, planPriceLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
 import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
 
 export const SITE_NAME = "متجركو";
@@ -36,7 +37,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/",
     title: "إنشاء متجر إلكتروني في مصر مجاناً | متجركو",
     description:
-      "ابدأ متجرك الإلكتروني مجاناً مع متجركو — ادفع فقط لما تبيع. قوالب عربية جاهزة، دفع وشحن مدمج، وإدارة كاملة للمنتجات والطلبات. بدون برمجة.",
+      "ابدأ متجرك الإلكتروني مجاناً مع متجركو وادفع 2% فقط لما تبيع. قوالب عربية جاهزة، دفع عند الاستلام، وشحن لكل المحافظات. بدون برمجة.",
     keywords: [
       "إنشاء متجر إلكتروني",
       "متجر إلكتروني مصر",
@@ -79,7 +80,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/pricing",
     title: "تكلفة إنشاء متجر إلكتروني في مصر | باقات متجركو",
     description:
-      "ابدأ مجاناً مع عمولة 3% فقط على كل طلب، أو اشترك في باقة شهرية تبدأ من 399 ج.م مع عمولة أقل. بدون رسوم مخفية.",
+      "ابدأ مجاناً بعمولة 2% فقط على كل طلب، أو باقة النمو 499 ج.م + 0.5%، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.",
     keywords: [
       "تكلفة إنشاء متجر إلكتروني في مصر",
       "أسعار متجر إلكتروني",
@@ -365,62 +366,45 @@ export function alternateLinksForPage(page: SeoPage) {
 }
 
 export function socialImageUrl() {
-  return `${SITE_URL}/og-image.svg`;
+  return `${SITE_URL}/og-image.png`;
 }
 
-const SERVICE_OFFERS = [
-  {
-    "@type": "Offer",
-    name: "مجاني",
-    price: "0",
-    priceCurrency: "EGP",
-    description: "ابدأ مجاناً مع عمولة 3% على كل طلب",
-    url: canonicalUrl("/pricing"),
-  },
-  {
-    "@type": "Offer",
-    name: "نمو",
-    price: "399",
-    priceCurrency: "EGP",
-    description: "399 ج.م شهرياً مع عمولة 1% فقط على كل طلب",
-    url: canonicalUrl("/pricing"),
-  },
-  {
-    "@type": "Offer",
-    name: "احترافي",
-    price: "999",
-    priceCurrency: "EGP",
-    description: "999 ج.م شهرياً بدون أي عمولة على المبيعات",
-    url: canonicalUrl("/pricing"),
-  },
-];
+function offerDescription(plan: (typeof plans)[number], language: "ar" | "en") {
+  if (language === "ar") {
+    return plan.commission === 0
+      ? `${formatEgp(plan.monthly, "ar")} شهرياً بدون أي عمولة على المبيعات`
+      : plan.monthly === 0
+        ? `ابدأ مجاناً مع عمولة ${formatCommission(plan)} على كل طلب مكتمل`
+        : `${planPriceLabel(plan, "ar")} عمولة على كل طلب مكتمل`;
+  }
 
-const EN_SERVICE_OFFERS = [
-  {
+  return plan.commission === 0
+    ? `${formatEgp(plan.monthly, "en")} per month with 0% Matgarko sales commission`
+    : plan.monthly === 0
+      ? `Start free with ${formatCommission(plan)} commission on each completed order`
+      : `${formatEgp(plan.monthly, "en")} per month with ${formatCommission(plan)} commission on completed orders`;
+}
+
+function serviceOffers(language: "ar" | "en") {
+  return plans.map((plan) => ({
     "@type": "Offer",
-    name: "Free",
-    price: "0",
+    name: plan.name[language],
+    price: String(plan.monthly),
     priceCurrency: "EGP",
-    description: "Start free with 3% commission on each completed order",
-    url: canonicalUrl("/en/pricing"),
-  },
-  {
-    "@type": "Offer",
-    name: "Growth",
-    price: "399",
-    priceCurrency: "EGP",
-    description: "399 EGP per month with 1% commission on completed orders",
-    url: canonicalUrl("/en/pricing"),
-  },
-  {
-    "@type": "Offer",
-    name: "Professional",
-    price: "999",
-    priceCurrency: "EGP",
-    description: "999 EGP per month with 0% Matgarko sales commission",
-    url: canonicalUrl("/en/pricing"),
-  },
-];
+    description: offerDescription(plan, language),
+    url: canonicalUrl(language === "en" ? "/en/pricing" : "/pricing"),
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: String(plan.monthly),
+      priceCurrency: "EGP",
+      unitCode: "MON",
+      billingIncrement: 1,
+    },
+  }));
+}
+
+const SERVICE_OFFERS = serviceOffers("ar");
+const EN_SERVICE_OFFERS = serviceOffers("en");
 
 export function organizationSchema() {
   return {
@@ -434,7 +418,8 @@ export function organizationSchema() {
     description:
       "متجركو منصة عربية لإنشاء المتاجر الإلكترونية في مصر. تتيح للتجار بناء متجر احترافي وإدارة منتجاتهم وطلباتهم وتجهيز الدفع والشحن بدون برمجة.",
     url: SITE_URL,
-    logo: `${SITE_URL}/favicon.ico`,
+    logo: `${SITE_URL}/icon-512.png`,
+    image: `${SITE_URL}/og-image.png`,
     email: CONTACT_EMAIL,
     telephone: "+20-108-031-2538",
     address: {
@@ -492,6 +477,12 @@ export function webPageSchema(page: SeoPage) {
     },
     publisher: {
       "@id": `${SITE_URL}/#organization`,
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: socialImageUrl(),
+      width: 1200,
+      height: 630,
     },
     about: CORE_TOPICS.map((name) => ({
       "@type": "Thing",
@@ -667,50 +658,19 @@ export function faqSchema(page?: SeoPage) {
 }
 
 export function pricingFaqSchema(page?: SeoPage) {
-  if (page && pageLocale(page) === "en") {
-    return {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: englishPricingFaqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    };
-  }
+  const language = page && pageLocale(page) === "en" ? "en" : "ar";
 
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "كيف تُحسب العمولة على الباقة المجانية؟",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "العمولة 3% تُخصم تلقائياً من قيمة كل طلب مكتمل.",
-        },
+    mainEntity: pricingFaqs[language].map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
       },
-      {
-        "@type": "Question",
-        name: "متى يستحق الترقية من المجاني للنمو؟",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "لما تتجاوز 33 طلب شهرياً بمتوسط قيمة 700 ج.م، تبدأ باقة النمو أن تكون أوفر من الباقة المجانية.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "هل يوجد رسوم إضافية على بوابات الدفع؟",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "رسوم بوابات الدفع تفرضها شركات الدفع مباشرة وهي منفصلة عن اشتراك متجركو.",
-        },
-      },
-    ],
+    })),
   };
 }
 
@@ -827,7 +787,7 @@ Last updated: ${lastmod}
 Official website: ${SITE_URL}/
 Languages: Arabic (Egypt) and English
 Primary market: Egypt, with English content for MENA-facing discovery
-Pricing: Free plan with 3% commission, Growth plan from 399 EGP/month with 1% commission, Professional plan from 999 EGP/month with 0% commission.
+Pricing: ${pricingSummary("en")}
 Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 
 ## Key Facts
@@ -909,9 +869,7 @@ Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores i
 
 ## Pricing Summary
 
-- Free: 0 EGP/month with 3% commission per completed order.
-- Growth: 399 EGP/month with 1% commission per completed order.
-- Professional: 999 EGP/month with 0% commission.
+${plans.map((plan) => `- ${plan.name.en}: ${formatEgp(plan.monthly, "en")}/month with ${formatCommission(plan)} commission per completed order.`).join("\n")}
 - Pricing source: ${canonicalUrl("/pricing")}
 
 ## Public Pages

@@ -13,7 +13,7 @@ export function VsWooCommercePage() {
         "لا سيرفر، لا استضافة، لا صيانة تقنية",
         "ابدأ في 5 دقائق — بدون مطور",
         "تحديثات وأمان تلقائي بدون تدخل منك",
-        "ابدأ مجاناً — 3% عمولة فقط على كل طلب",
+        "ابدأ مجاناً — 2% عمولة فقط على كل طلب",
         "بوابات دفع مصرية مدمجة مباشرة",
         "شركات شحن مصرية جاهزة",
         "دعم فني عربي متاح دائماً",
@@ -21,7 +21,7 @@ export function VsWooCommercePage() {
       comparisonRows={[
         { feature: "الحاجة لاستضافة", matgarko: false, competitor: true, highlight: true },
         { feature: "الحاجة لمطور للإعداد", matgarko: false, competitor: "غالباً نعم", highlight: true },
-        { feature: "التكلفة الشهرية الفعلية", matgarko: "0 — 999 ج.م", competitor: "200-1,000 ج.م+ استضافة + إضافات", highlight: true },
+        { feature: "التكلفة الشهرية الفعلية", matgarko: "0 — 1,499 ج.م", competitor: "200-1,000 ج.م+ استضافة + إضافات", highlight: true },
         { feature: "وقت الإعداد", matgarko: "5 دقائق", competitor: "أيام إلى أسابيع", highlight: true },
         { feature: "صيانة وتحديثات دورية", matgarko: false, competitor: true },
         { feature: "أمان وحماية تلقائية", matgarko: true, competitor: "مسؤوليتك أنت" },

@@ -2,11 +2,7 @@ import type { BlogArticle, BlogSection } from "@/data/blog";
 import {
   englishBlogArticles,
   englishComparisons,
-  englishFaqs,
-  englishHome,
   englishIndustries,
-  englishPricingFaqs,
-  englishPricingPlans,
   englishSimplePages,
   type EnglishComparisonContent,
   type EnglishIndustryContent,
@@ -14,25 +10,14 @@ import {
   type EnglishPageSection,
 } from "@/data/en";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Boxes,
-  CheckCircle2,
-  CreditCard,
-  Globe2,
-  ShieldCheck,
-  Store,
-  Truck,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
+import { HomePage } from "@/pages/HomePage";
+import { PricingPage } from "@/pages/PricingPage";
 
 const SIGNUP_URL = "https://signup.matgarko.com/signup";
 const WHATSAPP_URL = "https://wa.me/201080312538";
 const EMAIL_URL = "mailto:matgarko.help@gmail.com";
-
-const homeIcons: LucideIcon[] = [Store, Boxes, Truck, Globe2, CreditCard, Users];
 
 function primaryHref(label?: string) {
   if (!label) return SIGNUP_URL;
@@ -155,104 +140,7 @@ function EnglishStandardPage({ content }: { content: EnglishPageContent }) {
 }
 
 export function EnglishHomePage() {
-  return (
-    <>
-      <section className="hero-band relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
-              <span className="section-kicker">{englishHome.hero.kicker}</span>
-              <h1 className="mt-6 text-4xl font-black leading-tight text-gray-950 font-heading md:text-6xl">
-                {englishHome.hero.title}
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg font-medium leading-8 text-gray-700 md:text-xl">
-                {englishHome.hero.lead}
-              </p>
-              <CtaButtons primary={englishHome.hero.primaryCta} secondary={englishHome.hero.secondaryCta} />
-            </div>
-
-            <div className="rounded-lg border border-emerald-100 bg-white p-5 shadow-2xl shadow-emerald-900/10">
-              <div className="rounded-md bg-gray-950 p-5 text-white">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div>
-                    <p className="text-sm text-emerald-200">Store dashboard</p>
-                    <p className="text-2xl font-black">Today&apos;s launch list</p>
-                  </div>
-                  <Store className="h-8 w-8 text-emerald-300" />
-                </div>
-                <div className="mt-5 space-y-3">
-                  {englishHome.workflow.map((item, index) => (
-                    <div key={item} className="flex items-center gap-3 rounded-md bg-white/8 p-3">
-                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-400 text-sm font-black text-gray-950">
-                        {index + 1}
-                      </span>
-                      <span className="font-semibold">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {englishHome.stats.map((stat) => (
-              <div key={stat.label} className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
-                <p className="text-3xl font-black text-gray-950">{stat.value}</p>
-                <p className="mt-2 text-sm font-semibold text-gray-600">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl">
-            <span className="section-kicker">Why Matgarko</span>
-            <h2 className="mt-5 text-3xl font-black text-gray-950 font-heading md:text-5xl">
-              Built around how regional merchants actually sell
-            </h2>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {englishHome.features.map((feature, index) => {
-              const Icon = homeIcons[index] || CheckCircle2;
-              return (
-                <article key={feature.title} className="premium-card p-6">
-                  <div className="icon-tile h-12 w-12">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-5 text-xl font-black text-gray-950">{feature.title}</h3>
-                  <p className="mt-3 leading-7 text-gray-700">{feature.text}</p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-emerald-50/70 py-16 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-            <div>
-              <span className="section-kicker">FAQ</span>
-              <h2 className="mt-5 text-3xl font-black text-gray-950 font-heading md:text-5xl">
-                Answers for English-speaking teams researching Matgarko
-              </h2>
-            </div>
-            <div className="grid gap-4">
-              {englishFaqs.map((faq) => (
-                <article key={faq.question} className="rounded-lg border border-emerald-100 bg-white p-6 shadow-sm">
-                  <h3 className="text-lg font-black text-gray-950">{faq.question}</h3>
-                  <p className="mt-3 leading-7 text-gray-700">{faq.answer}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      <FinalCta />
-    </>
-  );
+  return <HomePage language="en" />;
 }
 
 export function EnglishSolutionsPage() {
@@ -288,60 +176,7 @@ export function EnglishPrivacyPage() {
 }
 
 export function EnglishPricingPage() {
-  return (
-    <>
-      <PageHero
-        kicker="Pricing"
-        title="Start free, then upgrade when lower commission saves money"
-        lead="Matgarko pricing is built for merchants who want to test demand before committing to fixed monthly software cost. Public plans are priced in EGP."
-        primaryCta="Start free"
-        secondaryCta="Contact us"
-        sections={[]}
-      />
-      <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-3">
-            {englishPricingPlans.map((plan) => (
-              <article key={plan.name} className="premium-card flex flex-col p-6 md:p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-2xl font-black text-gray-950">{plan.name}</h2>
-                    <p className="mt-2 text-sm font-semibold text-emerald-700">{plan.commission}</p>
-                  </div>
-                  <CreditCard className="h-7 w-7 text-emerald-700" />
-                </div>
-                <p className="mt-6 text-4xl font-black text-gray-950">{plan.price}</p>
-                <p className="mt-1 text-sm font-semibold text-gray-500">{plan.cadence}</p>
-                <p className="mt-5 leading-7 text-gray-700">{plan.note}</p>
-                <ul className="mt-6 space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex gap-3 text-sm font-semibold text-gray-700">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-600" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-6 md:grid-cols-3">
-            {englishPricingFaqs.map((faq) => (
-              <article key={faq.question} className="rounded-lg border border-gray-200 bg-white p-6">
-                <h2 className="text-lg font-black text-gray-950">{faq.question}</h2>
-                <p className="mt-3 leading-7 text-gray-700">{faq.answer}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-      <FinalCta />
-    </>
-  );
+  return <PricingPage language="en" />;
 }
 
 function EnglishIndustryPage({ content }: { content: EnglishIndustryContent }) {
