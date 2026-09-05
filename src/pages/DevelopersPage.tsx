@@ -119,7 +119,7 @@ export const DevelopersPage = () => {
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {["لا تحتاج خبرة تقنية", "كل شيء من لوحة واحدة", "تقدر تبدأ بسعر بسيط", "تطور متجرك لاحقًا"].map((item) => (
+                {["لا تحتاج خبرة تقنية", "كل شيء من لوحة واحدة", "تقدر تبدأ مجاناً بدون رسوم شهرية", "تطور متجرك لاحقًا"].map((item) => (
                   <div key={item} className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4">
                     <Check className="h-5 w-5 shrink-0 text-emerald-700" />
                     <span className="text-sm font-medium text-gray-700">{item}</span>
