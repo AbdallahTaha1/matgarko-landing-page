@@ -11,6 +11,8 @@
 
 Email and mobile availability checks use debounced JSON POST requests to `/check-email` and `/check-phone`; contact details are not placed in URLs. They do not send verification messages or create registrations. Deploy these backend endpoints before publishing the corresponding form update. The final registration still revalidates availability.
 
+The mobile field offers 22 Arab countries with calling codes. Local numbers, pasted international numbers, and Arabic/Persian digits are parsed using `libphonenumber-js`; the selected country must match and the number must be in a mobile range. The API receives one E.164 value including the country code. Changing the country invalidates any previous availability result for a different number. Deploy the backend international-phone validation before publishing this form update. Number validation does not verify ownership; signup verification remains by email.
+
 - After opt-in, GA4 receives one manually emitted `page_view` per route change, with marketing query parameters only and a referrer stripped of its path/query on the initial visit.
 - The browser retains the first recorded source and latest attributed non-direct source for up to 90 days. It recognizes UTM fields, Google click IDs, and external referrer hosts. An internal navigation before consent retains the landing campaign in memory for the first measured pageview.
 - `signup_start`, `signup_details_submitted`, and `signup_email_verified` measure progress. `sign_up` is emitted only after the backend reports that the verified store is active. It includes `method: email`, a non-secret transaction ID, and `first_source` / `last_source`.

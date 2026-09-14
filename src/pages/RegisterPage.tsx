@@ -8,6 +8,7 @@ import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
 import { useSignupContactCheck } from '@/lib/useSignupContactCheck';
+import { normalizePhoneInput, parseSignupPhone, phoneCountries, signupPhoneNumber, type CountryCode } from '@/lib/phone';
 
 const tokenKey = 'matgarko-pending-signup';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -17,7 +18,7 @@ const messages: Record<string, [string, string]> = {
   SubdomainInvalid: ['استخدم 3 إلى 40 حرف إنجليزي أو رقم، والشرطة بين الحروف فقط.', 'Use 3–40 letters or digits, with hyphens only between characters.'],
   SubdomainReserved: ['الرابط ده محجوز للمنصة.', 'This address is reserved.'],
   PhoneTaken: ['رقم الموبايل مستخدم من قبل.', 'This phone number is already registered.'],
-  PhoneInvalid: ['اكتب رقم موبايل مصري صحيح من 11 رقم.', 'Enter a valid 11-digit Egyptian mobile number.'],
+  PhoneInvalid: ['اكتب رقم موبايل صحيح وتأكد من مفتاح الدولة المختار.', 'Enter a valid mobile number and check the selected country code.'],
   EmailTaken: ['البريد الإلكتروني مستخدم من قبل.', 'This email is already registered.'],
   EmailInvalid: ['راجع البريد الإلكتروني.', 'Check your email address.'],
   Disabled: ['التسجيل مغلق مؤقتًا. حاول لاحقًا.', 'Registration is temporarily closed. Please try later.'],
@@ -40,6 +41,8 @@ export default function RegisterPage() {
   const t = (ar: string, en: string) => english ? en : ar;
   const consent = useSyncExternalStore(subscribeConsent, getConsent, serverConsent);
   const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false });
+  const [phoneCountry, setPhoneCountry] = useState<CountryCode>('EG');
+  const internationalPhone = signupPhoneNumber(form.phone, phoneCountry);
   const [config, setConfig] = useState<{ enabled: boolean; baseDomain: string } | null>(null);
   const [stage, setStage] = useState<'store' | 'account' | SignupStatus['state']>('store');
   const [status, setStatus] = useState<SignupStatus | null>(null);
@@ -54,7 +57,7 @@ export default function RegisterPage() {
   const submitting = useRef(false);
   const available = availability.value === form.subdomain && availability.state === 'available';
   const emailCheck = useSignupContactCheck('email', form.email, stage === 'account' && !!config?.enabled);
-  const phoneCheck = useSignupContactCheck('phone', form.phone, stage === 'account' && !!config?.enabled);
+  const phoneCheck = useSignupContactCheck('phone', form.phone ? internationalPhone || `invalid:${phoneCountry}:${form.phone}` : '', stage === 'account' && !!config?.enabled);
 
   function applyStatus(next: SignupStatus) {
     if (!['verification', 'provisioning', 'ready', 'unavailable'].includes(next.state)) throw new ApiError('InvalidResponse');
@@ -137,11 +140,11 @@ export default function RegisterPage() {
       trackSignupStep('signup_start'); setStage('account'); return;
     }
     if (stage === 'account' && form.password !== form.confirmPassword) { setError('password_mismatch'); return; }
-    if (stage === 'account' && (!emailCheck.available || !phoneCheck.available)) return;
+    if (stage === 'account' && (!emailCheck.available || !phoneCheck.available || !internationalPhone)) return;
     submitting.current = true; setBusy(true);
     try {
       if (stage === 'account') {
-        const result = await api.signup({ ...form, acquisition: getAcquisition() });
+        const result = await api.signup({ ...form, phone: internationalPhone!, acquisition: getAcquisition() });
         if (!uuid.test(result.token)) throw new ApiError('InvalidResponse');
         setToken(result.token);
         try { sessionStorage.setItem(tokenKey, result.token); } catch { /* Still usable in this tab. */ }
@@ -177,13 +180,26 @@ export default function RegisterPage() {
   }
   const errorMessage = error === 'password_mismatch' ? t('كلمتا المرور غير متطابقتين.', 'Passwords do not match.') : (messages[error] || messages.InvalidRequest)[english ? 1 : 0];
   const hintClass = 'mt-2 text-xs leading-5 text-gray-500';
+  function changeField(name: keyof SignupModel, value: string) {
+    if (name === 'phone') {
+      value = normalizePhoneInput(value);
+      if (value.startsWith('+')) {
+        const parsed = parseSignupPhone(value);
+        if (parsed?.country && phoneCountries.some(country => country.code === parsed.country)) {
+          setPhoneCountry(parsed.country);
+          value = parsed.formatNational();
+        }
+      }
+    }
+    setForm(previous => ({ ...previous, [name]: value }));
+  }
   const field = (name: 'storeName' | 'email' | 'phone' | 'password' | 'confirmPassword', label: string, type = 'text', extra = {}, hint = '') => {
     const check = name === 'email' ? emailCheck : name === 'phone' ? phoneCheck : undefined;
     const hasError = check && !['idle', 'checking', 'available'].includes(check.state);
     const canRetry = hasError && !['EmailInvalid', 'PhoneInvalid', 'EmailTaken', 'PhoneTaken', 'Disabled'].includes(check.state);
     const description = [hint ? `${name}-hint` : '', check ? `${name}-status` : ''].filter(Boolean).join(' ');
     return <div>
-      <label className="block text-sm font-bold text-gray-700" htmlFor={name}>{label}<input id={name} name={name} type={type} value={form[name]} onChange={event => setForm(value => ({ ...value, [name]: event.target.value }))} required aria-describedby={description || undefined} aria-invalid={hasError && !canRetry || undefined} className={inputClass} {...extra} /></label>
+      <label className="block text-sm font-bold text-gray-700" htmlFor={name}>{label}<input id={name} name={name} type={type} value={form[name]} onChange={event => changeField(name, event.target.value)} required aria-describedby={description || undefined} aria-invalid={hasError && !canRetry || undefined} className={inputClass} {...extra} /></label>
       {hint && <p id={`${name}-hint`} className={hintClass}>{hint}</p>}
       {check && <p id={`${name}-status`} role="status" className={`mt-2 text-sm ${hasError ? 'text-red-600' : check.available ? 'text-emerald-700' : 'text-gray-500'}`}>
         {check.state === 'checking' ? t('جاري الفحص…', 'Checking…') : check.available ? name === 'email' ? t('البريد متاح للتسجيل', 'Email available for signup') : t('رقم الموبايل متاح للتسجيل', 'Mobile number available for signup') : hasError ? (messages[check.state] || messages.InvalidRequest)[english ? 1 : 0] : ''}
@@ -192,7 +208,7 @@ export default function RegisterPage() {
     </div>;
   };
 
-  return <section className="hero-band min-h-[calc(100vh-4rem)] px-4 py-10 sm:py-14" dir={english ? 'ltr' : 'rtl'}>
+  return <section className="signup-form hero-band min-h-[calc(100vh-4rem)] px-4 py-10 sm:py-14" dir={english ? 'ltr' : 'rtl'}>
     <div className="mx-auto max-w-lg">
       <Store className="mx-auto h-9 w-9 text-emerald-700" aria-hidden="true" />
       <h1 className="mt-4 text-center text-3xl font-black font-heading">{t('أنشئ متجرك الآن', 'Create your store')}</h1>
@@ -202,20 +218,25 @@ export default function RegisterPage() {
         {config && !config.enabled && <p role="alert" className="mb-4 text-amber-800">{messages.Disabled[english ? 1 : 0]}</p>}
         {error && <div role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}</div>}
         {!config && error && <button className="btn btn-secondary mb-4" onClick={() => window.location.reload()}>{t('حاول تاني', 'Retry connection')}</button>}
-        {notice && <p role="status" className="mb-4 text-sm text-emerald-800">{notice}</p>}
+        {notice && <p role="status" className="mb-4 text-sm text-emerald-700">{notice}</p>}
         {['store', 'account', 'verification'].includes(stage) && <form onSubmit={submit} className="space-y-5">
           {stage === 'store' && <>
             {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization' }, t('ده الاسم اللي هيظهر لعملائك. اكتبه بالعربي أو الإنجليزي.', 'This is the name your customers will see. Use Arabic or English.'))}
             <div>
               <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}<div dir="ltr" className="flex min-w-0 items-center gap-2"><input id="subdomain" name="subdomain" required minLength={3} maxLength={40} pattern="[a-z0-9]([a-z0-9-]*[a-z0-9])?" autoCapitalize="none" autoComplete="off" spellCheck={false} aria-describedby="subdomain-hint subdomain-status" className={inputClass + ' min-w-0'} value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} /><span className="shrink-0 text-xs font-normal">.{config?.baseDomain || 'matgarko.com'}</span></div></label>
               <p id="subdomain-hint" className={hintClass}>{t('اختار اسم قصير من 3 إلى 40 حرف إنجليزي أو رقم، من غير مسافات. مثال:', 'Choose a short address with 3–40 English letters or digits, without spaces. Example:')} <bdi>my-store.{config?.baseDomain || 'matgarko.com'}</bdi></p>
-              <p id="subdomain-status" role="status" className={`mt-2 text-sm ${availability.value === form.subdomain && availability.state === 'SubdomainTaken' ? 'text-red-600' : 'text-gray-600'}`}>{available ? t('الرابط متاح', 'Address available') : availability.value === form.subdomain && messages[availability.state] ? messages[availability.state][english ? 1 : 0] : form.subdomain.length >= 3 ? t('جاري فحص الرابط…', 'Checking address…') : t('مسموح بشرطة بين الحروف أو الأرقام.', 'Hyphens are allowed between letters or digits.')}</p>
+              <p id="subdomain-status" role="status" className={`mt-2 text-sm ${available ? 'text-emerald-700' : availability.value === form.subdomain && messages[availability.state] ? 'text-red-600' : 'text-gray-600'}`}>{available ? t('الرابط متاح', 'Address available') : availability.value === form.subdomain && messages[availability.state] ? messages[availability.state][english ? 1 : 0] : form.subdomain.length >= 3 ? t('جاري فحص الرابط…', 'Checking address…') : t('مسموح بشرطة بين الحروف أو الأرقام.', 'Hyphens are allowed between letters or digits.')}</p>
             </div>
             <button type="submit" disabled={!available || !config?.enabled} className="btn btn-primary w-full disabled:opacity-50">{t('التالي', 'Continue')}</button>
           </>}
           {stage === 'account' && <>
             {field('email', t('البريد الإلكتروني', 'Email'), 'email', { maxLength: 320, autoComplete: 'email', dir: 'ltr' }, t('استخدم بريد تقدر تفتحه دلوقتي؛ هنبعت عليه رمز تأكيد حسابك.', 'Use an email you can access now. We will send your verification code there.'))}
-            {field('phone', t('رقم الموبايل', 'Mobile number'), 'tel', { pattern: '01[0125][0-9]{8}', maxLength: 11, inputMode: 'tel', autoComplete: 'tel-national', placeholder: '01012345678', dir: 'ltr' }, t('الصيغة المقبولة حاليًا 11 رقم يبدأ بـ01، من غير كود دولة أو مسافات.', 'Currently accepts 11 digits starting with 01, without a country code or spaces.'))}
+            <div className="space-y-3">
+              <label className="block text-sm font-bold text-gray-700" htmlFor="phoneCountry">{t('الدولة ومفتاح الاتصال', 'Country and calling code')}<select id="phoneCountry" name="phoneCountry" value={phoneCountry} onChange={event => setPhoneCountry(event.target.value as CountryCode)} className={inputClass} autoComplete="country">
+                {phoneCountries.map(country => <option key={country.code} value={country.code}>{t(country.ar, country.en)} ({'\u2066'}+{country.callingCode}{'\u2069'})</option>)}
+              </select></label>
+              {field('phone', t('رقم الموبايل', 'Mobile number'), 'tel', { maxLength: 32, inputMode: 'tel', autoComplete: 'tel-national', dir: 'ltr' }, t('اختار الدولة واكتب رقمك المحلي، أو الصق الرقم كاملًا بمفتاح الدولة. بنقبل الأرقام العربية والإنجليزية.', 'Choose your country and enter your local mobile number, or paste the full international number. Arabic and English digits are accepted.'))}
+            </div>
             {field('password', t('كلمة المرور', 'Password'), 'password', { minLength: 8, maxLength: 100, autoComplete: 'new-password' }, t('8 أحرف على الأقل. يفضّل تخلط حروف وأرقام ورموز وتستخدم كلمة مرور جديدة.', 'At least 8 characters. Use a unique password with a mix of letters, numbers, and symbols.'))}
             {field('confirmPassword', t('تأكيد كلمة المرور', 'Confirm password'), 'password', { minLength: 8, maxLength: 100, autoComplete: 'new-password' })}
             <div><label htmlFor="discoverySource" className="block text-sm font-bold text-gray-700">{t('عرفتنا منين؟ — اختياري', 'How did you hear about us? — optional')}<select id="discoverySource" name="discoverySource" aria-describedby="discoverySource-hint" className={inputClass} value={form.discoverySource || ''} onChange={event => setForm(value => ({ ...value, discoverySource: event.target.value || undefined }))}>
@@ -235,7 +256,7 @@ export default function RegisterPage() {
           </>}
         </form>}
         {stage === 'provisioning' && <div className="space-y-5 text-center"><Loader2 className="mx-auto h-9 w-9 animate-spin text-emerald-700" /><h2 className="text-xl font-bold">{t('بنجهّز متجرك', 'Preparing your store')}</h2><p className="text-sm leading-6">{t('بريدك اتأكد. تجهيز المتجر ممكن ياخد بضع دقائق، وهتوصلك رسالة لما يبقى جاهز.', 'Your email is verified. Setup can take a few minutes; we will email you when your store is ready.')}</p>{pollingPaused && <button className="btn btn-secondary" onClick={() => { setError(''); setPollingPaused(false); }}>{t('فحص الحالة تاني', 'Check status again')}</button>}</div>}
-        {stage === 'ready' && <div className="space-y-5 text-center"><CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" /><h2 className="text-2xl font-bold">{t('متجرك جاهز!', 'Your store is ready!')}</h2><p className="text-sm leading-6">{t('ادخل لوحة الإدارة بنفس البريد وكلمة المرور اللي سجلت بيهم، وأضف أول منتج.', 'Sign in to your dashboard with your email and password, then add your first product.')}</p>{safeStoreUrl(status?.adminUrl) && <a className="btn btn-primary w-full" href={safeStoreUrl(status?.adminUrl)}>{t('افتح لوحة إدارة متجرك', 'Open your dashboard')}</a>}</div>}
+        {stage === 'ready' && <div className="space-y-5 text-center"><CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" /><h2 className="text-2xl font-bold text-emerald-700">{t('متجرك جاهز!', 'Your store is ready!')}</h2><p className="text-sm leading-6">{t('ادخل لوحة الإدارة بنفس البريد وكلمة المرور اللي سجلت بيهم، وأضف أول منتج.', 'Sign in to your dashboard with your email and password, then add your first product.')}</p>{safeStoreUrl(status?.adminUrl) && <a className="btn btn-primary w-full" href={safeStoreUrl(status?.adminUrl)}>{t('افتح لوحة إدارة متجرك', 'Open your dashboard')}</a>}</div>}
         {stage === 'unavailable' && <p role="alert">{t('المتجر غير متاح حاليًا. تواصل مع الدعم.', 'Your store is currently unavailable. Please contact support.')}</p>}
         <p className="mt-6 text-center text-xs text-gray-500"><Link className="underline" to={english ? '/en/contact' : '/contact'}>{t('محتاج مساعدة؟ تواصل معانا', 'Need help? Contact us')}</Link></p>
       </div>

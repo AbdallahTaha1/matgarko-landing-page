@@ -137,6 +137,18 @@
     @apply border border-gray-200 bg-white text-gray-900 hover:border-emerald-300 hover:bg-emerald-50;
   }
 
+  .signup-form .btn-primary {
+    @apply bg-emerald-700 shadow-emerald-900/15 hover:bg-emerald-800 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-emerald-700;
+  }
+
+  .signup-form .btn-secondary {
+    @apply border-emerald-200 text-emerald-800 disabled:cursor-not-allowed;
+  }
+
+  .signup-form button:not(.btn) {
+    @apply text-emerald-700 disabled:opacity-50;
+  }
+
   .btn-accent {
     @apply bg-emerald-500 text-gray-950 shadow-lg shadow-emerald-500/25 hover:-translate-y-0.5 hover:bg-emerald-400;
   }

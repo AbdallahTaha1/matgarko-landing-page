@@ -10,7 +10,7 @@ export function useSignupContactCheck(kind: 'email' | 'phone', value: string, en
     const timer = setTimeout(async () => {
       const valid = kind === 'email'
         ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) && value.length <= 320
-        : /^01[0125][0-9]{8}$/.test(value);
+        : /^\+[1-9][0-9]{6,14}$/.test(value);
       if (!valid) {
         setResult({ value, attempt, state: kind === 'email' ? 'EmailInvalid' : 'PhoneInvalid' });
         return;

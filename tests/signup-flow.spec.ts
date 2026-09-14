@@ -134,7 +134,7 @@ test('live contact checks reject taken and invalid values and recheck edits befo
   await expect(submit).toBeDisabled();
   await expect(page.locator('#email-status')).toContainText('Check your email');
   await page.getByLabel('Mobile number', { exact: true }).fill('123');
-  await expect(page.locator('#phone-status')).toContainText('11-digit');
+  await expect(page.locator('#phone-status')).toContainText('selected country code');
   expect(state.submissions).toHaveLength(0);
 });
 
@@ -152,6 +152,28 @@ test('failed contact checks can be retried without changing the entered details'
   await expect(page.locator('#phone-status')).toContainText('available for signup');
   await expect(page.getByRole('button', { name: 'Send verification code', exact: true })).toBeEnabled();
   expect(state.submissions).toHaveLength(0);
+});
+
+test('country selection and pasted Arabic digits submit a normalized international mobile number', async ({ page }) => {
+  const state = await mockSignup(page, 'declined');
+  await page.goto('/en/register');
+  await enterDetails(page);
+  const country = page.getByLabel(/^Country and calling code/);
+  const phone = page.getByLabel('Mobile number', { exact: true });
+  const submit = page.getByRole('button', { name: 'Send verification code', exact: true });
+  await country.selectOption('SA');
+  await phone.fill('0501234567');
+  await expect(page.locator('#phone-status')).toContainText('available for signup');
+  await expect(submit).toBeEnabled();
+  await country.selectOption('EG');
+  await expect(submit).toBeDisabled();
+  await expect(page.locator('#phone-status')).toContainText('selected country code');
+  await phone.fill('٠٠٩٧١٥٠١٢٣٤٥٦٧');
+  await expect(country).toHaveValue('AE');
+  await expect(submit).toBeEnabled();
+  await submit.click();
+  await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
+  expect(state.submissions[0].phone).toBe('+971501234567');
 });
 test('page views are not duplicated and secret query parameters are omitted', async ({ page }) => {
   await mockSignup(page);
