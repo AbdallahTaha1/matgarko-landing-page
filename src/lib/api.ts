@@ -21,7 +21,10 @@ async function request<T>(path: string, options: { data?: unknown; token?: strin
       headers: { ...(options.data === undefined ? {} : { 'Content-Type': 'application/json' }), ...(options.token ? { 'X-Signup-Token': options.token } : {}) },
       body: options.data === undefined ? undefined : JSON.stringify(options.data),
     });
-  } catch (error) { if (options.signal?.aborted) throw error; throw new ApiError('NetworkError'); }
+  } catch (error) {
+    if (options.signal?.aborted) throw error;
+    throw new ApiError(error instanceof DOMException && error.name === 'TimeoutError' ? 'RequestTimeout' : 'NetworkError');
+  }
   const json = await response.json().catch(() => null);
   if (!response.ok) throw new ApiError(json?.code || (response.status === 429 ? 'rate_limited' : 'InvalidRequest'), json?.retryAfterSeconds || Number(response.headers.get('Retry-After')) || 0, response.status);
   if (!json || typeof json !== 'object') throw new ApiError('InvalidResponse');

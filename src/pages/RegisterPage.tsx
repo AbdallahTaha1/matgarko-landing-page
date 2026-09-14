@@ -31,7 +31,8 @@ const messages: Record<string, [string, string]> = {
   EmailFailed: ['تعذر إرسال البريد. استخدم إعادة إرسال الرمز بعد انتهاء العداد.', 'Email could not be sent. Try resending after the countdown.'],
   ResendTooSoon: ['انتظر انتهاء العداد قبل إعادة الإرسال.', 'Wait for the countdown before resending.'],
   rate_limited: ['محاولات كثيرة. انتظر ثم حاول تاني.', 'Too many requests. Wait and try again.'],
-  NetworkError: ['تعذر الاتصال. تأكد من الإنترنت وحاول تاني.', 'Unable to connect. Check your connection and try again.'],
+  NetworkError: ['تعذر الاتصال بالخدمة. حاول تاني بعد لحظات.', 'Unable to connect to the service. Please try again shortly.'],
+  RequestTimeout: ['الخدمة أخدت وقت أطول من المتوقع. حاول تاني بعد لحظات.', 'The service took longer than expected. Please try again shortly.'],
   InvalidRequest: ['راجع البيانات وحاول تاني.', 'Check your details and try again.'],
   InvalidResponse: ['حصل خطأ في الخدمة. حاول تاني.', 'The service returned an unexpected response. Please retry.'],
 };
@@ -55,6 +56,7 @@ export default function RegisterPage() {
   const [pollingPaused, setPollingPaused] = useState(false);
   const [availability, setAvailability] = useState({ value: '', state: 'idle' });
   const submitting = useRef(false);
+  const errorAlert = useRef<HTMLDivElement>(null);
   const available = availability.value === form.subdomain && availability.state === 'available';
   const emailCheck = useSignupContactCheck('email', form.email, stage === 'account' && !!config?.enabled);
   const phoneCheck = useSignupContactCheck('phone', form.phone ? internationalPhone || `invalid:${phoneCountry}:${form.phone}` : '', stage === 'account' && !!config?.enabled);
@@ -130,6 +132,9 @@ export default function RegisterPage() {
   useEffect(() => {
     if (status?.state === 'ready' && status.conversionId) trackSignupComplete(status.conversionId);
   }, [status, consent]);
+  useEffect(() => {
+    if (error) errorAlert.current?.focus();
+  }, [error]);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -216,14 +221,14 @@ export default function RegisterPage() {
       <div className="mt-7 rounded-xl border border-gray-200 bg-white p-5 shadow-xl sm:p-7">
         {!config && !error && <p role="status">{t('جاري الاتصال…', 'Connecting…')}</p>}
         {config && !config.enabled && <p role="alert" className="mb-4 text-amber-800">{messages.Disabled[english ? 1 : 0]}</p>}
-        {error && <div role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}</div>}
+        {error && <div ref={errorAlert} tabIndex={-1} role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}</div>}
         {!config && error && <button className="btn btn-secondary mb-4" onClick={() => window.location.reload()}>{t('حاول تاني', 'Retry connection')}</button>}
         {notice && <p role="status" className="mb-4 text-sm text-emerald-700">{notice}</p>}
         {['store', 'account', 'verification'].includes(stage) && <form onSubmit={submit} className="space-y-5">
           {stage === 'store' && <>
             {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization' }, t('ده الاسم اللي هيظهر لعملائك. اكتبه بالعربي أو الإنجليزي.', 'This is the name your customers will see. Use Arabic or English.'))}
             <div>
-              <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}<div dir="ltr" className="flex min-w-0 items-center gap-2"><input id="subdomain" name="subdomain" required minLength={3} maxLength={40} pattern="[a-z0-9]([a-z0-9-]*[a-z0-9])?" autoCapitalize="none" autoComplete="off" spellCheck={false} aria-describedby="subdomain-hint subdomain-status" className={inputClass + ' min-w-0'} value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} /><span className="shrink-0 text-xs font-normal">.{config?.baseDomain || 'matgarko.com'}</span></div></label>
+              <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}<div dir="ltr" className="flex min-w-0 items-center gap-2"><input id="subdomain" name="subdomain" required minLength={3} maxLength={40} pattern="[a-z0-9](([a-z0-9]|-)*[a-z0-9])?" autoCapitalize="none" autoComplete="off" spellCheck={false} aria-describedby="subdomain-hint subdomain-status" className={inputClass + ' min-w-0'} value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} /><span className="shrink-0 text-xs font-normal">.{config?.baseDomain || 'matgarko.com'}</span></div></label>
               <p id="subdomain-hint" className={hintClass}>{t('اختار اسم قصير من 3 إلى 40 حرف إنجليزي أو رقم، من غير مسافات. مثال:', 'Choose a short address with 3–40 English letters or digits, without spaces. Example:')} <bdi>my-store.{config?.baseDomain || 'matgarko.com'}</bdi></p>
               <p id="subdomain-status" role="status" className={`mt-2 text-sm ${available ? 'text-emerald-700' : availability.value === form.subdomain && messages[availability.state] ? 'text-red-600' : 'text-gray-600'}`}>{available ? t('الرابط متاح', 'Address available') : availability.value === form.subdomain && messages[availability.state] ? messages[availability.state][english ? 1 : 0] : form.subdomain.length >= 3 ? t('جاري فحص الرابط…', 'Checking address…') : t('مسموح بشرطة بين الحروف أو الأرقام.', 'Hyphens are allowed between letters or digits.')}</p>
             </div>

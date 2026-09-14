@@ -3,7 +3,7 @@ const token = '02c9185d-4208-4a64-804f-f38f0c0de641';
 async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknown' = 'accepted') {
   await page.addInitScript(value => { if (!localStorage.getItem('matgarko-consent')) localStorage.setItem('matgarko-consent', value); }, consent);
   await page.route('https://www.googletagmanager.com/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
-  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false };
+  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false };
   await page.route('**/api/signup/v1/**', async route => {
     const url = new URL(route.request().url());
     const action = url.pathname.split('/').pop();
@@ -21,7 +21,7 @@ async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknow
     }
     if (action === 'registrations') {
       state.submissions.push(route.request().postDataJSON());
-      return route.fulfill({ status: 202, json: { token, state: 'verification', retryAfterSeconds: 60, emailDeliveryFailed: false } });
+      return route.fulfill({ status: 202, json: { token, state: 'verification', retryAfterSeconds: 60, emailDeliveryFailed: state.emailDeliveryFailed } });
     }
     expect(route.request().headers()['x-signup-token']).toBe(token);
     expect(url.search).toBe('');
@@ -46,6 +46,39 @@ async function enterDetails(page: Page) {
 async function events(page: Page) {
   return page.evaluate(() => (window.dataLayer || []).map(item => Array.from(item as unknown[])).filter(item => item[0] === 'event'));
 }
+
+test('store address pattern works with browser Unicode sets and rejects boundary hyphens', async ({ page }) => {
+  await mockSignup(page);
+  const errors: string[] = [];
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+  await page.goto('/en/register');
+  const address = page.locator('#subdomain');
+  const matches = await address.evaluate((element: HTMLInputElement) => {
+    const pattern = new RegExp(`^(?:${element.pattern})$`, 'v');
+    return ['my-store', 'store123', '-store', 'store-'].map(value => pattern.test(value));
+  });
+  expect(matches).toEqual([true, true, false, false]);
+  await address.fill('my-store');
+  expect(await address.evaluate((element: HTMLInputElement) => element.checkValidity())).toBe(true);
+  await address.fill('store-');
+  expect(await address.evaluate((element: HTMLInputElement) => element.checkValidity())).toBe(false);
+  expect(errors.filter(error => /pattern|regular expression/i.test(error))).toEqual([]);
+});
+
+test('email delivery failure shows a focused error and preserves the registration for resending', async ({ page }) => {
+  const state = await mockSignup(page);
+  state.emailDeliveryFailed = true;
+  await page.goto('/en/register');
+  await enterDetails(page);
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
+  await expect(page.getByRole('alert')).toContainText('Email could not be sent');
+  await expect(page.getByRole('alert')).toBeFocused();
+  expect(await page.evaluate(() => sessionStorage.getItem('matgarko-pending-signup'))).toBe(token);
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
+  expect(state.submissions).toHaveLength(1);
+});
 test('verified signup stays on the landing domain, preserves sources, and converts once when ready', async ({ page }) => {
   const state = await mockSignup(page);
   await page.goto('/en?utm_source=google&utm_medium=cpc&utm_campaign=launch&gclid=click-123');
