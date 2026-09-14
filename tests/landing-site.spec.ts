@@ -1,17 +1,24 @@
 import { expect, test } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('matgarko-consent', 'declined'));
+  await page.route('https://www.googletagmanager.com/**', route => route.abort());
+  await page.route('**/api/signup/v1/config', route => route.fulfill({ json: { enabled: true, baseDomain: 'matgarko.com' } }));
+});
+
 test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   test('homepage presents the store creation offer and SEO metadata', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page).toHaveTitle('إنشاء متجر إلكتروني في مصر مجاناً | متجركو');
+    await expect(page).toHaveTitle('إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو');
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       'content',
       /ابدأ متجرك الإلكتروني مجاناً/,
     );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://matgarko.com/og-image.png');
-    await expect(page.getByRole('heading', { level: 1, name: /أنشئ متجر إلكتروني/ })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك/ })).toBeVisible();
+    await expect(page.getByText('تطبيق متجركو للموبايل قريبًا على Google Play. تقدر تبدأ دلوقتي من الموقع.').first()).toBeVisible();
     await expect(page.getByText('منصة إنشاء متجر إلكتروني في مصر')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ متجرك في 3 خطوات' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ مجاناً، وادفع لما تبيع' })).toBeVisible();
@@ -24,7 +31,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');
 
-    await expect(page.getByRole('heading', { level: 1, name: /أنشئ متجر إلكتروني/ })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك/ })).toBeVisible();
     await expect(page.getByRole('link', { name: /أنشئ متجرك مجاناً/ }).first()).toBeVisible();
 
     const hasHorizontalOverflow = await page.evaluate(
@@ -82,10 +89,6 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   });
 
   test('crawl files are available from public assets', async ({ request }) => {
-    const redirects = await request.get('/_redirects');
-    await expect(redirects).toBeOK();
-    await expect(await redirects.text()).toContain('/* /index.html 200');
-
     const robots = await request.get('/robots.txt');
     await expect(robots).toBeOK();
     const robotsText = await robots.text();
@@ -156,10 +159,20 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     expect(routeSchema).toContain('https://matgarko.com/blog/how-to-create-online-store-egypt#article');
   });
 
+  test('missing pages and articles stay noindex without pretending to be the homepage', async ({ page }) => {
+    for (const path of ['/missing-page', '/blog/missing-article', '/en/missing-page', '/en/blog/missing-article']) {
+      await page.goto(path);
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex,follow');
+      await expect(page).toHaveTitle(/الصفحة غير موجودة|Page not found/);
+      await expect(page.locator('h1')).toBeVisible();
+      await expect(page).toHaveURL(new RegExp(`${path}$`));
+    }
+  });
+
   test('english homepage exposes LTR content and hreflang SEO metadata', async ({ page }) => {
     await page.goto('/en');
 
-    await expect(page).toHaveTitle('Ecommerce platform for MENA merchants | Matgarko');
+    await expect(page).toHaveTitle('Run your online store from your phone | Matgarko');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/en');

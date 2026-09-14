@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { positioning } from "@/data/positioning";
 import { Check, KeyRound, Layers, MapPin, Shield, Store, Users, Zap } from "lucide-react";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/register";
 
 const values = [
   {
@@ -47,8 +48,7 @@ export const AboutPage = () => {
               </h1>
 
               <p className="text-base md:text-lg font-medium text-gray-700 max-w-2xl leading-8">
-                متجركو منصة عربية تساعد التجار وأصحاب المشاريع في مصر على إنشاء
-                متجر إلكتروني بسرعة وبتكلفة شهرية مناسبة، بدون شركة برمجة أو انتظار طويل.
+                {positioning.ar.description}
               </p>
             </div>
 

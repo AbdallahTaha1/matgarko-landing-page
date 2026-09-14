@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 
+# Public pages are available to search and AI retrieval crawlers under the rule above.
+# Keep signup crawlable so crawlers can read its noindex metadata.
 # AI retrieval guide: https://matgarko.com/llms.txt
 Sitemap: https://matgarko.com/sitemap.xml

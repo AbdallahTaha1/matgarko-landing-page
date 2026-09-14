@@ -1,8 +1,9 @@
 import { blogArticles, type BlogSection } from "@/data/blog";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Clock, ArrowRight, BookOpen } from "lucide-react";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/register";
 
 function renderSection(section: BlogSection, idx: number) {
   switch (section.type) {
@@ -64,7 +65,7 @@ export function BlogArticlePage() {
   const article = blogArticles.find((a) => a.slug === slug);
 
   if (!article) {
-    return <Navigate to="/blog" replace />;
+    return <NotFoundPage />;
   }
 
   const otherArticles = blogArticles.filter((a) => a.slug !== slug).slice(0, 3);

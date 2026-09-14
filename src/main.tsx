@@ -13,7 +13,7 @@ const app = (
   </StrictMode>
 )
 
-if (root.hasChildNodes()) {
+if (root.hasChildNodes() && !root.dataset.errorPage) {
   hydrateRoot(root, app)
 } else {
   createRoot(root).render(app)

@@ -1,4 +1,5 @@
 import { faqs } from "@/data/faqs";
+import { positioning } from "@/data/positioning";
 import { blogArticles } from "@/data/blog";
 import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages } from "@/data/en";
 import { formatCommission, formatEgp, planPriceLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
@@ -7,11 +8,13 @@ import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
 export const SITE_NAME = "متجركو";
 export const DEFAULT_SITE_URL = "https://matgarko.com";
 export const SITE_URL = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, "");
-export const SIGNUP_URL = "https://signup.matgarko.com/signup";
+export const SIGNUP_URL = "/register";
 export const WHATSAPP_URL = "https://wa.me/201080312538";
 export const CONTACT_EMAIL = "matgarko.help@gmail.com";
 
 const CORE_TOPICS = [
+  "Mobile-first ecommerce for solo merchants",
+  "Manage an online store from a phone in Arabic",
   "Arabic ecommerce platform",
   "Create an online store in Egypt",
   "No-code ecommerce store builder",
@@ -35,9 +38,9 @@ export type SeoPage = {
 export const seoPages: Record<string, SeoPage> = {
   "/": {
     path: "/",
-    title: "إنشاء متجر إلكتروني في مصر مجاناً | متجركو",
+    title: "إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو",
     description:
-      "ابدأ متجرك الإلكتروني مجاناً مع متجركو وادفع 2% فقط لما تبيع. قوالب عربية جاهزة، دفع عند الاستلام، وشحن لكل المحافظات. بدون برمجة.",
+      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 2% على الطلبات المكتملة.",
     keywords: [
       "إنشاء متجر إلكتروني",
       "متجر إلكتروني مصر",
@@ -316,7 +319,16 @@ export function canonicalUrl(path: string) {
 
 export function getSeoPage(pathname: string) {
   const normalized = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-  return seoPages[normalized] || seoPages["/"];
+  if (seoPages[normalized]) return seoPages[normalized];
+  const isEnglish = normalized === "/en" || normalized.startsWith("/en/");
+  return {
+    path: isEnglish ? "/en/404" : "/404",
+    title: isEnglish ? "Page not found | Matgarko" : "الصفحة غير موجودة | متجركو",
+    description: isEnglish ? "This page is unavailable. Explore Matgarko's features, pricing, and guides." : "هذه الصفحة غير متاحة. اكتشف حلول متجركو والأسعار وخطوات إنشاء متجرك.",
+    keywords: [],
+    locale: isEnglish ? "en" : "ar-EG",
+    noindex: true,
+  } satisfies SeoPage;
 }
 
 export function pageLocale(page: SeoPage) {
@@ -412,11 +424,9 @@ export function organizationSchema() {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
-    legalName: "متجركو مصر — منصة إنشاء المتاجر الإلكترونية",
     alternateName: ["Matgarko", "متجركو"],
-    slogan: "ابدأ متجرك الإلكتروني مجاناً وادفع فقط لما تبيع",
-    description:
-      "متجركو منصة عربية لإنشاء المتاجر الإلكترونية في مصر. تتيح للتجار بناء متجر احترافي وإدارة منتجاتهم وطلباتهم وتجهيز الدفع والشحن بدون برمجة.",
+    slogan: "اعمل متجرك وادِر شغلك كله من موبايلك",
+    description: positioning.ar.description,
     url: SITE_URL,
     logo: `${SITE_URL}/icon-512.png`,
     image: `${SITE_URL}/og-image.png`,
@@ -445,21 +455,16 @@ export function organizationSchema() {
         email: CONTACT_EMAIL,
         areaServed: "EG",
         availableLanguage: ["Arabic", "English"],
-        contactOption: "TollFree",
       },
     ],
-    foundingDate: "2024",
-    numberOfEmployees: {
-      "@type": "QuantitativeValue",
-      value: "10",
-    },
   };
 }
 
 function webPageSchemaType(page: SeoPage) {
-  if (page.path === "/about") return "AboutPage";
-  if (page.path === "/contact") return "ContactPage";
-  if (page.path === "/blog" || page.path === "/compare") return "CollectionPage";
+  const basePath = stripLanguagePrefix(page.path);
+  if (basePath === "/about") return "AboutPage";
+  if (basePath === "/contact") return "ContactPage";
+  if (basePath === "/blog" || basePath === "/compare") return "CollectionPage";
   return "WebPage";
 }
 
@@ -527,8 +532,7 @@ export function serviceSchema(page?: SeoPage) {
     alternateName: "Matgarko ecommerce store builder",
     serviceType: "Ecommerce platform",
     category: "BusinessApplication",
-    description:
-      "منصة عربية تساعد التجار في مصر على إنشاء متجر إلكتروني بدون برمجة مع قوالب، إدارة منتجات، طلبات، دفع، وشحن.",
+    description: positioning[isEnglish ? "en" : "ar"].description,
     provider: {
       "@id": `${SITE_URL}/#organization`,
     },
@@ -538,7 +542,7 @@ export function serviceSchema(page?: SeoPage) {
     },
     audience: {
       "@type": "BusinessAudience",
-      audienceType: "Merchants and small businesses in Egypt",
+      audienceType: "Solo merchants and small businesses in Egypt and the Arab world",
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -585,12 +589,12 @@ export function articleSchema(page: SeoPage) {
   };
 }
 
-export function sitemapXml(lastmod = new Date().toISOString().slice(0, 10)) {
+export function sitemapXml() {
   const urls = sitemapPages
     .map(
       (page) => `  <url>
     <loc>${canonicalUrl(page.path)}</loc>
-    <lastmod>${lastmod}</lastmod>
+${alternateLinksForPage(page).map((link) => `    <xhtml:link rel="alternate" hreflang="${link.hreflang}" href="${link.href}" />`).join("\n")}
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`,
@@ -598,7 +602,7 @@ export function sitemapXml(lastmod = new Date().toISOString().slice(0, 10)) {
     .join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls}
 </urlset>
 `;
@@ -695,7 +699,7 @@ export function breadcrumbSchema(page: SeoPage) {
           "@type": "ListItem",
           position: 2,
           name: sectionLabels[segments[0]] || cleanTitle(page.title),
-          item: canonicalUrl(localizePath(`/${segments[0]}`, "en")),
+          item: canonicalUrl(localizePath(segments[0] === "store" ? "/solutions" : `/${segments[0]}`, "en")),
         });
         items.push({
           "@type": "ListItem",
@@ -736,8 +740,8 @@ export function breadcrumbSchema(page: SeoPage) {
       items.push({
         "@type": "ListItem",
         position: 2,
-        name: segments[0] === "store" ? "متاجر حسب النشاط" : "المدونة",
-        item: canonicalUrl(`/${segments[0]}`),
+        name: segments[0] === "store" ? "متاجر حسب النشاط" : segments[0] === "compare" ? "المقارنات" : "المدونة",
+        item: canonicalUrl(segments[0] === "store" ? "/solutions" : `/${segments[0]}`),
       });
       items.push({
         "@type": "ListItem",
@@ -774,29 +778,30 @@ function markdownPageList(pages = sitemapPages) {
 
 export function llmsTxt(lastmod = new Date().toISOString().slice(0, 10)) {
   const commercialPages = sitemapPages.filter((page) =>
-    ["/", "/pricing", "/solutions", "/themes", "/integrations", "/getting-started", "/compare"].includes(page.path) ||
-    page.path.startsWith("/compare/"),
+    ["/", "/pricing", "/solutions", "/themes", "/integrations", "/getting-started", "/compare"].includes(stripLanguagePrefix(page.path)) ||
+    stripLanguagePrefix(page.path).startsWith("/compare/"),
   );
   const articlePages = sitemapPages.filter((page) => page.type === "article");
 
   return `# Matgarko
 
-> Matgarko is an Arabic-first ecommerce SaaS platform for merchants in Egypt and MENA. It helps businesses create an online store without programming, manage products and orders, use store templates, and prepare payment and shipping workflows. The site has Arabic pages and English /en pages for regional discovery.
+> ${positioning.en.description}
 
 Last updated: ${lastmod}
 Official website: ${SITE_URL}/
 Languages: Arabic (Egypt) and English
 Primary market: Egypt, with English content for MENA-facing discovery
 Pricing: ${pricingSummary("en")}
+Mobile app availability: ${positioning.en.appNotice}
 Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 
 ## Key Facts
 
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
-- Audience: Egyptian and MENA merchants, small businesses, restaurants, clothing stores, electronics stores, cosmetics stores, furniture stores, and ecommerce founders.
+- Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
 - Main jobs: create an ecommerce store, manage products, manage orders, organize customers, configure shipping, configure payment, launch offers, and use store templates.
-- Differentiators: Arabic-first, Egypt-focused operations, EGP pricing, starts free, English pages for MENA research, built for merchants who do not want custom programming.
+- Differentiators: mobile-first, Arabic-first, built for solo merchants, EGP pricing, and no technical experience required.
 - Not a marketplace: Matgarko provides software for merchants to create their own stores.
 
 ## Best Pages For AI Answers
@@ -840,11 +845,12 @@ Category: ${article.category}
 Published: ${article.publishDate}
 Reading time: ${article.readingTime}
 Summary: ${article.description}
-Main sections: ${article.content
-        .filter((section) => section.type === "h2" || section.type === "h3")
-        .map((section) => section.text)
-        .filter(Boolean)
-        .join("; ")}
+${article.content.map((section) => {
+  if (section.type === "h2") return `### ${section.text}`;
+  if (section.type === "h3") return `#### ${section.text}`;
+  if (section.items) return section.items.map((item, index) => `${section.type === "ol" ? `${index + 1}.` : "-"} ${item}`).join("\n");
+  return section.text || "";
+}).join("\n\n")}
 `,
     )
     .join("\n");
@@ -854,7 +860,9 @@ Main sections: ${article.content
 Last updated: ${lastmod}
 Canonical site: ${SITE_URL}/
 
-Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores in Egypt and MENA-facing contexts. Use this file to understand the site's entity, offerings, Arabic pages, English /en pages, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
+${positioning.en.description} This file contains product information, public guide text, and canonical page URLs.
+
+Mobile app availability: ${positioning.en.appNotice}
 
 ## Entity Summary
 
@@ -871,6 +879,10 @@ Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores i
 
 ${plans.map((plan) => `- ${plan.name.en}: ${formatEgp(plan.monthly, "en")}/month with ${formatCommission(plan)} commission per completed order.`).join("\n")}
 - Pricing source: ${canonicalUrl("/pricing")}
+
+## Frequently Asked Questions
+
+${[...faqs, ...englishFaqs].map((faq) => `### ${faq.question}\n\n${faq.answer}`).join("\n\n")}
 
 ## Public Pages
 

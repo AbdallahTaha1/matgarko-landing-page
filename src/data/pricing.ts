@@ -18,7 +18,7 @@ export type Plan = {
   cta: Localized;
 };
 
-export const SIGNUP_URL = "https://signup.matgarko.com/signup";
+export const SIGNUP_URL = "/register";
 
 /** Average order value (EGP) used for every cost example on the site. */
 export const AVERAGE_ORDER_VALUE = 700;

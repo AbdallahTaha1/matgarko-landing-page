@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: 'html',
   
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://127.0.0.1:5175',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -22,8 +22,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: true,
+    command: 'npm run dev -- --host 127.0.0.1 --port 5175 --strictPort',
+    url: 'http://127.0.0.1:5175',
+    reuseExistingServer: false,
+    env: { VITE_GA_MEASUREMENT_ID: 'G-TEST00001', VITE_GOOGLE_ADS_ID: 'AW-123456789', VITE_GOOGLE_ADS_SIGNUP_LABEL: 'test-signup' },
   },
 });

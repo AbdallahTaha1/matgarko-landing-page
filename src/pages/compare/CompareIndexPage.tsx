@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Zap, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/register";
 
 const comparisons = [
   {

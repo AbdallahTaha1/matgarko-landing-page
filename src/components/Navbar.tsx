@@ -79,7 +79,7 @@ export function Navbar() {
             <Languages className="h-4 w-4" aria-hidden="true" />
             {languageLabel}
           </Link>
-          <a href={SIGNUP_URL} className="btn btn-primary h-10 px-4 text-sm">
+          <a href={language === "en" ? "/en/register" : SIGNUP_URL} className="btn btn-primary h-10 px-4 text-sm">
             {signupLabel}
           </a>
         </div>
@@ -132,7 +132,7 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <a href={SIGNUP_URL} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">
+            <a href={language === "en" ? "/en/register" : SIGNUP_URL} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">
               {signupLabel}
             </a>
           </div>

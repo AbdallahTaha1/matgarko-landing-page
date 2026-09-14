@@ -136,7 +136,7 @@ export function SEO() {
     upsertAlternateMarkdown("/llms-full.txt", "Full LLM context");
 
     const pageArticleSchema = articleSchema(page);
-    const jsonLd = [
+    const jsonLd = page.noindex ? [] : [
       organizationSchema(),
       websiteSchema(page),
       webPageSchema(page),

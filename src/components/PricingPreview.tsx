@@ -57,7 +57,7 @@ export function PricingPreview({ language }: { language: AppLanguage }) {
               </ul>
 
               <a
-                href={SIGNUP_URL}
+                href={language === "en" ? "/en/register" : SIGNUP_URL}
                 className={cn("btn mt-6 w-full", plan.popular ? "btn-primary" : "btn-secondary")}
               >
                 {plan.cta[language]}

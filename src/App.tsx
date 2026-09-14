@@ -7,10 +7,12 @@ import { PricingPage } from "./pages/PricingPage";
 import { ContactPage } from "./pages/ContactPage";
 import { AboutPage } from "./pages/AboutPage";
 import RegisterPage from "./pages/RegisterPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { TermsPage } from "./pages/TermsPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { IntegrationsPage } from "./pages/IntegrationsPage";
 import { Analytics } from "./components/Analytics";
+import { AnalyticsConsent } from "./components/AnalyticsConsent";
 import { SEO } from "./components/SEO";
 import { ThemesPage } from "./pages/ThemesPage";
 // Industry pages
@@ -63,6 +65,7 @@ export function AppRoutes() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
           <Route path="solutions" element={<SolutionsPage />} />
           <Route path="integrations" element={<IntegrationsPage />} />
           <Route path="themes" element={<ThemesPage />} />
@@ -114,6 +117,7 @@ export function AppRoutes() {
           <Route path="en/compare/woocommerce" element={<EnglishVsWooCommercePage />} />
         </Route>
       </Routes>
+      <AnalyticsConsent />
     </>
   );
 }

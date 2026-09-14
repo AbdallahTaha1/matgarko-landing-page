@@ -46,7 +46,7 @@ export function Hero({ language }: { language: AppLanguage }) {
             <p className="mt-4 max-w-lg text-base leading-7 text-gray-600 sm:mt-5 sm:text-lg sm:leading-8">{t.lead}</p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href={SIGNUP_URL} className="btn btn-primary">
+              <a href={language === "en" ? "/en/register" : SIGNUP_URL} className="btn btn-primary">
                 {t.primaryCta}
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
               </a>
@@ -63,6 +63,7 @@ export function Hero({ language }: { language: AppLanguage }) {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-600">{t.appNotice}</p>
           </div>
 
           <div className="relative mx-auto hidden w-full max-w-[480px] lg:block" aria-hidden="true">

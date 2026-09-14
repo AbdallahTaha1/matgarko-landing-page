@@ -21,7 +21,7 @@ export function CTA({ language }: { language: AppLanguage }) {
           <p className="mt-3 text-base leading-7 text-gray-300 sm:text-lg">{t.lead}</p>
 
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-            <a href={SIGNUP_URL} className="btn btn-accent">
+            <a href={language === "en" ? "/en/register" : SIGNUP_URL} className="btn btn-accent">
               {t.primary}
               <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
             </a>

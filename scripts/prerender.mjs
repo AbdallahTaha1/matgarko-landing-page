@@ -34,7 +34,7 @@ try {
       const output = template
         .replace(/<html\s+lang="[^"]+"\s+dir="[^"]+">/, `<html lang="${lang}" dir="${dir}">`)
         .replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, head)
-        .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+        .replace('<div id="root"></div>', `<div id="root"${route.endsWith("/404") ? ' data-error-page="true"' : ""}>${html}</div>`)
         .replaceAll("/src/assets/logo.png", builtLogoPath);
 
       const routeDir = route === "/" ? distDir : path.join(distDir, route.replace(/^\//, ""));

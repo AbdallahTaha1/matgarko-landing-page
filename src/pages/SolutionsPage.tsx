@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/register";
 
 const solutionBlocks = [
   {

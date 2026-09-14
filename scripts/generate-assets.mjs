@@ -1,5 +1,6 @@
-// Generates the social share image and PWA icons from the brand logo.
+// Generates the social share image from the brand logo and site icons from the app icon.
 // Run: node scripts/generate-assets.mjs
+// Icons only: node scripts/generate-assets.mjs --icons-only
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,25 +10,47 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
 const publicDir = path.join(rootDir, "public");
 const logoPath = path.join(rootDir, "src", "assets", "logo.png");
+const iconPath = path.join(rootDir, "src", "assets", "app-icon.png");
 
 const BRAND_DARK = "#0b1220";
 const BRAND_GREEN = "#059669";
 
 async function generateIcons() {
   const sizes = [
+    { name: "favicon-96.png", size: 96 },
     { name: "icon-192.png", size: 192 },
     { name: "icon-512.png", size: 512 },
     { name: "apple-touch-icon.png", size: 180 },
   ];
 
   for (const { name, size } of sizes) {
-    await sharp(logoPath)
+    await sharp(iconPath)
       .resize(size, size, { fit: "contain", background: { r: 255, g: 255, b: 255, alpha: 1 } })
       .flatten({ background: "#ffffff" })
       .png()
       .toFile(path.join(publicDir, name));
     console.log(`generated ${name}`);
   }
+
+  // ICO directory containing PNG frames for browser tab and desktop sizes.
+  const icoSizes = [16, 32, 48, 64];
+  const frames = await Promise.all(icoSizes.map((size) => sharp(iconPath).resize(size, size).png().toBuffer()));
+  const directory = Buffer.alloc(6 + frames.length * 16);
+  directory.writeUInt16LE(1, 2);
+  directory.writeUInt16LE(frames.length, 4);
+  let offset = directory.length;
+  frames.forEach((frame, index) => {
+    const entry = 6 + index * 16;
+    directory[entry] = icoSizes[index];
+    directory[entry + 1] = icoSizes[index];
+    directory.writeUInt16LE(1, entry + 4);
+    directory.writeUInt16LE(32, entry + 6);
+    directory.writeUInt32LE(frame.length, entry + 8);
+    directory.writeUInt32LE(offset, entry + 12);
+    offset += frame.length;
+  });
+  await fs.writeFile(path.join(publicDir, "favicon.ico"), Buffer.concat([directory, ...frames]));
+  console.log("generated favicon.ico");
 }
 
 async function generateOgImage() {
@@ -99,4 +122,4 @@ async function generateOgImage() {
 
 await fs.mkdir(publicDir, { recursive: true });
 await generateIcons();
-await generateOgImage();
+if (!process.argv.includes("--icons-only")) await generateOgImage();

@@ -26,7 +26,7 @@ export type IndustryPageProps = {
   relatedLinks: { label: string; href: string }[];
 };
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/register";
 
 export function IndustryPage({
   icon,

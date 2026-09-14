@@ -1,3 +1,4 @@
+import RegisterPage from "@/pages/RegisterPage";
 import type { BlogArticle, BlogSection } from "@/data/blog";
 import {
   englishBlogArticles,
@@ -15,7 +16,7 @@ import { Link, useParams } from "react-router-dom";
 import { HomePage } from "@/pages/HomePage";
 import { PricingPage } from "@/pages/PricingPage";
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/en/register";
 const WHATSAPP_URL = "https://wa.me/201080312538";
 const EMAIL_URL = "mailto:matgarko.help@gmail.com";
 
@@ -456,42 +457,4 @@ export function EnglishBlogArticlePage() {
   );
 }
 
-export function EnglishRegisterPage() {
-  return (
-    <section className="page-hero min-h-[calc(100vh-4rem)]">
-      <div className="container mx-auto grid gap-10 px-4 md:grid-cols-[0.9fr_1.1fr] md:px-6">
-        <div>
-          <span className="section-kicker">Create your store</span>
-          <h1 className="mt-6 text-4xl font-black leading-tight text-gray-950 font-heading md:text-6xl">
-            Start your Matgarko store account
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-700">
-            Prepare your store name, contact details, and first product idea. The live signup flow opens on the Matgarko signup domain.
-          </p>
-          <Button asChild size="lg" className="mt-8 bg-gray-950 font-extrabold text-white hover:bg-emerald-700">
-            <a href={SIGNUP_URL}>Open signup</a>
-          </Button>
-        </div>
-        <form className="rounded-lg border border-gray-200 bg-white p-6 shadow-xl shadow-emerald-900/5">
-          <div className="grid gap-5">
-            <label className="grid gap-2 text-sm font-bold text-gray-700">
-              Store name
-              <input name="storeName" className="rounded-md border border-gray-300 px-4 py-3 text-base" placeholder="Example: Cairo Home Decor" />
-            </label>
-            <label className="grid gap-2 text-sm font-bold text-gray-700">
-              Store link
-              <input name="subdomain" className="rounded-md border border-gray-300 px-4 py-3 text-base" placeholder="yourstore" />
-            </label>
-            <label className="grid gap-2 text-sm font-bold text-gray-700">
-              Email
-              <input name="email" type="email" className="rounded-md border border-gray-300 px-4 py-3 text-base" placeholder="you@example.com" />
-            </label>
-            <p className="rounded-md bg-emerald-50 p-4 text-sm font-semibold leading-7 text-emerald-950">
-              This page is intentionally noindex. Use the signup button to continue on the official account creation flow.
-            </p>
-          </div>
-        </form>
-      </div>
-    </section>
-  );
-}
+export function EnglishRegisterPage() { return <RegisterPage />; }

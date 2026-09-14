@@ -1,4 +1,15 @@
+import { positioning } from "./positioning";
+
 export const faqs = [
+  {
+    question: "ما هي متجركو ولمن تناسب؟",
+    answer:
+      `${positioning.ar.description} التاجر يجهز منتجاته وطرق الدفع والشحن ويسوّق لمتجره لجذب العملاء.`,
+  },
+  {
+    question: "هل تطبيق متجركو متاح للتحميل؟",
+    answer: positioning.ar.appNotice,
+  },
   {
     question: "هل أقدر أعمل المتجر بنفسي بدون برمجة؟",
     answer:

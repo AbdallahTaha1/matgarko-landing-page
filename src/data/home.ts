@@ -1,4 +1,5 @@
 import type { AppLanguage } from "@/lib/i18n";
+import { positioning } from "./positioning";
 
 export type HomeContent = {
   hero: {
@@ -6,6 +7,7 @@ export type HomeContent = {
     titleLine1: string;
     titleLine2: string;
     lead: string;
+    appNotice: string;
     primaryCta: string;
     secondaryCta: string;
     trust: string[];
@@ -66,9 +68,10 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
   ar: {
     hero: {
       kicker: "منصة إنشاء متجر إلكتروني في مصر",
-      titleLine1: "أنشئ متجر إلكتروني",
-      titleLine2: "وابدأ البيع في دقائق",
-      lead: "متجرك جاهز بالجنيه المصري: منتجات وطلبات ودفع عند الاستلام وشحن لكل المحافظات، من لوحة واحدة وبدون برمجة.",
+      titleLine1: "اعمل متجرك",
+      titleLine2: "وادِر شغلك كله من موبايلك",
+      lead: positioning.ar.description,
+      appNotice: positioning.ar.appNotice,
       primaryCta: "أنشئ متجرك مجاناً",
       secondaryCta: "شوف الأسعار",
       trust: ["بدون بطاقة ائتمان", "ابدأ بـ 0 ج.م", "2% فقط لما تبيع"],
@@ -94,7 +97,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     features: {
       kicker: "كل اللي محتاجه",
       title: "أدوات بسيطة تخلي متجرك يبيع",
-      lead: "من إضافة المنتج لحد تسليم الطلب، كل حاجة في لوحة واحدة بالعربي.",
+      lead: "بتدير شغلك لوحدك؟ أضف منتجاتك وتابع طلباتك من موبايلك، في لوحة واحدة بالعربي.",
       items: [
         { title: "المنتجات والمخزون", text: "ارفع الصور والأسعار ونظّم الأقسام في دقائق." },
         { title: "الطلبات", text: "كل طلب جديد بحالته وبيانات العميل في مكان واحد." },
@@ -146,8 +149,9 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     hero: {
       kicker: "Online store builder for Egypt",
       titleLine1: "Create an online store",
-      titleLine2: "and start selling in minutes",
-      lead: "Products, orders, cash on delivery, and shipping to every governorate. Priced in EGP, no coding needed.",
+      titleLine2: "and run it from your phone",
+      lead: positioning.en.description,
+      appNotice: positioning.en.appNotice,
       primaryCta: "Create your store free",
       secondaryCta: "See pricing",
       trust: ["No credit card", "Start at 0 EGP", "2% only when you sell"],
@@ -173,7 +177,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     features: {
       kicker: "Everything you need",
       title: "Simple tools that make your store sell",
-      lead: "From adding a product to delivering the order, everything lives in one dashboard.",
+      lead: "Running your business on your own? Add products and manage orders from your phone, in one Arabic dashboard.",
       items: [
         { title: "Products and stock", text: "Upload photos, set prices, and organize categories in minutes." },
         { title: "Orders", text: "Every new order with its status and customer details in one place." },

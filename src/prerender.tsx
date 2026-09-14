@@ -39,6 +39,7 @@ const escapeHtml = (value: string) =>
 const escapeJson = (value: unknown) => JSON.stringify(value).replace(/</g, "\\u003c");
 
 function schemaForPage(page: SeoPage) {
+  if (page.noindex) return [];
   const pageArticleSchema = articleSchema(page);
 
   return [
@@ -100,7 +101,7 @@ function renderHead(page: SeoPage) {
     <!-- seo:end -->`;
 }
 
-export const prerenderRoutes = orderedSeoPages.map((page) => page.path);
+export const prerenderRoutes = [...orderedSeoPages.map((page) => page.path), "/404", "/en/404"];
 export { llmsFullTxt, llmsTxt, sitemapXml };
 
 export function render(path: string) {

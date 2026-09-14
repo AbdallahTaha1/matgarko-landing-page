@@ -22,7 +22,7 @@ export type CompetitorPageProps = {
   targetKeywords?: string[];
 };
 
-const SIGNUP_URL = "https://signup.matgarko.com/signup";
+const SIGNUP_URL = "/register";
 
 function CellValue({ value }: { value: string | boolean }) {
   if (value === true)

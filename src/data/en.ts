@@ -1,4 +1,5 @@
 import type { BlogArticle } from "./blog";
+import { positioning } from "./positioning";
 
 export type EnglishPageSection = {
   title: string;
@@ -48,6 +49,15 @@ export type EnglishSeoEntry = {
 };
 
 export const englishFaqs = [
+  {
+    question: "What is Matgarko and who is it for?",
+    answer:
+      `${positioning.en.description} Merchants prepare their products, payment and shipping options, and market their stores to attract customers.`,
+  },
+  {
+    question: "Can I download the Matgarko mobile app?",
+    answer: positioning.en.appNotice,
+  },
   {
     question: "Can I build the store myself?",
     answer:
@@ -292,6 +302,10 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     lead:
       "This English page explains the privacy approach in plain language. Matgarko uses account, store, and operational data to provide and improve the ecommerce service.",
     sections: [
+      {
+        title: "Visit sources and analytics",
+        text: "With your permission, Google Analytics and Google Ads measure visits and completed signups. We keep the first recorded source and latest attributed campaign on your device for up to 90 days and may save them with your store registration. Signup events do not contain your password, verification code, or contact details. You can decline measurement or change your cookie preferences. The optional discovery-source answer is stored separately from automatic attribution.",
+      },
       {
         title: "Data we process",
         text:
@@ -724,9 +738,9 @@ export const englishBlogArticles: BlogArticle[] = [
 
 export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en": {
-    title: "Ecommerce platform for MENA merchants | Matgarko",
+    title: "Run your online store from your phone | Matgarko",
     description:
-      "Create an online store for Egypt and MENA with Matgarko. Launch without coding, manage products and orders, prepare payment and shipping workflows, and start free in EGP.",
+      "Create and run your online store from your phone. An Arabic-first ecommerce platform for solo merchants in Egypt and the Arab world. Start free, without coding.",
     keywords: ["ecommerce platform MENA", "online store builder Middle East", "create online store Egypt", "Arabic ecommerce platform", "Matgarko"],
   },
   "/en/solutions": {

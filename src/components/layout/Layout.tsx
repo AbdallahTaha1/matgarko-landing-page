@@ -3,11 +3,12 @@ import { Footer } from '../Footer';
 import { WhatsAppButton } from '../WhatsAppButton';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { isEnglishPath } from '@/lib/i18n';
+import { isEnglishPath, stripLanguagePrefix } from '@/lib/i18n';
 
 const Layout = () => {
   const location = useLocation();
   const isEnglish = isEnglishPath(location.pathname);
+  const isRegistration = stripLanguagePrefix(location.pathname).replace(/\/$/, '') === '/register';
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -25,7 +26,7 @@ const Layout = () => {
       <main id="main-content" className="pt-16">
         <Outlet />
       </main>
-      <WhatsAppButton />
+      {!isRegistration && <WhatsAppButton />}
       <Footer />
     </div>
   );

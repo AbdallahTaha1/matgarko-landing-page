@@ -131,7 +131,7 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
                   ))}
                 </ul>
 
-                <a href={SIGNUP_URL} className={cn("btn mt-6 w-full", plan.popular ? "btn-primary" : "btn-secondary")}>
+                <a href={language === "en" ? "/en/register" : SIGNUP_URL} className={cn("btn mt-6 w-full", plan.popular ? "btn-primary" : "btn-secondary")}>
                   {plan.cta[language]}
                 </a>
               </Reveal>
@@ -240,7 +240,7 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
               <p className="mt-2 text-sm leading-7 text-gray-600 sm:text-base">{t.ctaLead}</p>
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <a href={SIGNUP_URL} className="btn btn-primary">
+              <a href={language === "en" ? "/en/register" : SIGNUP_URL} className="btn btn-primary">
                 {t.ctaPrimary}
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
               </a>
