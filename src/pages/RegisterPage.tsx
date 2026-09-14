@@ -7,6 +7,7 @@ import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
+import { useSignupContactCheck } from '@/lib/useSignupContactCheck';
 
 const tokenKey = 'matgarko-pending-signup';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -52,6 +53,8 @@ export default function RegisterPage() {
   const [availability, setAvailability] = useState({ value: '', state: 'idle' });
   const submitting = useRef(false);
   const available = availability.value === form.subdomain && availability.state === 'available';
+  const emailCheck = useSignupContactCheck('email', form.email, stage === 'account' && !!config?.enabled);
+  const phoneCheck = useSignupContactCheck('phone', form.phone, stage === 'account' && !!config?.enabled);
 
   function applyStatus(next: SignupStatus) {
     if (!['verification', 'provisioning', 'ready', 'unavailable'].includes(next.state)) throw new ApiError('InvalidResponse');
@@ -134,6 +137,7 @@ export default function RegisterPage() {
       trackSignupStep('signup_start'); setStage('account'); return;
     }
     if (stage === 'account' && form.password !== form.confirmPassword) { setError('password_mismatch'); return; }
+    if (stage === 'account' && (!emailCheck.available || !phoneCheck.available)) return;
     submitting.current = true; setBusy(true);
     try {
       if (stage === 'account') {
@@ -172,7 +176,21 @@ export default function RegisterPage() {
     } catch { return undefined; }
   }
   const errorMessage = error === 'password_mismatch' ? t('كلمتا المرور غير متطابقتين.', 'Passwords do not match.') : (messages[error] || messages.InvalidRequest)[english ? 1 : 0];
-  const field = (name: 'storeName' | 'email' | 'phone' | 'password' | 'confirmPassword', label: string, type = 'text', extra = {}) => <label className="block text-sm font-bold text-gray-700" htmlFor={name}>{label}<input id={name} name={name} type={type} value={form[name]} onChange={event => setForm(value => ({ ...value, [name]: event.target.value }))} required className={inputClass} {...extra} /></label>;
+  const hintClass = 'mt-2 text-xs leading-5 text-gray-500';
+  const field = (name: 'storeName' | 'email' | 'phone' | 'password' | 'confirmPassword', label: string, type = 'text', extra = {}, hint = '') => {
+    const check = name === 'email' ? emailCheck : name === 'phone' ? phoneCheck : undefined;
+    const hasError = check && !['idle', 'checking', 'available'].includes(check.state);
+    const canRetry = hasError && !['EmailInvalid', 'PhoneInvalid', 'EmailTaken', 'PhoneTaken', 'Disabled'].includes(check.state);
+    const description = [hint ? `${name}-hint` : '', check ? `${name}-status` : ''].filter(Boolean).join(' ');
+    return <div>
+      <label className="block text-sm font-bold text-gray-700" htmlFor={name}>{label}<input id={name} name={name} type={type} value={form[name]} onChange={event => setForm(value => ({ ...value, [name]: event.target.value }))} required aria-describedby={description || undefined} aria-invalid={hasError && !canRetry || undefined} className={inputClass} {...extra} /></label>
+      {hint && <p id={`${name}-hint`} className={hintClass}>{hint}</p>}
+      {check && <p id={`${name}-status`} role="status" className={`mt-2 text-sm ${hasError ? 'text-red-600' : check.available ? 'text-emerald-700' : 'text-gray-500'}`}>
+        {check.state === 'checking' ? t('جاري الفحص…', 'Checking…') : check.available ? name === 'email' ? t('البريد متاح للتسجيل', 'Email available for signup') : t('رقم الموبايل متاح للتسجيل', 'Mobile number available for signup') : hasError ? (messages[check.state] || messages.InvalidRequest)[english ? 1 : 0] : ''}
+      </p>}
+      {canRetry && <button type="button" className="mt-2 text-sm underline" onClick={check.retry}>{t('إعادة الفحص', 'Check again')}</button>}
+    </div>;
+  };
 
   return <section className="hero-band min-h-[calc(100vh-4rem)] px-4 py-10 sm:py-14" dir={english ? 'ltr' : 'rtl'}>
     <div className="mx-auto max-w-lg">
@@ -187,22 +205,25 @@ export default function RegisterPage() {
         {notice && <p role="status" className="mb-4 text-sm text-emerald-800">{notice}</p>}
         {['store', 'account', 'verification'].includes(stage) && <form onSubmit={submit} className="space-y-5">
           {stage === 'store' && <>
-            {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization' })}
-            <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}<div dir="ltr" className="flex min-w-0 items-center gap-2"><input id="subdomain" name="subdomain" required minLength={3} maxLength={40} pattern="[a-z0-9]([a-z0-9-]*[a-z0-9])?" autoCapitalize="none" autoComplete="off" spellCheck={false} className={inputClass + ' min-w-0'} value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} /><span className="shrink-0 text-xs font-normal">.{config?.baseDomain || 'matgarko.com'}</span></div></label>
-            <p role="status" className="text-sm text-gray-600">{available ? t('الرابط متاح', 'Address available') : availability.value === form.subdomain && messages[availability.state] ? messages[availability.state][english ? 1 : 0] : form.subdomain.length >= 3 ? t('جاري فحص الرابط…', 'Checking address…') : t('استخدم حروف إنجليزية وأرقام وشرطات.', 'Use English letters, digits, and hyphens.')}</p>
+            {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization' }, t('ده الاسم اللي هيظهر لعملائك. اكتبه بالعربي أو الإنجليزي.', 'This is the name your customers will see. Use Arabic or English.'))}
+            <div>
+              <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}<div dir="ltr" className="flex min-w-0 items-center gap-2"><input id="subdomain" name="subdomain" required minLength={3} maxLength={40} pattern="[a-z0-9]([a-z0-9-]*[a-z0-9])?" autoCapitalize="none" autoComplete="off" spellCheck={false} aria-describedby="subdomain-hint subdomain-status" className={inputClass + ' min-w-0'} value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} /><span className="shrink-0 text-xs font-normal">.{config?.baseDomain || 'matgarko.com'}</span></div></label>
+              <p id="subdomain-hint" className={hintClass}>{t('اختار اسم قصير من 3 إلى 40 حرف إنجليزي أو رقم، من غير مسافات. مثال:', 'Choose a short address with 3–40 English letters or digits, without spaces. Example:')} <bdi>my-store.{config?.baseDomain || 'matgarko.com'}</bdi></p>
+              <p id="subdomain-status" role="status" className={`mt-2 text-sm ${availability.value === form.subdomain && availability.state === 'SubdomainTaken' ? 'text-red-600' : 'text-gray-600'}`}>{available ? t('الرابط متاح', 'Address available') : availability.value === form.subdomain && messages[availability.state] ? messages[availability.state][english ? 1 : 0] : form.subdomain.length >= 3 ? t('جاري فحص الرابط…', 'Checking address…') : t('مسموح بشرطة بين الحروف أو الأرقام.', 'Hyphens are allowed between letters or digits.')}</p>
+            </div>
             <button type="submit" disabled={!available || !config?.enabled} className="btn btn-primary w-full disabled:opacity-50">{t('التالي', 'Continue')}</button>
           </>}
           {stage === 'account' && <>
-            {field('email', t('البريد الإلكتروني', 'Email'), 'email', { maxLength: 320, autoComplete: 'email', dir: 'ltr' })}
-            {field('phone', t('رقم الموبايل المصري', 'Egyptian mobile number'), 'tel', { pattern: '01[0125][0-9]{8}', maxLength: 11, inputMode: 'tel', autoComplete: 'tel-national', placeholder: '01012345678', dir: 'ltr' })}
-            {field('password', t('كلمة المرور', 'Password'), 'password', { minLength: 8, maxLength: 100, autoComplete: 'new-password' })}
+            {field('email', t('البريد الإلكتروني', 'Email'), 'email', { maxLength: 320, autoComplete: 'email', dir: 'ltr' }, t('استخدم بريد تقدر تفتحه دلوقتي؛ هنبعت عليه رمز تأكيد حسابك.', 'Use an email you can access now. We will send your verification code there.'))}
+            {field('phone', t('رقم الموبايل', 'Mobile number'), 'tel', { pattern: '01[0125][0-9]{8}', maxLength: 11, inputMode: 'tel', autoComplete: 'tel-national', placeholder: '01012345678', dir: 'ltr' }, t('الصيغة المقبولة حاليًا 11 رقم يبدأ بـ01، من غير كود دولة أو مسافات.', 'Currently accepts 11 digits starting with 01, without a country code or spaces.'))}
+            {field('password', t('كلمة المرور', 'Password'), 'password', { minLength: 8, maxLength: 100, autoComplete: 'new-password' }, t('8 أحرف على الأقل. يفضّل تخلط حروف وأرقام ورموز وتستخدم كلمة مرور جديدة.', 'At least 8 characters. Use a unique password with a mix of letters, numbers, and symbols.'))}
             {field('confirmPassword', t('تأكيد كلمة المرور', 'Confirm password'), 'password', { minLength: 8, maxLength: 100, autoComplete: 'new-password' })}
-            <label htmlFor="discoverySource" className="block text-sm font-bold text-gray-700">{t('عرفتنا منين؟ — اختياري', 'How did you hear about us? — optional')}<select id="discoverySource" name="discoverySource" className={inputClass} value={form.discoverySource || ''} onChange={event => setForm(value => ({ ...value, discoverySource: event.target.value || undefined }))}>
+            <div><label htmlFor="discoverySource" className="block text-sm font-bold text-gray-700">{t('عرفتنا منين؟ — اختياري', 'How did you hear about us? — optional')}<select id="discoverySource" name="discoverySource" aria-describedby="discoverySource-hint" className={inputClass} value={form.discoverySource || ''} onChange={event => setForm(value => ({ ...value, discoverySource: event.target.value || undefined }))}>
               <option value="">{t('اختار لو تحب', 'Select if you wish')}</option>
               {[['google', 'جوجل', 'Google'], ['facebook_instagram', 'فيسبوك أو إنستجرام', 'Facebook or Instagram'], ['tiktok', 'تيك توك', 'TikTok'], ['youtube', 'يوتيوب', 'YouTube'], ['friend', 'ترشيح صديق', 'A friend'], ['whatsapp', 'واتساب', 'WhatsApp'], ['ai', 'ChatGPT أو أداة ذكاء اصطناعي', 'ChatGPT or another AI tool'], ['other', 'مصدر تاني', 'Another source']].map(([value, ar, en]) => <option key={value} value={value}>{t(ar, en)}</option>)}
-            </select></label>
+            </select></label><p id="discoverySource-hint" className={hintClass}>{t('إجابتك بتساعدنا نوصل لتجار أكتر. تقدر تكمل من غير ما تختار.', 'Your answer helps us reach more merchants. You can leave this blank.')}</p></div>
             <label className="flex items-start gap-3 text-sm leading-6"><input name="acceptTerms" type="checkbox" required checked={form.acceptTerms} onChange={event => setForm(value => ({ ...value, acceptTerms: event.target.checked }))} className="mt-1 h-5 w-5 shrink-0" /><span>{t('أوافق على', 'I agree to the')} <Link target="_blank" className="underline" to={english ? '/en/terms' : '/terms'}>{t('الشروط والأحكام', 'terms')}</Link> {t('و', 'and')} <Link target="_blank" className="underline" to={english ? '/en/privacy' : '/privacy'}>{t('سياسة الخصوصية', 'privacy policy')}</Link>.</span></label>
-            <button type="submit" disabled={busy || !form.acceptTerms || cooldown > 0} className="btn btn-primary w-full disabled:opacity-50">{busy ? <Loader2 className="h-5 w-5 animate-spin" /> : t('إرسال رمز التحقق', 'Send verification code')}{cooldown > 0 && ` (${cooldown})`}</button>
+            <button type="submit" disabled={busy || !form.acceptTerms || cooldown > 0 || !emailCheck.available || !phoneCheck.available} className="btn btn-primary w-full disabled:opacity-50">{busy ? <Loader2 className="h-5 w-5 animate-spin" /> : t('إرسال رمز التحقق', 'Send verification code')}{cooldown > 0 && ` (${cooldown})`}</button>
             <button type="button" disabled={busy} className="btn btn-secondary w-full" onClick={() => { setStage('store'); setError(''); }}>{t('السابق', 'Back')}</button>
           </>}
           {stage === 'verification' && <>

@@ -3,7 +3,7 @@ const token = '02c9185d-4208-4a64-804f-f38f0c0de641';
 async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknown' = 'accepted') {
   await page.addInitScript(value => { if (!localStorage.getItem('matgarko-consent')) localStorage.setItem('matgarko-consent', value); }, consent);
   await page.route('https://www.googletagmanager.com/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
-  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false };
+  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false };
   await page.route('**/api/signup/v1/**', async route => {
     const url = new URL(route.request().url());
     const action = url.pathname.split('/').pop();
@@ -11,6 +11,13 @@ async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknow
     if (action === 'check-subdomain') {
       if (state.networkFailure) return route.abort();
       return route.fulfill({ json: { available: true, code: 'Ok' } });
+    }
+    if (action === 'check-email' || action === 'check-phone') {
+      expect(route.request().method()).toBe('POST');
+      expect(url.search).toBe('');
+      if (state.contactNetworkFailure) return route.abort();
+      const taken = action === 'check-email' ? state.emailTaken : state.phoneTaken;
+      return route.fulfill({ json: { available: !taken, code: taken ? action === 'check-email' ? 'EmailTaken' : 'PhoneTaken' : 'Ok' } });
     }
     if (action === 'registrations') {
       state.submissions.push(route.request().postDataJSON());
@@ -31,7 +38,7 @@ async function enterDetails(page: Page) {
   await page.getByLabel(/^Store address/).fill('testshop');
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
   await page.getByLabel('Email', { exact: true }).fill('owner@example.com');
-  await page.getByLabel('Egyptian mobile number').fill('01012345678');
+  await page.getByLabel('Mobile number', { exact: true }).fill('01012345678');
   await page.getByLabel('Password', { exact: true }).fill('A-safe-password-123');
   await page.getByLabel('Confirm password', { exact: true }).fill('A-safe-password-123');
   await page.locator('input[name="acceptTerms"]').check();
@@ -106,6 +113,45 @@ test('closed registration cannot be submitted', async ({ page }) => {
   await page.goto('/en/register');
   await expect(page.getByRole('alert')).toContainText('temporarily closed');
   await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
+});
+
+test('live contact checks reject taken and invalid values and recheck edits before submission', async ({ page }) => {
+  const state = await mockSignup(page, 'declined');
+  state.emailTaken = true; state.phoneTaken = true;
+  await page.goto('/en/register');
+  await enterDetails(page);
+  const submit = page.getByRole('button', { name: 'Send verification code', exact: true });
+  await expect(page.locator('#email-status')).toContainText('already registered');
+  await expect(page.locator('#phone-status')).toContainText('already registered');
+  await expect(submit).toBeDisabled();
+  state.emailTaken = false; state.phoneTaken = false;
+  await page.getByLabel('Email', { exact: true }).fill('new@example.com');
+  await page.getByLabel('Mobile number', { exact: true }).fill('01112345678');
+  await expect(page.locator('#email-status')).toContainText('available for signup');
+  await expect(page.locator('#phone-status')).toContainText('available for signup');
+  await expect(submit).toBeEnabled();
+  await page.getByLabel('Email', { exact: true }).fill('invalid');
+  await expect(submit).toBeDisabled();
+  await expect(page.locator('#email-status')).toContainText('Check your email');
+  await page.getByLabel('Mobile number', { exact: true }).fill('123');
+  await expect(page.locator('#phone-status')).toContainText('11-digit');
+  expect(state.submissions).toHaveLength(0);
+});
+
+test('failed contact checks can be retried without changing the entered details', async ({ page }) => {
+  const state = await mockSignup(page, 'declined'); state.contactNetworkFailure = true;
+  await page.goto('/en/register');
+  await enterDetails(page);
+  await expect(page.locator('#email-status')).toContainText('Unable to connect');
+  await expect(page.locator('#phone-status')).toContainText('Unable to connect');
+  await expect(page.getByRole('button', { name: 'Send verification code', exact: true })).toBeDisabled();
+  state.contactNetworkFailure = false;
+  await page.getByRole('button', { name: 'Check again', exact: true }).first().click();
+  await expect(page.locator('#email-status')).toContainText('available for signup');
+  await page.getByRole('button', { name: 'Check again', exact: true }).click();
+  await expect(page.locator('#phone-status')).toContainText('available for signup');
+  await expect(page.getByRole('button', { name: 'Send verification code', exact: true })).toBeEnabled();
+  expect(state.submissions).toHaveLength(0);
 });
 test('page views are not duplicated and secret query parameters are omitted', async ({ page }) => {
   await mockSignup(page);

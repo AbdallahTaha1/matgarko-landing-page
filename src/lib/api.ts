@@ -30,6 +30,8 @@ async function request<T>(path: string, options: { data?: unknown; token?: strin
 export const api = {
   config: () => request<{ enabled: boolean; baseDomain: string }>('/config'),
   checkSubdomain: (value: string, signal?: AbortSignal) => request<{ available: boolean; code: string; message?: string }>(`/check-subdomain?value=${encodeURIComponent(value)}`, { signal }),
+  checkEmail: (email: string, signal?: AbortSignal) => request<{ available: boolean; code: string }>('/check-email', { data: { email }, signal }),
+  checkPhone: (phone: string, signal?: AbortSignal) => request<{ available: boolean; code: string }>('/check-phone', { data: { phone }, signal }),
   signup: (data: SignupModel) => request<{ token: string; state: 'verification'; emailDeliveryFailed: boolean; retryAfterSeconds: number }>('/registrations', { data }),
   verify: (token: string, code: string) => request<SignupStatus>('/verify', { token, data: { code } }),
   resend: (token: string) => request<{ retryAfterSeconds: number }>('/resend', { token, data: {} }),
