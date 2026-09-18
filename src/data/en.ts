@@ -304,7 +304,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     sections: [
       {
         title: "Visit sources and analytics",
-        text: "With your permission, Google Analytics and Google Ads measure visits and completed signups. We keep the first recorded source and latest attributed campaign on your device for up to 90 days and may save them with your store registration. Signup events do not contain your password, verification code, or contact details. You can decline measurement or change your cookie preferences. The optional discovery-source answer is stored separately from automatic attribution.",
+        text: "With your permission, Google Analytics, Google Ads, and Meta Pixel measure visits and completed signups. These services may receive the page URL, referral source, cookie identifiers, and browser and connection information. Meta receives a completed-registration event after email verification and store provisioning, with a non-secret identifier to prevent duplicates. We keep the first recorded source and latest attributed campaign on your device for up to 90 days and may save them with your store registration. Signup events do not contain your password, verification code, or contact details, and we do not enable advanced matching of form data. You can decline measurement or change your cookie preferences. The optional discovery-source answer is stored separately from automatic attribution.",
       },
       {
         title: "Data we process",

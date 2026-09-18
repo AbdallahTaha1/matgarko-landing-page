@@ -22,9 +22,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev -- --host 127.0.0.1 --port 5175 --strictPort',
+    command: 'node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5175 --strictPort',
     url: 'http://127.0.0.1:5175',
     reuseExistingServer: false,
-    env: { VITE_GA_MEASUREMENT_ID: 'G-TEST00001', VITE_GOOGLE_ADS_ID: 'AW-123456789', VITE_GOOGLE_ADS_SIGNUP_LABEL: 'test-signup' },
+    env: { VITE_GA_MEASUREMENT_ID: 'G-TEST00001', VITE_GOOGLE_ADS_ID: 'AW-123456789', VITE_GOOGLE_ADS_SIGNUP_LABEL: 'test-signup', VITE_META_PIXEL_ID: '123456789012345' },
   },
 });

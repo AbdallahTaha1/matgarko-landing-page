@@ -31,7 +31,18 @@ The mobile field offers 22 Arab countries with calling codes. Local numbers, pas
 4. Imported Analytics conversion data can take up to 24 hours to appear in Google Ads. [Google's import instructions](https://support.google.com/google-ads/answer/2375435?hl=en).
 5. Optionally register `first_source` and `last_source` as event-scoped custom dimensions for signup analysis. Standard acquisition reports already provide session source, medium, and campaign. Add explicit UTM values to links you control, such as social posts and WhatsApp campaigns. Google Ads auto-tagging supplies Google click IDs.
 
-No account-side configuration or production deployment is performed by these code changes. Local browser tests block Google's script and use test tag IDs, so they do not generate real advertising conversions.
+## Meta Pixel
+
+- Production configuration uses Pixel ID `1988477075326444`, obtained from the Meta setup flow for `https://matgarko.com/` in the campaign's advertising account. The public ID is set as `VITE_META_PIXEL_ID`; no access token belongs in frontend configuration.
+- The script loads only after analytics/advertising consent. Route changes send one explicit `PageView`. Withdrawal revokes Meta consent and stops our events; an in-flight script cannot send our events after withdrawal.
+- `CompleteRegistration` is sent only when the backend reports a verified, provisioned store as `ready`, never for opening the form, submitting details, or requesting an email. Its non-secret conversion ID is used as `eventID` and for browser-local deduplication scoped to this Pixel ID. A reload does not send it again in the same browser/storage. This is browser measurement, not a server registration ledger.
+- Meta works without Google Analytics or Google Ads. Automatic event configuration is disabled, and we do not pass contact details or enable advanced matching. Do not enable automatic form tracking or install a second copy through another tool.
+- Meta itself reads page URLs, referrers, browser/connection information and cookie identifiers. To avoid exposing query-string secrets, this integration suppresses Meta when the current URL or document referrer contains a fragment or query keys outside the marketing allowlist (UTMs, Google click IDs and `fbclid`). Campaign parameters must never contain personal data. Such visits, declined consent, ad blockers, cleared storage, other browsers and leaving before completion can affect measurement.
+- Events wait until the Pixel script loads. Script failures do not mark a signup as sent; initialization can retry on later navigation. The local tests intercept Meta and Google scripts and cannot create advertising conversions.
+
+After deployment, open Events Manager for this exact Pixel ID, use **Test Events**, visit the site, and consent. Verify `PageView` and then `CompleteRegistration` from an authorized real registration. Declining consent must send neither event. Confirm the live deployment contains the expected Pixel ID; build-environment variables can override `.env.production`.
+
+Adding the Pixel does not change a traffic campaign into a registration campaign. Once a real completed registration is verified, use that event when configuring a website-conversion campaign. Budget, audience, and objective changes are separate from installing measurement.
 
 ## Local verification
 

@@ -3,6 +3,8 @@ const token = '02c9185d-4208-4a64-804f-f38f0c0de641';
 async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknown' = 'accepted') {
   await page.addInitScript(value => { if (!localStorage.getItem('matgarko-consent')) localStorage.setItem('matgarko-consent', value); }, consent);
   await page.route('https://www.googletagmanager.com/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
+  await page.route('https://connect.facebook.net/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
+  await page.route('https://www.facebook.com/tr**', route => route.abort());
   const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false };
   await page.route('**/api/signup/v1/**', async route => {
     const url = new URL(route.request().url());
@@ -45,6 +47,9 @@ async function enterDetails(page: Page) {
 }
 async function events(page: Page) {
   return page.evaluate(() => (window.dataLayer || []).map(item => Array.from(item as unknown[])).filter(item => item[0] === 'event'));
+}
+async function metaRegistrations(page: Page) {
+  return page.evaluate(() => (window.fbq?.queue || []).filter(event => event[0] === 'trackSingle' && event[2] === 'CompleteRegistration'));
 }
 
 test('store address pattern works with browser Unicode sets and rejects boundary hyphens', async ({ page }) => {
@@ -99,6 +104,7 @@ test('verified signup stays on the landing domain, preserves sources, and conver
   await page.getByRole('button', { name: 'Verify and create store' }).click();
   await expect(page.getByRole('heading', { name: 'Preparing your store' })).toBeVisible();
   expect((await events(page)).filter(event => event[1] === 'sign_up')).toHaveLength(0);
+  expect(await metaRegistrations(page)).toHaveLength(0);
   state.ready = true;
   await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible({ timeout: 10000 });
   await expect(page.getByRole('link', { name: 'Open your dashboard' })).toHaveAttribute('href', 'https://testshop.matgarko.com/admin');
@@ -106,10 +112,12 @@ test('verified signup stays on the landing domain, preserves sources, and conver
   const measured = await events(page);
   expect(measured.filter(event => event[1] === 'sign_up')).toHaveLength(1);
   expect(measured.filter(event => event[1] === 'conversion')).toHaveLength(1);
+  await expect.poll(() => metaRegistrations(page)).toEqual([['trackSingle', '123456789012345', 'CompleteRegistration', {}, { eventID: 'registration-101' }]]);
   expect(JSON.stringify(measured)).not.toMatch(/owner@example|A-safe-password|02c9185d|01012345678|123456"/);
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible();
   expect((await events(page)).filter(event => ['sign_up', 'conversion'].includes(String(event[1])))).toHaveLength(0);
+  expect(await metaRegistrations(page)).toHaveLength(0);
   expect(state.submissions).toHaveLength(1);
 });
 test('signup works without analytics consent or the optional discovery answer', async ({ page }) => {
@@ -126,6 +134,31 @@ test('signup works without analytics consent or the optional discovery answer', 
   await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible();
   expect(await events(page)).toHaveLength(0);
   expect(await page.locator('script[src*="googletagmanager"]').count()).toBe(0);
+  expect(await page.locator('script[src*="connect.facebook.net"]').count()).toBe(0);
+  expect(await metaRegistrations(page)).toHaveLength(0);
+});
+
+test('Meta signup retries after a blocked script and works without the Google tag', async ({ page }) => {
+  const state = await mockSignup(page);
+  let blockPixel = true;
+  await page.route('https://connect.facebook.net/**', route => blockPixel
+    ? route.abort()
+    : route.fulfill({ contentType: 'text/javascript', body: '' }));
+  await page.goto('/en/register');
+  await enterDetails(page);
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await page.getByLabel('Verification code', { exact: true }).fill('123456');
+  await page.getByRole('button', { name: 'Verify and create store' }).click();
+  await expect(page.getByRole('heading', { name: 'Preparing your store' })).toBeVisible();
+  await page.evaluate(() => { delete window.gtag; });
+  state.ready = true;
+  await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible({ timeout: 10000 });
+  expect(await metaRegistrations(page)).toHaveLength(0);
+  expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-meta-123456789012345-registration-101'))).toBeNull();
+  blockPixel = false;
+  await page.getByRole('navigation').getByRole('link', { name: 'Pricing', exact: true }).click();
+  await expect.poll(() => metaRegistrations(page)).toHaveLength(1);
+  expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-meta-123456789012345-registration-101'))).toBe('sent');
 });
 test('address lookup failure blocks continuation and recovers after editing', async ({ page }) => {
   const state = await mockSignup(page);

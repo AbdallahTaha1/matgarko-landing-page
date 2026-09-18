@@ -1,5 +1,6 @@
 import { getConsent } from './consent';
 import { getAcquisition, getLandingParameters } from './attribution';
+import { trackMetaSignupComplete } from './metaPixel';
 const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 const adsId = import.meta.env.VITE_GOOGLE_ADS_ID;
 const adsLabel = import.meta.env.VITE_GOOGLE_ADS_SIGNUP_LABEL;
@@ -50,6 +51,7 @@ export function trackSignupStep(event: 'signup_start' | 'signup_details_submitte
   window.gtag('event', event, { send_to: gaId, method: 'email' });
 }
 export function trackSignupComplete(conversionId: string) {
+  trackMetaSignupComplete(conversionId);
   if (getConsent() !== 'accepted' || !window.gtag) return;
   const acquisition = getAcquisition();
   for (const destination of ['ga', 'ads'] as const) {
