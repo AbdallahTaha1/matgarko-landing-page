@@ -2,7 +2,15 @@ import { expect, test, type Page } from '@playwright/test';
 const token = '02c9185d-4208-4a64-804f-f38f0c0de641';
 async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknown' = 'accepted') {
   await page.addInitScript(value => { if (!localStorage.getItem('matgarko-consent')) localStorage.setItem('matgarko-consent', value); }, consent);
-  await page.route('https://www.googletagmanager.com/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
+  await page.route('https://www.googletagmanager.com/**', route => route.fulfill({ contentType: 'text/javascript', body: `
+    // Simulate tag processing without sending any analytics requests.
+    const processEvent = item => {
+      if (item[0] === 'event' && typeof item[2]?.event_callback === 'function') item[2].event_callback();
+    };
+    window.dataLayer.forEach(processEvent);
+    const push = window.dataLayer.push.bind(window.dataLayer);
+    window.dataLayer.push = (...items) => { const result = push(...items); items.forEach(processEvent); return result; };
+  ` }));
   await page.route('https://connect.facebook.net/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
   await page.route('https://www.facebook.com/tr**', route => route.abort());
   const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false };
@@ -84,8 +92,9 @@ test('email delivery failure shows a focused error and preserves the registratio
   await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
   expect(state.submissions).toHaveLength(1);
 });
-test('verified signup stays on the landing domain, preserves sources, and converts once when ready', async ({ page }) => {
+test('verified signup preserves sources, converts once, then opens the dashboard and remembers the store', async ({ page }) => {
   const state = await mockSignup(page);
+  await page.route('https://testshop.matgarko.com/admin', route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
   await page.goto('/en?utm_source=google&utm_medium=cpc&utm_campaign=launch&gclid=click-123');
   await page.getByRole('link', { name: 'Create your store free' }).first().click();
   await expect(page).toHaveURL(/\/en\/register$/);
@@ -114,7 +123,14 @@ test('verified signup stays on the landing domain, preserves sources, and conver
   expect(measured.filter(event => event[1] === 'conversion')).toHaveLength(1);
   await expect.poll(() => metaRegistrations(page)).toEqual([['trackSingle', '123456789012345', 'CompleteRegistration', {}, { eventID: 'registration-101' }]]);
   expect(JSON.stringify(measured)).not.toMatch(/owner@example|A-safe-password|02c9185d|01012345678|123456"/);
-  await page.reload();
+  await expect(page).toHaveURL('https://testshop.matgarko.com/admin');
+  await page.goto('/en');
+  await expect(page.getByRole('link', { name: 'Open your dashboard', exact: true })).toHaveAttribute('href', 'https://testshop.matgarko.com/admin');
+  expect(await page.evaluate(() => localStorage.getItem('matgarko-last-store'))).toBe('https://testshop.matgarko.com/');
+  expect(await page.evaluate(() => sessionStorage.getItem('matgarko-pending-signup'))).toBeNull();
+  // A restored ready registration still must not count the same conversion twice.
+  await page.evaluate(value => sessionStorage.setItem('matgarko-pending-signup', value), token);
+  await page.goto('/en/register');
   await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible();
   expect((await events(page)).filter(event => ['sign_up', 'conversion'].includes(String(event[1])))).toHaveLength(0);
   expect(await metaRegistrations(page)).toHaveLength(0);
@@ -122,6 +138,7 @@ test('verified signup stays on the landing domain, preserves sources, and conver
 });
 test('signup works without analytics consent or the optional discovery answer', async ({ page }) => {
   const state = await mockSignup(page, 'declined');
+  await page.route('https://testshop.matgarko.com/admin', route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
   await page.goto('/en/register');
   await enterDetails(page);
   await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
@@ -136,6 +153,59 @@ test('signup works without analytics consent or the optional discovery answer', 
   expect(await page.locator('script[src*="googletagmanager"]').count()).toBe(0);
   expect(await page.locator('script[src*="connect.facebook.net"]').count()).toBe(0);
   expect(await metaRegistrations(page)).toHaveLength(0);
+  await expect(page).toHaveURL('https://testshop.matgarko.com/admin');
+});
+
+for (const navigation of ['automatic', 'manual']) {
+  test(`${navigation} dashboard navigation waits for both Google signup callbacks`, async ({ page }) => {
+    const state = await mockSignup(page);
+    state.ready = true;
+    await page.addInitScript(value => sessionStorage.setItem('matgarko-pending-signup', value), token);
+    // Keep the tag queue pending to model slow Google processing.
+    await page.route('https://www.googletagmanager.com/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
+    await page.route('https://testshop.matgarko.com/admin', route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
+    await page.clock.install();
+    await page.goto('/en/register');
+    await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible();
+    await expect.poll(async () => (await events(page)).filter(event => ['sign_up', 'conversion'].includes(String(event[1]))).length).toBe(2);
+    if (navigation === 'manual') await page.getByRole('link', { name: 'Open your dashboard' }).click();
+    await page.clock.runFor(1600);
+    await expect(page).toHaveURL(/\/en\/register$/);
+    expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-ads-registration-101'))).toBeNull();
+    // Finishing GA alone must not discard the pending Google Ads conversion.
+    await page.evaluate(() => {
+      const event = (window.dataLayer || []).map(item => Array.from(item as unknown[])).find(item => item[1] === 'sign_up')!;
+      (event[2] as { event_callback: () => void }).event_callback();
+    });
+    await expect(page).toHaveURL(/\/en\/register$/);
+    expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-ga-registration-101'))).toBe('sent');
+    expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-ads-registration-101'))).toBeNull();
+    await page.evaluate(() => {
+      const event = (window.dataLayer || []).map(item => Array.from(item as unknown[])).find(item => item[1] === 'conversion')!;
+      (event[2] as { event_callback: () => void }).event_callback();
+    });
+    await expect(page).toHaveURL('https://testshop.matgarko.com/admin');
+    await page.goto('/en/login');
+    expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-ads-registration-101'))).toBe('sent');
+  });
+}
+
+test('blocked Google tracking has a bounded wait and is not marked as processed', async ({ page }) => {
+  const state = await mockSignup(page);
+  state.ready = true;
+  await page.addInitScript(value => sessionStorage.setItem('matgarko-pending-signup', value), token);
+  await page.route('https://www.googletagmanager.com/**', route => route.abort());
+  await page.route('https://testshop.matgarko.com/admin', route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
+  await page.clock.install();
+  await page.goto('/en/register');
+  await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible();
+  await page.clock.runFor(1600);
+  await expect(page).toHaveURL(/\/en\/register$/);
+  await page.clock.runFor(2500);
+  await expect(page).toHaveURL('https://testshop.matgarko.com/admin');
+  await page.goto('/en/login');
+  expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-ga-registration-101'))).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem('matgarko-conversion-ads-registration-101'))).toBeNull();
 });
 
 test('Meta signup retries after a blocked script and works without the Google tag', async ({ page }) => {
@@ -189,6 +259,7 @@ test('live contact checks reject taken and invalid values and recheck edits befo
   const submit = page.getByRole('button', { name: 'Send verification code', exact: true });
   await expect(page.locator('#email-status')).toContainText('already registered');
   await expect(page.locator('#phone-status')).toContainText('already registered');
+  await expect(page.getByRole('link', { name: 'Access your existing store', exact: true })).toHaveCount(2);
   await expect(submit).toBeDisabled();
   state.emailTaken = false; state.phoneTaken = false;
   await page.getByLabel('Email', { exact: true }).fill('new@example.com');

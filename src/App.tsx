@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import { HomePage } from "./pages/HomePage";
+import { DownloadPage } from "./pages/DownloadPage";
 import { SolutionsPage } from "./pages/SolutionsPage";
 import { DevelopersPage } from "./pages/DevelopersPage";
 import { PricingPage } from "./pages/PricingPage";
 import { ContactPage } from "./pages/ContactPage";
 import { AboutPage } from "./pages/AboutPage";
 import RegisterPage from "./pages/RegisterPage";
+import { LoginPage } from "./pages/LoginPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { TermsPage } from "./pages/TermsPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
@@ -65,6 +67,8 @@ export function AppRoutes() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="download" element={<DownloadPage />} />
+          <Route path="en/download" element={<DownloadPage language="en" />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="solutions" element={<SolutionsPage />} />
           <Route path="integrations" element={<IntegrationsPage />} />
@@ -74,6 +78,8 @@ export function AppRoutes() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="en/login" element={<LoginPage language="en" />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="privacy" element={<PrivacyPage />} />
           {/* Industry landing pages */}

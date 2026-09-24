@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, ClipboardList, CreditCard, PackagePlus, Store, Truck, Zap } from "lucide-react";
+import { Banknote, Check, ClipboardList, PackagePlus, Store, Truck, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const SIGNUP_URL = "/register";
@@ -16,14 +16,14 @@ const steps = [
     desc: "ارفع الصور، الأسعار، الوصف، والأقسام التي يحتاجها العميل.",
   },
   {
-    icon: <CreditCard className="h-6 w-6" />,
-    title: "جهز الدفع",
-    desc: "حدد طرق الدفع المناسبة لطبيعة نشاطك وطريقة تحصيل الطلبات.",
+    icon: <Banknote className="h-6 w-6" />,
+    title: "الدفع عند الاستلام",
+    desc: "العميل يطلب من متجرك ويدفع وقت استلام الطلب.",
   },
   {
     icon: <Truck className="h-6 w-6" />,
-    title: "رتب الشحن",
-    desc: "أضف مناطق الشحن أو طريقة التوصيل التي تناسب عملاءك.",
+    title: "حدد تكلفة التوصيل",
+    desc: "أضف مناطق الشحن وسعر التوصيل المناسب لكل منطقة.",
   },
 ];
 
@@ -45,7 +45,7 @@ export const DevelopersPage = () => {
               </h1>
               <p className="mb-8 max-w-2xl text-lg leading-relaxed text-gray-300">
                 هذه الصفحة توضح رحلة التاجر داخل متجركو: تبدأ بالتسجيل، تضيف
-                منتجاتك، تضبط الدفع والشحن، ثم تبدأ استقبال الطلبات من لوحة سهلة.
+                منتجاتك، تحدد تكلفة التوصيل، ثم تبدأ استقبال الطلبات من لوحة سهلة.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg" className="h-14 bg-emerald-500 px-7 font-extrabold text-gray-950 hover:bg-emerald-400">
@@ -63,7 +63,7 @@ export const DevelopersPage = () => {
                 <Zap className="h-5 w-5 text-primary" />
               </div>
               <div className="space-y-3">
-                {["تسجيل سريع", "إضافة المنتجات", "تجهيز الدفع والشحن", "استقبال أول طلب"].map((item, index) => (
+                {["تسجيل سريع", "إضافة المنتجات", "تحديد تكلفة التوصيل", "استقبال أول طلب"].map((item, index) => (
                   <div key={item} className="flex items-center gap-3 rounded-lg bg-white/10 p-4">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-sm font-black text-gray-950">
                       {index + 1}

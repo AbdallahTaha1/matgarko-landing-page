@@ -120,10 +120,6 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
       answer: `عند حوالي ${FREE_TO_GROWTH_ORDERS} طلب شهرياً بمتوسط ${AVERAGE_ORDER_VALUE} ج.م للطلب، تصبح باقة النمو (${planPriceLabel(growth, "ar")}) أوفر من عمولة ${formatCommission(free)}. الباقة الاحترافية تبدأ توفر لك بعد حوالي ${GROWTH_TO_PRO_ORDERS} طلب شهرياً.`,
     },
     {
-      question: "هل هناك رسوم إضافية على بوابات الدفع؟",
-      answer: "رسوم بوابات الدفع (فوري، ميزة، فيزا) تفرضها شركات الدفع مباشرة وهي منفصلة عن اشتراك متجركو، وتتراوح عادة بين 1% و3%. الدفع عند الاستلام بدون رسوم من جهتنا.",
-    },
-    {
       question: "هل أقدر ألغي الاشتراك في أي وقت؟",
       answer: `نعم، بدون أي التزام. متجرك يرجع للباقة المجانية بعمولة ${formatCommission(free)} وتكمل البيع بشكل طبيعي.`,
     },
@@ -140,10 +136,6 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     {
       question: "When should I move from Free to Growth?",
       answer: `At around ${FREE_TO_GROWTH_ORDERS} orders per month with a ${AVERAGE_ORDER_VALUE} EGP average order, Growth (${planPriceLabel(growth, "en")}) becomes cheaper than the ${formatCommission(free)} commission. Pro (${formatEgp(pro.monthly, "en")}, 0%) starts saving money at roughly ${GROWTH_TO_PRO_ORDERS} orders per month.`,
-    },
-    {
-      question: "Are payment gateway fees included?",
-      answer: "No. Gateway fees (Fawry, Meeza, Visa) are charged by the payment provider, usually 1% to 3%, and are separate from Matgarko plans. Cash on delivery has no Matgarko fee.",
     },
     {
       question: "Can I cancel at any time?",

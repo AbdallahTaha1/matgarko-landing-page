@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   BadgePercent,
   Boxes,
-  CreditCard,
+  Banknote,
   FileText,
   PackageCheck,
   ShieldCheck,
@@ -24,7 +24,7 @@ const solutionBlocks = [
   {
     icon: <PackageCheck className="w-7 h-7" />,
     title: "متابعة الطلبات",
-    text: "اعرف كل طلب جديد، بيانات العميل، حالة الدفع، وخطوات التجهيز والشحن.",
+    text: "اعرف كل طلب جديد، بيانات العميل، وحالة الطلب وخطوات تجهيزه.",
   },
   {
     icon: <Users className="w-7 h-7" />,
@@ -51,8 +51,8 @@ export const SolutionsPage = () => {
             كل ما تحتاجه لإدارة متجرك من مكان واحد
           </h1>
           <p className="page-lead mb-7">
-            متجركو يساعدك تعرض منتجاتك، تستقبل الطلبات، وتتابع العملاء والدفع
-            والشحن من لوحة عربية بسيطة، بدون تكلفة كبيرة أو تعقيد تقني.
+            متجركو يساعدك تعرض منتجاتك، تستقبل الطلبات، وتتابع العملاء
+            من لوحة عربية بسيطة، بدون تكلفة كبيرة أو تعقيد تقني.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Button asChild size="lg" className="h-14 bg-gray-950 px-7 font-extrabold text-white shadow-xl shadow-emerald-900/10 hover:bg-emerald-700">
@@ -79,7 +79,7 @@ export const SolutionsPage = () => {
                   يومه العادي.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {["منتجات", "طلبات", "عملاء", "شحن ودفع"].map((item) => (
+                  {["منتجات", "طلبات", "عملاء", "عروض"].map((item) => (
                     <span key={item} className="rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-700">
                       {item}
                     </span>
@@ -90,8 +90,8 @@ export const SolutionsPage = () => {
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
                   { icon: <Store className="h-5 w-5" />, title: "متجر جاهز" },
-                  { icon: <CreditCard className="h-5 w-5" />, title: "طرق دفع" },
-                  { icon: <Truck className="h-5 w-5" />, title: "خيارات شحن" },
+                  { icon: <Banknote className="h-5 w-5" />, title: "دفع عند الاستلام" },
+                  { icon: <Truck className="h-5 w-5" />, title: "أسعار التوصيل" },
                   { icon: <FileText className="h-5 w-5" />, title: "صفحات مهمة" },
                 ].map((item) => (
                   <div key={item.title} className="rounded-lg border border-gray-200 bg-gray-50 p-5">

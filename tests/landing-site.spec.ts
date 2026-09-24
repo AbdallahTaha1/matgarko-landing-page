@@ -18,7 +18,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://matgarko.com/og-image.png');
     await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك/ })).toBeVisible();
-    await expect(page.getByText('تطبيق متجركو للموبايل قريبًا على Google Play. تقدر تبدأ دلوقتي من الموقع.').first()).toBeVisible();
+    await expect(page.getByText('اختار طريقة تحميل تطبيق متجركو المناسبة لجهازك، أو ابدأ من المتصفح.', { exact: false }).first()).toBeVisible();
     await expect(page.getByText('منصة إنشاء متجر إلكتروني في مصر')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ متجرك في 3 خطوات' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ مجاناً، وادفع لما تبيع' })).toBeVisible();
@@ -56,8 +56,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     await page.getByRole('navigation').getByRole('link', { name: 'الدفع والشحن' }).click();
     await page.waitForURL('**/integrations');
-    await expect(page.getByRole('heading', { name: 'اربط متجرك بما يحتاجه نشاطك' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'الدفع' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'رتّب تفاصيل الدفع والتوصيل' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'الدفع', exact: true })).toBeVisible();
 
     await page.getByRole('navigation').getByRole('link', { name: 'خطوات البدء' }).click();
     await page.waitForURL('**/getting-started');

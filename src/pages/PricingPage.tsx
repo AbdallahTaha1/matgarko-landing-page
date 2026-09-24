@@ -43,7 +43,7 @@ const copy = {
     ctaLead: "لا بطاقة ائتمان ولا التزام. سجّل وابدأ البيع بعمولة 2% فقط.",
     ctaPrimary: "ابدأ مجاناً الآن",
     ctaSecondary: "اسأل على واتساب",
-    note: "رسوم بوابات الدفع الإلكتروني منفصلة وتُحصّلها شركة الدفع مباشرة.",
+    note: "العمولة على الطلبات المكتملة حسب باقتك.",
   },
   en: {
     kicker: "Pricing",
@@ -67,7 +67,7 @@ const copy = {
     ctaLead: "No credit card and no commitment. Sign up and start selling with 2% commission only.",
     ctaPrimary: "Start free now",
     ctaSecondary: "Ask on WhatsApp",
-    note: "Online payment gateway fees are separate and charged by the payment provider.",
+    note: "Commission applies to completed orders according to your plan.",
   },
 } as const;
 

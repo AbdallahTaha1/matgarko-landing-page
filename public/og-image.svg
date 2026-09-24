@@ -13,7 +13,7 @@
   <text x="600" y="184" fill="#5EEAD4" font-family="Cairo, Arial, sans-serif" font-size="34" font-weight="800" text-anchor="end">متجركو</text>
   <text x="600" y="265" fill="white" font-family="Cairo, Arial, sans-serif" font-size="66" font-weight="900" text-anchor="end">أنشئ متجر إلكتروني</text>
   <text x="600" y="345" fill="white" font-family="Cairo, Arial, sans-serif" font-size="66" font-weight="900" text-anchor="end">بدون برمجة</text>
-  <text x="600" y="415" fill="#CBD5E1" font-family="Cairo, Arial, sans-serif" font-size="30" font-weight="600" text-anchor="end">منتجات، طلبات، دفع وشحن من لوحة عربية واحدة</text>
+  <text x="600" y="415" fill="#CBD5E1" font-family="Cairo, Arial, sans-serif" font-size="30" font-weight="600" text-anchor="end">منتجات وطلبات من لوحة عربية واحدة</text>
   <rect x="322" y="465" width="278" height="58" rx="29" fill="#0D9488"/>
-  <text x="461" y="503" fill="white" font-family="Cairo, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">ابدأ من 50 جنيه</text>
+  <text x="461" y="503" fill="white" font-family="Cairo, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">ابدأ مجاناً</text>
 </svg>

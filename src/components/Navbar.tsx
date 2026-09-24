@@ -1,6 +1,7 @@
 import { SIGNUP_URL } from "@/data/pricing";
 import { alternateLanguagePath, languageFromPath, localizePath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { useRememberedStore } from "@/lib/storeAccess";
 import { Languages, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -24,8 +25,11 @@ export function Navbar() {
   const { pathname } = useLocation();
   const language = languageFromPath(pathname);
   const isEnglish = language === "en";
+  const store = useRememberedStore();
   const brandName = isEnglish ? "Matgarko" : "متجركو";
-  const signupLabel = isEnglish ? "Start free" : "أنشئ متجرك مجاناً";
+  const signupLabel = store ? (isEnglish ? 'Dashboard' : 'لوحة التحكم') : (isEnglish ? "Start free" : "أنشئ متجرك مجاناً");
+  const primaryUrl = store?.adminUrl || (isEnglish ? '/en/register' : SIGNUP_URL);
+  const loginLabel = isEnglish ? "My store" : "ادخل متجرك";
   const languageLabel = isEnglish ? "العربية" : "English";
   const menuLabel = isEnglish ? (isOpen ? "Close menu" : "Open menu") : isOpen ? "إغلاق القائمة" : "فتح القائمة";
   const navLabel = isEnglish ? "Main navigation" : "القائمة الرئيسية";
@@ -51,10 +55,10 @@ export function Navbar() {
       <div className="container-x flex h-16 items-center justify-between gap-3">
         <Link to={localizePath("/", language)} className="flex shrink-0 items-center gap-2" aria-label={brandName}>
           <img src={logo} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
-          <span className="text-xl font-extrabold text-gray-950 font-heading">{brandName}</span>
+          <span className="hidden text-xl font-extrabold text-gray-950 font-heading min-[360px]:inline">{brandName}</span>
         </Link>
 
-        <nav aria-label={navLabel} className="hidden items-center gap-1 lg:flex">
+        <nav aria-label={navLabel} className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -70,7 +74,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           <Link
             to={alternateLanguagePath(pathname)}
             hrefLang={isEnglish ? "ar" : "en"}
@@ -79,12 +83,14 @@ export function Navbar() {
             <Languages className="h-4 w-4" aria-hidden="true" />
             {languageLabel}
           </Link>
-          <a href={language === "en" ? "/en/register" : SIGNUP_URL} className="btn btn-primary h-10 px-4 text-sm">
+          <Link to={localizePath('/login', language)} className="btn btn-secondary h-10 px-3 text-sm">{loginLabel}</Link>
+          <a href={primaryUrl} className="btn btn-primary h-10 px-4 text-sm">
             {signupLabel}
           </a>
         </div>
 
-        <div className="flex items-center gap-1 lg:hidden">
+        <div className="flex items-center gap-1 xl:hidden">
+          <Link to={localizePath('/login', language)} onClick={() => setIsOpen(false)} className="inline-flex h-10 shrink-0 items-center rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 text-xs font-bold text-emerald-800">{loginLabel}</Link>
           <Link
             to={alternateLanguagePath(pathname)}
             hrefLang={isEnglish ? "ar" : "en"}
@@ -93,7 +99,7 @@ export function Navbar() {
             className="inline-flex h-10 items-center gap-1.5 rounded-lg px-2.5 text-xs font-bold text-gray-700 hover:bg-gray-100"
           >
             <Languages className="h-4 w-4" aria-hidden="true" />
-            {languageLabel}
+            <span className="hidden sm:inline">{languageLabel}</span>
           </Link>
           <button
             type="button"
@@ -112,7 +118,7 @@ export function Navbar() {
         <nav
           id="mobile-menu"
           aria-label={navLabel}
-          className="animate-menu-in border-t border-gray-100 bg-white shadow-xl shadow-gray-950/5 lg:hidden"
+          className="animate-menu-in border-t border-gray-100 bg-white shadow-xl shadow-gray-950/5 xl:hidden"
         >
           <div className="container-x py-3">
             <ul className="divide-y divide-gray-100">
@@ -132,7 +138,7 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <a href={language === "en" ? "/en/register" : SIGNUP_URL} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">
+            <a href={primaryUrl} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">
               {signupLabel}
             </a>
           </div>

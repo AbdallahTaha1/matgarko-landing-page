@@ -12,6 +12,8 @@ const footerColumns = [
     arTitle: "المنصة",
     enTitle: "Platform",
     links: [
+      { path: "/login", ar: "ادخل متجرك", en: "Access your store" },
+      { path: "/download", ar: "تحميل التطبيق", en: "Get the app" },
       { path: "/solutions", ar: "الحلول", en: "Solutions" },
       { path: "/themes", ar: "القوالب", en: "Themes" },
       { path: "/integrations", ar: "الدفع والشحن", en: "Payment and shipping" },
@@ -139,13 +141,6 @@ export function Footer() {
           <p className="text-xs text-gray-500 sm:text-sm">
             © {new Date().getFullYear()} {brandName}. {isEnglish ? "All rights reserved." : "جميع الحقوق محفوظة."}
           </p>
-          <ul className="flex flex-wrap items-center justify-center gap-2" aria-label={isEnglish ? "Payment methods" : "طرق الدفع"}>
-            {["Visa", "Mastercard", "Fawry", "Meeza"].map((method) => (
-              <li key={method} className="rounded-md border border-gray-200 bg-white px-2.5 py-1 text-[11px] font-bold text-gray-600">
-                {method}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </footer>

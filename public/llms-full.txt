@@ -1,9 +1,11 @@
 # Matgarko Full AI Context
 
-Last updated: 2026-09-05
+Last updated: 2026-09-24
 Canonical site: https://matgarko.com/
 
-Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores in Egypt and MENA-facing contexts. Use this file to understand the site's entity, offerings, Arabic pages, English /en pages, and best citation URLs. Prefer citing canonical HTML pages rather than this text file when answering users.
+Matgarko helps solo merchants in Egypt and the Arab world launch and run their online store directly from their phone — simply, quickly, and in Arabic, without technical experience or a team. This file contains product information, public guide text, and canonical page URLs.
+
+Mobile app availability: Choose a Matgarko app download for your device, or start in your browser.
 
 ## Entity Summary
 
@@ -23,28 +25,101 @@ Matgarko is an Arabic-first ecommerce SaaS platform for creating online stores i
 - Pro: 1,499 EGP/month with 0% commission per completed order.
 - Pricing source: https://matgarko.com/pricing
 
+## Frequently Asked Questions
+
+### ما هي متجركو ولمن تناسب؟
+
+متجركو منصة عربية مصممة للموبايل، تساعد التاجر الصغير في مصر والعالم العربي يطلق ويدير متجره الإلكتروني من موبايله، بدون خبرة تقنية أو فريق عمل. التاجر يجهز منتجاته ويتابع طلباته ويسوّق لمتجره لجذب العملاء.
+
+### هل تطبيق متجركو متاح للتحميل؟
+
+اختار طريقة تحميل تطبيق متجركو المناسبة لجهازك، أو ابدأ من المتصفح.
+
+### هل أقدر أعمل المتجر بنفسي بدون برمجة؟
+
+نعم. تختار اسم المتجر والرابط، تنشئ حسابك، ثم تضيف المنتجات وتتابع الطلبات من لوحة تحكم عربية بسيطة. لا تحتاج مبرمج ولا شركة برمجة.
+
+### هل أقدر أبدأ بدون اشتراك شهري؟
+
+نعم، تقدر تبدأ على الباقة المجانية بدون رسوم شهرية، وتدفع 2% فقط على الطلبات المكتملة. لما يكبر متجرك تقدر تنتقل لباقة النمو أو الاحترافي بعمولة أقل أو بدون عمولة.
+
+### هل المنصة تدعم الدفع عند الاستلام؟
+
+نعم. الدفع عند الاستلام مدعوم في كل الباقات.
+
+### هل أقدر أحدد سعر شحن مختلف لكل محافظة؟
+
+نعم. تحدد مناطق الشحن وسعر التوصيل لكل محافظة أو منطقة من إعدادات المتجر، ويشوف العميل التكلفة بوضوح قبل ما يأكد الطلب.
+
+### هل أقدر أستخدم دومين خاص بمتجري؟
+
+تبدأ برابط متجرك على متجركو مجاناً، ومع باقتي النمو والاحترافي تقدر تربط دومين خاص بعلامتك التجارية.
+
+### هل المتجر يشتغل كويس على الموبايل؟
+
+نعم. كل القوالب متجاوبة وتعمل على الموبايل والكمبيوتر، لأن أغلب عملائك في مصر بيشتروا من الموبايل.
+
+### What is Matgarko and who is it for?
+
+Matgarko helps solo merchants in Egypt and the Arab world launch and run their online store directly from their phone — simply, quickly, and in Arabic, without technical experience or a team. Merchants prepare their products, manage orders, and market their stores to attract customers.
+
+### Can I download the Matgarko mobile app?
+
+Choose a Matgarko app download for your device, or start in your browser.
+
+### Can I build the store myself?
+
+Yes. Matgarko is made for merchants who want to launch without a developer. You choose the store name, add products, set delivery prices, then start receiving orders.
+
+### Is Matgarko only for Egypt?
+
+Matgarko is especially practical for Egypt and Arabic-speaking merchants because pricing is in EGP and the product is built around local selling workflows. English pages explain the platform for regional teams and international researchers.
+
+### Do I need coding or hosting?
+
+No. You do not need to buy hosting, install plugins, or manage servers. Matgarko gives you the storefront, dashboard, product tools, order management, and setup flow in one platform.
+
+### Can I start before paying monthly?
+
+Yes. The free plan lets you start with no monthly fee and pay a 2% commission on completed orders. Paid plans lower or remove the commission as your store grows.
+
+### Does Matgarko support cash on delivery?
+
+Yes. Cash on delivery is available on every plan. You can also set delivery prices for each area so customers see the cost before placing an order.
+
+### Can I use my own domain?
+
+You can start with a Matgarko store link, then connect a custom domain when your plan and store setup are ready for it.
+
 ## Public Pages
 
-## إنشاء متجر إلكتروني في مصر مجاناً
+## تحميل تطبيق متجركو لأندرويد
+
+URL: https://matgarko.com/download
+Type: Landing page
+Description: خيارات تحميل تطبيق متجركو لإدارة الطلبات والمنتجات من الموبايل، مع إمكانية إدارة متجرك من المتصفح بدون تثبيت تطبيق.
+Keywords: تحميل متجركو, تطبيق إدارة المتجر, متجركو أندرويد
+
+## إنشاء وإدارة متجر إلكتروني من الموبايل في مصر
 
 URL: https://matgarko.com/
 Type: Landing page
-Description: ابدأ متجرك الإلكتروني مجاناً مع متجركو وادفع 2% فقط لما تبيع. قوالب عربية جاهزة، دفع عند الاستلام، وشحن لكل المحافظات. بدون برمجة.
+Description: ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 2% على الطلبات المكتملة.
 Keywords: إنشاء متجر إلكتروني, متجر إلكتروني مصر, منصة تجارة إلكترونية, متجركو, بيع أونلاين, متجر بدون برمجة, ابدأ مجاناً متجر إلكتروني
 
 ## حلول إدارة المتجر الإلكتروني
 
 URL: https://matgarko.com/solutions
 Type: Landing page
-Description: كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، صفحات مهمة، وتجهيزات دفع وشحن تناسب نشاطك.
+Description: كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، وصفحات مهمة لنشاطك.
 Keywords: إدارة متجر إلكتروني, إدارة الطلبات, إدارة المنتجات, لوحة تحكم متجر
 
-## الدفع والشحن والتكاملات
+## الدفع عند الاستلام وأسعار التوصيل
 
 URL: https://matgarko.com/integrations
 Type: Landing page
-Description: جهز طرق الدفع، مناطق الشحن، أدوات التسويق، وإعدادات تشغيل متجرك الإلكتروني بما يناسب عملاءك في السوق العربي.
-Keywords: طرق دفع إلكتروني, شحن متجر إلكتروني, تكاملات متجر, دفع عند الاستلام
+Description: استقبل طلبات الدفع عند الاستلام، وحدد مناطق الشحن وسعر التوصيل بوضوح لعملاء متجرك.
+Keywords: دفع عند الاستلام, أسعار التوصيل, مناطق الشحن
 
 ## قوالب متجر إلكتروني جاهزة عربية
 
@@ -57,7 +132,7 @@ Keywords: قوالب متجر إلكتروني, ثيمات متجر, تصميم 
 
 URL: https://matgarko.com/getting-started
 Type: Landing page
-Description: تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تجهيز الدفع والشحن، ثم استقبال أول طلب في وقت قصير.
+Description: تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تحديد تكلفة التوصيل، ثم استقبال أول طلب في وقت قصير.
 Keywords: خطوات إنشاء متجر إلكتروني, كيفية إنشاء متجر إلكتروني, ابدأ البيع أونلاين, إنشاء متجر بدون كود
 
 ## تكلفة إنشاء متجر إلكتروني في مصر
@@ -99,14 +174,14 @@ Keywords: سياسة الخصوصية متجركو, خصوصية متجر إلك
 
 URL: https://matgarko.com/store/restaurants
 Type: Landing page
-Description: أنشئ متجر إلكتروني لمطعمك أو مشروعك الغذائي في دقائق. استقبل طلبات التوصيل أونلاين، أدر القائمة، وجهز الدفع والشحن بسهولة.
+Description: أنشئ متجر إلكتروني لمطعمك أو مشروعك الغذائي في دقائق. اعرض القائمة بالصور والأسعار واستقبل طلبات عملائك أونلاين.
 Keywords: إنشاء متجر إلكتروني للمطاعم, متجر أونلاين للمطاعم, طلبات توصيل أونلاين, متجر أكل أونلاين مصر
 
 ## إنشاء متجر ملابس إلكتروني في مصر
 
 URL: https://matgarko.com/store/clothing
 Type: Landing page
-Description: افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، وتوصيل سريع لعملاءك.
+Description: افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، ومتابعة طلبات عملائك.
 Keywords: إنشاء متجر ملابس إلكتروني, متجر ملابس أونلاين مصر, متجر موضة إلكتروني, بيع ملابس أونلاين
 
 ## إنشاء متجر إلكترونيات أونلاين في مصر
@@ -120,14 +195,14 @@ Keywords: إنشاء متجر إلكترونيات, متجر أجهزة أونل
 
 URL: https://matgarko.com/store/cosmetics
 Type: Landing page
-Description: أنشئ متجر عناية وجمال احترافي أونلاين. عرض المنتجات بوصف دقيق، إدارة الطلبات، وتوصيل سريع لعملاءك في مصر.
+Description: أنشئ متجر عناية وجمال احترافي أونلاين. عرض المنتجات بوصف دقيق وإدارة طلبات عملائك في مصر.
 Keywords: إنشاء متجر تجميل إلكتروني, متجر عناية أونلاين مصر, بيع مستحضرات تجميل أونلاين, متجر جمال إلكتروني
 
 ## إنشاء متجر أثاث وديكور أونلاين في مصر
 
 URL: https://matgarko.com/store/furniture
 Type: Landing page
-Description: افتح متجر أثاث وديكور منزلي أونلاين. عرض المنتجات بتفاصيل واضحة ومقاسات دقيقة، وإدارة الطلبات والتوصيل بسهولة.
+Description: افتح متجر أثاث وديكور منزلي أونلاين. عرض المنتجات بتفاصيل واضحة ومقاسات دقيقة، وإدارة الطلبات بسهولة.
 Keywords: إنشاء متجر أثاث إلكتروني, متجر ديكور أونلاين مصر, بيع أثاث أونلاين, متجر منزل إلكتروني
 
 ## مدونة متجركو
@@ -155,7 +230,7 @@ Keywords: تكلفة إنشاء متجر إلكتروني في مصر, سعر م
 
 URL: https://matgarko.com/blog/best-ecommerce-platform-egypt
 Type: Guide article
-Description: مقارنة بين أفضل منصات التجارة الإلكترونية في مصر: الأسعار، المزايا، الدعم المحلي، وطرق الدفع والشحن المتاحة.
+Description: مقارنة بين منصات التجارة الإلكترونية في مصر: الأسعار، إدارة المنتجات والطلبات، سهولة الاستخدام، والدعم المحلي.
 Keywords: أفضل منصة إنشاء متجر إلكتروني مصر, مقارنة منصات التجارة الإلكترونية, أفضل موقع لبيع أونلاين مصر
 
 ## إنشاء متجر إلكتروني مجاني
@@ -176,7 +251,7 @@ Keywords: مقارنة منصات التجارة الإلكترونية مصر, 
 
 URL: https://matgarko.com/compare/easyorders
 Type: Landing page
-Description: مقارنة تفصيلية بين متجركو وإيزي أوردرز للتاجر المصري. الأسعار، بوابات الدفع، والمزايا — اكتشف البديل الأرخص بالجنيه المصري.
+Description: مقارنة بين متجركو وإيزي أوردرز للتاجر المصري من حيث الأسعار وإدارة المنتجات والطلبات وسهولة الاستخدام.
 Keywords: بديل إيزي أوردرز, متجركو vs إيزي أوردرز, إيزي أوردرز مقارنة, easyorders بديل, افضل بديل easyorders مصر
 
 ## بديل شوبيفاي في مصر
@@ -190,7 +265,7 @@ Keywords: بديل شوبيفاي في مصر, شوبيفاي بالعربي م�
 
 URL: https://matgarko.com/compare/salla
 Type: Landing page
-Description: سلة منصة خليجية رائعة — لكن للتاجر المصري، متجركو مصممة لمصر من البداية. مقارنة الأسعار والمزايا ودعم بوابات الدفع المصرية.
+Description: قارن متجركو وسلة من حيث الأسعار والمزايا وسهولة الاستخدام، واختار المنصة المناسبة لمتجرك.
 Keywords: بديل سلة في مصر, سلة مصر مقارنة, متجركو vs سلة, منصة مثل سلة في مصر, بديل منصة سلة
 
 ## بديل ووكومرس في مصر
@@ -200,26 +275,33 @@ Type: Landing page
 Description: ووكومرس مجاني لكن يحتاج سيرفر ومطوراً. متجركو تمنحك متجراً كاملاً في 5 دقائق بدون تعقيدات تقنية وبأسعار بالجنيه المصري.
 Keywords: بديل ووكومرس في مصر, ووكومرس مقارنة, متجركو vs ووكومرس, woocommerce alternative egypt, بديل WooCommerce
 
-## Ecommerce platform for MENA merchants
+## Download Matgarko for Android
+
+URL: https://matgarko.com/en/download
+Type: Landing page
+Description: Find Matgarko app download options to manage your products and orders on mobile, or use your store dashboard in the browser without installing an app.
+Keywords: download Matgarko, Android merchant app, Matgarko APK
+
+## Run your online store from your phone
 
 URL: https://matgarko.com/en
 Type: Landing page
-Description: Create an online store for Egypt and MENA with Matgarko. Launch without coding, manage products and orders, prepare payment and shipping workflows, and start free in EGP.
+Description: Create and run your online store from your phone. An Arabic-first ecommerce platform for solo merchants in Egypt and the Arab world. Start free, without coding.
 Keywords: ecommerce platform MENA, online store builder Middle East, create online store Egypt, Arabic ecommerce platform, Matgarko
 
 ## Ecommerce store management solutions
 
 URL: https://matgarko.com/en/solutions
 Type: Landing page
-Description: Manage storefronts, products, orders, customers, offers, payment setup, and shipping workflows in one Arabic-first ecommerce platform.
+Description: Manage storefronts, products, orders, customers, and offers in one Arabic-first ecommerce platform.
 Keywords: ecommerce store management, online store dashboard, product and order management, Arabic ecommerce software
 
-## Payment and shipping setup for ecommerce
+## Cash on delivery and delivery prices
 
 URL: https://matgarko.com/en/integrations
 Type: Landing page
-Description: Prepare cash on delivery, payment workflows, shipping zones, delivery fees, and operational settings for ecommerce stores in Egypt and MENA.
-Keywords: ecommerce payment Egypt, cash on delivery ecommerce, shipping setup online store, MENA ecommerce logistics
+Description: Accept cash-on-delivery orders and set delivery areas and prices so customers know the cost before ordering.
+Keywords: cash on delivery ecommerce, store delivery prices, delivery areas
 
 ## Online store templates for MENA businesses
 
@@ -323,7 +405,7 @@ Keywords: how to create online store Egypt, start ecommerce Egypt 2026, online s
 
 URL: https://matgarko.com/en/blog/cost-of-online-store-egypt-2026
 Type: Guide article
-Description: Understand ecommerce costs in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.
+Description: Understand ecommerce costs in Egypt, including platform fees, commissions, domain cost, shipping, and day-to-day operating work.
 Keywords: online store cost Egypt, ecommerce pricing Egypt, cost to start ecommerce store, Matgarko pricing
 
 ## Best ecommerce platform for Egypt: what to compare
@@ -386,7 +468,65 @@ Category: دليل البدء
 Published: 2026-06-26
 Reading time: 8 دقائق
 Summary: دليل كامل خطوة بخطوة لإنشاء متجر إلكتروني في مصر: من اختيار المنتج وتسجيل المتجر حتى استقبال أول طلب وإعداد التوصيل.
-Main sections: لماذا تنشئ متجراً إلكترونياً في مصر؟; الخطوة الأولى: اختر ما ستبيعه; الخطوة الثانية: اختر منصة إنشاء المتجر; الخطوة الثالثة: سجّل متجرك وجهز الإعدادات الأساسية; الخطوة الرابعة: أضف منتجاتك; الخطوة الخامسة: جهز طرق الدفع والشحن; الخطوة السادسة: أطلق متجرك وابدأ التسويق
+إنشاء متجر إلكتروني في مصر أصبح أسهل مع المنصات الجاهزة. يمكنك عرض منتجاتك واستقبال الطلبات أونلاين في خطوات بسيطة دون الحاجة لشركة برمجة أو ميزانية ضخمة.
+
+### لماذا تنشئ متجراً إلكترونياً في مصر؟
+
+المتجر الإلكتروني يدي عميلك مكاناً واضحاً يشوف فيه المنتجات والأسعار ويطلب في الوقت المناسب له. ويساعدك تنظم الطلبات وبيانات العملاء في مكان واحد.
+
+### الخطوة الأولى: اختر ما ستبيعه
+
+قبل إنشاء المتجر، حدد بوضوح ما ستبيعه. الأسئلة التي تساعدك:
+
+- هل لديك منتج جاهز أم ستبيع بالدروبشيبينج؟
+- من هو عميلك المستهدف؟
+- ما هو هامش الربح المتوقع؟
+- هل المنتج سهل التوصيل والشحن؟
+
+### الخطوة الثانية: اختر منصة إنشاء المتجر
+
+اختار منصة تناسب طريقة شغلك وحجم تجارتك. تأكد من أن المنصة التي تختارها:
+
+- تدعم الدفع عند الاستلام
+- تتيح تحديد تكلفة التوصيل بوضوح
+- تدعم اللغة العربية بالكامل
+- سعرها مناسب لميزانيتك
+
+### الخطوة الثالثة: سجّل متجرك وجهز الإعدادات الأساسية
+
+بعد اختيار المنصة، أنشئ حسابك وجهز الإعدادات التالية:
+
+1. اختر اسم المتجر ورابطه (يفضل يكون الاسم يعكس ما تبيعه)
+2. أضف شعار المتجر وبياناته الأساسية
+3. حدد العملة (الجنيه المصري) ولغة المتجر (العربية)
+4. أضف معلومات التواصل: رقم واتساب، بريد إلكتروني، عنوان
+
+### الخطوة الرابعة: أضف منتجاتك
+
+هذه المرحلة هي الأهم. لكل منتج تضيفه تأكد من:
+
+- صورة واضحة بخلفية بيضاء أو نظيفة
+- اسم المنتج يحتوي على الكلمات التي يبحث عنها العميل
+- وصف يذكر الفوائد وليس فقط المواصفات
+- سعر واضح مع ذكر حالة الخصم لو موجود
+- الكمية المتاحة في المخزون
+
+### الخطوة الخامسة: حدد تفاصيل الدفع والتوصيل
+
+في متجركو، عميلك يطلب من المتجر ويدفع عند استلام الطلب. حدد سعر التوصيل لكل منطقة عشان يعرف تكلفة الطلب قبل تأكيده.
+
+اتفق مع شركة شحن مناسبة على مناطق التغطية والتكلفة والتحصيل، ووضّح لعملائك الموعد المتوقع للتوصيل.
+
+### الخطوة السادسة: أطلق متجرك وابدأ التسويق
+
+بعد مراجعة كل الإعدادات، أطلق متجرك وابدأ التسويق له. افضل مكان للبدء هو:
+
+- فيسبوك وإنستغرام بالمحتوى العضوي أولاً
+- مجموعات فيسبوك المتخصصة في نشاطك
+- التصوير الاحترافي للمنتجات بجودة عالية
+- الاستجابة السريعة لاستفسارات العملاء
+
+💡 نصيحة: ابدأ بعدد محدود من المنتجات (10-20 منتج) وركز على التسويق لهم جيداً قبل توسيع الكتالوج.
 
 ## Blog Article: تكلفة إنشاء متجر إلكتروني في مصر 2026 — حساب دقيق
 
@@ -396,7 +536,49 @@ Category: التكاليف والأسعار
 Published: 2026-06-26
 Reading time: 6 دقائق
 Summary: كم تكلف إنشاء متجر إلكتروني في مصر؟ مقارنة كاملة بين المنصات المدفوعة، العمولة، الاشتراك الشهري، والتكاليف الخفية.
-Main sections: نماذج التسعير الشائعة لمنصات المتاجر الإلكترونية; 1. الاشتراك الشهري الثابت; 2. العمولة على كل طلب; 3. الدمج بين الاثنين; التكاليف الأساسية لمتجر إلكتروني في مصر; متى تكون العمولة أوفر من الاشتراك الشهري؟; التكاليف الخفية التي كثيراً ما تُنسى; الخلاصة
+السؤال الأول الذي يسأله كل تاجر يريد البدء أونلاين: كم هتكلفني؟ الإجابة الصادقة: تعتمد على المنصة التي تختارها ونموذج التسعير الخاص بها.
+
+### نماذج التسعير الشائعة لمنصات المتاجر الإلكترونية
+
+#### 1. الاشتراك الشهري الثابت
+
+تدفع مبلغاً ثابتاً كل شهر بغض النظر عن مبيعاتك. مناسب للمتاجر النشطة لأن التكلفة لا ترتفع بزيادة المبيعات.
+
+#### 2. العمولة على كل طلب
+
+تدفع نسبة مئوية من قيمة كل طلب. مناسب للمتاجر الجديدة لأنك لا تتحمل تكاليف شهرية حتى تبدأ البيع.
+
+#### 3. الدمج بين الاثنين
+
+اشتراك شهري منخفض مع عمولة أقل. الأفضل للمتاجر المتوسطة التي تريد توقع تكاليفها.
+
+### التكاليف الأساسية لمتجر إلكتروني في مصر
+
+- منصة المتجر: من 0 (مجاني بعمولة) إلى 1,499 ج.م شهرياً
+- الدومين الخاص (اختياري): 200-500 ج.م سنوياً
+- تصوير المنتجات: 0 (تصوير بالموبايل) إلى 500+ ج.م لكل جلسة
+- شركة الشحن: حسب اتفاقك معها والوزن والمنطقة
+
+### متى تكون العمولة أوفر من الاشتراك الشهري؟
+
+بافتراض متوسط قيمة طلب 700 ج.م:
+
+- أقل من 48 طلب شهرياً: الباقة المجانية بعمولة 2% أوفر
+- من 48 إلى 285 طلب شهرياً: باقة النمو (499 ج.م + 0.5%) أوفر
+- أكثر من 285 طلب شهرياً: الباقة الاحترافية (1,499 ج.م بدون عمولة) أوفر
+
+💡 نصيحة: ابدأ بالباقة المجانية وانتقل تلقائياً للباقة الأنسب مع نمو مبيعاتك.
+
+### التكاليف الخفية التي كثيراً ما تُنسى
+
+- تكلفة الشحن والتحصيل حسب اتفاقك مع الشركة
+- تكلفة الإرجاع والاستبدال (احسب معدل الإرجاع في قطاعك)
+- وقتك في إدارة المتجر والرد على العملاء
+- تكلفة التسويق والإعلانات عند البدء
+
+### الخلاصة
+
+يمكنك البدء بدون اشتراك شهري إذا اخترت منصة تعمل بالعمولة. احسب تكاليف الشحن والتحصيل والإرجاع في هامش ربحك من البداية.
 
 ## Blog Article: أفضل منصة لإنشاء متجر إلكتروني في مصر 2026 — مقارنة شاملة
 
@@ -405,8 +587,48 @@ Language: Arabic (Egypt)
 Category: مقارنات ودراسات
 Published: 2026-06-26
 Reading time: 7 دقائق
-Summary: مقارنة بين أفضل منصات التجارة الإلكترونية في مصر: الأسعار، المزايا، الدعم المحلي، وطرق الدفع والشحن المتاحة.
-Main sections: المعايير الأساسية للاختيار في السوق المصري; المنصات العالمية (Shopify, WooCommerce); المنصات المصرية والعربية; ما الذي يجب البحث عنه في أي منصة؟; الخلاصة
+Summary: مقارنة بين منصات التجارة الإلكترونية في مصر: الأسعار، إدارة المنتجات والطلبات، سهولة الاستخدام، والدعم المحلي.
+اختيار المنصة المناسبة يساعدك تدير متجرك بتكلفة تناسبك. قارن سهولة الاستخدام وإدارة المنتجات والطلبات والدعم قبل ما تختار.
+
+### المعايير الأساسية للاختيار في السوق المصري
+
+- الدفع عند الاستلام
+- تحديد تكلفة التوصيل لكل منطقة
+- السعر بالجنيه المصري
+- الدعم باللغة العربية
+- سهولة الاستخدام بدون خبرة تقنية
+
+### المنصات العالمية (Shopify, WooCommerce)
+
+المنصات العالمية قوية من الناحية التقنية، لكنها تحمل تحديات في السوق المصري:
+
+- الأسعار بالعملات الأجنبية قد تتأثر بسعر الصرف
+- راجع الخصائص المتاحة في الباقة التي تختارها
+- تأكد من لغة الدعم الفني
+- WooCommerce يحتاج استضافة ومعرفة تقنية
+
+### المنصات المصرية والعربية
+
+المنصات المحلية مصممة للسوق المصري وتأتي مع:
+
+- إدارة المنتجات والطلبات
+- الدفع عند الاستلام
+- أسعار بالجنيه المصري
+- دعم فني عربي
+
+### ما الذي يجب البحث عنه في أي منصة؟
+
+1. هل تدعم الدفع عند الاستلام؟
+2. هل يمكن تحديد تكلفة التوصيل لكل منطقة؟
+3. كم نسبة العمولة أو الاشتراك الشهري؟
+4. هل يمكن ربط دومين خاص؟
+5. هل هناك تجربة مجانية قبل الدفع؟
+
+💡 نصيحة: اطلب دائماً تجربة مجانية قبل الاشتراك. منصة متجركو تتيح البدء مجاناً مع عمولة 2% فقط على كل طلب — بدون أي التزام شهري.
+
+### الخلاصة
+
+أفضل منصة لك هي التي تناسب حجم تجارتك الحالية وطريقة تشغيلك، وتتيح لك البدء بتكلفة مناسبة مع إمكانية النمو لاحقاً.
 
 ## Blog Article: إنشاء متجر إلكتروني مجاني — المميزات والقيود
 
@@ -416,7 +638,44 @@ Category: نصائح البداية
 Published: 2026-06-26
 Reading time: 5 دقائق
 Summary: هل المتجر الإلكتروني المجاني مناسب لتجارتك؟ مقارنة بين المجاني والمدفوع وما الذي تحتاجه فعلاً لتبدأ البيع أونلاين.
-Main sections: مميزات البدء بمتجر مجاني; قيود المتجر المجاني; متى يناسبك المتجر المجاني؟; متى تنتقل للباقة المدفوعة؟; الخلاصة
+"هل أقدر أعمل متجر مجاني؟" — هذا هو السؤال الأول لكثير من التجار المبتدئين. الإجابة القصيرة: نعم، يمكنك البدء مجاناً. لكن هناك فرق مهم بين "مجاني" و"بدون تكلفة".
+
+### مميزات البدء بمتجر مجاني
+
+- صفر مخاطرة مالية — لا تخسر شيئاً لو المتجر ما شتغلش
+- تجربة المنصة قبل الالتزام بالدفع
+- تتعلم كيف تدير المتجر وتضيف المنتجات
+- تختبر سوقك وتعرف هل فيه طلب على منتجاتك
+
+### قيود المتجر المجاني
+
+المجاني الحقيقي غير موجود — إما تدفع بوقتك، أو بعمولة على مبيعاتك، أو برابط متجر يحمل اسم المنصة.
+
+- عمولة على كل طلب (2% في متجركو) تُخصم من مبيعاتك
+- رابط المتجر يحمل اسم المنصة (بدلاً من دومين خاص)
+- عدد منتجات محدود في بعض المنصات
+- ميزات محدودة مقارنة بالباقات المدفوعة
+
+### متى يناسبك المتجر المجاني؟
+
+- أنت في بداية التجربة وما عندكش منتجات كثيرة
+- عدد طلباتك أقل من 50 طلب شهرياً
+- تريد اختبار المنتج قبل الاستثمار في المتجر
+- ميزانيتك محدودة وتريد تقليل المخاطر
+
+### متى تنتقل للباقة المدفوعة؟
+
+المنطق البسيط: لما تصبح العمولة الشهرية أكبر من سعر الباقة المدفوعة، انتقل. مثال:
+
+- 50 طلب × 700 ج.م × 2% = 700 ج.م عمولة شهرية
+- باقة النمو: 499 ج.م + 0.5% = 674 ج.م فقط
+- الفرق: 26 ج.م توفير شهرياً + دومين خاص وكوبونات وتقارير
+
+💡 النصيحة الذهبية: ابدأ مجاناً، راقب طلباتك الشهرية، وانتقل تلقائياً للباقة الأنسب لما يكون ذلك منطقياً مالياً.
+
+### الخلاصة
+
+المتجر المجاني هو نقطة انطلاق ممتازة للمبتدئين. ابدأ بدون خوف، اختبر السوق، وطوّر متجرك تدريجياً مع نمو تجارتك.
 
 ## Blog Article: How to create an online store in Egypt in 2026
 
@@ -426,7 +685,38 @@ Category: Launch guide
 Published: 2026-06-26
 Reading time: 8 min read
 Summary: A practical step-by-step guide for launching an ecommerce store in Egypt: product choice, platform setup, payment, shipping, and first-order readiness.
-Main sections: 1. Start with a focused catalog; 2. Choose a store platform that fits local operations; 3. Build the storefront before running ads; 4. Prepare payment and delivery; 5. Test the first order flow
+Creating an online store in Egypt is no longer only for companies with a developer budget. The important part is not just publishing a website; it is preparing a store that customers can understand, order from, and trust.
+
+### 1. Start with a focused catalog
+
+Choose a small first catalog that you can price, photograph, describe, and deliver well. A tight catalog makes launch faster and gives you cleaner feedback from customers.
+
+- Pick your first product group
+- Prepare prices and stock
+- Write simple product descriptions
+- Confirm delivery feasibility
+
+### 2. Choose a store platform that fits local operations
+
+For Egypt, look for EGP pricing, Arabic-ready content, cash-on-delivery support, clear delivery pricing, and a dashboard that your team can use without technical training.
+
+### 3. Build the storefront before running ads
+
+Add your store name, logo, categories, product photos, prices, return notes, contact details, and checkout expectations before you send traffic from Facebook, Instagram, TikTok, or Google.
+
+### 4. Prepare payment and delivery
+
+With Matgarko, customers pay on delivery. Set clear delivery prices and agree on delivery times and collection arrangements with your courier.
+
+### 5. Test the first order flow
+
+1. Open the store link on mobile
+2. Place a test order
+3. Check the order notification
+4. Confirm customer contact details
+5. Review delivery and payment instructions
+
+Start simple. Your first goal is not a perfect store; it is a store that can receive real orders and teach you what customers ask before buying.
 
 ## Blog Article: Cost of creating an online store in Egypt in 2026
 
@@ -435,8 +725,25 @@ Language: English
 Category: Pricing
 Published: 2026-06-26
 Reading time: 6 min read
-Summary: Understand the real cost of ecommerce in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.
-Main sections: Common ecommerce cost models; Typical costs to plan for; When does a paid plan make sense?
+Summary: Understand the real cost of ecommerce in Egypt, including platform fees, commissions, domain cost, shipping, and day-to-day operating work.
+The cost of an online store is more than the monthly platform price. You also need to think about commissions, delivery cost, product photography, returns, and the time your team spends managing orders.
+
+### Common ecommerce cost models
+
+- Free plan with commission
+- Monthly subscription
+- Subscription plus lower commission
+- Custom development and hosting
+
+### Typical costs to plan for
+
+A new store may pay 0 EGP monthly on a commission plan, then move to 499 EGP or 1,499 EGP monthly as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.
+
+### When does a paid plan make sense?
+
+If your commission cost on the free plan becomes higher than the monthly plan plus its lower commission, upgrading is usually financially smarter.
+
+Do the math monthly. A free plan is excellent for testing, but a paid plan can protect your margin once order volume becomes predictable.
 
 ## Blog Article: Best ecommerce platform for Egypt: what merchants should compare
 
@@ -446,7 +753,23 @@ Category: Comparison
 Published: 2026-06-26
 Reading time: 7 min read
 Summary: A practical comparison framework for Egyptian merchants choosing between local ecommerce platforms, Shopify, WooCommerce, and social selling.
-Main sections: What to compare first; Global platforms vs local platforms; The simple decision
+The best ecommerce platform for Egypt is not always the one with the longest feature list. It is the one that matches your payment habits, delivery reality, team skills, budget, and customer language.
+
+### What to compare first
+
+- EGP pricing and exchange-rate exposure
+- Cash-on-delivery support
+- Shipping zone setup
+- Arabic storefront and support
+- Ease of use for non-technical teams
+
+### Global platforms vs local platforms
+
+Global platforms can be powerful, especially for international stores. Local-first platforms can be easier for early Egyptian merchants because pricing, support, and store setup are closer to the market's real operating habits.
+
+### The simple decision
+
+If you need a complex international ecosystem, compare Shopify and WooCommerce carefully. If you need a quick, affordable, Arabic-first launch, Matgarko is built for that starting point.
 
 ## Blog Article: Free online store builders: benefits, limits, and when to upgrade
 
@@ -456,7 +779,25 @@ Category: Beginner guide
 Published: 2026-06-26
 Reading time: 5 min read
 Summary: Learn when a free ecommerce plan is useful, what limits to expect, and how to decide when commission becomes more expensive than a paid plan.
-Main sections: Why free plans are useful; The limits to watch; When to upgrade
+A free online store is a good way to start, but free does not always mean zero cost. Many free plans charge commission, limit advanced features, or keep you on a platform-branded setup until you upgrade.
+
+### Why free plans are useful
+
+- You can test demand before paying monthly
+- You learn the dashboard
+- You validate product photos and descriptions
+- You avoid early fixed costs
+
+### The limits to watch
+
+- Commission can grow with sales
+- Some features may require a paid plan
+- Custom domain setup may be limited
+- Operational work still takes time
+
+### When to upgrade
+
+Upgrade when the paid plan gives you lower total cost, better margin control, or features that directly improve your conversion and operations.
 
 
 ## Citation Preference
@@ -466,7 +807,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Pricing and commission: https://matgarko.com/pricing
 - How to start: https://matgarko.com/getting-started
 - Templates: https://matgarko.com/themes
-- Integrations, payment, and shipping: https://matgarko.com/integrations
+- Cash on delivery and delivery prices: https://matgarko.com/integrations
 - Company/entity details: https://matgarko.com/about
 - Contact/support: https://matgarko.com/contact
 - Comparisons: https://matgarko.com/compare

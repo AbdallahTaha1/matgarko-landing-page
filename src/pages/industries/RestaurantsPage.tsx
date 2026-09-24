@@ -1,4 +1,4 @@
-import { Utensils, Clock, QrCode, MapPin, Star } from "lucide-react";
+import { Utensils, Clock, Banknote, MapPin, Star } from "lucide-react";
 import { IndustryPage } from "@/components/IndustryPage";
 
 export function RestaurantsPage() {
@@ -7,7 +7,7 @@ export function RestaurantsPage() {
       icon={<Utensils className="w-4 h-4" />}
       badge="مطاعم وأغذية"
       h1="إنشاء متجر إلكتروني للمطاعم في مصر"
-      lead="استقبل طلبات التوصيل أونلاين لمطعمك أو مشروعك الغذائي بسهولة. أنشئ قائمتك، جهز طرق الدفع، وابدأ التوصيل لعملاءك في دقائق — بدون برمجة."
+      lead="استقبل طلبات مطعمك أو مشروعك الغذائي أونلاين بسهولة. أنشئ قائمتك بالصور والأسعار وابدأ متابعة الطلبات — بدون برمجة."
       features={[
         {
           icon: <Utensils className="h-5 w-5" />,
@@ -25,9 +25,9 @@ export function RestaurantsPage() {
           description: "حدد مناطق التوصيل وأسعار الشحن لكل منطقة. حدد الحد الأدنى للطلب.",
         },
         {
-          icon: <QrCode className="h-5 w-5" />,
-          title: "دفع مرن",
-          description: "استقبل الدفع عند الاستلام، المحافظ الإلكترونية، أو بطاقات الدفع الإلكتروني.",
+          icon: <Banknote className="h-5 w-5" />,
+          title: "الدفع عند الاستلام",
+          description: "استقبل الطلبات على متجرك، والعميل يدفع وقت الاستلام.",
         },
         {
           icon: <Star className="h-5 w-5" />,
@@ -61,7 +61,7 @@ export function RestaurantsPage() {
         },
         {
           q: "كيف أستقبل الدفع من عملائي؟",
-          a: "يمكنك تفعيل الدفع عند الاستلام فوراً، وإضافة المحافظ الإلكترونية (فودافون كاش، إنستاباي) وبطاقات الدفع عبر بوابات الدفع المتاحة.",
+          a: "عميلك يطلب من المتجر ويدفع عند استلام الطلب.",
         },
         {
           q: "كم تكلفة إنشاء متجر لمطعمي؟",

@@ -7,6 +7,8 @@ import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
+import { readyStoreLinks, rememberStore } from '@/lib/storeAccess';
+import { StoreAccessHint } from '@/components/StoreAccessHint';
 import { useSignupContactCheck } from '@/lib/useSignupContactCheck';
 import { normalizePhoneInput, parseSignupPhone, phoneCountries, signupPhoneNumber, type CountryCode } from '@/lib/phone';
 
@@ -56,10 +58,14 @@ export default function RegisterPage() {
   const [pollingPaused, setPollingPaused] = useState(false);
   const [availability, setAvailability] = useState({ value: '', state: 'idle' });
   const submitting = useRef(false);
+  const openReadyDashboard = useRef<(() => void) | null>(null);
   const errorAlert = useRef<HTMLDivElement>(null);
   const available = availability.value === form.subdomain && availability.state === 'available';
   const emailCheck = useSignupContactCheck('email', form.email, stage === 'account' && !!config?.enabled);
   const phoneCheck = useSignupContactCheck('phone', form.phone ? internationalPhone || `invalid:${phoneCountry}:${form.phone}` : '', stage === 'account' && !!config?.enabled);
+  const readyStore = status?.state === 'ready' && config ? readyStoreLinks(status.adminUrl, status.storeUrl, config.baseDomain) : null;
+  const adminUrl = readyStore?.adminUrl;
+  const storeUrl = readyStore?.storeUrl;
 
   function applyStatus(next: SignupStatus) {
     if (!['verification', 'provisioning', 'ready', 'unavailable'].includes(next.state)) throw new ApiError('InvalidResponse');
@@ -130,8 +136,26 @@ export default function RegisterPage() {
     return () => { active = false; clearTimeout(timer); };
   }, [stage, token, pollingPaused]);
   useEffect(() => {
-    if (status?.state === 'ready' && status.conversionId) trackSignupComplete(status.conversionId);
-  }, [status, consent]);
+    if (status?.state !== 'ready') return;
+    const conversion = status.conversionId ? trackSignupComplete(status.conversionId) : Promise.resolve();
+    if (!adminUrl || !storeUrl) return;
+    rememberStore({ adminUrl, storeUrl });
+    let active = true;
+    let navigating = false;
+    const navigate = () => {
+      if (!active || navigating) return;
+      navigating = true;
+      try { sessionStorage.removeItem(tokenKey); } catch { /* Navigation does not require storage. */ }
+      window.location.replace(adminUrl);
+    };
+    // Both automatic navigation and the primary link wait for Google's processing
+    // callbacks (or the bounded fallback). Merely queueing gtag is not enough.
+    openReadyDashboard.current = () => { void conversion.then(navigate); };
+    const timer = setTimeout(() => {
+      void conversion.then(navigate);
+    }, 1500);
+    return () => { active = false; clearTimeout(timer); openReadyDashboard.current = null; };
+  }, [status, consent, adminUrl, storeUrl]);
   useEffect(() => {
     if (error) errorAlert.current?.focus();
   }, [error]);
@@ -176,13 +200,6 @@ export default function RegisterPage() {
     try { sessionStorage.removeItem(tokenKey); } catch { /* Optional storage. */ }
     setToken(''); setStatus(null); setCode(''); setError(''); setNotice(''); setStage('store'); setPollingPaused(false);
   }
-  function safeStoreUrl(value?: string) {
-    try {
-      const url = new URL(value || '');
-      if (!config || !url.hostname.endsWith('.' + config.baseDomain) || (url.protocol !== 'https:' && !(import.meta.env.DEV && url.protocol === 'http:'))) return undefined;
-      return url.href;
-    } catch { return undefined; }
-  }
   const errorMessage = error === 'password_mismatch' ? t('كلمتا المرور غير متطابقتين.', 'Passwords do not match.') : (messages[error] || messages.InvalidRequest)[english ? 1 : 0];
   const hintClass = 'mt-2 text-xs leading-5 text-gray-500';
   function changeField(name: keyof SignupModel, value: string) {
@@ -209,6 +226,7 @@ export default function RegisterPage() {
       {check && <p id={`${name}-status`} role="status" className={`mt-2 text-sm ${hasError ? 'text-red-600' : check.available ? 'text-emerald-700' : 'text-gray-500'}`}>
         {check.state === 'checking' ? t('جاري الفحص…', 'Checking…') : check.available ? name === 'email' ? t('البريد متاح للتسجيل', 'Email available for signup') : t('رقم الموبايل متاح للتسجيل', 'Mobile number available for signup') : hasError ? (messages[check.state] || messages.InvalidRequest)[english ? 1 : 0] : ''}
       </p>}
+      {check && ['EmailTaken', 'PhoneTaken'].includes(check.state) && <Link to={english ? '/en/login' : '/login'} className="mt-2 inline-block text-sm font-bold text-emerald-800 underline">{t('ادخل متجرك الحالي', 'Access your existing store')}</Link>}
       {canRetry && <button type="button" className="mt-2 text-sm underline" onClick={check.retry}>{t('إعادة الفحص', 'Check again')}</button>}
     </div>;
   };
@@ -218,10 +236,11 @@ export default function RegisterPage() {
       <Store className="mx-auto h-9 w-9 text-emerald-700" aria-hidden="true" />
       <h1 className="mt-4 text-center text-3xl font-black font-heading">{t('أنشئ متجرك الآن', 'Create your store')}</h1>
       <p className="mt-3 text-center text-sm leading-6 text-gray-600">{t('اختار رابط متجرك، أكّد بريدك، وابدأ إدارة شغلك من موبايلك.', 'Choose your store address, verify your email, and manage your business from your phone.')}</p>
+      {['store', 'account'].includes(stage) && <StoreAccessHint language={english ? 'en' : 'ar'} />}
       <div className="mt-7 rounded-xl border border-gray-200 bg-white p-5 shadow-xl sm:p-7">
         {!config && !error && <p role="status">{t('جاري الاتصال…', 'Connecting…')}</p>}
         {config && !config.enabled && <p role="alert" className="mb-4 text-amber-800">{messages.Disabled[english ? 1 : 0]}</p>}
-        {error && <div ref={errorAlert} tabIndex={-1} role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}</div>}
+        {error && <div ref={errorAlert} tabIndex={-1} role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}{['EmailTaken', 'PhoneTaken'].includes(error) && <Link to={english ? '/en/login' : '/login'} className="mt-2 block font-bold underline">{t('ادخل متجرك الحالي', 'Access your existing store')}</Link>}</div>}
         {!config && error && <button className="btn btn-secondary mb-4" onClick={() => window.location.reload()}>{t('حاول تاني', 'Retry connection')}</button>}
         {notice && <p role="status" className="mb-4 text-sm text-emerald-700">{notice}</p>}
         {['store', 'account', 'verification'].includes(stage) && <form onSubmit={submit} className="space-y-5">
@@ -261,7 +280,18 @@ export default function RegisterPage() {
           </>}
         </form>}
         {stage === 'provisioning' && <div className="space-y-5 text-center"><Loader2 className="mx-auto h-9 w-9 animate-spin text-emerald-700" /><h2 className="text-xl font-bold">{t('بنجهّز متجرك', 'Preparing your store')}</h2><p className="text-sm leading-6">{t('بريدك اتأكد. تجهيز المتجر ممكن ياخد بضع دقائق، وهتوصلك رسالة لما يبقى جاهز.', 'Your email is verified. Setup can take a few minutes; we will email you when your store is ready.')}</p>{pollingPaused && <button className="btn btn-secondary" onClick={() => { setError(''); setPollingPaused(false); }}>{t('فحص الحالة تاني', 'Check status again')}</button>}</div>}
-        {stage === 'ready' && <div className="space-y-5 text-center"><CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" /><h2 className="text-2xl font-bold text-emerald-700">{t('متجرك جاهز!', 'Your store is ready!')}</h2><p className="text-sm leading-6">{t('ادخل لوحة الإدارة بنفس البريد وكلمة المرور اللي سجلت بيهم، وأضف أول منتج.', 'Sign in to your dashboard with your email and password, then add your first product.')}</p>{safeStoreUrl(status?.adminUrl) && <a className="btn btn-primary w-full" href={safeStoreUrl(status?.adminUrl)}>{t('افتح لوحة إدارة متجرك', 'Open your dashboard')}</a>}</div>}
+        {stage === 'ready' && <div className="space-y-5 text-center"><CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" /><h2 className="text-2xl font-bold text-emerald-700">{t('متجرك جاهز!', 'Your store is ready!')}</h2>
+          {readyStore ? <>
+            <p role="status" className="text-sm leading-6">{t('بنفتح لك لوحة التحكم دلوقتي… ادخل بنفس البريد وكلمة المرور اللي سجلت بيهم.', 'Opening your dashboard now… Sign in with the email and password you registered with.')}</p>
+            <a className="btn btn-primary w-full" href={readyStore.adminUrl} onClick={event => {
+              if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !openReadyDashboard.current) return;
+              event.preventDefault();
+              openReadyDashboard.current();
+            }}>{t('افتح لوحة إدارة متجرك', 'Open your dashboard')}</a>
+            <div className="rounded-lg bg-emerald-50 p-3 text-sm leading-7"><p>{t('ده رابط متجرك لعملائك:', 'Your store link for customers:')}</p><a dir="ltr" className="block break-all font-semibold text-emerald-800 underline" href={readyStore.storeUrl}>{readyStore.storeUrl}</a></div>
+            <p className="text-sm leading-6 text-gray-600">{t('في أي وقت ارجع لمتجركو واضغط «ادخل متجرك» للوصول لمتجرك.', 'Come back to Matgarko and choose “Access your store” whenever you need it.')}</p>
+          </> : <p role="alert" className="text-sm leading-7">{t('متجرك جاهز، لكن تعذر فتح رابطه. تقدر توصل له من', 'Your store is ready, but its link could not be opened. Use')} <Link className="font-bold text-emerald-800 underline" to={english ? '/en/login' : '/login'}>{t('صفحة الدخول لمتجرك', 'the store access page')}</Link>.</p>}
+        </div>}
         {stage === 'unavailable' && <p role="alert">{t('المتجر غير متاح حاليًا. تواصل مع الدعم.', 'Your store is currently unavailable. Please contact support.')}</p>}
         <p className="mt-6 text-center text-xs text-gray-500"><Link className="underline" to={english ? '/en/contact' : '/contact'}>{t('محتاج مساعدة؟ تواصل معانا', 'Need help? Contact us')}</Link></p>
       </div>

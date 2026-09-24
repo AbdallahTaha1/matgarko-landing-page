@@ -12,7 +12,7 @@ assert(urls.length > 0, 'Sitemap is empty');
 assert.equal(new Set(urls.map(String)).size, urls.length, 'Duplicate sitemap URLs');
 assert(!sitemap.includes('<lastmod>'), 'Do not claim a new modification date on every build');
 const origin = urls[0].origin;
-const routes = new Set([...urls.map((url) => url.pathname), '/register', '/en/register', '/404', '/en/404']);
+const routes = new Set([...urls.map((url) => url.pathname), '/register', '/en/register', '/login', '/en/login', '/404', '/en/404']);
 const browser = await chromium.launch();
 const page = await browser.newPage();
 const titles = new Set();
@@ -36,7 +36,7 @@ try {
         images: [...doc.querySelectorAll('img')].map((el) => ({ src: el.getAttribute('src'), alt: el.getAttribute('alt') })),
       };
     }, html);
-    const noindex = /\/(register|404)$/.test(route);
+    const noindex = /\/(register|login|404)$/.test(route);
     assert(data.title && data.description, `${route}: missing title or description`);
     assert(!titles.has(data.title), `${route}: duplicate title`);
     titles.add(data.title);
@@ -75,7 +75,7 @@ try {
   }
   const full = await fs.readFile(path.join(dist, 'llms-full.txt'), 'utf8');
   assert(full.includes('## Frequently Asked Questions'), 'Missing FAQ text for retrieval');
-  assert(!urls.some((url) => /\/(register|404)$/.test(url.pathname)), 'Private/error route in sitemap');
+  assert(!urls.some((url) => /\/(register|login|404)$/.test(url.pathname)), 'Private/error route in sitemap');
   assert(sitemap.includes('xhtml:link'), 'Missing sitemap language alternates');
   console.log(`SEO audit passed: ${routes.size} prerendered pages; metadata, HTML content, links, images, schemas, sitemap, and AI summaries.`);
 } finally {

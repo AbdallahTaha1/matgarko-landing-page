@@ -52,7 +52,7 @@ export const englishFaqs = [
   {
     question: "What is Matgarko and who is it for?",
     answer:
-      `${positioning.en.description} Merchants prepare their products, payment and shipping options, and market their stores to attract customers.`,
+      `${positioning.en.description} Merchants prepare their products, manage orders, and market their stores to attract customers.`,
   },
   {
     question: "Can I download the Matgarko mobile app?",
@@ -61,7 +61,7 @@ export const englishFaqs = [
   {
     question: "Can I build the store myself?",
     answer:
-      "Yes. Matgarko is made for merchants who want to launch without a developer. You choose the store name, add products, configure payment and shipping, then start receiving orders.",
+      "Yes. Matgarko is made for merchants who want to launch without a developer. You choose the store name, add products, set delivery prices, then start receiving orders.",
   },
   {
     question: "Is Matgarko only for Egypt?",
@@ -79,9 +79,9 @@ export const englishFaqs = [
       "Yes. The free plan lets you start with no monthly fee and pay a 2% commission on completed orders. Paid plans lower or remove the commission as your store grows.",
   },
   {
-    question: "Does Matgarko support payment and shipping workflows?",
+    question: "Does Matgarko support cash on delivery?",
     answer:
-      "You can prepare the payment and shipping settings that fit your business, including cash on delivery and local delivery pricing. Gateway fees, if any, are charged by the payment provider separately.",
+      "Yes. Cash on delivery is available on every plan. You can also set delivery prices for each area so customers see the cost before placing an order.",
   },
   {
     question: "Can I use my own domain?",
@@ -97,7 +97,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     lead:
       "Matgarko brings the storefront, product catalog, orders, customers, offers, and operating settings into one merchant-friendly platform.",
     primaryCta: "Start free",
-    secondaryCta: "View integrations",
+    secondaryCta: "Payment and delivery",
     sections: [
       {
         title: "Launch the storefront",
@@ -114,36 +114,36 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Handle orders clearly",
         text:
-          "Move from messages and spreadsheets to a structured order flow. Track customer details, delivery status, and order history from the dashboard.",
+          "Move from messages and spreadsheets to a structured order flow. Track customer details, order status, and order history from the dashboard.",
         items: ["Order tracking", "Customer records", "Operational notes"],
       },
       {
         title: "Grow without rebuilding",
         text:
-          "Start with the essentials, then add templates, custom domain work, integrations, and lower-commission plans as your business grows.",
+          "Start with the essentials, then explore templates, a custom domain, and lower-commission plans as your business grows.",
         items: ["Plans for different stages", "Custom domain path", "Support for growing catalogs"],
       },
     ],
   },
   integrations: {
     kicker: "Payment and shipping",
-    title: "Prepare the workflows your customers expect in Egypt and MENA",
+    title: "Set clear payment and delivery details",
     lead:
-      "Matgarko focuses on practical ecommerce operations: cash on delivery, payment setup, shipping zones, delivery fees, and store settings that are easy to manage.",
+      "Accept cash-on-delivery orders and make delivery costs clear to your customers.",
     primaryCta: "Create your store",
     secondaryCta: "Compare plans",
     sections: [
       {
-        title: "Payment options",
+        title: "Cash on delivery",
         text:
-          "Offer payment methods that match your audience. For many Egyptian stores, cash on delivery remains essential while digital payment options can be added as the business matures.",
-        items: ["Cash on delivery", "Payment provider setup", "Clear checkout expectations"],
+          "Customers place an order through your store and pay when they receive it.",
+        items: ["Cash on delivery", "Available on every plan"],
       },
       {
         title: "Shipping zones and fees",
         text:
           "Define delivery areas, shipping prices, and rules so customers know what to expect before placing the order.",
-        items: ["Delivery zones", "Shipping prices", "Operational notes for fulfillment"],
+        items: ["Delivery zones", "Shipping prices"],
       },
       {
         title: "Marketing and analytics readiness",
@@ -207,7 +207,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "3. Configure operations",
         text:
-          "Set delivery areas, shipping fees, payment expectations, contact channels, and order handling rules before you start sending traffic.",
+          "Set delivery areas, shipping fees, contact channels, and order handling rules before you start sending traffic. Customers pay on delivery.",
       },
       {
         title: "4. Launch and improve",
@@ -282,7 +282,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Plans, commissions, and payments",
         text:
-          "Plan prices and commissions are shown on the pricing page. Third-party payment providers or delivery companies may charge separate fees outside Matgarko subscription or commission fees.",
+          "Plan prices and commissions are shown on the pricing page. Delivery companies may charge separate fees outside Matgarko subscription or commission fees.",
       },
       {
         title: "Store content",
@@ -319,7 +319,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Third-party services",
         text:
-          "Payment, analytics, hosting, communication, or delivery-related providers may process limited data where needed to provide their part of the service.",
+          "Analytics, hosting, or communication providers may process limited data where needed to provide their part of the service.",
       },
       {
         title: "Contact",
@@ -569,7 +569,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "For Egypt, look for EGP pricing, Arabic-ready content, cash-on-delivery support, local shipping setup, and a dashboard that your team can use without technical training.",
+          "For Egypt, look for EGP pricing, Arabic-ready content, cash-on-delivery support, clear delivery pricing, and a dashboard that your team can use without technical training.",
       },
       {
         type: "h2",
@@ -587,7 +587,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "Cash on delivery is still important for many Egyptian shoppers. If you offer digital payments, make sure gateway fees and settlement timing are clear in your margin planning.",
+          "With Matgarko, customers pay on delivery. Set clear delivery prices and agree on delivery times and collection arrangements with your courier.",
       },
       {
         type: "h2",
@@ -608,7 +608,7 @@ export const englishBlogArticles: BlogArticle[] = [
     slug: "cost-of-online-store-egypt-2026",
     title: "Cost of creating an online store in Egypt in 2026",
     description:
-      "Understand the real cost of ecommerce in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.",
+      "Understand the real cost of ecommerce in Egypt, including platform fees, commissions, domain cost, shipping, and day-to-day operating work.",
     category: "Pricing",
     readingTime: "6 min read",
     publishDate: "2026-06-26",
@@ -616,7 +616,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "The cost of an online store is more than the monthly platform price. You also need to think about commissions, payment provider fees, delivery cost, product photography, returns, and the time your team spends managing orders.",
+          "The cost of an online store is more than the monthly platform price. You also need to think about commissions, delivery cost, product photography, returns, and the time your team spends managing orders.",
       },
       {
         type: "h2",
@@ -633,7 +633,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "A new store may pay 0 EGP monthly on a commission plan, then move to 499 EGP or 1,499 EGP monthly as volume grows. Other costs can include a custom domain, product photos, payment gateway fees, ads, shipping, and returns.",
+          "A new store may pay 0 EGP monthly on a commission plan, then move to 499 EGP or 1,499 EGP monthly as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.",
       },
       {
         type: "h2",
@@ -737,6 +737,11 @@ export const englishBlogArticles: BlogArticle[] = [
 ];
 
 export const englishSeoPages: Record<string, EnglishSeoEntry> = {
+  "/en/download": {
+    title: "Download Matgarko for Android | Manage your store on mobile",
+    description: "Find Matgarko app download options to manage your products and orders on mobile, or use your store dashboard in the browser without installing an app.",
+    keywords: ["download Matgarko", "Android merchant app", "Matgarko APK"],
+  },
   "/en": {
     title: "Run your online store from your phone | Matgarko",
     description:
@@ -746,14 +751,14 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/solutions": {
     title: "Ecommerce store management solutions | Matgarko",
     description:
-      "Manage storefronts, products, orders, customers, offers, payment setup, and shipping workflows in one Arabic-first ecommerce platform.",
+      "Manage storefronts, products, orders, customers, and offers in one Arabic-first ecommerce platform.",
     keywords: ["ecommerce store management", "online store dashboard", "product and order management", "Arabic ecommerce software"],
   },
   "/en/integrations": {
-    title: "Payment and shipping setup for ecommerce | Matgarko",
+    title: "Cash on delivery and delivery prices | Matgarko",
     description:
-      "Prepare cash on delivery, payment workflows, shipping zones, delivery fees, and operational settings for ecommerce stores in Egypt and MENA.",
-    keywords: ["ecommerce payment Egypt", "cash on delivery ecommerce", "shipping setup online store", "MENA ecommerce logistics"],
+      "Accept cash-on-delivery orders and set delivery areas and prices so customers know the cost before ordering.",
+    keywords: ["cash on delivery ecommerce", "store delivery prices", "delivery areas"],
   },
   "/en/themes": {
     title: "Online store templates for MENA businesses | Matgarko",
@@ -784,6 +789,12 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
     description:
       "Contact Matgarko by WhatsApp or email to ask about ecommerce pricing, store setup, migration, or launching your online store.",
     keywords: ["contact Matgarko", "ecommerce setup support", "online store support Egypt", "Matgarko WhatsApp"],
+  },
+  "/en/login": {
+    title: "Access your store and dashboard | Matgarko",
+    description: "Open your existing Matgarko store dashboard, copy your store link, or get help finding it.",
+    keywords: ["Matgarko login", "store dashboard", "find my store"],
+    noindex: true,
   },
   "/en/register": {
     title: "Create your Matgarko store account",
@@ -851,7 +862,7 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/blog/cost-of-online-store-egypt-2026": {
     title: "Cost of creating an online store in Egypt in 2026 | Matgarko",
     description:
-      "Understand ecommerce costs in Egypt, including platform fees, commissions, domain cost, payment gateway fees, shipping, and hidden operating work.",
+      "Understand ecommerce costs in Egypt, including platform fees, commissions, domain cost, shipping, and day-to-day operating work.",
     keywords: ["online store cost Egypt", "ecommerce pricing Egypt", "cost to start ecommerce store", "Matgarko pricing"],
     type: "article",
   },
@@ -902,6 +913,7 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
 };
 
 export const englishOrderedPaths = [
+  "/en/download",
   "/en",
   "/en/solutions",
   "/en/themes",
@@ -911,6 +923,7 @@ export const englishOrderedPaths = [
   "/en/about",
   "/en/contact",
   "/en/register",
+  "/en/login",
   "/en/terms",
   "/en/privacy",
   "/en/store/restaurants",

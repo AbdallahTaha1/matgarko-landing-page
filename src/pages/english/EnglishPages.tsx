@@ -31,7 +31,7 @@ function secondaryHref(label?: string) {
   const lowerLabel = label.toLowerCase();
   if (lowerLabel.includes("email")) return EMAIL_URL;
   if (lowerLabel.includes("contact")) return "/en/contact";
-  if (lowerLabel.includes("integration")) return "/en/integrations";
+  if (lowerLabel.includes("integration") || lowerLabel.includes("payment")) return "/en/integrations";
   if (lowerLabel.includes("plan") || lowerLabel.includes("pricing")) return "/en/pricing";
   if (lowerLabel.includes("guide")) return "/en/blog/how-to-create-online-store-egypt";
   if (lowerLabel.includes("store type")) return "/en/store/restaurants";

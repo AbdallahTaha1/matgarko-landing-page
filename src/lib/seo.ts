@@ -20,7 +20,7 @@ const CORE_TOPICS = [
   "No-code ecommerce store builder",
   "Egyptian pound ecommerce pricing",
   "Cash on delivery",
-  "Payment and shipping setup",
+  "Delivery area pricing",
   "Store templates",
   "Product and order management",
 ];
@@ -36,6 +36,12 @@ export type SeoPage = {
 };
 
 export const seoPages: Record<string, SeoPage> = {
+  "/download": {
+    path: "/download",
+    title: "تحميل تطبيق متجركو لأندرويد | إدارة متجرك من الموبايل",
+    description: "خيارات تحميل تطبيق متجركو لإدارة الطلبات والمنتجات من الموبايل، مع إمكانية إدارة متجرك من المتصفح بدون تثبيت تطبيق.",
+    keywords: ["تحميل متجركو", "تطبيق إدارة المتجر", "متجركو أندرويد"],
+  },
   "/": {
     path: "/",
     title: "إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو",
@@ -55,15 +61,15 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/solutions",
     title: "حلول إدارة المتجر الإلكتروني | متجركو",
     description:
-      "كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، صفحات مهمة، وتجهيزات دفع وشحن تناسب نشاطك.",
+      "كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، وصفحات مهمة لنشاطك.",
     keywords: ["إدارة متجر إلكتروني", "إدارة الطلبات", "إدارة المنتجات", "لوحة تحكم متجر"],
   },
   "/integrations": {
     path: "/integrations",
-    title: "الدفع والشحن والتكاملات | متجركو",
+    title: "الدفع عند الاستلام وأسعار التوصيل | متجركو",
     description:
-      "جهز طرق الدفع، مناطق الشحن، أدوات التسويق، وإعدادات تشغيل متجرك الإلكتروني بما يناسب عملاءك في السوق العربي.",
-    keywords: ["طرق دفع إلكتروني", "شحن متجر إلكتروني", "تكاملات متجر", "دفع عند الاستلام"],
+      "استقبل طلبات الدفع عند الاستلام، وحدد مناطق الشحن وسعر التوصيل بوضوح لعملاء متجرك.",
+    keywords: ["دفع عند الاستلام", "أسعار التوصيل", "مناطق الشحن"],
   },
   "/themes": {
     path: "/themes",
@@ -76,7 +82,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/getting-started",
     title: "كيفية إنشاء متجر إلكتروني خطوة بخطوة | متجركو",
     description:
-      "تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تجهيز الدفع والشحن، ثم استقبال أول طلب في وقت قصير.",
+      "تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تحديد تكلفة التوصيل، ثم استقبال أول طلب في وقت قصير.",
     keywords: ["خطوات إنشاء متجر إلكتروني", "كيفية إنشاء متجر إلكتروني", "ابدأ البيع أونلاين", "إنشاء متجر بدون كود"],
   },
   "/pricing": {
@@ -106,6 +112,13 @@ export const seoPages: Record<string, SeoPage> = {
       "تواصل مع فريق متجركو عبر واتساب أو البريد الإلكتروني للاستفسار عن الباقات، البدء مجاناً، وخطوات إنشاء المتجر.",
     keywords: ["تواصل متجركو", "دعم متجر إلكتروني", "واتساب متجركو"],
   },
+  "/login": {
+    path: "/login",
+    title: "الدخول لمتجرك ولوحة التحكم | متجركو",
+    description: "افتح لوحة تحكم متجرك الحالي، انسخ رابط متجرك، أو اطلب المساعدة لو نسيت الرابط.",
+    keywords: ["تسجيل دخول متجركو", "رابط متجري", "لوحة تحكم متجركو"],
+    noindex: true,
+  },
   "/register": {
     path: "/register",
     title: "إنشاء حساب متجر إلكتروني | متجركو",
@@ -133,14 +146,14 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/store/restaurants",
     title: "إنشاء متجر إلكتروني للمطاعم في مصر | متجركو",
     description:
-      "أنشئ متجر إلكتروني لمطعمك أو مشروعك الغذائي في دقائق. استقبل طلبات التوصيل أونلاين، أدر القائمة، وجهز الدفع والشحن بسهولة.",
+      "أنشئ متجر إلكتروني لمطعمك أو مشروعك الغذائي في دقائق. اعرض القائمة بالصور والأسعار واستقبل طلبات عملائك أونلاين.",
     keywords: ["إنشاء متجر إلكتروني للمطاعم", "متجر أونلاين للمطاعم", "طلبات توصيل أونلاين", "متجر أكل أونلاين مصر"],
   },
   "/store/clothing": {
     path: "/store/clothing",
     title: "إنشاء متجر ملابس إلكتروني في مصر | متجركو",
     description:
-      "افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، وتوصيل سريع لعملاءك.",
+      "افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، ومتابعة طلبات عملائك.",
     keywords: ["إنشاء متجر ملابس إلكتروني", "متجر ملابس أونلاين مصر", "متجر موضة إلكتروني", "بيع ملابس أونلاين"],
   },
   "/store/electronics": {
@@ -154,14 +167,14 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/store/cosmetics",
     title: "إنشاء متجر مستحضرات تجميل أونلاين | متجركو",
     description:
-      "أنشئ متجر عناية وجمال احترافي أونلاين. عرض المنتجات بوصف دقيق، إدارة الطلبات، وتوصيل سريع لعملاءك في مصر.",
+      "أنشئ متجر عناية وجمال احترافي أونلاين. عرض المنتجات بوصف دقيق وإدارة طلبات عملائك في مصر.",
     keywords: ["إنشاء متجر تجميل إلكتروني", "متجر عناية أونلاين مصر", "بيع مستحضرات تجميل أونلاين", "متجر جمال إلكتروني"],
   },
   "/store/furniture": {
     path: "/store/furniture",
     title: "إنشاء متجر أثاث وديكور أونلاين في مصر | متجركو",
     description:
-      "افتح متجر أثاث وديكور منزلي أونلاين. عرض المنتجات بتفاصيل واضحة ومقاسات دقيقة، وإدارة الطلبات والتوصيل بسهولة.",
+      "افتح متجر أثاث وديكور منزلي أونلاين. عرض المنتجات بتفاصيل واضحة ومقاسات دقيقة، وإدارة الطلبات بسهولة.",
     keywords: ["إنشاء متجر أثاث إلكتروني", "متجر ديكور أونلاين مصر", "بيع أثاث أونلاين", "متجر منزل إلكتروني"],
   },
   // Blog
@@ -193,7 +206,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/blog/best-ecommerce-platform-egypt",
     title: "أفضل منصة لإنشاء متجر إلكتروني في مصر 2026 | مقارنة شاملة",
     description:
-      "مقارنة بين أفضل منصات التجارة الإلكترونية في مصر: الأسعار، المزايا، الدعم المحلي، وطرق الدفع والشحن المتاحة.",
+      "مقارنة بين منصات التجارة الإلكترونية في مصر: الأسعار، إدارة المنتجات والطلبات، سهولة الاستخدام، والدعم المحلي.",
     keywords: ["أفضل منصة إنشاء متجر إلكتروني مصر", "مقارنة منصات التجارة الإلكترونية", "أفضل موقع لبيع أونلاين مصر"],
     type: "article",
   },
@@ -217,7 +230,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/compare/easyorders",
     title: "متجركو vs إيزي أوردرز — مقارنة 2026 | بديل إيزي أوردرز",
     description:
-      "مقارنة تفصيلية بين متجركو وإيزي أوردرز للتاجر المصري. الأسعار، بوابات الدفع، والمزايا — اكتشف البديل الأرخص بالجنيه المصري.",
+      "مقارنة بين متجركو وإيزي أوردرز للتاجر المصري من حيث الأسعار وإدارة المنتجات والطلبات وسهولة الاستخدام.",
     keywords: ["بديل إيزي أوردرز", "متجركو vs إيزي أوردرز", "إيزي أوردرز مقارنة", "easyorders بديل", "افضل بديل easyorders مصر"],
   },
   "/compare/shopify": {
@@ -231,7 +244,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/compare/salla",
     title: "بديل سلة في مصر — منصة مصرية 100% | متجركو vs سلة",
     description:
-      "سلة منصة خليجية رائعة — لكن للتاجر المصري، متجركو مصممة لمصر من البداية. مقارنة الأسعار والمزايا ودعم بوابات الدفع المصرية.",
+      "قارن متجركو وسلة من حيث الأسعار والمزايا وسهولة الاستخدام، واختار المنصة المناسبة لمتجرك.",
     keywords: ["بديل سلة في مصر", "سلة مصر مقارنة", "متجركو vs سلة", "منصة مثل سلة في مصر", "بديل منصة سلة"],
   },
   "/compare/woocommerce": {
@@ -278,6 +291,7 @@ export const sitemapPages = indexableSeoPages.map((page) => {
 });
 
 const arabicOrderedSeoPages = [
+  seoPages["/download"],
   seoPages["/"],
   seoPages["/solutions"],
   seoPages["/themes"],
@@ -287,6 +301,7 @@ const arabicOrderedSeoPages = [
   seoPages["/about"],
   seoPages["/contact"],
   seoPages["/register"],
+  seoPages["/login"],
   seoPages["/terms"],
   seoPages["/privacy"],
   seoPages["/store/restaurants"],
@@ -628,7 +643,8 @@ export function softwareSchema(page?: SeoPage) {
       "Create an online store without coding",
       "Manage products and orders",
       "Use editable store templates",
-      "Prepare payment and shipping workflows",
+      "Accept cash-on-delivery orders",
+      "Set delivery prices by area",
       "Manage customers and offers",
       "Use store reports",
       "Connect a custom domain",
@@ -636,7 +652,8 @@ export function softwareSchema(page?: SeoPage) {
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
       "قوالب متجر قابلة للتعديل",
-      "تجهيز الدفع والشحن",
+      "استقبال طلبات الدفع عند الاستلام",
+      "تحديد سعر التوصيل لكل منطقة",
       "إدارة العملاء والعروض",
       "تقارير المتجر",
       "دومين خاص",
@@ -800,7 +817,7 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
-- Main jobs: create an ecommerce store, manage products, manage orders, organize customers, configure shipping, configure payment, launch offers, and use store templates.
+- Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and use store templates.
 - Differentiators: mobile-first, Arabic-first, built for solo merchants, EGP pricing, and no technical experience required.
 - Not a marketplace: Matgarko provides software for merchants to create their own stores.
 
@@ -899,7 +916,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Pricing and commission: ${canonicalUrl("/pricing")}
 - How to start: ${canonicalUrl("/getting-started")}
 - Templates: ${canonicalUrl("/themes")}
-- Integrations, payment, and shipping: ${canonicalUrl("/integrations")}
+- Cash on delivery and delivery prices: ${canonicalUrl("/integrations")}
 - Company/entity details: ${canonicalUrl("/about")}
 - Contact/support: ${canonicalUrl("/contact")}
 - Comparisons: ${canonicalUrl("/compare")}

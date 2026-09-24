@@ -9,6 +9,8 @@ const Layout = () => {
   const location = useLocation();
   const isEnglish = isEnglishPath(location.pathname);
   const isRegistration = stripLanguagePrefix(location.pathname).replace(/\/$/, '') === '/register';
+  const isDownload = stripLanguagePrefix(location.pathname).replace(/\/$/, '') === '/download';
+  const isLogin = stripLanguagePrefix(location.pathname).replace(/\/$/, '') === '/login';
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -26,7 +28,7 @@ const Layout = () => {
       <main id="main-content" className="pt-16">
         <Outlet />
       </main>
-      {!isRegistration && <WhatsAppButton />}
+      {!isRegistration && !isDownload && !isLogin && <WhatsAppButton />}
       <Footer />
     </div>
   );

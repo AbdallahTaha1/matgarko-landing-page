@@ -7,7 +7,8 @@ const adsLabel = import.meta.env.VITE_GOOGLE_ADS_SIGNUP_LABEL;
 let initialized = false;
 let lastPage = '';
 let previousLocation = '';
-const sent = new Set<string>();
+const conversions = new Map<string, Promise<void>>();
+const conversionWaitMs = 4000;
 declare global { interface Window { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void; } }
 export function initAnalytics() {
   if (getConsent() !== 'accepted') {
@@ -52,17 +53,41 @@ export function trackSignupStep(event: 'signup_start' | 'signup_details_submitte
 }
 export function trackSignupComplete(conversionId: string) {
   trackMetaSignupComplete(conversionId);
-  if (getConsent() !== 'accepted' || !window.gtag) return;
+  if (getConsent() !== 'accepted' || !window.gtag) return Promise.resolve();
   const acquisition = getAcquisition();
+  const pending: Promise<void>[] = [];
   for (const destination of ['ga', 'ads'] as const) {
     if (destination === 'ga' ? !gaId : !adsId || !adsLabel) continue;
     const key = `matgarko-conversion-${destination}-${conversionId}`;
-    let recorded = sent.has(key);
-    try { recorded ||= localStorage.getItem(key) === 'sent'; } catch { /* In-memory deduplication. */ }
+    const existing = conversions.get(key);
+    if (existing) { pending.push(existing); continue; }
+    let recorded = false;
+    try { recorded = localStorage.getItem(key) === 'sent'; } catch { /* In-memory deduplication. */ }
     if (recorded) continue;
-    sent.add(key);
-    if (destination === 'ga') window.gtag('event', 'sign_up', { send_to: gaId, method: 'email', transaction_id: conversionId, first_source: acquisition?.first.source, last_source: acquisition?.last.source });
-    else window.gtag('event', 'conversion', { send_to: `${adsId}/${adsLabel}`, transaction_id: conversionId });
-    try { localStorage.setItem(key, 'sent'); } catch { /* In-memory deduplication. */ }
+    let finish!: () => void;
+    const processed = new Promise<void>(resolve => { finish = resolve; });
+    conversions.set(key, processed);
+    pending.push(processed);
+    // gtag may still be loading or blocked entirely. Never strand the merchant.
+    const timer = setTimeout(finish, conversionWaitMs);
+    const completion = {
+      event_timeout: 2000,
+      event_callback: () => {
+        clearTimeout(timer);
+        // A callback signals tag processing, not confirmation in the Ads account.
+        if (getConsent() === 'accepted') {
+          try { localStorage.setItem(key, 'sent'); } catch { /* In-memory deduplication. */ }
+        }
+        finish();
+      },
+    };
+    try {
+      if (destination === 'ga') window.gtag('event', 'sign_up', { send_to: gaId, method: 'email', transaction_id: conversionId, first_source: acquisition?.first.source, last_source: acquisition?.last.source, ...completion });
+      else window.gtag('event', 'conversion', { send_to: `${adsId}/${adsLabel}`, transaction_id: conversionId, ...completion });
+    } catch {
+      clearTimeout(timer);
+      finish();
+    }
   }
+  return Promise.all(pending).then(() => undefined);
 }

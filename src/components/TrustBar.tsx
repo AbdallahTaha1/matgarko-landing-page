@@ -1,8 +1,8 @@
 import { homeContent } from "@/data/home";
 import type { AppLanguage } from "@/lib/i18n";
-import { Banknote, CreditCard, Landmark, Smartphone, Wallet } from "lucide-react";
+import { Banknote, Languages, PackageCheck } from "lucide-react";
 
-const icons = [Banknote, Landmark, CreditCard, CreditCard, Wallet, Smartphone];
+const icons = [Banknote, Languages, PackageCheck];
 
 export function TrustBar({ language }: { language: AppLanguage }) {
   const t = homeContent[language].trustBar;
@@ -11,9 +11,9 @@ export function TrustBar({ language }: { language: AppLanguage }) {
     <section className="border-y border-gray-100 bg-white" aria-label={t.title}>
       <div className="container-x flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-6">
         <p className="shrink-0 text-xs font-bold text-gray-500 sm:text-sm">{t.title}</p>
-        <ul className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
+        <ul className="flex flex-wrap gap-2">
           {t.items.map((item, index) => {
-            const Icon = icons[index] ?? CreditCard;
+            const Icon = icons[index] ?? Banknote;
             return (
               <li
                 key={item}

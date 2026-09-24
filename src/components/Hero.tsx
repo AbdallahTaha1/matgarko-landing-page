@@ -13,12 +13,15 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { StoreAccessHint } from "./StoreAccessHint";
+import { useRememberedStore } from "@/lib/storeAccess";
 
 const productIcons = [Sparkles, Flower2, Leaf, Package];
 const productTints = ["from-emerald-100 to-teal-50", "from-amber-100 to-orange-50", "from-sky-100 to-cyan-50", "from-rose-100 to-pink-50"];
 
 export function Hero({ language }: { language: AppLanguage }) {
   const t = homeContent[language].hero;
+  const store = useRememberedStore();
 
   return (
     <section className="hero-band relative overflow-hidden" aria-labelledby="hero-title">
@@ -46,14 +49,16 @@ export function Hero({ language }: { language: AppLanguage }) {
             <p className="mt-4 max-w-lg text-base leading-7 text-gray-600 sm:mt-5 sm:text-lg sm:leading-8">{t.lead}</p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href={language === "en" ? "/en/register" : SIGNUP_URL} className="btn btn-primary">
-                {t.primaryCta}
+              <a href={store?.adminUrl || (language === "en" ? "/en/register" : SIGNUP_URL)} className="btn btn-primary">
+                {store ? (language === 'en' ? 'Manage your store' : 'كمّل إدارة متجرك') : t.primaryCta}
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
               </a>
               <Link to={localizePath("/pricing", language)} className="btn btn-secondary">
                 {t.secondaryCta}
               </Link>
             </div>
+
+            <StoreAccessHint language={language} />
 
             <ul className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-gray-600 sm:text-sm">
               {t.trust.map((item) => (
@@ -63,7 +68,7 @@ export function Hero({ language }: { language: AppLanguage }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-600">{t.appNotice}</p>
+            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-600">{t.appNotice} <Link className="font-semibold text-emerald-800 underline underline-offset-4" to={localizePath('/download', language)}>{language === 'en' ? 'Download options' : 'تحميل التطبيق'}</Link></p>
           </div>
 
           <div className="relative mx-auto hidden w-full max-w-[480px] lg:block" aria-hidden="true">

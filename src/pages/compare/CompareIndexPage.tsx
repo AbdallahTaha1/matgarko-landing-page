@@ -13,7 +13,7 @@ const comparisons = [
     badge: "المنافس المحلي",
     badgeColor: "bg-blue-100 text-blue-700",
     headline: "باقة النمو بـ 499 ج.م بدلاً من 50 دولاراً",
-    points: ["أسعار بالجنيه المصري", "لا تأثر بسعر الصرف", "نفس بوابات الدفع المصرية"],
+    points: ["أسعار بالجنيه المصري", "لا تأثر بسعر الصرف", "إدارة المنتجات والطلبات"],
   },
   {
     href: "/compare/salla",
@@ -23,7 +23,7 @@ const comparisons = [
     badge: "منصة خليجية",
     badgeColor: "bg-green-100 text-green-700",
     headline: "مصممة لمصر — ليس للسعودية",
-    points: ["بوابات الدفع المصرية جاهزة", "شركات الشحن المصرية مدمجة", "أسعار بالجنيه لا الريال"],
+    points: ["واجهة عربية", "الدفع عند الاستلام", "أسعار بالجنيه لا الريال"],
   },
   {
     href: "/compare/shopify",
@@ -33,7 +33,7 @@ const comparisons = [
     badge: "منصة عالمية",
     badgeColor: "bg-purple-100 text-purple-700",
     headline: "ادفع 499 ج.م بدلاً من $29+ شهرياً",
-    points: ["بدون رسوم دولار", "فودافون كاش وفوري مدمج", "بدون رسوم معاملات إضافية"],
+    points: ["بدون رسوم دولار", "الدفع عند الاستلام", "باقات واضحة بالجنيه المصري"],
   },
   {
     href: "/compare/woocommerce",
@@ -43,7 +43,7 @@ const comparisons = [
     badge: "مفتوح المصدر",
     badgeColor: "bg-orange-100 text-orange-700",
     headline: "ابدأ في 5 دقائق — بدون سيرفر أو مطور",
-    points: ["لا استضافة مطلوبة", "لا صيانة تقنية", "بوابات الدفع جاهزة مباشرة"],
+    points: ["لا استضافة مطلوبة", "لا صيانة تقنية", "إدارة المنتجات والطلبات"],
   },
 ];
 
@@ -118,7 +118,7 @@ export function CompareIndexPage() {
         <div className="container px-4 mx-auto max-w-4xl text-center">
           <h2 className="text-2xl font-black mb-4 font-heading">لماذا التجار المصريون يختارون متجركو؟</h2>
           <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
-            في السوق المصري، التفاصيل مهمة — العملة، طرق الدفع المحلية، شركات الشحن، والدعم الذي يفهمك.
+            في السوق المصري، التفاصيل مهمة — أسعار بالجنيه، واجهة عربية، ودعم يفهم احتياجاتك.
           </p>
           <div className="grid sm:grid-cols-3 gap-6 mb-10">
             {[

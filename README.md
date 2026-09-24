@@ -10,9 +10,10 @@ Core product message:
 
 - Mobile-first, Arabic-first, built for solo merchants: launch and run an online store from a phone without technical experience.
 - متجركو — اعمل متجرك وادِر شغلك كله من موبايلك.
-- The native mobile app is coming soon to Google Play; do not add download links or a guaranteed release date until it is publicly available. Shared positioning and availability text lives in `src/data/positioning.ts`.
+- `/download` and `/en/download` read public app availability from `https://downloads.matgarko.com/android/latest.json`. Only published channels show a download link; missing metadata keeps retry and web-admin access available. Shared marketing copy lives in `src/data/positioning.ts`, with no hardcoded release number. Deployment/runbook and app context live separately in the sibling mobile repository: `matgarko_merchant/docs/android-release-runbook.md`. The download host and an unprotected Play-signed APK still need setup before public activation.
 - Start free and pay only when you sell.
-- Manage products, orders, customers, payment, and shipping from one dashboard.
+- Manage products, cash-on-delivery orders, and customers from one dashboard.
+- Current checkout supports cash on delivery. Merchants arrange shipping directly with their couriers; payment gateways and shipping-company integrations are not currently offered. Keep public copy focused on available features without adding unnecessary limitation notices.
 - Designed for Arabic-speaking merchants and the Egyptian market, with a full English site under `/en`.
 
 ## Pricing
@@ -28,12 +29,14 @@ Pricing lives in one place, `src/data/pricing.ts`, and feeds the pricing pages, 
 ## Main Pages
 
 - `/` - Home page
+- `/login` - Existing-store access, saved store link, and help finding a forgotten link (also `/en/login`)
+- `/download` - Android downloads and browser dashboard access (also `/en/download`)
 - `/solutions` - Product solutions and store management features
 - `/getting-started` - Steps to create and prepare a store
 - `/pricing` - Monthly pricing plans
 - `/about` - About Matgarko
 - `/contact` - WhatsApp, email, phone, and Facebook contact options
-- `/integrations` - Integrations and app store information
+- `/integrations` - Cash on delivery and delivery prices
 - `/terms` - Terms and conditions
 - `/privacy` - Privacy policy
 
@@ -81,7 +84,7 @@ npm run preview
 
 ## Signup and analytics
 
-The bilingual registration form stays on the landing domain through email verification and store provisioning. It calls `VITE_SIGNUP_API_URL` (default `https://signup.matgarko.com/api/signup/v1`) in the background. The merchant opens their store dashboard after setup. Deploy the backend API and catalog migration before publishing this frontend; see [the setup guide](docs/signup-and-analytics.md).
+The bilingual registration form stays on the landing domain through email verification and store provisioning. It calls `VITE_SIGNUP_API_URL` (default `https://signup.matgarko.com/api/signup/v1`) in the background. Once the store is ready, it saves the public store link in this browser and automatically opens the dashboard for normal sign-in. Returning merchants can use “Access your store” in the header, hero, registration form, or footer. Deploy the backend API and catalog migration before publishing this frontend; see [the setup guide](docs/signup-and-analytics.md).
 
 Tracking requires consent. GA4 uses `VITE_GA_MEASUREMENT_ID` for page visits, signup steps, and the completed `sign_up` event. Optional direct Google Ads tracking uses `VITE_GOOGLE_ADS_ID` and `VITE_GOOGLE_ADS_SIGNUP_LABEL`. Meta Pixel independently uses `VITE_META_PIXEL_ID` for route `PageView` events and `CompleteRegistration` after a verified store is ready. Meta automatic event configuration is disabled; no contact details are supplied for advanced matching. Values are public build-time configuration; rebuild after changes. Do not add duplicate Google or Meta tags to `index.html`, GTM, or another integration. See [measurement setup](docs/signup-and-analytics.md) for consent, verification, and limitations.
 

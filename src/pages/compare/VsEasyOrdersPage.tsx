@@ -26,8 +26,6 @@ export function VsEasyOrdersPage() {
         { feature: "قوالب متجر كاملة", matgarko: true, competitor: "صفحات هبوط فقط" },
         { feature: "دومين خاص بالمتجر", matgarko: true, competitor: true },
         { feature: "دفع عند الاستلام", matgarko: true, competitor: true },
-        { feature: "محافظ إلكترونية (فودافون كاش، إنستاباي)", matgarko: true, competitor: true },
-        { feature: "+15 بوابة دفع", matgarko: true, competitor: true },
         { feature: "إدارة كتالوج ومنتجات", matgarko: true, competitor: "محدود" },
         { feature: "إدارة المخزون", matgarko: true, competitor: "محدود" },
         { feature: "كوبونات وخصومات", matgarko: "باقة النمو+", competitor: true },
@@ -44,10 +42,6 @@ export function VsEasyOrdersPage() {
         {
           q: "هل متجركو بديل جيد لإيزي أوردرز للتاجر المصري؟",
           a: "نعم، خاصة لمن يريد أسعاراً ثابتة بالجنيه المصري بدون القلق من تغير سعر الدولار. الباقة المجانية في كلا المنصتين متشابهة، لكن الباقة المدفوعة في متجركو أرخص بكثير.",
-        },
-        {
-          q: "هل متجركو تدعم نفس بوابات الدفع الخاصة بإيزي أوردرز؟",
-          a: "متجركو تدعم بوابات الدفع المصرية الرئيسية: فوري، ميزة، فيزا، ماستركارد، فودافون كاش، وإنستاباي.",
         },
         {
           q: "هل يمكنني الانتقال من إيزي أوردرز لمتجركو؟",
