@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { homeContent } from "@/data/home";
-import { SIGNUP_URL, formatCommission, formatEgp, plans } from "@/data/pricing";
+import { SIGNUP_URL, commissionCapLabel, formatCommission, formatEgp, plans } from "@/data/pricing";
 import { localizePath, type AppLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check } from "lucide-react";
@@ -47,8 +47,10 @@ export function PricingPreview({ language }: { language: AppLanguage }) {
                 {plan.commission === 0 ? t.noCommission : `+ ${formatCommission(plan)} ${t.commission}`}
               </p>
 
-              <ul className="mt-5 space-y-2.5 border-t border-gray-100 pt-5">
-                {plan.features[language].slice(0, 4).map((feature) => (
+              {plan.commission > 0 && <p className="mt-1 text-xs font-semibold text-emerald-700">{commissionCapLabel(plan, language)}</p>}
+
+              <ul className="mt-5 flex-1 space-y-2.5 border-t border-gray-100 pt-5">
+                {plan.features[language].map((feature) => (
                   <li key={feature} className="flex items-start gap-2.5 text-sm text-gray-700">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
                     <span>{feature}</span>

@@ -2,7 +2,7 @@ import { faqs } from "@/data/faqs";
 import { positioning } from "@/data/positioning";
 import { blogArticles } from "@/data/blog";
 import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages } from "@/data/en";
-import { formatCommission, formatEgp, planPriceLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
+import { commissionCapLabel, formatCommission, formatEgp, planPriceLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
 import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
 
 export const SITE_NAME = "متجركو";
@@ -89,7 +89,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/pricing",
     title: "تكلفة إنشاء متجر إلكتروني في مصر | باقات متجركو",
     description:
-      "ابدأ مجاناً بعمولة 2% فقط على كل طلب، أو باقة النمو 499 ج.م + 0.5%، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.",
+      pricingSummary("ar"),
     keywords: [
       "تكلفة إنشاء متجر إلكتروني في مصر",
       "أسعار متجر إلكتروني",
@@ -401,15 +401,15 @@ function offerDescription(plan: (typeof plans)[number], language: "ar" | "en") {
     return plan.commission === 0
       ? `${formatEgp(plan.monthly, "ar")} شهرياً بدون أي عمولة على المبيعات`
       : plan.monthly === 0
-        ? `ابدأ مجاناً مع عمولة ${formatCommission(plan)} على كل طلب مكتمل`
-        : `${planPriceLabel(plan, "ar")} عمولة على كل طلب مكتمل`;
+        ? `ابدأ بدون اشتراك شهري مع عمولة ${formatCommission(plan)} على كل طلب مكتمل، ${commissionCapLabel(plan, "ar")}`
+        : `${planPriceLabel(plan, "ar")} على الطلبات المكتملة، ${commissionCapLabel(plan, "ar")}`;
   }
 
   return plan.commission === 0
     ? `${formatEgp(plan.monthly, "en")} per month with 0% Matgarko sales commission`
     : plan.monthly === 0
-      ? `Start free with ${formatCommission(plan)} commission on each completed order`
-      : `${formatEgp(plan.monthly, "en")} per month with ${formatCommission(plan)} commission on completed orders`;
+      ? `Start free with ${formatCommission(plan)} commission on each completed order. ${commissionCapLabel(plan, "en")}.`
+      : `${formatEgp(plan.monthly, "en")} per month with ${formatCommission(plan)} commission on completed orders. ${commissionCapLabel(plan, "en")}.`;
 }
 
 function serviceOffers(language: "ar" | "en") {
@@ -894,7 +894,7 @@ Mobile app availability: ${positioning.en.appNotice}
 
 ## Pricing Summary
 
-${plans.map((plan) => `- ${plan.name.en}: ${formatEgp(plan.monthly, "en")}/month with ${formatCommission(plan)} commission per completed order.`).join("\n")}
+${plans.map((plan) => `- ${plan.name.en}: ${formatEgp(plan.monthly, "en")}/month with ${formatCommission(plan)} commission per completed order.${plan.commission > 0 ? ` ${commissionCapLabel(plan, "en")}.` : ""}`).join("\n")}
 - Pricing source: ${canonicalUrl("/pricing")}
 
 ## Frequently Asked Questions

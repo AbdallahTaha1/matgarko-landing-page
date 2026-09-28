@@ -1,5 +1,6 @@
 import type { BlogArticle } from "./blog";
 import { positioning } from "./positioning";
+import { pricingSummary } from "./pricing";
 
 export type EnglishPageSection = {
   title: string;
@@ -76,7 +77,7 @@ export const englishFaqs = [
   {
     question: "Can I start before paying monthly?",
     answer:
-      "Yes. The free plan lets you start with no monthly fee and pay a 2% commission on completed orders. Paid plans lower or remove the commission as your store grows.",
+      "Yes. Starter has no monthly fee or expiring trial: 2% per completed order, capped at 20 EGP. Growth costs 499 EGP monthly plus 0.5%, capped at 5 EGP per completed order. Pro costs 1,499 EGP monthly with no commission.",
   },
   {
     question: "Does Matgarko support cash on delivery?",
@@ -84,9 +85,9 @@ export const englishFaqs = [
       "Yes. Cash on delivery is available on every plan. You can also set delivery prices for each area so customers see the cost before placing an order.",
   },
   {
-    question: "Can I use my own domain?",
+    question: "Are the core tools available on Starter?",
     answer:
-      "You can start with a Matgarko store link, then connect a custom domain when your plan and store setup are ready for it.",
+      "Yes. Every plan includes product, stock and order management, coupons, shipping settings and WhatsApp support. Plans differ in monthly subscription, commission rate and per-order cap.",
   },
 ];
 
@@ -775,7 +776,7 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/pricing": {
     title: "Online store pricing in Egypt | Matgarko plans",
     description:
-      "Start free with 2% commission, or choose EGP plans: Growth at 499 EGP + 0.5% or Pro at 1,499 EGP with zero commission.",
+      pricingSummary("en"),
     keywords: ["online store pricing Egypt", "ecommerce platform pricing", "free online store Egypt", "EGP ecommerce plans"],
   },
   "/en/about": {

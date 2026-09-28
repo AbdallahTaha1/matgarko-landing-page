@@ -11,7 +11,7 @@ export function VsShopifyPage() {
       competitorSummary="شوبيفاي العملاق العالمي لإنشاء المتاجر الإلكترونية. تقدم منظومة متكاملة وآلاف التطبيقات. لكن باقاتها بالدولار (من $29 إلى $299+/شهر) وعمولتها على الطلبات (0.5-2%) تجعلها مكلفة جداً للتاجر المصري في ظل تقلبات سعر الصرف."
       matgarkoAdvantages={[
         "أسعار ثابتة بالجنيه المصري — لا تتأثر بالدولار",
-        "ابدأ مجاناً — بعمولة 2% فقط على كل طلب",
+        "بدون اشتراك شهري — 2% بحد أقصى 20 ج.م للطلب المكتمل",
         "باقة النمو: 499 ج.م فقط (مقابل ~1,500 ج.م+ لشوبيفاي Basic)",
         "لا رسوم تحويل عملة",
         "الدفع عند الاستلام",
@@ -21,7 +21,7 @@ export function VsShopifyPage() {
       comparisonRows={[
         { feature: "الاشتراك الشهري", matgarko: "0 — 1,499 ج.م", competitor: "$29 — $299/شهر (~1,500–15,000 ج.م)", highlight: true },
         { feature: "أسعار بالجنيه المصري", matgarko: true, competitor: false, highlight: true },
-        { feature: "عمولة على الطلبات (غير Shopify Payments)", matgarko: "0-2% حسب الباقة", competitor: "0.5–2% إضافية", highlight: true },
+        { feature: "عمولة على الطلبات (غير Shopify Payments)", matgarko: "البداية: 2% بسقف 20 ج.م؛ نمو: 0.5% بسقف 5 ج.م؛ احترافي: 0%", competitor: "0.5–2% إضافية", highlight: true },
         { feature: "Shopify Payments متاح في مصر", matgarko: "غير مطلوب", competitor: false, highlight: false },
         { feature: "دفع عند الاستلام", matgarko: true, competitor: "يحتاج تطبيق خارجي" },
         { feature: "واجهة عربية RTL كاملة", matgarko: true, competitor: "محدودة في بعض القوالب" },

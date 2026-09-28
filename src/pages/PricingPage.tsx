@@ -6,9 +6,11 @@ import {
   FREE_TO_GROWTH_ORDERS,
   GROWTH_TO_PRO_ORDERS,
   SIGNUP_URL,
+  commissionCapLabel,
   costTable,
   formatCommission,
   formatEgp,
+  orderCommission,
   planPriceLabel,
   plans,
   pricingFaqs,
@@ -18,22 +20,22 @@ import { WHATSAPP_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, Crown } from "lucide-react";
 
-const EXAMPLE_ORDER = 500;
+const EXAMPLE_ORDERS = [200, 500, 700, 1000, 2000];
 
 const copy = {
   ar: {
     kicker: "الأسعار",
     title: "ابدأ مجاناً، وادفع 2% فقط لما تبيع",
-    lead: "بدون رسوم شهرية في البداية. لما يكبر متجرك انتقل للباقة اللي توفرلك أكتر. كل الأسعار بالجنيه المصري.",
+    lead: "نفس أدوات المتجر في كل الباقات. ابدأ بدون اشتراك شهري أو مدة تجريبية تنتهي، ولما تزيد طلباتك اختار الباقة الأوفر. كل الأسعار بالجنيه المصري.",
     monthly: "شهرياً",
     commission: "عمولة على كل طلب مكتمل",
     noCommission: "بدون أي عمولة",
-    popular: "الأكثر اختياراً",
-    exampleTitle: "مثال: طلب بقيمة 500 ج.م",
-    exampleLead: "كم تدفع لمتجركو على هذا الطلب في كل باقة؟",
-    exampleNet: "يصلك",
+    popular: "عمولة أقل",
+    exampleTitle: "عمولة الطلب لها سقف واضح",
+    exampleLead: "أمثلة لعمولة الطلب فقط، قبل إضافة الاشتراك الشهري في نمو واحترافي. قيمة الطلب هنا هي إجمالي المنتجات بعد الخصم، قبل الشحن والضرائب.",
+    orderValue: "قيمة الطلب",
     tableTitle: "أي باقة أوفر لك؟",
-    tableLead: `التكلفة الشهرية الكاملة (اشتراك + عمولة) بمتوسط قيمة طلب ${AVERAGE_ORDER_VALUE} ج.م.`,
+    tableLead: `أمثلة للتكلفة الشهرية (اشتراك + عمولة)، بافتراض أن كل طلب مكتمل قيمته ${AVERAGE_ORDER_VALUE} ج.م. المبلغ الفعلي يعتمد على قيمة كل طلب وسقفه.`,
     orders: "طلبات / شهر",
     cheapest: "الأوفر",
     breakeven: `باقة النمو أوفر بعد حوالي ${FREE_TO_GROWTH_ORDERS} طلب شهرياً، والاحترافي بعد حوالي ${GROWTH_TO_PRO_ORDERS} طلب.`,
@@ -43,21 +45,21 @@ const copy = {
     ctaLead: "لا بطاقة ائتمان ولا التزام. سجّل وابدأ البيع بعمولة 2% فقط.",
     ctaPrimary: "ابدأ مجاناً الآن",
     ctaSecondary: "اسأل على واتساب",
-    note: "العمولة على الطلبات المكتملة حسب باقتك.",
+    note: "السقف لكل طلب مكتمل، مهما كان عدد المنتجات فيه. العمولة على قيمة المنتجات بعد الخصم، قبل الشحن والضرائب.",
   },
   en: {
     kicker: "Pricing",
     title: "Start free, pay 2% only when you sell",
-    lead: "No monthly fee to start. Move to a paid plan when it saves you money. All prices in EGP.",
+    lead: "The same store tools on every plan. Start with no monthly fee or expiring trial, then choose the plan that saves you money as orders grow. All prices in EGP.",
     monthly: "per month",
     commission: "commission on completed orders",
     noCommission: "no commission at all",
-    popular: "Most popular",
-    exampleTitle: "Example: a 500 EGP order",
-    exampleLead: "What you pay Matgarko on this order in each plan.",
-    exampleNet: "You receive",
+    popular: "Lower commission",
+    exampleTitle: "A clear cap on each order",
+    exampleLead: "Order commission only, before the Growth or Pro monthly subscription. Order value means merchandise after discounts, excluding shipping and tax.",
+    orderValue: "Order value",
     tableTitle: "Which plan is cheaper for you?",
-    tableLead: `Total monthly cost (subscription + commission) at a ${AVERAGE_ORDER_VALUE} EGP average order.`,
+    tableLead: `Monthly examples (subscription + commission), assuming every completed order is worth ${AVERAGE_ORDER_VALUE} EGP. Actual fees depend on each order's value and cap.`,
     orders: "Orders / month",
     cheapest: "Cheapest",
     breakeven: `Growth becomes cheaper after about ${FREE_TO_GROWTH_ORDERS} orders a month, and Pro after about ${GROWTH_TO_PRO_ORDERS}.`,
@@ -67,7 +69,7 @@ const copy = {
     ctaLead: "No credit card and no commitment. Sign up and start selling with 2% commission only.",
     ctaPrimary: "Start free now",
     ctaSecondary: "Ask on WhatsApp",
-    note: "Commission applies to completed orders according to your plan.",
+    note: "The cap applies to each completed order, regardless of item count. Commission is based on merchandise after discounts, excluding shipping and tax.",
   },
 } as const;
 
@@ -120,6 +122,7 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
                   <p className={cn("mt-1.5 text-sm font-bold", plan.commission === 0 ? "text-emerald-700" : "text-gray-700")}>
                     {plan.commission === 0 ? t.noCommission : `+ ${formatCommission(plan)} ${t.commission}`}
                   </p>
+                  {plan.commission > 0 && <p className="mt-1 text-xs font-semibold text-emerald-700">{commissionCapLabel(plan, language)}</p>}
                 </div>
 
                 <ul className="mt-5 flex-1 space-y-2.5">
@@ -146,21 +149,24 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
           <Reveal>
             <SectionHeading id="example-title" title={t.exampleTitle} lead={t.exampleLead} />
           </Reveal>
-          <Reveal delay={80} className="mx-auto mt-8 grid max-w-3xl grid-cols-3 divide-x divide-gray-200 rounded-2xl border border-gray-200 bg-white rtl:divide-x-reverse">
-            {plans.map((plan) => {
-              const fee = (EXAMPLE_ORDER * plan.commission) / 100;
-              return (
-                <div key={plan.id} className="px-2 py-5 text-center sm:px-4">
-                  <p className="text-xs font-bold text-gray-500 sm:text-sm">{plan.name[language]}</p>
-                  <p className={cn("num mt-1 text-lg font-extrabold sm:text-2xl", fee === 0 ? "text-emerald-700" : "text-gray-950")}>
-                    {formatEgp(fee, language)}
-                  </p>
-                  <p className="num mt-1 text-[11px] text-gray-500 sm:text-xs">
-                    {t.exampleNet} {formatEgp(EXAMPLE_ORDER - fee, language)}
-                  </p>
-                </div>
-              );
-            })}
+          <Reveal delay={80} className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-gray-200 bg-white">
+            <table className="w-full text-xs sm:text-sm">
+              <caption className="sr-only">{t.exampleTitle}</caption>
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-2 py-3 text-start sm:px-5">{t.orderValue}</th>
+                  {plans.map((plan) => <th key={plan.id} scope="col" className="px-2 py-3 text-center">{plan.name[language]}</th>)}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {EXAMPLE_ORDERS.map((value) => (
+                  <tr key={value}>
+                    <th scope="row" className="num px-2 py-3 text-start sm:px-5">{formatEgp(value, language)}</th>
+                    {plans.map((plan) => <td key={plan.id} className="num px-2 py-3 text-center font-semibold text-emerald-700">{formatEgp(orderCommission(plan, value), language)}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Reveal>
         </div>
       </section>
