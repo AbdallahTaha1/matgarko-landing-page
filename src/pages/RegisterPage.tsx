@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Loader2, Store, CheckCircle2 } from 'lucide-react';
+import { Loader2, Store, CheckCircle2, CircleAlert, Globe2 } from 'lucide-react';
 import { api, ApiError, type SignupModel, type SignupStatus } from '@/lib/api';
 import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
@@ -15,9 +15,15 @@ import { normalizePhoneInput, parseSignupPhone, phoneCountries, signupPhoneNumbe
 const tokenKey = 'matgarko-pending-signup';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const inputClass = 'mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-950 focus:outline-emerald-600';
+const subdomainPattern = '[a-z0-9]([a-z0-9]|-){1,38}[a-z0-9]';
+const validSubdomain = new RegExp(`^${subdomainPattern}$`);
 const messages: Record<string, [string, string]> = {
   SubdomainTaken: ['رابط المتجر مستخدم أو محجوز مؤقتًا. اختار رابط تاني.', 'This store address is taken or temporarily reserved. Choose another.'],
-  SubdomainInvalid: ['استخدم 3 إلى 40 حرف إنجليزي أو رقم، والشرطة بين الحروف فقط.', 'Use 3–40 letters or digits, with hyphens only between characters.'],
+  SubdomainInvalid: ['استخدم من 3 إلى 40 حرف إنجليزي أو رقم، وممكن شرطة (-) في النص.', 'Use 3–40 English letters or digits. Hyphens are allowed in the middle.'],
+  SubdomainFullAddress: ['اكتب الجزء الأول بس، زي my-store، من غير رابط كامل أو بريد إلكتروني.', 'Enter only the first part, like my-store, not a full link or email address.'],
+  SubdomainSpaces: ['اكتب الرابط من غير مسافات. ممكن تستخدم شرطة (-) بدل المسافة، زي my-store.', 'Use no spaces. You can use a hyphen (-) instead, like my-store.'],
+  SubdomainCharacters: ['استخدم حروف إنجليزية وأرقام فقط، وممكن شرطة (-). اسم المتجر اللي فوق ممكن يكون بالعربي.', 'Use English letters, digits or hyphens (-). The store name above can be in Arabic.'],
+  SubdomainHyphen: ['الشرطة (-) تكون في النص، مش في أول الرابط أو آخره.', 'Use hyphens (-) in the middle, not at the start or end.'],
   SubdomainReserved: ['الرابط ده محجوز للمنصة.', 'This address is reserved.'],
   PhoneTaken: ['رقم الموبايل مستخدم من قبل.', 'This phone number is already registered.'],
   PhoneInvalid: ['اكتب رقم موبايل صحيح وتأكد من مفتاح الدولة المختار.', 'Enter a valid mobile number and check the selected country code.'],
@@ -60,7 +66,17 @@ export default function RegisterPage() {
   const submitting = useRef(false);
   const openReadyDashboard = useRef<(() => void) | null>(null);
   const errorAlert = useRef<HTMLDivElement>(null);
-  const available = availability.value === form.subdomain && availability.state === 'available';
+  const baseDomain = config?.baseDomain || 'matgarko.com';
+  const subdomainValid = validSubdomain.test(form.subdomain);
+  const subdomainError = !form.subdomain || subdomainValid ? ''
+    : /[.:/\\@]/.test(form.subdomain) ? 'SubdomainFullAddress'
+    : /\s/.test(form.subdomain) ? 'SubdomainSpaces'
+    : /[^a-z0-9-]/.test(form.subdomain) ? 'SubdomainCharacters'
+    : /^-|-$/.test(form.subdomain) ? 'SubdomainHyphen' : 'SubdomainInvalid';
+  const subdomainState = subdomainError || (!form.subdomain || !config?.enabled ? 'idle'
+    : availability.value === form.subdomain ? availability.state : 'checking');
+  const subdomainHasError = !['idle', 'checking', 'available'].includes(subdomainState);
+  const available = subdomainValid && subdomainState === 'available';
   const emailCheck = useSignupContactCheck('email', form.email, stage === 'account' && !!config?.enabled);
   const phoneCheck = useSignupContactCheck('phone', form.phone ? internationalPhone || `invalid:${phoneCountry}:${form.phone}` : '', stage === 'account' && !!config?.enabled);
   const readyStore = status?.state === 'ready' && config ? readyStoreLinks(status.adminUrl, status.storeUrl, config.baseDomain) : null;
@@ -100,7 +116,7 @@ export default function RegisterPage() {
   }, []);
 
   useEffect(() => {
-    if (!/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(form.subdomain) || form.subdomain.length < 3 || !config?.enabled || stage !== 'store') return;
+    if (!validSubdomain.test(form.subdomain) || !config?.enabled || stage !== 'store') return;
     const controller = new AbortController();
     const timer = setTimeout(async () => {
       setAvailability({ value: form.subdomain, state: 'checking' });
@@ -245,11 +261,37 @@ export default function RegisterPage() {
         {notice && <p role="status" className="mb-4 text-sm text-emerald-700">{notice}</p>}
         {['store', 'account', 'verification'].includes(stage) && <form onSubmit={submit} className="space-y-5">
           {stage === 'store' && <>
-            {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization' }, t('ده الاسم اللي هيظهر لعملائك. اكتبه بالعربي أو الإنجليزي.', 'This is the name your customers will see. Use Arabic or English.'))}
+            {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization', placeholder: t('مثال: متجر نور', 'e.g. Nour Store') }, t('ده الاسم اللي هيظهر لعملائك. اكتبه بالعربي أو الإنجليزي.', 'This is the name your customers will see. Use Arabic or English.'))}
             <div>
-              <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}<div dir="ltr" className="flex min-w-0 items-center gap-2"><input id="subdomain" name="subdomain" required minLength={3} maxLength={40} pattern="[a-z0-9](([a-z0-9]|-)*[a-z0-9])?" autoCapitalize="none" autoComplete="off" spellCheck={false} aria-describedby="subdomain-hint subdomain-status" className={inputClass + ' min-w-0'} value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))} /><span className="shrink-0 text-xs font-normal">.{config?.baseDomain || 'matgarko.com'}</span></div></label>
-              <p id="subdomain-hint" className={hintClass}>{t('اختار اسم قصير من 3 إلى 40 حرف إنجليزي أو رقم، من غير مسافات. مثال:', 'Choose a short address with 3–40 English letters or digits, without spaces. Example:')} <bdi>my-store.{config?.baseDomain || 'matgarko.com'}</bdi></p>
-              <p id="subdomain-status" role="status" className={`mt-2 text-sm ${available ? 'text-emerald-700' : availability.value === form.subdomain && messages[availability.state] ? 'text-red-600' : 'text-gray-600'}`}>{available ? t('الرابط متاح', 'Address available') : availability.value === form.subdomain && messages[availability.state] ? messages[availability.state][english ? 1 : 0] : form.subdomain.length >= 3 ? t('جاري فحص الرابط…', 'Checking address…') : t('مسموح بشرطة بين الحروف أو الأرقام.', 'Hyphens are allowed between letters or digits.')}</p>
+              <label className="block text-sm font-bold text-gray-700" htmlFor="subdomain">{t('رابط المتجر', 'Store address')}</label>
+              <p id="subdomain-hint" className="mt-2 text-sm leading-6 text-gray-600">
+                {t('اكتب اسم مختصر بالإنجليزي، زي', 'Enter a short name in English, like')} <bdi className="whitespace-nowrap font-semibold text-gray-800">my-store</bdi>.
+                {' '}{t('هنضيف', 'We add')} <bdi dir="ltr" className="whitespace-nowrap">.{baseDomain}</bdi> {t('تلقائيًا.', 'automatically.')}
+              </p>
+              <div dir="ltr" className={`mt-3 flex min-w-0 overflow-hidden rounded-xl border bg-white transition-shadow focus-within:ring-2 focus-within:ring-offset-2 ${subdomainHasError ? 'border-red-400 focus-within:ring-red-500' : 'border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600'}`}>
+                <input
+                  id="subdomain" name="subdomain" type="text" dir="ltr" required minLength={3} pattern={subdomainPattern}
+                  placeholder="my-store" autoCapitalize="none" autoComplete="off" autoCorrect="off" spellCheck={false}
+                  aria-describedby="subdomain-hint subdomain-rules subdomain-status" aria-invalid={subdomainHasError || undefined}
+                  className="min-w-0 flex-1 bg-transparent px-3 py-3.5 text-left text-base text-gray-950 outline-none placeholder:text-gray-400"
+                  value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase() }))}
+                />
+                <span aria-hidden="true" className="flex shrink-0 items-center border-l border-gray-200 bg-gray-50 px-3 text-xs font-medium text-gray-500 sm:text-sm">.{baseDomain}</span>
+              </div>
+              <p id="subdomain-rules" className={hintClass}>{t('من 3 إلى 40 حرف إنجليزي أو رقم، من غير مسافات. ممكن شرطة (-) في النص.', '3–40 English letters or digits, no spaces. Hyphens (-) are allowed in the middle.')}</p>
+              <p id="subdomain-status" role="status" aria-atomic="true" className={`mt-2 flex items-start gap-2 text-xs leading-5 ${subdomainHasError ? 'text-red-600' : available ? 'text-emerald-700' : 'text-gray-500'}`}>
+                {subdomainHasError ? <><CircleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span>{(messages[subdomainState] || messages.InvalidRequest)[english ? 1 : 0]}</span></>
+                  : available ? <><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span>{t('الرابط متاح، تقدر تكمل', 'Address available. You can continue.')}</span></>
+                  : subdomainState === 'checking' ? <><Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin" aria-hidden="true" /><span>{t('جاري فحص الرابط…', 'Checking address…')}</span></> : null}
+              </p>
+              <div className="mt-4 flex items-start gap-3 rounded-xl border border-emerald-100 bg-emerald-50/70 p-3.5">
+                <Globe2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs leading-5 text-emerald-900">{subdomainValid ? t('معاينة رابط متجرك', 'Your store address preview') : t('مثال على رابط متجرك', 'Example store address')}</p>
+                  <p id="subdomain-preview" dir="ltr" className="mt-1 break-all text-left text-sm leading-6 text-emerald-800"><span className="font-bold">{subdomainValid ? form.subdomain : 'my-store'}</span><span>.{baseDomain}</span></p>
+                  <p className="mt-1 text-xs leading-5 text-gray-600">{t('ده الرابط اللي هتبعته لعملائك عشان يفتحوا متجرك.', 'Share this link with customers so they can visit your store.')}</p>
+                </div>
+              </div>
             </div>
             <button type="submit" disabled={!available || !config?.enabled} className="btn btn-primary w-full disabled:opacity-50">{t('التالي', 'Continue')}</button>
           </>}

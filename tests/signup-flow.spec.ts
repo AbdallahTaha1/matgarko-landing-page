@@ -13,14 +13,14 @@ async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknow
   ` }));
   await page.route('https://connect.facebook.net/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
   await page.route('https://www.facebook.com/tr**', route => route.abort());
-  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false };
+  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, baseDomain: 'matgarko.com', subdomainTaken: false, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false };
   await page.route('**/api/signup/v1/**', async route => {
     const url = new URL(route.request().url());
     const action = url.pathname.split('/').pop();
-    if (action === 'config') return route.fulfill({ json: { enabled: state.enabled, baseDomain: 'matgarko.com' } });
+    if (action === 'config') return route.fulfill({ json: { enabled: state.enabled, baseDomain: state.baseDomain } });
     if (action === 'check-subdomain') {
       if (state.networkFailure) return route.abort();
-      return route.fulfill({ json: { available: true, code: 'Ok' } });
+      return route.fulfill({ json: { available: !state.subdomainTaken, code: state.subdomainTaken ? 'SubdomainTaken' : 'Ok' } });
     }
     if (action === 'check-email' || action === 'check-phone') {
       expect(route.request().method()).toBe('POST');
@@ -76,6 +76,86 @@ test('store address pattern works with browser Unicode sets and rejects boundary
   await address.fill('store-');
   expect(await address.evaluate((element: HTMLInputElement) => element.checkValidity())).toBe(false);
   expect(errors.filter(error => /pattern|regular expression/i.test(error))).toEqual([]);
+});
+
+test('store address mistakes stay visible and cannot become a different available address', async ({ page }) => {
+  await mockSignup(page, 'declined');
+  const checked: string[] = [];
+  page.on('request', request => {
+    const url = new URL(request.url());
+    if (url.pathname.endsWith('/check-subdomain')) checked.push(url.searchParams.get('value')!);
+  });
+  await page.goto('/en/register');
+  await page.getByLabel('Store name', { exact: true }).fill('My store');
+  const address = page.getByLabel('Store address', { exact: true });
+  const next = page.getByRole('button', { name: 'Continue', exact: true });
+  await address.fill('my-store');
+  await expect(next).toBeEnabled();
+
+  for (const [value, message] of [
+    ['https://my-store.matgarko.com', 'only the first part'],
+    ['my-store.matgarko.com', 'only the first part'],
+    ['owner@example.com', 'only the first part'],
+    ['my store', 'no spaces'],
+    ['متجري', 'English letters'],
+    ['my_store', 'English letters'],
+    ['-store', 'start or end'],
+    ['store-', 'start or end'],
+    ['ab', '3–40'],
+    ['a'.repeat(41), '3–40'],
+  ]) {
+    await address.fill(value);
+    await expect(address).toHaveValue(value);
+    await expect(address).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.locator('#subdomain-status')).toContainText(message);
+    await expect(page.locator('#subdomain-status')).not.toContainText('Checking');
+    await expect(next).toBeDisabled();
+    expect(await address.evaluate((element: HTMLInputElement) => element.checkValidity())).toBe(false);
+  }
+
+  await address.fill('Nour-Store');
+  await expect(address).toHaveValue('nour-store');
+  await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.matgarko.com');
+  await expect(next).toBeEnabled();
+  expect(checked).toEqual(['my-store', 'nour-store']);
+  await address.fill('');
+  await expect(page.locator('#subdomain-status')).toBeEmpty();
+  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.matgarko.com');
+  await expect(next).toBeDisabled();
+});
+
+test('store address preview follows the configured domain and a taken address stays blocked', async ({ page }) => {
+  const state = await mockSignup(page, 'declined');
+  state.baseDomain = 'shops.example.com';
+  state.subdomainTaken = true;
+  await page.goto('/en/register');
+  const address = page.getByLabel('Store address', { exact: true });
+  await expect(page.locator('#subdomain-hint')).toContainText('.shops.example.com');
+  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.shops.example.com');
+  await address.fill('nour-store');
+  await expect(page.locator('#subdomain-status')).toContainText('taken');
+  await expect(address).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.shops.example.com');
+  await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
+});
+
+test('Arabic store address guidance and preview fit narrow mobile screens', async ({ page }) => {
+  await mockSignup(page, 'declined');
+  await page.setViewportSize({ width: 320, height: 812 });
+  await page.goto('/register');
+  const address = page.getByLabel('رابط المتجر', { exact: true });
+  await expect(address).toHaveAttribute('placeholder', 'my-store');
+  await expect(page.locator('#subdomain-hint')).toContainText('هنضيف');
+  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.matgarko.com');
+  await address.fill('متجري');
+  await expect(page.locator('#subdomain-status')).toContainText('حروف إنجليزية');
+  await address.fill('n'.repeat(40));
+  await expect(page.locator('#subdomain-status')).toContainText('الرابط متاح');
+  await expect(page.locator('#subdomain-preview')).toHaveText(`${'n'.repeat(40)}.matgarko.com`);
+  const inputBounds = await address.boundingBox();
+  const suffixBounds = await address.locator('..').locator('span').boundingBox();
+  expect(inputBounds!.x + inputBounds!.width).toBeLessThanOrEqual(suffixBounds!.x + 1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
 test('email delivery failure shows a focused error and preserves the registration for resending', async ({ page }) => {
