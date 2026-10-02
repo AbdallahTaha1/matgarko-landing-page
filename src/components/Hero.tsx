@@ -15,6 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { StoreAccessHint } from "./StoreAccessHint";
 import { useRememberedStore } from "@/lib/storeAccess";
+import { GooglePlayBadge } from "./GooglePlayBadge";
 
 const productIcons = [Sparkles, Flower2, Leaf, Package];
 const productTints = ["from-emerald-100 to-teal-50", "from-amber-100 to-orange-50", "from-sky-100 to-cyan-50", "from-rose-100 to-pink-50"];
@@ -68,7 +69,11 @@ export function Hero({ language }: { language: AppLanguage }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-600">{t.appNotice} <Link className="font-semibold text-emerald-800 underline underline-offset-4" to={localizePath('/download', language)}>{language === 'en' ? 'Download options' : 'تحميل التطبيق'}</Link></p>
+            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-600">{t.appNotice}</p>
+            <div className="mt-3 flex flex-wrap items-center gap-4">
+              <GooglePlayBadge language={language} />
+              <Link className="text-sm font-semibold text-emerald-800 underline underline-offset-4" to={localizePath('/download', language)}>{language === 'en' ? 'Download options' : 'خيارات التحميل'}</Link>
+            </div>
           </div>
 
           <div className="relative mx-auto hidden w-full max-w-[480px] lg:block" aria-hidden="true">

@@ -740,7 +740,7 @@ export const englishBlogArticles: BlogArticle[] = [
 export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/download": {
     title: "Download Matgarko for Android | Manage your store on mobile",
-    description: "Find Matgarko app download options to manage your products and orders on mobile, or use your store dashboard in the browser without installing an app.",
+    description: "Get Matgarko for Android on Google Play to manage orders, products, and inventory from your phone, or use your store dashboard in the browser.",
     keywords: ["download Matgarko", "Android merchant app", "Matgarko APK"],
   },
   "/en": {

@@ -18,7 +18,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://matgarko.com/og-image.png');
     await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك/ })).toBeVisible();
-    await expect(page.getByText('اختار طريقة تحميل تطبيق متجركو المناسبة لجهازك، أو ابدأ من المتصفح.', { exact: false }).first()).toBeVisible();
+    await expect(page.getByText('تطبيق متجركو متاح دلوقتي على Google Play لأجهزة أندرويد.', { exact: false }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'تحميل من Google Play' })).toHaveAttribute('href', 'https://play.google.com/store/apps/details?id=com.matgarko.merchant');
     await expect(page.getByText('منصة إنشاء متجر إلكتروني في مصر')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ متجرك في 3 خطوات' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ مجاناً، وادفع لما تبيع' })).toBeVisible();

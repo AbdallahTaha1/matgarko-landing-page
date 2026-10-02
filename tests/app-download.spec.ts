@@ -38,18 +38,18 @@ test('Arabic mobile download uses independent channels and collapsed instruction
   await page.screenshot({ path: 'test-results/download-ar-mobile.png', fullPage: true });
 });
 
-test('English website release does not advertise an unpublished Play channel', async ({ page }) => {
+test('English download keeps the published Play link when release metadata omits it', async ({ page }) => {
   await page.route(RELEASE_URL, route => route.fulfill({ json: { ...manifest, play: null } }));
   await page.goto('/en/download');
   await expect(page.getByRole('link', { name: 'Download for Android (APK)' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Get it on Google Play' })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Get it on Google Play' })).toHaveAttribute('href', PLAY_URL);
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 });
 
-test('empty manifest keeps browser fallback without any download buttons', async ({ page }) => {
+test('empty manifest keeps Google Play and browser access available', async ({ page }) => {
   await page.route(RELEASE_URL, route => route.fulfill({ json: { ...manifest, play: null, website: null } }));
   await page.goto('/download');
-  await expect(page.getByText('تحميل التطبيق قيد التجهيز.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'تحميل من Google Play' })).toHaveAttribute('href', PLAY_URL);
   await expect(page.getByRole('link', { name: 'تحميل مباشر لأندرويد (APK)' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'فتح لوحة المتجر' })).toBeVisible();
 });
@@ -61,6 +61,7 @@ test('network failure stays useful and a retry recovers', async ({ page }) => {
   await page.goto('/download');
   await expect(page.getByRole('button', { name: 'فتح لوحة المتجر' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'إعادة المحاولة' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'تحميل من Google Play' })).toHaveAttribute('href', PLAY_URL);
   const beforeRetry = calls;
   offline = false;
   await page.getByRole('button', { name: 'إعادة المحاولة' }).click();
@@ -73,6 +74,14 @@ test('invalid metadata never exposes a download URL', async ({ page }) => {
   await page.goto('/download');
   await expect(page.getByRole('button', { name: 'إعادة المحاولة' })).toBeVisible();
   await expect(page.locator('a[href*="evil.example"]')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'تحميل من Google Play' })).toHaveAttribute('href', PLAY_URL);
+});
+
+test('Google Play is available before release metadata loads', async ({ page }) => {
+  await page.route(RELEASE_URL, () => {});
+  await page.goto('/download');
+  await expect(page.getByText('جارٍ التحقق من توفر التحميل المباشر (APK)…')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'تحميل من Google Play' })).toHaveAttribute('href', PLAY_URL);
 });
 
 test('browser fallback validates platform address and opens the correct admin', async ({ page }) => {

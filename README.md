@@ -10,7 +10,7 @@ Core product message:
 
 - Mobile-first, Arabic-first, built for solo merchants: launch and run an online store from a phone without technical experience.
 - متجركو — اعمل متجرك وادِر شغلك كله من موبايلك.
-- `/download` and `/en/download` read public app availability from `https://downloads.matgarko.com/android/latest.json`. Only published channels show a download link; missing metadata keeps retry and web-admin access available. Shared marketing copy lives in `src/data/positioning.ts`, with no hardcoded release number. Deployment/runbook and app context live separately in the sibling mobile repository: `matgarko_merchant/docs/android-release-runbook.md`. The download host and an unprotected Play-signed APK still need setup before public activation.
+- `/download` and `/en/download` always link to the published [Google Play app](https://play.google.com/store/apps/details?id=com.matgarko.merchant). Direct APK availability is read from `https://downloads.matgarko.com/android/latest.json`; missing or invalid metadata never blocks the Google Play link or web-admin access. Shared marketing copy lives in `src/data/positioning.ts`, with no hardcoded release number. Deployment/runbook and app context live separately in the sibling mobile repository: `matgarko_merchant/docs/android-release-runbook.md`.
 - Start free and pay only when you sell.
 - Manage products, cash-on-delivery orders, and customers from one dashboard.
 - Current checkout supports cash on delivery. Merchants arrange shipping directly with their couriers; payment gateways and shipping-company integrations are not currently offered. Keep public copy focused on available features without adding unnecessary limitation notices.

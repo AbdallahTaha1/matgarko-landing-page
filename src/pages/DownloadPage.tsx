@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Download, Globe, Smartphone } from 'lucide-react';
 import { fetchReleases, type Releases } from '@/lib/appReleases';
 import type { AppLanguage } from '@/lib/i18n';
+import { GooglePlayBadge } from '@/components/GooglePlayBadge';
 
 export function DownloadPage({ language = 'ar' }: { language?: AppLanguage }) {
   const en = language === 'en';
@@ -39,22 +40,21 @@ export function DownloadPage({ language = 'ar' }: { language?: AppLanguage }) {
         <div className="mx-auto max-w-2xl">
           <span className="section-kicker"><Smartphone size={18} aria-hidden="true" />{en ? 'Your store, with you' : 'متجرك معاك'}</span>
           <h1 className="mt-5 text-3xl font-extrabold leading-relaxed text-gray-950 sm:text-4xl">{en ? 'Get the Matgarko app' : 'حمّل تطبيق متجركو'}</h1>
-          <p className="mt-4 text-lg leading-8 text-gray-600">{en ? 'Manage products and orders from your phone. Choose the download that works for your device.' : 'تابع طلباتك ومنتجاتك من موبايلك. اختار طريقة التحميل المناسبة لجهازك.'}</p>
+          <p className="mt-4 text-lg leading-8 text-gray-600">{en ? 'Manage orders, products, and inventory from your phone. Matgarko is now available on Google Play for Android.' : 'تابع طلباتك ومنتجاتك ومخزونك من موبايلك. تطبيق متجركو متاح دلوقتي على Google Play لأجهزة أندرويد.'}</p>
 
-          <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8" aria-busy={!releases && !failed}>
+          <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
             <h2 className="text-xl font-bold text-gray-950">{en ? 'For Android' : 'لأجهزة أندرويد'}</h2>
+            <div className="mt-4 flex"><GooglePlayBadge language={language} /></div>
             <div className="mt-4" role="status" aria-live="polite">
-              {!releases && !failed && <p className="text-gray-600">{en ? 'Checking available downloads…' : 'جارٍ تجهيز روابط التحميل…'}</p>}
+              {!releases && !failed && <p className="text-gray-600">{en ? 'Checking direct APK download availability…' : 'جارٍ التحقق من توفر التحميل المباشر (APK)…'}</p>}
               {failed && <>
-                <p className="leading-7 text-gray-600">{en ? 'We could not load the download links. Try again or use your store in the browser below.' : 'تعذر تحميل روابط التطبيق حاليًا. جرّب مرة تانية، أو افتح متجرك من المتصفح بالأسفل.'}</p>
+                <p className="leading-7 text-gray-600">{en ? 'Direct APK download is temporarily unavailable. You can get the app from Google Play above.' : 'التحميل المباشر (APK) مش متاح حاليًا. تقدر تحمّل التطبيق من Google Play بالأعلى.'}</p>
                 <button className="btn btn-secondary mt-4" onClick={() => { setFailed(false); setReleases(null); setAttempt(n => n + 1); }}>{en ? 'Try again' : 'إعادة المحاولة'}</button>
               </>}
-              {releases && !releases.play && !releases.website && <p className="leading-7 text-gray-600">{en ? 'The app download is being prepared. You can manage your store in the browser below.' : 'تحميل التطبيق قيد التجهيز. تقدر تدير متجرك من المتصفح بالأسفل.'}</p>}
             </div>
-            {releases?.play && <a className="btn btn-primary mt-4 w-full" href={releases.play.storeUrl} referrerPolicy="no-referrer">{en ? 'Get it on Google Play' : 'تحميل من Google Play'}</a>}
-            {releases?.website && <div className={releases.play ? 'mt-6 border-t border-gray-100 pt-6' : 'mt-4'}>
+            {releases?.website && <div className="mt-6 border-t border-gray-100 pt-6">
               <p className="mb-3 font-semibold text-gray-800">{en ? 'No Google Play on your device?' : 'جهازك مفيهوش Google Play؟'}</p>
-              <a className={`btn ${releases.play ? 'btn-secondary' : 'btn-primary'} w-full`} href={releases.website.downloadUrl} referrerPolicy="no-referrer"><Download size={18} aria-hidden="true" />{en ? 'Download for Android (APK)' : 'تحميل مباشر لأندرويد (APK)'}</a>
+              <a className="btn btn-secondary w-full" href={releases.website.downloadUrl} referrerPolicy="no-referrer"><Download size={18} aria-hidden="true" />{en ? 'Download for Android (APK)' : 'تحميل مباشر لأندرويد (APK)'}</a>
               <p className="mt-3 text-sm text-gray-600">{en ? 'Version' : 'الإصدار'} <bdi>{releases.website.versionName}</bdi> · <bdi>{Math.ceil(releases.website.sizeBytes! / 1048576)} MB</bdi></p>
               <details className="mt-4 text-sm leading-7 text-gray-600">
                 <summary className="cursor-pointer py-2 font-semibold text-emerald-800">{en ? 'How do I install it?' : 'إزاي أثبّت التطبيق؟'}</summary>

@@ -27,7 +27,7 @@ export function VsEasyOrdersPage() {
         { feature: "دفع عند الاستلام", matgarko: true, competitor: true },
         { feature: "إدارة كتالوج ومنتجات", matgarko: true, competitor: true },
         { feature: "كوبونات وخصومات", matgarko: "كل الباقات", competitor: true },
-        { feature: "تطبيق موبايل للإدارة", matgarko: "قريباً", competitor: true },
+        { feature: "تطبيق موبايل للإدارة", matgarko: "متاح لأندرويد على Google Play", competitor: true },
         { feature: "ذكاء اصطناعي لكتابة المنتجات", matgarko: "قريباً", competitor: true },
         { feature: "دعم عربي", matgarko: true, competitor: true },
         { feature: "باقة بدون رسوم شهرية", matgarko: true, competitor: true },
