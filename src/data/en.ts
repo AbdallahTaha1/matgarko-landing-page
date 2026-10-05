@@ -77,7 +77,7 @@ export const englishFaqs = [
   {
     question: "Can I start before paying monthly?",
     answer:
-      "Yes. Starter has no monthly fee or expiring trial: 2% per completed order, capped at 20 EGP. Growth costs 499 EGP monthly plus 0.5%, capped at 5 EGP per completed order. Pro costs 1,499 EGP monthly with no commission.",
+      "Yes. Starter has no monthly fee or expiring trial: 2% per completed order, capped at 10 EGP. Growth costs 499 EGP monthly plus 0.5%, capped at 2.5 EGP per completed order. Pro costs 1,499 EGP monthly with no commission.",
   },
   {
     question: "Does Matgarko support cash on delivery?",

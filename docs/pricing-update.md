@@ -1,11 +1,11 @@
-# Pricing update — 2026-09-28
+# Pricing update — 2026-10-05
 
 ## Agreed prices
 
 | Plan | Monthly fee | Completed-order commission |
 | --- | ---: | --- |
-| البداية / Starter | 0 EGP | 2%, capped at 20 EGP per order |
-| نمو / Growth | 499 EGP | 0.5%, capped at 5 EGP per order |
+| البداية / Starter | 0 EGP | 2%, capped at 10 EGP per order |
+| نمو / Growth | 499 EGP | 0.5%, capped at 2.5 EGP per order |
 | احترافي / Pro | 1,499 EGP | 0% |
 
 Starter has no expiring trial. Commission is calculated once per whole order on merchandise
@@ -17,7 +17,18 @@ coupons and discounts, shipping areas/rates, cash on delivery and WhatsApp suppo
 product limits, unlimited allowances, plan-specific custom domains, advanced reports and
 priority support were removed from pricing cards. Growth and Pro retain all Starter tools.
 
-## Scope
+The launch-stage reduction on 2026-10-05 lowers the Starter cap to 10 EGP and the Growth
+cap to 2.5 EGP, preserving the one-quarter ratio. Monthly fees and commission percentages
+stay unchanged. Both caps are reached at an order value of 500 EGP. For orders worth
+700 EGP each, Growth becomes cheaper at 67 orders; Growth and Pro tie at 400 orders,
+and Pro becomes cheaper at 401 orders.
+
+The related Shopify cost example also distinguishes manual cash-on-delivery from external
+payment gateways, using the official pricing and manual-payment documentation reviewed on
+2026-10-05: https://www.shopify.com/pricing and
+https://help.shopify.com/en/manual/payments/manual-payments.
+
+## Original implementation scope (2026-09-28)
 
 - Landing: Arabic/English pricing cards, order examples, monthly comparison, FAQ, SEO/AI text,
   home preview and related comparison/article copy. EasyOrders numbers were checked against
@@ -31,12 +42,12 @@ priority support were removed from pricing cards. Growth and Pro retain all Star
 ## Release requirement
 
 Apply main-app catalog migration `20260928120000_AddInvoiceCommissionCap` before serving its
-updated API. Verify the configured caps are 20 / 5 / 0 EGP. Old invoices keep their original
+updated API. Verify the configured caps are 10 / 2.5 / 0 EGP. Old invoices keep their original
 amounts and null cap. Refunds after invoicing require operator review. Coordinate backend,
 admin, landing deployment and mobile release. Publishing the landing site does not deploy
 the billing calculation, migration or mobile application; those require a separate rollout.
 
-## Validation
+## Original implementation validation (2026-09-28)
 
 - Landing build, ESLint and SEO audit of 58 prerendered routes passed.
 - 14 landing/browser/pricing checks passed; Arabic and English mobile layouts were inspected.
@@ -44,6 +55,13 @@ the billing calculation, migration or mobile application; those require a separa
 - Admin production build passed.
 - Mobile: 10 billing tests and focused static analysis passed.
 - At the local validation checkpoint, no live invoices or database migrations were changed.
+
+## Cap reduction validation (2026-10-05)
+
+- Production build, ESLint and the SEO audit of 58 prerendered routes passed.
+- All 14 pricing and landing checks passed, including both languages on mobile, fractional
+  commission display, per-order caps and the updated upgrade thresholds.
+- Generated pricing pages and AI summaries contain the new caps without the old limits.
 
 ## Landing publication scope
 
