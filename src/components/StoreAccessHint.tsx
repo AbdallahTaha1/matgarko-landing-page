@@ -2,9 +2,17 @@ import { Link } from 'react-router-dom';
 import { localizePath, type AppLanguage } from '@/lib/i18n';
 import { useRememberedStore } from '@/lib/storeAccess';
 
-export function StoreAccessHint({ language }: { language: AppLanguage }) {
+export function StoreAccessHint({ language, compact = false }: { language: AppLanguage; compact?: boolean }) {
   const store = useRememberedStore();
   const en = language === 'en';
+
+  if (compact) {
+    return <p className="mt-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-600">
+      <span>{store ? (en ? 'Welcome back to your store' : 'متجرك مستنيك') : (en ? 'Already have a store?' : 'عملت متجر قبل كده؟')}</span>
+      {store && <a href={store.storeUrl} dir="ltr" className="break-all py-2 font-medium text-emerald-800 underline underline-offset-4">{new URL(store.storeUrl).hostname}</a>}
+      <Link to={localizePath('/login', language)} className="py-2 font-bold text-emerald-800 underline underline-offset-4">{store ? (en ? 'Store access options' : 'خيارات الدخول لمتجرك') : (en ? 'Access your store' : 'ادخل متجرك')}</Link>
+    </p>;
+  }
 
   return <div className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-7">
     <p className="font-bold text-gray-900">{store ? (en ? 'Welcome back to your store' : 'متجرك مستنيك') : (en ? 'Already have a store?' : 'عملت متجر قبل كده؟')}</p>

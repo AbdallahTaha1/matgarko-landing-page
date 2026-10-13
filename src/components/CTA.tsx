@@ -30,15 +30,6 @@ export function CTA({ language }: { language: AppLanguage }) {
             </a>
           </div>
         </Reveal>
-
-        <Reveal delay={120} className="mx-auto mt-10 grid max-w-2xl grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/5 rtl:divide-x-reverse">
-          {t.stats.map((stat) => (
-            <div key={stat.label} className="px-2 py-4 text-center sm:py-5">
-              <p className="num text-lg font-extrabold text-white sm:text-2xl">{stat.value}</p>
-              <p className="mt-1 text-[11px] font-semibold text-gray-400 sm:text-sm">{stat.label}</p>
-            </div>
-          ))}
-        </Reveal>
       </div>
     </section>
   );

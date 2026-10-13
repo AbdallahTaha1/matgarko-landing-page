@@ -28,8 +28,8 @@ export function Hero({ language }: { language: AppLanguage }) {
     <section className="hero-band relative overflow-hidden" aria-labelledby="hero-title">
       <div className="noise-grid absolute inset-0 opacity-70 [mask-image:radial-gradient(70%_60%_at_50%_0%,#000_20%,transparent_100%)]" aria-hidden="true" />
 
-      <div className="container-x relative pb-12 pt-10 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+      <div className="container-x relative pb-10 pt-8 sm:py-12 lg:py-14">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-8">
           <div className="text-start">
             <span className="section-kicker">
               <span className="relative flex h-2 w-2" aria-hidden="true">
@@ -41,7 +41,7 @@ export function Hero({ language }: { language: AppLanguage }) {
 
             <h1
               id="hero-title"
-              className="mt-5 max-w-xl text-[2rem] font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-4xl sm:leading-[1.35] lg:text-5xl lg:leading-[1.3]"
+              className="mt-5 max-w-xl text-[2rem] font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-4xl sm:leading-[1.35] lg:text-[2.5rem] lg:leading-[1.3]"
             >
               {t.titleLine1}
               <span className="text-conversion-gradient block pb-2">{t.titleLine2}</span>
@@ -49,7 +49,7 @@ export function Hero({ language }: { language: AppLanguage }) {
 
             <p className="mt-4 max-w-lg text-base leading-7 text-gray-600 sm:mt-5 sm:text-lg sm:leading-8">{t.lead}</p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a href={store?.adminUrl || (language === "en" ? "/en/register" : SIGNUP_URL)} className="btn btn-primary">
                 {store ? (language === 'en' ? 'Manage your store' : 'كمّل إدارة متجرك') : t.primaryCta}
                 <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
@@ -59,9 +59,7 @@ export function Hero({ language }: { language: AppLanguage }) {
               </Link>
             </div>
 
-            <StoreAccessHint language={language} />
-
-            <ul className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-gray-600 sm:text-sm">
+            <ul className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-gray-600 sm:text-sm">
               {t.trust.map((item) => (
                 <li key={item} className="inline-flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
@@ -69,11 +67,12 @@ export function Hero({ language }: { language: AppLanguage }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-gray-600">{t.appNotice}</p>
-            <div className="mt-3 flex flex-wrap items-center gap-4">
-              <GooglePlayBadge language={language} />
-              <Link className="text-sm font-semibold text-emerald-800 underline underline-offset-4" to={localizePath('/download', language)}>{language === 'en' ? 'Download options' : 'خيارات التحميل'}</Link>
+            <div className="mt-5 flex flex-wrap items-center gap-4">
+              <GooglePlayBadge language={language} widthClass="w-[150px]" />
+              <Link className="py-3 text-sm font-semibold text-emerald-800 underline underline-offset-4" to={localizePath('/download', language)}>{language === 'en' ? 'Download options' : 'خيارات التحميل'}</Link>
             </div>
+
+            <StoreAccessHint language={language} compact />
           </div>
 
           <div className="relative mx-auto hidden w-full max-w-[480px] lg:block" aria-hidden="true">

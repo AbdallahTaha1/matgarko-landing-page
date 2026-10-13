@@ -19,6 +19,9 @@ test-results
 !.env.example
 !.env.production
 
+# Marketing campaign working files
+campaigns/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

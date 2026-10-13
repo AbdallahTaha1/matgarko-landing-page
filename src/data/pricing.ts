@@ -30,6 +30,12 @@ const storeFeatures: LocalizedList = {
   en: ["Product, stock and order management", "Customer coupons and discounts", "Delivery areas and shipping rates", "WhatsApp support"],
 };
 
+/** What every plan includes, for layouts that list it once instead of per plan. */
+export const includedInEveryPlan: LocalizedList = {
+  ar: ["متجر جاهز برابط على متجركو", ...storeFeatures.ar],
+  en: ["Ready store on a Matgarko link", ...storeFeatures.en],
+};
+
 export const plans: Plan[] = [
   {
     id: "free",

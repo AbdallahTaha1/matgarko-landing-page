@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { homeContent } from "@/data/home";
-import { SIGNUP_URL, commissionCapLabel, formatCommission, formatEgp, plans } from "@/data/pricing";
+import { SIGNUP_URL, commissionCapLabel, formatCommission, formatEgp, includedInEveryPlan, plans } from "@/data/pricing";
 import { localizePath, type AppLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check } from "lucide-react";
@@ -49,14 +49,7 @@ export function PricingPreview({ language }: { language: AppLanguage }) {
 
               {plan.commission > 0 && <p className="mt-1 text-xs font-semibold text-emerald-700">{commissionCapLabel(plan, language)}</p>}
 
-              <ul className="mt-5 flex-1 space-y-2.5 border-t border-gray-100 pt-5">
-                {plan.features[language].map((feature) => (
-                  <li key={feature} className="flex items-start gap-2.5 text-sm text-gray-700">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="flex-1" />
 
               <a
                 href={language === "en" ? "/en/register" : SIGNUP_URL}
@@ -68,11 +61,23 @@ export function PricingPreview({ language }: { language: AppLanguage }) {
           ))}
         </div>
 
-        <Reveal className="mt-6 flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-start">
+        <Reveal className="mt-4 rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
+          <p className="text-sm font-extrabold text-gray-950">{t.included}</p>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2.5">
+            {includedInEveryPlan[language].map((feature) => (
+              <li key={feature} className="flex items-start gap-2 text-sm text-gray-700">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <Reveal className="mt-4 flex flex-col items-center justify-between gap-1 text-center sm:flex-row sm:text-start">
           <p className="text-xs text-gray-500 sm:text-sm">{t.note}</p>
           <Link
             to={localizePath("/pricing", language)}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+            className="inline-flex items-center gap-1.5 py-2 text-sm font-bold text-emerald-700 hover:text-emerald-800"
           >
             {t.compare}
             <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />

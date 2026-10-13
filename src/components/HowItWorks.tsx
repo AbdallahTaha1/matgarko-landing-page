@@ -35,7 +35,7 @@ export function HowItWorks({ language }: { language: AppLanguage }) {
         <Reveal className="mt-8 text-center">
           <Link
             to={localizePath("/getting-started", language)}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+            className="inline-flex items-center gap-1.5 py-2 text-sm font-bold text-emerald-700 hover:text-emerald-800"
           >
             {t.cta}
             <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />

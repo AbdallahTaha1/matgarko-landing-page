@@ -1,5 +1,4 @@
 import type { AppLanguage } from "@/lib/i18n";
-import { positioning } from "./positioning";
 
 export type HomeContent = {
   hero: {
@@ -7,7 +6,6 @@ export type HomeContent = {
     titleLine1: string;
     titleLine2: string;
     lead: string;
-    appNotice: string;
     primaryCta: string;
     secondaryCta: string;
     trust: string[];
@@ -21,9 +19,10 @@ export type HomeContent = {
       sales: { label: string; value: string; delta: string };
     };
   };
-  trustBar: {
+  stores: {
     title: string;
-    items: string[];
+    lead: string;
+    opensNewTab: string;
   };
   features: {
     kicker: string;
@@ -46,6 +45,7 @@ export type HomeContent = {
     commission: string;
     noCommission: string;
     popular: string;
+    included: string;
     compare: string;
     note: string;
   };
@@ -60,7 +60,6 @@ export type HomeContent = {
     lead: string;
     primary: string;
     secondary: string;
-    stats: Array<{ value: string; label: string }>;
   };
 };
 
@@ -70,8 +69,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       kicker: "منصة إنشاء متجر إلكتروني في مصر",
       titleLine1: "اعمل متجرك",
       titleLine2: "وادِر شغلك كله من موبايلك",
-      lead: positioning.ar.description,
-      appNotice: positioning.ar.appNotice,
+      lead: "أضف منتجاتك، استقبل طلباتك، وتابع مبيعاتك في لوحة واحدة بالعربي، بدون خبرة تقنية أو فريق عمل.",
       primaryCta: "أنشئ متجرك مجاناً",
       secondaryCta: "شوف الأسعار",
       trust: ["بدون بطاقة ائتمان", "ابدأ بـ 0 ج.م", "2% فقط لما تبيع"],
@@ -90,14 +88,15 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         sales: { label: "مبيعات اليوم", value: "4,820 ج.م", delta: "+18%" },
       },
     },
-    trustBar: {
-      title: "بداية بسيطة لمتجرك",
-      items: ["الدفع عند الاستلام", "واجهة عربية", "إدارة المنتجات والطلبات"],
+    stores: {
+      title: "متاجر حقيقية شغالة على متجركو",
+      lead: "افتح أي متجر وشوف بنفسك شكل المتجر اللي هتطلع بيه.",
+      opensNewTab: "(يفتح في تبويب جديد)",
     },
     features: {
       kicker: "كل اللي محتاجه",
       title: "أدوات بسيطة تخلي متجرك يبيع",
-      lead: "بتدير شغلك لوحدك؟ أضف منتجاتك وتابع طلباتك من موبايلك، في لوحة واحدة بالعربي.",
+      lead: "بتدير شغلك لوحدك؟ دي الأدوات اللي هتستخدمها كل يوم.",
       items: [
         { title: "المنتجات والمخزون", text: "ارفع الصور والأسعار ونظّم الأقسام في دقائق." },
         { title: "الطلبات", text: "كل طلب جديد بحالته وبيانات العميل في مكان واحد." },
@@ -124,6 +123,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       commission: "عمولة على الطلب",
       noCommission: "بدون عمولة",
       popular: "عمولة أقل",
+      included: "كل الباقات تشمل",
       compare: "قارن الباقات بالتفصيل",
       note: "العمولة على الطلبات المكتملة حسب باقتك.",
     },
@@ -138,11 +138,6 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "أنشئ متجرك النهارده وابدأ استقبال الطلبات من عملائك في مصر.",
       primary: "أنشئ متجرك مجاناً",
       secondary: "كلمنا على واتساب",
-      stats: [
-        { value: "0 ج.م", label: "للبدء" },
-        { value: "2%", label: "فقط لما تبيع" },
-        { value: "دقائق", label: "لإطلاق متجرك" },
-      ],
     },
   },
   en: {
@@ -150,8 +145,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       kicker: "Online store builder for Egypt",
       titleLine1: "Create an online store",
       titleLine2: "and run it from your phone",
-      lead: positioning.en.description,
-      appNotice: positioning.en.appNotice,
+      lead: "Add products, take orders, and track sales in one Arabic dashboard, with no technical experience or team.",
       primaryCta: "Create your store free",
       secondaryCta: "See pricing",
       trust: ["No credit card", "Start at 0 EGP", "2% only when you sell"],
@@ -170,14 +164,15 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         sales: { label: "Today's sales", value: "4,820 EGP", delta: "+18%" },
       },
     },
-    trustBar: {
-      title: "A simple start for your store",
-      items: ["Cash on delivery", "Arabic dashboard", "Product and order management"],
+    stores: {
+      title: "Real stores running on Matgarko",
+      lead: "Open any of them to see the kind of store you will launch.",
+      opensNewTab: "(opens in a new tab)",
     },
     features: {
       kicker: "Everything you need",
       title: "Simple tools that make your store sell",
-      lead: "Running your business on your own? Add products and manage orders from your phone, in one Arabic dashboard.",
+      lead: "Running your business on your own? These are the tools you'll use every day.",
       items: [
         { title: "Products and stock", text: "Upload photos, set prices, and organize categories in minutes." },
         { title: "Orders", text: "Every new order with its status and customer details in one place." },
@@ -204,6 +199,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       commission: "commission per order",
       noCommission: "no commission",
       popular: "Lower commission",
+      included: "Every plan includes",
       compare: "Compare plans in detail",
       note: "Commission applies to completed orders according to your plan.",
     },
@@ -218,11 +214,6 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "Create your store today and start receiving orders from customers in Egypt.",
       primary: "Create your store free",
       secondary: "Message us on WhatsApp",
-      stats: [
-        { value: "0 EGP", label: "to start" },
-        { value: "2%", label: "only when you sell" },
-        { value: "Minutes", label: "to launch your store" },
-      ],
     },
   },
 };

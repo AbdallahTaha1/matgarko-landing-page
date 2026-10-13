@@ -1,12 +1,12 @@
 import { PLAY_URL } from '@/lib/appReleases';
 import type { AppLanguage } from '@/lib/i18n';
 
-export function GooglePlayBadge({ language }: { language: AppLanguage }) {
+export function GooglePlayBadge({ language, widthClass = 'w-[220px]' }: { language: AppLanguage; widthClass?: string }) {
   return (
     <a
       href={PLAY_URL}
       referrerPolicy="no-referrer"
-      className="inline-flex w-[220px] max-w-full shrink-0 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+      className={`inline-flex ${widthClass} max-w-full shrink-0 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700`}
     >
       <img
         src={`/badges/google-play-${language}.png`}

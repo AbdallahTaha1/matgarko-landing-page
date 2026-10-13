@@ -22,7 +22,7 @@ export function FAQ({ language }: { language: AppLanguage }) {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-emerald-700 hover:text-emerald-800"
+              className="mt-3 inline-flex items-center gap-2 py-2 text-sm font-bold text-emerald-700 hover:text-emerald-800"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               {t.more}
