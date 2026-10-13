@@ -28,7 +28,7 @@ export function Hero({ language }: { language: AppLanguage }) {
     <section className="hero-band relative overflow-hidden" aria-labelledby="hero-title">
       <div className="noise-grid absolute inset-0 opacity-70 [mask-image:radial-gradient(70%_60%_at_50%_0%,#000_20%,transparent_100%)]" aria-hidden="true" />
 
-      <div className="container-x relative pb-10 pt-8 sm:py-12 lg:py-14">
+      <div className="container-x relative pb-10 pt-8 sm:py-14 lg:py-20 xl:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-8">
           <div className="text-start">
             <span className="section-kicker">
@@ -41,7 +41,7 @@ export function Hero({ language }: { language: AppLanguage }) {
 
             <h1
               id="hero-title"
-              className="mt-5 max-w-xl text-[2rem] font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-4xl sm:leading-[1.35] lg:text-[2.5rem] lg:leading-[1.3]"
+              className="mt-5 max-w-xl text-[2rem] font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-4xl sm:leading-[1.35] lg:text-[2.5rem] lg:leading-[1.3] xl:max-w-2xl xl:text-[2.75rem]"
             >
               {t.titleLine1}
               <span className="text-conversion-gradient block pb-2">{t.titleLine2}</span>
