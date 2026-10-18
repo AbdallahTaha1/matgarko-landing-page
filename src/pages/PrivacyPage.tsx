@@ -66,7 +66,7 @@ export function PrivacyPage() {
             </div>
             <div className="flex items-start gap-3">
               <Mail className="mt-1 h-5 w-5 shrink-0 text-emerald-700" />
-              <p className="text-gray-700">للاستفسار: matgarko.help@gmail.com</p>
+              <p className="text-gray-700">للاستفسار: support@matgarko.com</p>
             </div>
           </div>
         </section>

@@ -18,7 +18,7 @@ import { PricingPage } from "@/pages/PricingPage";
 
 const SIGNUP_URL = "/en/register";
 const WHATSAPP_URL = "https://wa.me/201080312538";
-const EMAIL_URL = "mailto:matgarko.help@gmail.com";
+const EMAIL_URL = "mailto:support@matgarko.com";
 
 function primaryHref(label?: string) {
   if (!label) return SIGNUP_URL;

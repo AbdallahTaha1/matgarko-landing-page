@@ -45,7 +45,7 @@ The cap applies once per order to merchandise after discounts, excluding shippin
 ## Contact Information
 
 - WhatsApp / phone: `+20 108 031 2538`
-- Email: `matgarko.help@gmail.com`
+- Email: `support@matgarko.com`
 - Facebook: `https://www.facebook.com/matgarko2/`
 - Signup: `https://matgarko.com/register` (English: `/en/register`)
 

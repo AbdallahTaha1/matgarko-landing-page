@@ -10,7 +10,7 @@ export const DEFAULT_SITE_URL = "https://matgarko.com";
 export const SITE_URL = (import.meta.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, "");
 export const SIGNUP_URL = "/register";
 export const WHATSAPP_URL = "https://wa.me/201080312538";
-export const CONTACT_EMAIL = "matgarko.help@gmail.com";
+export const CONTACT_EMAIL = "support@matgarko.com";
 
 const CORE_TOPICS = [
   "Mobile-first ecommerce for solo merchants",

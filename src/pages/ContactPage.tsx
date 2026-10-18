@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Clock, Facebook, Mail, MessageCircle, Phone } from "lucide-react";
 
-const EMAIL = "matgarko.help@gmail.com";
+const EMAIL = "support@matgarko.com";
 const PHONE_DISPLAY = "+20 108 031 2538";
 const WHATSAPP_URL = "https://wa.me/201080312538";
 const FACEBOOK_URL = "https://www.facebook.com/matgarko2/";

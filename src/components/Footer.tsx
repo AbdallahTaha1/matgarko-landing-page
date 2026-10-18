@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const FACEBOOK_URL = "https://www.facebook.com/matgarko2/";
-const EMAIL = "matgarko.help@gmail.com";
+const EMAIL = "support@matgarko.com";
 const WHATSAPP_URL = "https://wa.me/201080312538";
 
 const footerColumns = [

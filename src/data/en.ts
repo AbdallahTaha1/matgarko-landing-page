@@ -260,7 +260,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
         title: "Email",
         text:
           "Send details about your store, products, current platform, or launch timeline if you need a more complete reply.",
-        items: ["matgarko.help@gmail.com"],
+        items: ["support@matgarko.com"],
       },
       {
         title: "Location context",
@@ -325,7 +325,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Contact",
         text:
-          "For privacy questions, contact Matgarko at matgarko.help@gmail.com.",
+          "For privacy questions, contact Matgarko at support@matgarko.com.",
       },
     ],
   },
