@@ -7,7 +7,7 @@ import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
-import { readyStoreLinks, rememberStore } from '@/lib/storeAccess';
+import { readyStoreLinks, rememberStore, signupSignInUrl } from '@/lib/storeAccess';
 import { StoreAccessHint } from '@/components/StoreAccessHint';
 import { useSignupContactCheck } from '@/lib/useSignupContactCheck';
 import { normalizePhoneInput, parseSignupPhone, phoneCountries, signupPhoneNumber, type CountryCode } from '@/lib/phone';
@@ -158,11 +158,15 @@ export default function RegisterPage() {
     rememberStore({ adminUrl, storeUrl });
     let active = true;
     let navigating = false;
-    const navigate = () => {
+    const navigate = async () => {
       if (!active || navigating) return;
       navigating = true;
+      // Sign the owner straight in; the plain dashboard address asks for the password instead.
+      let destination = adminUrl;
+      try { destination = signupSignInUrl((await api.signIn(token)).url, { adminUrl, storeUrl }) || adminUrl; } catch { /* Fall back to signing in. */ }
+      if (!active) return;
       try { sessionStorage.removeItem(tokenKey); } catch { /* Navigation does not require storage. */ }
-      window.location.replace(adminUrl);
+      window.location.replace(destination);
     };
     // Both automatic navigation and the primary link wait for Google's processing
     // callbacks (or the bounded fallback). Merely queueing gtag is not enough.
@@ -171,7 +175,7 @@ export default function RegisterPage() {
       void conversion.then(navigate);
     }, 1500);
     return () => { active = false; clearTimeout(timer); openReadyDashboard.current = null; };
-  }, [status, consent, adminUrl, storeUrl]);
+  }, [status, consent, adminUrl, storeUrl, token]);
   useEffect(() => {
     if (error) errorAlert.current?.focus();
   }, [error]);
@@ -324,7 +328,7 @@ export default function RegisterPage() {
         {stage === 'provisioning' && <div className="space-y-5 text-center"><Loader2 className="mx-auto h-9 w-9 animate-spin text-emerald-700" /><h2 className="text-xl font-bold">{t('بنجهّز متجرك', 'Preparing your store')}</h2><p className="text-sm leading-6">{t('بريدك اتأكد. تجهيز المتجر ممكن ياخد بضع دقائق، وهتوصلك رسالة لما يبقى جاهز.', 'Your email is verified. Setup can take a few minutes; we will email you when your store is ready.')}</p>{pollingPaused && <button className="btn btn-secondary" onClick={() => { setError(''); setPollingPaused(false); }}>{t('فحص الحالة تاني', 'Check status again')}</button>}</div>}
         {stage === 'ready' && <div className="space-y-5 text-center"><CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600" /><h2 className="text-2xl font-bold text-emerald-700">{t('متجرك جاهز!', 'Your store is ready!')}</h2>
           {readyStore ? <>
-            <p role="status" className="text-sm leading-6">{t('بنفتح لك لوحة التحكم دلوقتي… ادخل بنفس البريد وكلمة المرور اللي سجلت بيهم.', 'Opening your dashboard now… Sign in with the email and password you registered with.')}</p>
+            <p role="status" className="text-sm leading-6">{t('بنفتح لك لوحة التحكم دلوقتي عشان تضيف أول منتج… لو طلب منك تسجيل دخول، ادخل بنفس البريد وكلمة المرور اللي سجلت بيهم.', 'Opening your dashboard so you can add your first product… If it asks you to sign in, use the email and password you registered with.')}</p>
             <a className="btn btn-primary w-full" href={readyStore.adminUrl} onClick={event => {
               if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !openReadyDashboard.current) return;
               event.preventDefault();

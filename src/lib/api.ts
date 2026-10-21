@@ -39,4 +39,7 @@ export const api = {
   verify: (token: string, code: string) => request<SignupStatus>('/verify', { token, data: { code } }),
   resend: (token: string) => request<{ retryAfterSeconds: number }>('/resend', { token, data: {} }),
   status: (token: string) => request<SignupStatus>('/status', { token }),
+  // A single-use link that signs the new owner into their dashboard. Callers fall back to the
+  // plain dashboard address, which asks for the password, if this fails.
+  signIn: (token: string) => request<{ url: string }>('/sign-in', { token, data: {} }),
 };

@@ -22,6 +22,16 @@ function storeOrigin(value: string, domain = baseDomain) {
   } catch { return null; }
 }
 
+// The signup API's dashboard sign-in link, accepted only on the store's own host and path.
+export function signupSignInUrl(value: string | undefined, store: StoreLinks): string | null {
+  try {
+    const url = value ? new URL(value) : null;
+    if (!url || url.origin !== new URL(store.adminUrl).origin) return null;
+    if (url.pathname !== '/external-login/signup/complete' || !/^\?code=[A-Za-z0-9_%-]+$/.test(url.search) || url.hash) return null;
+    return url.href;
+  } catch { return null; }
+}
+
 export function readyStoreLinks(adminUrl?: string, storeUrl?: string, domain = baseDomain): StoreLinks | null {
   const origin = adminUrl && storeOrigin(adminUrl, domain);
   if (!origin || (storeUrl && storeOrigin(storeUrl, domain) !== origin)) return null;
