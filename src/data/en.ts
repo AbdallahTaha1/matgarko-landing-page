@@ -85,6 +85,16 @@ export const englishFaqs = [
       "Yes. Cash on delivery is available on every plan. You can also set delivery prices for each area so customers see the cost before placing an order.",
   },
   {
+    question: "Can I connect Meta Pixel to my store?",
+    answer:
+      "Yes. In your store design settings, add your Meta Pixel ID (or paste the whole pixel code) and a Conversions API token, plus Google Analytics and Google Search Console, without a developer. The store sends views, add-to-carts, checkouts, and purchases to your ads, and each purchase arrives from both the browser and the server without being counted twice.",
+  },
+  {
+    question: "Can I bring my products from Excel or another platform?",
+    answer:
+      "Yes. From the web dashboard, upload an Excel file of up to 500 products with name, price, category, quantity, description, and cost, using the template you download from the same page. Photos, sizes, and colors are added after the import.",
+  },
+  {
     question: "Are the core tools available on Starter?",
     answer:
       "Yes. Every plan includes product, stock and order management, coupons, shipping settings and WhatsApp support. Plans differ in monthly subscription, commission rate and per-order cap.",
@@ -109,20 +119,32 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Manage products and stock",
         text:
-          "Keep product names, images, prices, quantities, and descriptions organized so your team can sell with fewer manual mistakes.",
-        items: ["Product catalog", "Inventory visibility", "Price and offer controls"],
+          "Keep product names, images, prices, sizes, colors, quantities, and descriptions organized, or import up to 500 products from an Excel file, so your team can sell with fewer manual mistakes.",
+        items: ["Product catalog", "Excel product import", "Low-stock alerts", "Price and offer controls"],
       },
       {
         title: "Handle orders clearly",
         text:
-          "Move from messages and spreadsheets to a structured order flow. Track customer details, order status, and order history from the dashboard.",
-        items: ["Order tracking", "Customer records", "Operational notes"],
+          "Move from messages and spreadsheets to a structured order flow. Track customer details, order status, and order history from the dashboard, call the customer or send a ready-made WhatsApp confirmation, and print a PDF invoice.",
+        items: ["Order tracking", "Customer records", "WhatsApp order confirmation", "PDF invoices and Excel export"],
+      },
+      {
+        title: "Advertise and measure",
+        text:
+          "Connect Meta Pixel, the Conversions API, Google Analytics, and Google Search Console yourself, and let shoppers order straight from the product page with Order now. Store statistics show sales, profit after cost, visit sources, best sellers, and searches.",
+        items: ["Meta Pixel and Conversions API", "Google Analytics and Search Console", "Sales, profit, and visit sources"],
+      },
+      {
+        title: "Design the store shoppers see",
+        text:
+          "Arrange your home page from more than 20 section types, including sliders, countdown offers, and testimonials. Shoppers get Arabic search that handles spelling variants, filters, a wishlist, recently viewed products, complementary products, and Google sign-in.",
+        items: ["Home page builder", "Arabic search and filters", "Wishlist and Google sign-in"],
       },
       {
         title: "Grow without rebuilding",
         text:
-          "Start with the essentials, then explore templates, a custom domain, and lower-commission plans as your business grows.",
-        items: ["Plans for different stages", "Custom domain path", "Support for growing catalogs"],
+          "Start with the essentials, then move to lower-commission plans and your own domain, which our team connects for you, as your business grows.",
+        items: ["Plans for different stages", "Custom domain, connected for you", "Support for growing catalogs"],
       },
     ],
   },
@@ -130,7 +152,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     kicker: "Payment and shipping",
     title: "Set clear payment and delivery details",
     lead:
-      "Accept cash-on-delivery orders and make delivery costs clear to your customers.",
+      "Accept cash-on-delivery orders, make delivery costs clear to your customers, and connect Meta Pixel, Google Analytics, and WhatsApp to your store.",
     primaryCta: "Create your store",
     secondaryCta: "Compare plans",
     sections: [
@@ -138,19 +160,25 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
         title: "Cash on delivery",
         text:
           "Customers place an order through your store and pay when they receive it.",
-        items: ["Cash on delivery", "Available on every plan"],
+        items: ["Cash on delivery", "Available on every plan", "Optional collection fee", "Minimum and maximum order"],
       },
       {
         title: "Shipping zones and fees",
         text:
           "Define delivery areas, shipping prices, and rules so customers know what to expect before placing the order.",
-        items: ["Delivery zones", "Shipping prices"],
+        items: ["Delivery zones", "Prices per governorate and area", "Free shipping", "Minimum order per area"],
       },
       {
         title: "Marketing and analytics readiness",
         text:
-          "Use clean product pages, campaign-ready links, and clear store content so your ads, social posts, and search visibility point to a reliable buying experience.",
-        items: ["Campaign-friendly URLs", "Product landing pages", "Conversion-focused copy"],
+          "Connect Meta Pixel, the Conversions API, Google Analytics, and Google Search Console from your store design settings, without a developer. Views, add-to-carts, checkouts, and purchases reach your ads and reports, and store statistics show which sources bring visits.",
+        items: ["Meta Pixel", "Conversions API", "Google Analytics", "Google Search Console"],
+      },
+      {
+        title: "WhatsApp",
+        text:
+          "Make it easy for customers to reach you, and confirm each order with a ready-made message you send from your own WhatsApp.",
+        items: ["Floating WhatsApp button", "Ready-made order confirmation", "One-tap call to the customer", "Facebook, Instagram, and TikTok links"],
       },
       {
         title: "Local support context",
@@ -422,7 +450,7 @@ export const englishIndustries: Record<string, EnglishIndustryContent> = {
       {
         title: "Benefit-focused pages",
         text:
-          "Move beyond product names by explaining use cases, skin or hair concerns, shade notes, and bundle recommendations.",
+          "Move beyond product names by explaining use cases, skin or hair concerns, shade notes, and the products that pair well with each item.",
       },
       {
         title: "Campaign-ready categories",
@@ -752,14 +780,14 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/solutions": {
     title: "Ecommerce store management solutions | Matgarko",
     description:
-      "Manage storefronts, products, orders, customers, and offers in one Arabic-first ecommerce platform.",
-    keywords: ["ecommerce store management", "online store dashboard", "product and order management", "Arabic ecommerce software"],
+      "Manage storefronts, products, Excel imports, orders, customers, offers, Meta Pixel, and sales and profit statistics in one Arabic-first ecommerce platform.",
+    keywords: ["ecommerce store management", "online store dashboard", "product and order management", "Arabic ecommerce software", "store statistics"],
   },
   "/en/integrations": {
-    title: "Cash on delivery and delivery prices | Matgarko",
+    title: "Cash on delivery, delivery prices, and Meta Pixel | Matgarko",
     description:
-      "Accept cash-on-delivery orders and set delivery areas and prices so customers know the cost before ordering.",
-    keywords: ["cash on delivery ecommerce", "store delivery prices", "delivery areas"],
+      "Accept cash-on-delivery orders, set delivery prices by area, and connect Meta Pixel, the Conversions API, Google Analytics, and WhatsApp to your store.",
+    keywords: ["cash on delivery ecommerce", "store delivery prices", "delivery areas", "Meta Pixel for online store", "Conversions API"],
   },
   "/en/themes": {
     title: "Online store templates for MENA businesses | Matgarko",

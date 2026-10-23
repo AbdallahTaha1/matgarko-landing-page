@@ -32,7 +32,7 @@ export function ElectronicsPage() {
         {
           icon: <Star className="h-5 w-5" />,
           title: "كوبونات وعروض",
-          description: "أنشئ عروض المواسم، عروض الشراء بكمية، والكوبونات لعملاء الجملة.",
+          description: "أنشئ عروض المواسم وكوبونات خصم بمدة محددة وحد استخدام لكل عميل.",
         },
         {
           icon: <Laptop className="h-5 w-5" />,

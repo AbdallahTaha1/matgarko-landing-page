@@ -27,8 +27,10 @@ export function VsEasyOrdersPage() {
         { feature: "دفع عند الاستلام", matgarko: true, competitor: true },
         { feature: "إدارة كتالوج ومنتجات", matgarko: true, competitor: true },
         { feature: "كوبونات وخصومات", matgarko: "كل الباقات", competitor: true },
-        { feature: "تطبيق موبايل للإدارة", matgarko: "متاح لأندرويد على Google Play", competitor: true },
-        { feature: "ذكاء اصطناعي لكتابة المنتجات", matgarko: "قريباً", competitor: true },
+        { feature: "تطبيق موبايل للإدارة", matgarko: "أندرويد على Google Play، ولوحة التحكم من متصفح أي موبايل", competitor: true },
+        { feature: "زر «اطلب الآن» في صفحة المنتج", matgarko: true, competitor: true },
+        { feature: "بكسل ميتا وConversions API", matgarko: true, competitor: true },
+        { feature: "ذكاء اصطناعي لكتابة المنتجات", matgarko: false, competitor: true },
         { feature: "دعم عربي", matgarko: true, competitor: true },
         { feature: "باقة بدون رسوم شهرية", matgarko: true, competitor: true },
       ]}
@@ -43,7 +45,7 @@ export function VsEasyOrdersPage() {
         },
         {
           q: "هل يمكنني الانتقال من إيزي أوردرز لمتجركو؟",
-          a: "نعم. يمكنك إنشاء حسابك في متجركو مجاناً وتهجير منتجاتك بسهولة. فريق الدعم يساعدك في عملية الانتقال.",
+          a: "نعم. أنشئ حسابك في متجركو مجاناً، ثم ارفع منتجاتك بملف Excel من لوحة التحكم على الويب: حتى 500 منتج في الملف بالاسم والسعر والقسم والكمية والوصف. الصور والمقاسات والألوان تضيفها بعد الاستيراد، ولو احتجت مساعدة كلمنا على واتساب.",
         },
       ]}
     />

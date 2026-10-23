@@ -40,7 +40,7 @@ export function DownloadPage({ language = 'ar' }: { language?: AppLanguage }) {
         <div className="mx-auto max-w-2xl">
           <span className="section-kicker"><Smartphone size={18} aria-hidden="true" />{en ? 'Your store, with you' : 'متجرك معاك'}</span>
           <h1 className="mt-5 text-3xl font-extrabold leading-relaxed text-gray-950 sm:text-4xl">{en ? 'Get the Matgarko app' : 'حمّل تطبيق متجركو'}</h1>
-          <p className="mt-4 text-lg leading-8 text-gray-600">{en ? 'Manage orders, products, and inventory from your phone. Matgarko is now available on Google Play for Android.' : 'تابع طلباتك ومنتجاتك ومخزونك من موبايلك. تطبيق متجركو متاح دلوقتي على Google Play لأجهزة أندرويد.'}</p>
+          <p className="mt-4 text-lg leading-8 text-gray-600">{en ? 'Manage orders, products, and inventory from your phone, and get a notification for every new order. Matgarko is now available on Google Play for Android.' : 'تابع طلباتك ومنتجاتك ومخزونك من موبايلك، ويوصلك إشعار مع كل طلب جديد. تطبيق متجركو متاح دلوقتي على Google Play لأجهزة أندرويد.'}</p>
 
           <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
             <h2 className="text-xl font-bold text-gray-950">{en ? 'For Android' : 'لأجهزة أندرويد'}</h2>
