@@ -47,7 +47,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/",
     title: "إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو",
     description:
-      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 2% على الطلبات المكتملة.",
+      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 1% على الطلبات المكتملة.",
     keywords: [
       "إنشاء متجر إلكتروني",
       "متجر إلكتروني مصر",
@@ -918,7 +918,7 @@ Mobile app availability: ${positioning.en.appNotice}
 - Email: ${CONTACT_EMAIL}
 - WhatsApp: ${WHATSAPP_URL}
 - Service: ecommerce store creation and store management software.
-- Core offer: start free and pay only when selling, or upgrade to monthly plans for lower commission.
+- Core offer: start free and pay only when selling, or upgrade to Pro for no commission.
 
 ## Pricing Summary
 

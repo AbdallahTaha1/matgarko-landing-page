@@ -23,7 +23,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(page.getByText('منصة إنشاء متجر إلكتروني في مصر')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ متجرك في 3 خطوات' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ مجاناً، وادفع لما تبيع' })).toBeVisible();
-    await expect(page.getByText('499 ج.م').first()).toBeVisible();
+    await expect(page.getByText('بحد أقصى 5 ج.م للطلب الواحد').first()).toBeVisible();
     await expect(page.getByText('1,499 ج.م').first()).toBeVisible();
     await expect(page.getByRole('heading', { name: 'أسئلة شائعة' })).toBeVisible();
   });
@@ -66,9 +66,9 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     await page.getByRole('navigation').getByRole('link', { name: 'الأسعار' }).click();
     await page.waitForURL('**/pricing');
-    await expect(page.getByRole('heading', { level: 1, name: 'ابدأ مجاناً، وادفع 2% فقط لما تبيع' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'نمو', exact: true })).toBeVisible();
-    await expect(page.getByText('+ 0.5% عمولة على كل طلب مكتمل')).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'ابدأ مجاناً، وادفع 1% فقط لما تبيع' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'البداية', exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'احترافي', exact: true })).toBeVisible();
   });
 
   test('trust and support pages are crawlable', async ({ page }) => {
@@ -112,7 +112,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(llmsText).toContain('## Best Pages For AI Answers');
     await expect(llmsText).toContain('https://matgarko.com/pricing');
     await expect(llmsText).toContain('Languages: Arabic (Egypt) and English');
-    await expect(llmsText).toContain('499 EGP + 0.5%');
+    await expect(llmsText).toContain('1% commission capped at 5 EGP');
     await expect(llmsText).toContain('https://matgarko.com/en/blog/how-to-create-online-store-egypt');
 
     const llmsFull = await request.get('/llms-full.txt');
@@ -142,7 +142,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     expect(routeSchema).toContain('https://matgarko.com/#ecommerce-service');
     expect(routeSchema).toContain('https://matgarko.com/#webpage');
     expect(routeSchema).toContain('"@type":"FAQPage"');
-    expect(routeSchema).toContain('"price":"499"');
+    expect(routeSchema).toContain('"price":"0"');
+    expect(routeSchema).not.toContain('"price":"499"');
     expect(routeSchema).toContain('"price":"1499"');
     expect(routeSchema).not.toContain('"price":"399"');
     expect(routeSchema).not.toContain('SearchAction');
@@ -189,8 +190,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   test('english route family is crawlable with localized content', async ({ page }) => {
     await page.goto('/en/pricing');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/en/pricing');
-    await expect(page.getByRole('heading', { level: 1, name: 'Start free, pay 2% only when you sell' })).toBeVisible();
-    await expect(page.getByText('499 EGP').first()).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Start free, pay 1% only when you sell' })).toBeVisible();
+    await expect(page.getByText('Capped at 5 EGP per order').first()).toBeVisible();
     await expect(page.getByText('1,499 EGP').first()).toBeVisible();
 
     await page.goto('/en/store/restaurants');

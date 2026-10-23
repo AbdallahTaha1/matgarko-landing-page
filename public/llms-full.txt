@@ -20,8 +20,7 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 
 ## Pricing Summary
 
-- Free: 0 EGP/month with 2% commission per completed order.
-- Growth: 499 EGP/month with 0.5% commission per completed order.
+- Starter: 0 EGP/month with 1% commission per completed order. Capped at 5 EGP per order.
 - Pro: 1,499 EGP/month with 0% commission per completed order.
 - Pricing source: https://matgarko.com/pricing
 
@@ -41,7 +40,7 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 
 ### هل أقدر أبدأ بدون اشتراك شهري؟
 
-نعم، تقدر تبدأ على الباقة المجانية بدون رسوم شهرية، وتدفع 2% فقط على الطلبات المكتملة. لما يكبر متجرك تقدر تنتقل لباقة النمو أو الاحترافي بعمولة أقل أو بدون عمولة.
+نعم، تقدر تبدأ على الباقة المجانية بدون رسوم شهرية، وتدفع 1% فقط على الطلبات المكتملة، بحد أقصى 5 ج.م للطلب. لما يكبر متجرك تقدر تنتقل لباقة احترافي بدون عمولة.
 
 ### هل المنصة تدعم الدفع عند الاستلام؟
 
@@ -53,7 +52,7 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 
 ### هل أقدر أستخدم دومين خاص بمتجري؟
 
-تبدأ برابط متجرك على متجركو مجاناً، ومع باقتي النمو والاحترافي تقدر تربط دومين خاص بعلامتك التجارية.
+تبدأ برابط متجرك على متجركو مجاناً، وتقدر تربط دومين خاص بعلامتك التجارية.
 
 ### هل المتجر يشتغل كويس على الموبايل؟
 
@@ -81,7 +80,7 @@ No. You do not need to buy hosting, install plugins, or manage servers. Matgarko
 
 ### Can I start before paying monthly?
 
-Yes. The free plan lets you start with no monthly fee and pay a 2% commission on completed orders. Paid plans lower or remove the commission as your store grows.
+Yes. The free plan lets you start with no monthly fee and pay a 1% commission on completed orders, capped at 5 EGP per order. The Pro plan removes the commission as your store grows.
 
 ### Does Matgarko support cash on delivery?
 
@@ -104,7 +103,7 @@ Keywords: تحميل متجركو, تطبيق إدارة المتجر, متجر�
 
 URL: https://matgarko.com/
 Type: Landing page
-Description: ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 2% على الطلبات المكتملة.
+Description: ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 1% على الطلبات المكتملة.
 Keywords: إنشاء متجر إلكتروني, متجر إلكتروني مصر, منصة تجارة إلكترونية, متجركو, بيع أونلاين, متجر بدون برمجة, ابدأ مجاناً متجر إلكتروني
 
 ## حلول إدارة المتجر الإلكتروني
@@ -139,7 +138,7 @@ Keywords: خطوات إنشاء متجر إلكتروني, كيفية إنشاء
 
 URL: https://matgarko.com/pricing
 Type: Landing page
-Description: ابدأ مجاناً بعمولة 2% فقط على كل طلب، أو باقة النمو 499 ج.م + 0.5%، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
+Description: ابدأ مجاناً بعمولة 1% فقط على كل طلب (بحد أقصى 5 ج.م)، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
 Keywords: تكلفة إنشاء متجر إلكتروني في مصر, أسعار متجر إلكتروني, باقات متجر إلكتروني, متجر إلكتروني مجاني, عمولة متجر إلكتروني
 
 ## عن متجركو
@@ -321,7 +320,7 @@ Keywords: start online store, ecommerce launch checklist, create online store Eg
 
 URL: https://matgarko.com/en/pricing
 Type: Landing page
-Description: Start free with 2% commission, or choose EGP plans: Growth at 499 EGP + 0.5% or Pro at 1,499 EGP with zero commission.
+Description: Start free with 1% commission capped at 5 EGP per order, or choose Pro at 1,499 EGP with zero commission.
 Keywords: online store pricing Egypt, ecommerce platform pricing, free online store Egypt, EGP ecommerce plans
 
 ## About Matgarko
@@ -563,9 +562,8 @@ Summary: كم تكلف إنشاء متجر إلكتروني في مصر؟ مقا
 
 بافتراض متوسط قيمة طلب 700 ج.م:
 
-- أقل من 48 طلب شهرياً: الباقة المجانية بعمولة 2% أوفر
-- من 48 إلى 285 طلب شهرياً: باقة النمو (499 ج.م + 0.5%) أوفر
-- أكثر من 285 طلب شهرياً: الباقة الاحترافية (1,499 ج.م بدون عمولة) أوفر
+- أقل من 300 طلب شهرياً: الباقة المجانية بعمولة 1% (بحد أقصى 5 ج.م للطلب) أوفر
+- من 300 طلب شهرياً: الباقة الاحترافية (1,499 ج.م بدون عمولة) أوفر
 
 💡 نصيحة: ابدأ بالباقة المجانية وانتقل تلقائياً للباقة الأنسب مع نمو مبيعاتك.
 
@@ -624,7 +622,7 @@ Summary: مقارنة بين منصات التجارة الإلكترونية ف
 4. هل يمكن ربط دومين خاص؟
 5. هل هناك تجربة مجانية قبل الدفع؟
 
-💡 نصيحة: اطلب دائماً تجربة مجانية قبل الاشتراك. منصة متجركو تتيح البدء مجاناً مع عمولة 2% فقط على كل طلب — بدون أي التزام شهري.
+💡 نصيحة: اطلب دائماً تجربة مجانية قبل الاشتراك. منصة متجركو تتيح البدء مجاناً مع عمولة 1% فقط على كل طلب (بحد أقصى 5 ج.م) — بدون أي التزام شهري.
 
 ### الخلاصة
 
@@ -651,7 +649,7 @@ Summary: هل المتجر الإلكتروني المجاني مناسب لتج
 
 المجاني الحقيقي غير موجود — إما تدفع بوقتك، أو بعمولة على مبيعاتك، أو برابط متجر يحمل اسم المنصة.
 
-- عمولة على كل طلب (2% في متجركو) تُخصم من مبيعاتك
+- عمولة على كل طلب (1% بحد أقصى 5 ج.م في متجركو) تُخصم من مبيعاتك
 - رابط المتجر يحمل اسم المنصة (بدلاً من دومين خاص)
 - عدد منتجات محدود في بعض المنصات
 - ميزات محدودة مقارنة بالباقات المدفوعة
@@ -667,9 +665,9 @@ Summary: هل المتجر الإلكتروني المجاني مناسب لتج
 
 المنطق البسيط: لما تصبح العمولة الشهرية أكبر من سعر الباقة المدفوعة، انتقل. مثال:
 
-- 50 طلب × 700 ج.م × 2% = 700 ج.م عمولة شهرية
-- باقة النمو: 499 ج.م + 0.5% = 674 ج.م فقط
-- الفرق: 26 ج.م توفير شهرياً + دومين خاص وكوبونات وتقارير
+- 400 طلب × 5 ج.م (سقف عمولة البداية) = 2,000 ج.م عمولة شهرية
+- احترافي: 1,499 ج.م بدون عمولة
+- الفرق: 501 ج.م توفير شهرياً
 
 💡 النصيحة الذهبية: ابدأ مجاناً، راقب طلباتك الشهرية، وانتقل تلقائياً للباقة الأنسب لما يكون ذلك منطقياً مالياً.
 
@@ -737,7 +735,7 @@ The cost of an online store is more than the monthly platform price. You also ne
 
 ### Typical costs to plan for
 
-A new store may pay 0 EGP monthly on a commission plan, then move to 499 EGP or 1,499 EGP monthly as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.
+A new store may pay 0 EGP monthly on a commission plan, then move to a 1,499 EGP monthly plan as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.
 
 ### When does a paid plan make sense?
 

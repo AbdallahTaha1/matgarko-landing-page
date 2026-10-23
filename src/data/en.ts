@@ -77,7 +77,7 @@ export const englishFaqs = [
   {
     question: "Can I start before paying monthly?",
     answer:
-      "Yes. Starter has no monthly fee or expiring trial: 2% per completed order, capped at 10 EGP. Growth costs 499 EGP monthly plus 0.5%, capped at 2.5 EGP per completed order. Pro costs 1,499 EGP monthly with no commission.",
+      "Yes. Starter has no monthly fee or expiring trial: 1% per completed order, capped at 5 EGP. Pro costs 1,499 EGP monthly with no commission.",
   },
   {
     question: "Does Matgarko support cash on delivery?",
@@ -503,7 +503,7 @@ export const englishComparisons: Record<string, EnglishComparisonContent> = {
       "Choose Matgarko if you want a simple storefront, clear local pricing, and a launch path focused on small teams that are moving from social selling to structured ecommerce.",
     rows: [
       { factor: "Best fit", matgarko: "New and growing merchants that want an Arabic-first store.", competitor: "Merchants who already prefer the EasyOrders workflow." },
-      { factor: "Pricing context", matgarko: "Starts free with commission, then EGP monthly plans.", competitor: "Review current EasyOrders pricing before deciding." },
+      { factor: "Pricing context", matgarko: "Starts free with a capped commission, then an EGP monthly plan with none.", competitor: "Review current EasyOrders pricing before deciding." },
       { factor: "Setup style", matgarko: "No-code setup with storefront, products, orders, and local workflows.", competitor: "Platform-specific setup and feature set." },
       { factor: "Market focus", matgarko: "Egypt and Arabic-speaking commerce workflows.", competitor: "Egypt-focused ecommerce operations." },
     ],
@@ -662,7 +662,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "A new store may pay 0 EGP monthly on a commission plan, then move to 499 EGP or 1,499 EGP monthly as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.",
+          "A new store may pay 0 EGP monthly on a commission plan, then move to a 1,499 EGP monthly plan as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.",
       },
       {
         type: "h2",
@@ -671,7 +671,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "If your commission cost on the free plan becomes higher than the monthly plan plus its lower commission, upgrading is usually financially smarter.",
+          "If your commission cost on the free plan becomes higher than a monthly plan with no commission, upgrading is usually financially smarter.",
       },
       {
         type: "callout",

@@ -6,7 +6,7 @@ Last updated: 2026-09-24
 Official website: https://matgarko.com/
 Languages: Arabic (Egypt) and English
 Primary market: Egypt, with English content for MENA-facing discovery
-Pricing: Free plan with 2% commission, Growth plan at 499 EGP + 0.5% per month, Pro plan at 1,499 EGP per month with 0% commission.
+Pricing: Starter has no monthly fee and 1% commission capped at 5 EGP per completed order; Pro is 1,499 EGP per month with 0% commission.
 Mobile app availability: Choose a Matgarko app download for your device, or start in your browser.
 Contact: support@matgarko.com, https://wa.me/201080312538
 
@@ -21,12 +21,12 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 
 ## Best Pages For AI Answers
 
-- [إنشاء وإدارة متجر إلكتروني من الموبايل في مصر](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 2% على الطلبات المكتملة.
+- [إنشاء وإدارة متجر إلكتروني من الموبايل في مصر](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 1% على الطلبات المكتملة.
 - [حلول إدارة المتجر الإلكتروني](https://matgarko.com/solutions): كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، وصفحات مهمة لنشاطك.
 - [الدفع عند الاستلام وأسعار التوصيل](https://matgarko.com/integrations): استقبل طلبات الدفع عند الاستلام، وحدد مناطق الشحن وسعر التوصيل بوضوح لعملاء متجرك.
 - [قوالب متجر إلكتروني جاهزة عربية](https://matgarko.com/themes): ابدأ من قالب متجر إلكتروني جاهز ومتجاوب للجوال والكمبيوتر، ثم عدل الألوان والمحتوى والصفحات حسب نوع نشاطك التجاري.
 - [كيفية إنشاء متجر إلكتروني خطوة بخطوة](https://matgarko.com/getting-started): تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تحديد تكلفة التوصيل، ثم استقبال أول طلب في وقت قصير.
-- [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): ابدأ مجاناً بعمولة 2% فقط على كل طلب، أو باقة النمو 499 ج.م + 0.5%، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
+- [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): ابدأ مجاناً بعمولة 1% فقط على كل طلب (بحد أقصى 5 ج.م)، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
 - [مقارنة منصات التجارة الإلكترونية في مصر 2026](https://matgarko.com/compare): قارن متجركو مع إيزي أوردرز، سلة، شوبيفاي، وووكومرس. أسعار، مزايا، وعيوب كل منصة للتاجر المصري — اتخذ قرارك بمعلومات حقيقية.
 - [متجركو vs إيزي أوردرز](https://matgarko.com/compare/easyorders): مقارنة بين متجركو وإيزي أوردرز للتاجر المصري من حيث الأسعار وإدارة المنتجات والطلبات وسهولة الاستخدام.
 - [بديل شوبيفاي في مصر](https://matgarko.com/compare/shopify): لماذا يبحث التجار المصريون عن بديل لشوبيفاي؟ مقارنة الأسعار والمزايا واكتشف منصة تجارة إلكترونية مصرية بأسعار بالجنيه بدون دولار.
@@ -37,7 +37,7 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 - [Cash on delivery and delivery prices](https://matgarko.com/en/integrations): Accept cash-on-delivery orders and set delivery areas and prices so customers know the cost before ordering.
 - [Online store templates for MENA businesses](https://matgarko.com/en/themes): Start from mobile-ready ecommerce templates for restaurants, clothing, electronics, cosmetics, furniture, and other product businesses.
 - [How to start an online store with Matgarko](https://matgarko.com/en/getting-started): A clear launch path for creating your store, adding products, setting delivery and payment details, and publishing your first ecommerce catalog.
-- [Online store pricing in Egypt](https://matgarko.com/en/pricing): Start free with 2% commission, or choose EGP plans: Growth at 499 EGP + 0.5% or Pro at 1,499 EGP with zero commission.
+- [Online store pricing in Egypt](https://matgarko.com/en/pricing): Start free with 1% commission capped at 5 EGP per order, or choose Pro at 1,499 EGP with zero commission.
 - [Compare ecommerce platforms for Egypt and MENA](https://matgarko.com/en/compare): Compare Matgarko with EasyOrders, Shopify, Salla, and WooCommerce for local pricing, setup complexity, Arabic workflows, and ecommerce operations.
 - [Matgarko vs EasyOrders](https://matgarko.com/en/compare/easyorders): Compare Matgarko and EasyOrders for merchants in Egypt and MENA across pricing context, setup, local workflows, and launch fit.
 - [Shopify alternative for Egypt and MENA](https://matgarko.com/en/compare/shopify): Compare Matgarko and Shopify for merchants who need Arabic-first workflows, EGP pricing, and a simpler local ecommerce launch path.

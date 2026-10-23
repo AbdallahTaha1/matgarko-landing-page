@@ -1,3 +1,19 @@
+# Pricing update — 2026-10-23
+
+Two plans only. Starter: 0 EGP/month, 1% of each completed order capped at 5 EGP (the cap is
+reached at a 500 EGP order). Pro: 1,499 EGP/month, 0% commission. Growth (499 EGP + 0.5%, capped at
+2.5 EGP) is removed from every page, comparison, FAQ, structured-data offer and AI context file.
+For 700 EGP orders Pro becomes cheaper than Starter at 300 orders a month.
+
+The pricing page was redesigned: two plan cards with the same two rows (monthly fee, commission),
+a bar chart showing the per-order cap, a cost calculator with sliders for monthly orders and
+average order value, a short examples table, FAQ and CTA. Numbers come from `src/data/pricing.ts`.
+The backend change (retired Growth enum value kept for existing stores, Starter defaults 1% / 5 EGP,
+Compose pinning) is described in the main application's `docs/platform-admin-and-billing.md`.
+Deploy the backend terms and this landing change together.
+
+---
+
 # Pricing update — 2026-10-05
 
 ## Agreed prices

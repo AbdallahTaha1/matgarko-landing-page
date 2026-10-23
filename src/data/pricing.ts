@@ -1,6 +1,6 @@
 import type { AppLanguage } from "@/lib/i18n";
 
-export type PlanId = "free" | "growth" | "pro";
+export type PlanId = "free" | "pro";
 
 type Localized = Record<AppLanguage, string>;
 type LocalizedList = Record<AppLanguage, string[]>;
@@ -13,6 +13,7 @@ export type Plan = {
   commission: number;
   /** Maximum commission in EGP per completed order, not per month. */
   commissionCap: number;
+  /** The plan most new stores should start on; it gets the highlighted card. */
   popular: boolean;
   name: Localized;
   tagline: Localized;
@@ -40,9 +41,9 @@ export const plans: Plan[] = [
   {
     id: "free",
     monthly: 0,
-    commission: 2,
-    commissionCap: 10,
-    popular: false,
+    commission: 1,
+    commissionCap: 5,
+    popular: true,
     name: { ar: "البداية", en: "Starter" },
     tagline: { ar: "ابدأ بدون أي رسوم شهرية", en: "Start with no monthly fee" },
     features: {
@@ -50,20 +51,6 @@ export const plans: Plan[] = [
       en: ["Ready store on a Matgarko link", ...storeFeatures.en],
     },
     cta: { ar: "ابدأ مجاناً", en: "Start free" },
-  },
-  {
-    id: "growth",
-    monthly: 499,
-    commission: 0.5,
-    commissionCap: 2.5,
-    popular: true,
-    name: { ar: "نمو", en: "Growth" },
-    tagline: { ar: "اشتراك شهري وعمولة أقل لكل طلب", en: "Monthly subscription, lower order fees" },
-    features: {
-      ar: ["كل مزايا باقة البداية", ...storeFeatures.ar],
-      en: ["Everything in Starter", ...storeFeatures.en],
-    },
-    cta: { ar: "اختر باقة النمو", en: "Choose Growth" },
   },
   {
     id: "pro",
@@ -74,8 +61,8 @@ export const plans: Plan[] = [
     name: { ar: "احترافي", en: "Pro" },
     tagline: { ar: "للمتاجر الكبيرة بدون عمولة", en: "For high-volume stores" },
     features: {
-      ar: ["كل مزايا باقة النمو", ...storeFeatures.ar],
-      en: ["Everything in Growth", ...storeFeatures.en],
+      ar: ["كل مزايا باقة البداية", ...storeFeatures.ar],
+      en: ["Everything in Starter", ...storeFeatures.en],
     },
     cta: { ar: "ابدأ احترافي", en: "Go Pro" },
   },
@@ -105,9 +92,14 @@ export function orderCommission(plan: Plan, orderValue: number) {
   return Math.round((Math.min(Math.max(0, orderValue) * plan.commission / 100, plan.commissionCap) + Number.EPSILON) * 100) / 100;
 }
 
-/** Short price label such as "499 ج.م + 0.5%" or "0 EGP + 2%". */
+/** Order value from which every order pays the capped commission; undefined when the plan has none. */
+export function capReachedAt(plan: Plan) {
+  return plan.commission > 0 ? plan.commissionCap / (plan.commission / 100) : undefined;
+}
+
+/** Short price label such as "1,499 ج.م" or "0 EGP + 1%". */
 export function planPriceLabel(plan: Plan, language: AppLanguage) {
-  return `${formatEgp(plan.monthly, language)} + ${formatCommission(plan)}`;
+  return plan.commission > 0 ? `${formatEgp(plan.monthly, language)} + ${formatCommission(plan)}` : formatEgp(plan.monthly, language);
 }
 
 /** Example total for orders of identical value; real invoices sum each order's capped fee. */
@@ -122,41 +114,42 @@ export function breakevenOrders(current: Plan, upgrade: Plan, averageOrderValue 
   return Math.max(0, Math.floor((upgrade.monthly - current.monthly) / commissionGap) + 1);
 }
 
-export const FREE_TO_GROWTH_ORDERS = breakevenOrders(getPlan("free"), getPlan("growth"));
-export const GROWTH_TO_PRO_ORDERS = breakevenOrders(getPlan("growth"), getPlan("pro"));
+const free = getPlan("free");
+const pro = getPlan("pro");
 
-export const costTableOrders = [10, 25, 50, 100, 200, 300];
+export const FREE_TO_PRO_ORDERS = breakevenOrders(free, pro);
+
+/** Order value from which a Starter order pays the cap, e.g. 500 EGP at 1% capped at 5 EGP. */
+export const STARTER_CAP_ORDER_VALUE = capReachedAt(free) as number;
+
+export const costTableOrders = [10, 50, 100, 200, 300, 500];
 
 export const costTable = costTableOrders.map((orders) => ({
   orders,
   costs: plans.map((plan) => ({ id: plan.id, cost: monthlyCost(plan, orders) })),
 }));
 
-const free = getPlan("free");
-const growth = getPlan("growth");
-const pro = getPlan("pro");
-
 export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: string }>> = {
   ar: [
     {
       question: "كيف تُحسب العمولة وسقفها؟",
-      answer: `في البداية: ${formatCommission(free)} ${commissionCapLabel(free, "ar")}. وفي نمو: ${formatCommission(growth)} ${commissionCapLabel(growth, "ar")}. تُحسب العمولة على إجمالي منتجات الطلب المكتمل بعد الخصم، قبل الشحن والضرائب. السقف للطلب كله، مهما كان عدد المنتجات، وليس سقفاً شهرياً. الطلبات الملغاة والمستردة قبل إصدار الفاتورة لا تُحتسب؛ تواصل معنا لمراجعة استرداد بعد إصدارها.`,
+      answer: `في البداية: ${formatCommission(free)} ${commissionCapLabel(free, "ar")}، يعني أي طلب قيمته ${formatEgp(STARTER_CAP_ORDER_VALUE, "ar")} أو أكتر بيدفع ${formatEgp(free.commissionCap, "ar")} بس. تُحسب العمولة على إجمالي منتجات الطلب المكتمل بعد الخصم، قبل الشحن والضرائب. السقف للطلب كله، مهما كان عدد المنتجات، وليس سقفاً شهرياً. الطلبات الملغاة والمستردة قبل إصدار الفاتورة لا تُحتسب؛ تواصل معنا لمراجعة استرداد بعد إصدارها.`,
     },
     {
       question: "هل أدفع أثناء تجهيز المتجر أو قبل أول طلب؟",
-      answer: "باقة البداية بدون اشتراك شهري وبدون مدة تجريبية تنتهي. جهّز متجرك وابدأ البيع؛ لو مفيش طلبات مكتملة، مفيش عمولة. الاشتراك الشهري يخص باقتي نمو واحترافي فقط.",
+      answer: "باقة البداية بدون اشتراك شهري وبدون مدة تجريبية تنتهي. جهّز متجرك وابدأ البيع؛ لو مفيش طلبات مكتملة، مفيش عمولة. الاشتراك الشهري يخص باقة احترافي فقط.",
     },
     {
       question: "هل تختلف أدوات المتجر بين الباقات؟",
-      answer: "نفس أدوات إدارة المنتجات والمخزون والطلبات والكوبونات وإعدادات الشحن متاحة في كل الباقات، مع الدفع عند الاستلام والدعم عبر واتساب. الاختلاف في الاشتراك الشهري ونسبة العمولة وسقفها.",
+      answer: "نفس أدوات إدارة المنتجات والمخزون والطلبات والكوبونات وإعدادات الشحن متاحة في الباقتين، مع الدفع عند الاستلام والدعم عبر واتساب. الاختلاف في الاشتراك الشهري والعمولة.",
     },
     {
       question: "كيف أسدد رسوم متجركو؟",
       answer: "تظهر الرسوم في فاتورة داخل لوحة التحكم. تسدد باتباع تعليمات التحويل الموجودة في الفاتورة، ثم تبلغ عن السداد لمراجعته.",
     },
     {
-      question: "متى أنتقل من البداية إلى باقة النمو؟",
-      answer: `لو قيمة كل طلب ${AVERAGE_ORDER_VALUE} ج.م، تصبح نمو أوفر من البداية من ${FREE_TO_GROWTH_ORDERS} طلب مكتمل شهرياً، والاحترافي أوفر من نمو من ${GROWTH_TO_PRO_ORDERS} طلب. العدد يختلف حسب قيمة كل طلب لأن سقف العمولة يُطبق عليه منفرداً.`,
+      question: "متى أنتقل من البداية إلى احترافي؟",
+      answer: `لو قيمة كل طلب ${AVERAGE_ORDER_VALUE} ج.م، يصبح احترافي أوفر من البداية من ${FREE_TO_PRO_ORDERS} طلب مكتمل شهرياً. العدد يختلف حسب قيمة كل طلب لأن سقف العمولة يُطبق عليه منفرداً؛ استخدم حاسبة التكلفة في الصفحة بأرقامك.`,
     },
     {
       question: "هل أقدر ألغي الاشتراك في أي وقت؟",
@@ -170,23 +163,23 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
   en: [
     {
       question: "How is commission capped?",
-      answer: `Starter charges ${formatCommission(free)}, capped at ${formatEgp(free.commissionCap, "en")} per completed order. Growth charges ${formatCommission(growth)}, capped at ${formatEgp(growth.commissionCap, "en")} per completed order. The base is the order's merchandise value after discounts, excluding shipping and tax. The cap applies once to the whole order, regardless of item count, not to the month. Orders cancelled or refunded before invoicing are excluded; contact us to review a refund after an invoice has been issued.`,
+      answer: `Starter charges ${formatCommission(free)}, capped at ${formatEgp(free.commissionCap, "en")} per completed order, so any order worth ${formatEgp(STARTER_CAP_ORDER_VALUE, "en")} or more pays just ${formatEgp(free.commissionCap, "en")}. The base is the order's merchandise value after discounts, excluding shipping and tax. The cap applies once to the whole order, regardless of item count, not to the month. Orders cancelled or refunded before invoicing are excluded; contact us to review a refund after an invoice has been issued.`,
     },
     {
       question: "Do I pay while setting up or before my first order?",
-      answer: "Starter has no monthly subscription and no expiring trial. Prepare your store and start selling: no completed orders means no commission. Monthly subscriptions apply only to Growth and Pro.",
+      answer: "Starter has no monthly subscription and no expiring trial. Prepare your store and start selling: no completed orders means no commission. The monthly subscription applies only to Pro.",
     },
     {
       question: "Do store tools differ between plans?",
-      answer: "Every plan includes the same product, stock, order, coupon and shipping tools, cash on delivery and WhatsApp support. Plans differ in their monthly subscription, commission rate and per-order cap.",
+      answer: "Both plans include the same product, stock, order, coupon and shipping tools, cash on delivery and WhatsApp support. Plans differ in their monthly subscription and commission.",
     },
     {
       question: "How do I pay Matgarko fees?",
       answer: "Fees appear on an invoice in your dashboard. Follow its transfer instructions, then report your payment for review.",
     },
     {
-      question: "When should I move from Starter to Growth?",
-      answer: `If each completed order is worth ${AVERAGE_ORDER_VALUE} EGP, Growth becomes cheaper than Starter at ${FREE_TO_GROWTH_ORDERS} monthly orders, and Pro becomes cheaper than Growth at ${GROWTH_TO_PRO_ORDERS}. These thresholds depend on individual order values because each order is capped separately.`,
+      question: "When should I move from Starter to Pro?",
+      answer: `If each completed order is worth ${AVERAGE_ORDER_VALUE} EGP, Pro becomes cheaper than Starter at ${FREE_TO_PRO_ORDERS} monthly orders. The threshold depends on individual order values because each order is capped separately; use the cost calculator on this page with your own numbers.`,
     },
     {
       question: "Can I cancel at any time?",
@@ -202,8 +195,8 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
 /** One-line pricing summary reused in meta descriptions and AI context files. */
 export function pricingSummary(language: AppLanguage) {
   if (language === "ar") {
-    return `البداية بدون اشتراك شهري: ${formatCommission(free)} ${commissionCapLabel(free, "ar")}. نمو ${planPriceLabel(growth, "ar")} ${commissionCapLabel(growth, "ar")}، والاحترافي ${formatEgp(pro.monthly, "ar")} شهرياً بدون عمولة. العمولة على الطلبات المكتملة.`;
+    return `البداية بدون اشتراك شهري: ${formatCommission(free)} ${commissionCapLabel(free, "ar")}، والاحترافي ${formatEgp(pro.monthly, "ar")} شهرياً بدون عمولة. العمولة على الطلبات المكتملة.`;
   }
 
-  return `Starter has no monthly fee: ${formatCommission(free)} commission capped at ${formatEgp(free.commissionCap, "en")} per completed order. Growth is ${planPriceLabel(growth, "en")} per month, capped at ${formatEgp(growth.commissionCap, "en")} per completed order. Pro is ${formatEgp(pro.monthly, "en")} per month with 0% commission.`;
+  return `Starter has no monthly fee: ${formatCommission(free)} commission capped at ${formatEgp(free.commissionCap, "en")} per completed order. Pro is ${formatEgp(pro.monthly, "en")} per month with 0% commission.`;
 }

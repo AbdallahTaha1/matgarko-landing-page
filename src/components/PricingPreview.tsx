@@ -17,7 +17,7 @@ export function PricingPreview({ language }: { language: AppLanguage }) {
           <SectionHeading id="pricing-title" kicker={t.kicker} title={t.title} lead={t.lead} />
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-3xl gap-4 md:grid-cols-2">
           {plans.map((plan, index) => (
             <Reveal
               key={plan.id}

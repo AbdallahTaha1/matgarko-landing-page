@@ -104,7 +104,7 @@ async function generateOgImage() {
       <text x="80" y="200" fill="#a7f3d0" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="2">MATGARKO</text>
       <text x="80" y="290" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">Create your</text>
       <text x="80" y="370" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">online store in Egypt</text>
-      <text x="80" y="430" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="30">Start free. Pay 2% only when you sell.</text>
+      <text x="80" y="430" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="30">Start free. Pay 1% only when you sell.</text>
       <rect x="80" y="480" width="330" height="64" rx="18" fill="${BRAND_GREEN}" />
       <text x="245" y="522" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" text-anchor="middle">matgarko.com</text>
     </svg>
