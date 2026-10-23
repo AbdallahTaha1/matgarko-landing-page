@@ -32,7 +32,7 @@ export function RestaurantsPage() {
         {
           icon: <Star className="h-5 w-5" />,
           title: "عروض وكوبونات",
-          description: "أنشئ عروض يومية، كوبونات خصم، أو حزم وجبات بسهولة لزيادة مبيعاتك.",
+          description: "أنشئ عروض يومية وكوبونات خصم، وأضف وجبات الكومبو كأصناف بسعرها الخاص لزيادة مبيعاتك.",
         },
         {
           icon: <Utensils className="h-5 w-5" />,

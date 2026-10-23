@@ -27,7 +27,7 @@ export function VsShopifyPage() {
         { feature: "واجهة عربية RTL كاملة", matgarko: true, competitor: "محدودة في بعض القوالب" },
         { feature: "دعم فني عربي", matgarko: true, competitor: "إنجليزي بالأساس" },
         { feature: "سهولة الإعداد بدون خبرة", matgarko: true, competitor: true },
-        { feature: "متجر تطبيقات", matgarko: "أساسي", competitor: "آلاف التطبيقات" },
+        { feature: "متجر تطبيقات", matgarko: "غير متاح؛ Meta Pixel وGoogle Analytics مدمجين", competitor: "آلاف التطبيقات" },
         { feature: "تسويق عالمي متقدم", matgarko: "محدود", competitor: true },
         { feature: "بدء مجاني حقيقي", matgarko: true, competitor: "تجربة 3 أيام فقط" },
         { feature: "قوالب عربية متخصصة", matgarko: true, competitor: "محدود" },

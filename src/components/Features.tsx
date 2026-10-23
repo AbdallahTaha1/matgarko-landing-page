@@ -2,9 +2,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { homeContent } from "@/data/home";
 import type { AppLanguage } from "@/lib/i18n";
-import { BadgePercent, Boxes, PackageCheck, Truck } from "lucide-react";
+import { BadgePercent, BarChart3, Boxes, LayoutTemplate, Megaphone, MousePointerClick, PackageCheck, Truck } from "lucide-react";
 
-const icons = [Boxes, PackageCheck, Truck, BadgePercent];
+const icons = [Boxes, PackageCheck, Truck, BadgePercent, Megaphone, MousePointerClick, BarChart3, LayoutTemplate];
 
 export function Features({ language }: { language: AppLanguage }) {
   const t = homeContent[language].features;

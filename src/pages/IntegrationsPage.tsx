@@ -1,17 +1,29 @@
-import { Banknote, ClipboardList, Truck } from "lucide-react";
+import { Banknote, ClipboardList, Megaphone, MessageCircle, Truck } from "lucide-react";
 
 const groups = [
   {
     icon: <Banknote className="h-6 w-6 text-current" />,
     title: "الدفع",
     description: "العميل يطلب من متجرك ويدفع وقت استلام الطلب.",
-    items: ["الدفع عند الاستلام", "متاح في كل الباقات"],
+    items: ["الدفع عند الاستلام", "متاح في كل الباقات", "رسوم تحصيل اختيارية", "حد أدنى وأقصى للطلب"],
   },
   {
     icon: <Truck className="h-6 w-6 text-current" />,
     title: "الشحن",
     description: "حدد مناطق الشحن وسعر التوصيل لكل منطقة، عشان العميل يعرف التكلفة قبل تأكيد الطلب.",
-    items: ["مناطق الشحن", "أسعار التوصيل"],
+    items: ["مناطق الشحن", "سعر لكل محافظة ومنطقة", "شحن مجاني", "حد أدنى للطلب لكل منطقة"],
+  },
+  {
+    icon: <Megaphone className="h-6 w-6 text-current" />,
+    title: "الإعلانات والتحليلات",
+    description: "اربط حساباتك من إعدادات تصميم المتجر بدون مبرمج، وأحداث الشراء توصل لإعلاناتك وتقاريرك.",
+    items: ["Meta Pixel", "Conversions API", "Google Analytics", "Google Search Console"],
+  },
+  {
+    icon: <MessageCircle className="h-6 w-6 text-current" />,
+    title: "واتساب",
+    description: "خلّي عملاءك يكلموك بسهولة، وأكّد كل طلب برسالة جاهزة تبعتها من واتساب بتاعك.",
+    items: ["زر واتساب عائم في المتجر", "رسالة تأكيد الطلب جاهزة", "اتصال بالعميل بضغطة", "روابط فيسبوك وإنستجرام وتيك توك"],
   },
 ];
 
@@ -28,7 +40,7 @@ export function IntegrationsPage() {
             رتّب تفاصيل الدفع والتوصيل
           </h1>
           <p className="page-lead">
-            استقبل طلبات الدفع عند الاستلام، وحدد تكلفة التوصيل بوضوح لعملائك.
+            استقبل طلبات الدفع عند الاستلام، حدد تكلفة التوصيل بوضوح لعملائك، واربط بكسل ميتا وGoogle Analytics وواتساب بمتجرك.
           </p>
         </div>
       </section>

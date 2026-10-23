@@ -25,10 +25,11 @@ export function VsSallaPage() {
         { feature: "دفع عند الاستلام", matgarko: true, competitor: true },
         { feature: "واجهة عربية RTL", matgarko: true, competitor: true },
         { feature: "سهولة الإعداد", matgarko: true, competitor: true },
-        { feature: "متجر تطبيقات عربي", matgarko: "أساسي", competitor: "متقدم جداً" },
+        { feature: "متجر تطبيقات عربي", matgarko: "غير متاح؛ Meta Pixel وGoogle Analytics مدمجين", competitor: "متقدم جداً" },
         { feature: "قوالب متخصصة", matgarko: true, competitor: true },
-        { feature: "تسويق بالعمولة", matgarko: "قريباً", competitor: true },
-        { feature: "دعم فني 24/7 بالعربي", matgarko: true, competitor: true },
+        { feature: "بكسل ميتا وConversions API", matgarko: true, competitor: true },
+        { feature: "تسويق بالعمولة", matgarko: false, competitor: true },
+        { feature: "دعم فني بالعربي على واتساب", matgarko: true, competitor: true },
         { feature: "باقة مجانية للبداية", matgarko: true, competitor: "مجانية محدودة" },
       ]}
       faqs={[
@@ -46,7 +47,7 @@ export function VsSallaPage() {
         },
         {
           q: "هل الانتقال من سلة لمتجركو سهل؟",
-          a: "نعم. يمكنك تصدير منتجاتك من سلة واستيرادها لمتجركو. فريق الدعم متاح لمساعدتك في عملية الانتقال خطوة بخطوة.",
+          a: "تقدر تنقل منتجاتك بملف Excel: رتّب منتجاتك على قالب الاستيراد في متجركو (الاسم والسعر والقسم والكمية والوصف) وارفع حتى 500 منتج في الملف من لوحة التحكم على الويب. الصور والمقاسات والألوان تضيفها بعد الاستيراد، ولو احتجت مساعدة كلمنا على واتساب.",
         },
       ]}
     />
