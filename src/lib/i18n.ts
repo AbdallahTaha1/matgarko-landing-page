@@ -35,6 +35,8 @@ export function localizePath(path: string, language: AppLanguage) {
 
 export function alternateLanguagePath(pathname: string) {
   const language = languageFromPath(pathname);
+  // The learning center is Arabic only, so its English switch lands on the English home page.
+  if (language === "ar" && (pathname === "/learn" || pathname.startsWith("/learn/"))) return ENGLISH_PREFIX;
   return localizePath(pathname, language === "en" ? "ar" : "en");
 }
 

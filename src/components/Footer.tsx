@@ -48,6 +48,7 @@ const footerColumns = [
     enTitle: "Company",
     links: [
       { path: "/about", ar: "من نحن", en: "About" },
+      { path: "/learn", ar: "مركز التعلّم", en: "Learn", arabicOnly: true },
       { path: "/blog", ar: "المدونة", en: "Blog" },
       { path: "/contact", ar: "تواصل معنا", en: "Contact" },
       { path: "/terms", ar: "الشروط والأحكام", en: "Terms" },
@@ -124,7 +125,7 @@ export function Footer() {
               <div key={column.enTitle}>
                 <h3 className="text-sm font-extrabold text-gray-950 font-heading">{isEnglish ? column.enTitle : column.arTitle}</h3>
                 <ul className="mt-4 space-y-2.5">
-                  {column.links.map((link) => (
+                  {column.links.filter((link) => !("arabicOnly" in link) || !isEnglish).map((link) => (
                     <li key={link.path}>
                       <Link to={localizePath(link.path, language)} className="text-sm text-gray-600 transition-colors hover:text-emerald-700">
                         {link[language]}

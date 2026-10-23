@@ -1,6 +1,7 @@
 import { faqs } from "@/data/faqs";
 import { positioning } from "@/data/positioning";
 import { blogArticles } from "@/data/blog";
+import { learnGuides } from "@/data/learn";
 import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages } from "@/data/en";
 import { commissionCapLabel, formatCommission, formatEgp, planPriceLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
 import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
@@ -256,6 +257,25 @@ export const seoPages: Record<string, SeoPage> = {
   },
 };
 
+// Learning center: Arabic only, one page per dashboard guide.
+seoPages["/learn"] = {
+  path: "/learn",
+  title: "مركز التعلّم | شروحات إدارة متجرك خطوة بخطوة | متجركو",
+  description:
+    "شروحات قصيرة بالصور من لوحة تحكم متجركو: إضافة المنتجات، متابعة الطلبات، ضبط الشحن، كوبونات الخصم، البيكسل، وتصميم المتجر.",
+  keywords: ["مركز تعلم متجركو", "شرح لوحة تحكم المتجر", "إدارة متجر إلكتروني", "شرح إضافة منتج", "شرح الشحن والطلبات"],
+  type: "website",
+};
+for (const guide of learnGuides) {
+  seoPages[`/learn/${guide.slug}`] = {
+    path: `/learn/${guide.slug}`,
+    title: `${guide.title} | مركز التعلّم | متجركو`,
+    description: guide.description,
+    keywords: [...guide.keywords, "شرح متجركو", "مركز التعلم"],
+    type: "article",
+  };
+}
+
 Object.assign(
   seoPages,
   Object.fromEntries(
@@ -285,7 +305,7 @@ export const sitemapPages = indexableSeoPages.map((page) => {
 
   return {
     ...page,
-    changefreq: isHome || page.path === "/blog" ? "weekly" : isLegal ? "yearly" : "monthly",
+    changefreq: isHome || page.path === "/blog" || page.path === "/learn" ? "weekly" : isLegal ? "yearly" : "monthly",
     priority: isHome ? "1.0" : isCommercial ? "0.9" : isArticle ? "0.8" : isLegal ? "0.3" : "0.7",
   };
 });
@@ -314,6 +334,8 @@ const arabicOrderedSeoPages = [
   seoPages["/blog/cost-of-online-store-egypt-2026"],
   seoPages["/blog/best-ecommerce-platform-egypt"],
   seoPages["/blog/free-online-store-pros-cons"],
+  seoPages["/learn"],
+  ...learnGuides.map((guide) => seoPages[`/learn/${guide.slug}`]),
   // Compare pages
   seoPages["/compare"],
   seoPages["/compare/easyorders"],
@@ -479,7 +501,7 @@ function webPageSchemaType(page: SeoPage) {
   const basePath = stripLanguagePrefix(page.path);
   if (basePath === "/about") return "AboutPage";
   if (basePath === "/contact") return "ContactPage";
-  if (basePath === "/blog" || basePath === "/compare") return "CollectionPage";
+  if (basePath === "/blog" || basePath === "/compare" || basePath === "/learn") return "CollectionPage";
   return "WebPage";
 }
 
@@ -575,8 +597,8 @@ export function articleSchema(page: SeoPage) {
   }
 
   const articlePath = stripLanguagePrefix(page.path);
-  const articleSource = pageLocale(page) === "en" ? englishBlogArticles : blogArticles;
-  const article = articleSource.find((item) => articlePath === `/blog/${item.slug}`);
+  const articleSource = pageLocale(page) === "en" ? englishBlogArticles : [...blogArticles, ...learnGuides];
+  const article = articleSource.find((item) => articlePath === `/blog/${item.slug}` || articlePath === `/learn/${item.slug}`);
 
   if (!article) {
     return null;
@@ -763,7 +785,7 @@ export function breadcrumbSchema(page: SeoPage) {
       items.push({
         "@type": "ListItem",
         position: 2,
-        name: segments[0] === "store" ? "متاجر حسب النشاط" : segments[0] === "compare" ? "المقارنات" : "المدونة",
+        name: segments[0] === "store" ? "متاجر حسب النشاط" : segments[0] === "compare" ? "المقارنات" : segments[0] === "learn" ? "مركز التعلّم" : "المدونة",
         item: canonicalUrl(segments[0] === "store" ? "/solutions" : `/${segments[0]}`),
       });
       items.push({

@@ -26,6 +26,9 @@ import { FurniturePage } from "./pages/industries/FurniturePage";
 // Blog
 import { BlogIndexPage } from "./pages/blog/BlogIndexPage";
 import { BlogArticlePage } from "./pages/blog/BlogArticlePage";
+// Learning center
+import { LearnIndexPage } from "./pages/learn/LearnIndexPage";
+import { LearnGuidePage } from "./pages/learn/LearnGuidePage";
 // Compare (competitor) pages
 import { CompareIndexPage } from "./pages/compare/CompareIndexPage";
 import { VsEasyOrdersPage } from "./pages/compare/VsEasyOrdersPage";
@@ -91,6 +94,9 @@ export function AppRoutes() {
           {/* Blog */}
           <Route path="blog" element={<BlogIndexPage />} />
           <Route path="blog/:slug" element={<BlogArticlePage />} />
+          {/* Learning center */}
+          <Route path="learn" element={<LearnIndexPage />} />
+          <Route path="learn/:slug" element={<LearnGuidePage />} />
           {/* Compare / competitor pages */}
           <Route path="compare" element={<CompareIndexPage />} />
           <Route path="compare/easyorders" element={<VsEasyOrdersPage />} />

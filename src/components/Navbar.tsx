@@ -7,15 +7,18 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-const navItems = [
+type NavItem = { path: string; ar: string; en: string; arabicOnly?: boolean };
+
+const navItems: NavItem[] = [
   { path: "/solutions", ar: "الحلول", en: "Solutions" },
   { path: "/themes", ar: "القوالب", en: "Themes" },
   { path: "/integrations", ar: "الدفع والشحن", en: "Payment and shipping" },
   { path: "/getting-started", ar: "خطوات البدء", en: "Getting started" },
+  { path: "/learn", ar: "مركز التعلّم", en: "Learn", arabicOnly: true },
   { path: "/pricing", ar: "الأسعار", en: "Pricing" },
 ];
 
-const mobileExtraItems = [
+const mobileExtraItems: NavItem[] = [
   { path: "/blog", ar: "المدونة", en: "Blog" },
   { path: "/contact", ar: "تواصل معنا", en: "Contact" },
 ];
@@ -27,6 +30,7 @@ export function Navbar() {
   const isEnglish = language === "en";
   const store = useRememberedStore();
   const brandName = isEnglish ? "Matgarko" : "متجركو";
+  const shownNavItems = navItems.filter((item) => !item.arabicOnly || !isEnglish);
   const signupLabel = store ? (isEnglish ? 'Dashboard' : 'لوحة التحكم') : (isEnglish ? "Start free" : "أنشئ متجرك مجاناً");
   const primaryUrl = store?.adminUrl || (isEnglish ? '/en/register' : SIGNUP_URL);
   const loginLabel = isEnglish ? "My store" : "ادخل متجرك";
@@ -59,13 +63,13 @@ export function Navbar() {
         </Link>
 
         <nav aria-label={navLabel} className="hidden items-center gap-1 xl:flex">
-          {navItems.map((item) => (
+          {shownNavItems.map((item) => (
             <Link
               key={item.path}
               to={localizePath(item.path, language)}
               aria-current={isActive(item.path) ? "page" : undefined}
               className={cn(
-                "rounded-lg px-3 py-2 text-sm font-bold transition-colors hover:bg-gray-100 hover:text-gray-950",
+                "whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-bold transition-colors hover:bg-gray-100 hover:text-gray-950",
                 isActive(item.path) ? "text-emerald-700" : "text-gray-700",
               )}
             >
@@ -83,8 +87,8 @@ export function Navbar() {
             <Languages className="h-4 w-4" aria-hidden="true" />
             {languageLabel}
           </Link>
-          <Link to={localizePath('/login', language)} className="btn btn-secondary h-10 px-3 text-sm">{loginLabel}</Link>
-          <a href={primaryUrl} className="btn btn-primary h-10 px-4 text-sm">
+          <Link to={localizePath('/login', language)} className="btn btn-secondary h-10 whitespace-nowrap px-3 text-sm">{loginLabel}</Link>
+          <a href={primaryUrl} className="btn btn-primary h-10 whitespace-nowrap px-4 text-sm">
             {signupLabel}
           </a>
         </div>
@@ -122,7 +126,7 @@ export function Navbar() {
         >
           <div className="container-x py-3">
             <ul className="divide-y divide-gray-100">
-              {[...navItems, ...mobileExtraItems].map((item) => (
+              {[...shownNavItems, ...mobileExtraItems].map((item) => (
                 <li key={item.path}>
                   <Link
                     to={localizePath(item.path, language)}
