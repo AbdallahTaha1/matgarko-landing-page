@@ -430,3 +430,25 @@ test('Arabic mobile registration displays optional discovery choices without hor
   await expect(discovery).toHaveValue('ai');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
+
+for (const consent of ['accepted', 'declined'] as const) {
+  test(`server-side Meta registration is sent once with the event id only after ${consent === 'accepted' ? 'consent' : 'nothing: declined'}`, async ({ page }) => {
+    const state = await mockSignup(page, consent);
+    await page.route('https://testshop.matgarko.com/admin', route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
+    const conversions: Record<string, unknown>[] = [];
+    page.on('request', request => { if (request.url().endsWith('/api/signup/v1/conversion')) conversions.push(request.postDataJSON()); });
+    await page.goto('/en/register');
+    await enterDetails(page);
+    await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+    await page.getByLabel('Verification code', { exact: true }).fill('123456');
+    await page.getByRole('button', { name: 'Verify and create store' }).click();
+    await expect(page.getByRole('heading', { name: 'Preparing your store' })).toBeVisible();
+    expect(conversions).toHaveLength(0);
+    state.ready = true;
+    await expect(page.getByRole('heading', { name: 'Your store is ready!' })).toBeVisible({ timeout: 10000 });
+    if (consent === 'declined') { expect(conversions).toHaveLength(0); return; }
+    await expect.poll(() => conversions.length).toBe(1);
+    expect(conversions[0]).toMatchObject({ sourceUrl: expect.stringMatching(/\/en\/register$/) });
+    expect(JSON.stringify(conversions[0])).not.toMatch(/owner@example|01012345678/);
+  });
+}

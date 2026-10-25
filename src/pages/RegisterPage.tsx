@@ -5,6 +5,7 @@ import { Loader2, Store, CheckCircle2, CircleAlert, Globe2 } from 'lucide-react'
 import { api, ApiError, type SignupModel, type SignupStatus } from '@/lib/api';
 import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
+import { reportMetaSignupServer } from '@/lib/metaPixel';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
 import { readyStoreLinks, rememberStore, signupSignInUrl } from '@/lib/storeAccess';
@@ -154,6 +155,7 @@ export default function RegisterPage() {
   useEffect(() => {
     if (status?.state !== 'ready') return;
     const conversion = status.conversionId ? trackSignupComplete(status.conversionId) : Promise.resolve();
+    if (status.conversionId) reportMetaSignupServer(token, status.conversionId);
     if (!adminUrl || !storeUrl) return;
     rememberStore({ adminUrl, storeUrl });
     let active = true;

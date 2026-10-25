@@ -41,5 +41,6 @@ export const api = {
   status: (token: string) => request<SignupStatus>('/status', { token }),
   // A single-use link that signs the new owner into their dashboard. Callers fall back to the
   // plain dashboard address, which asks for the password, if this fails.
+  conversion: (token: string, data: { sourceUrl: string; fbp?: string; fbc?: string }) => request<object>('/conversion', { token, data }),
   signIn: (token: string) => request<{ url: string }>('/sign-in', { token, data: {} }),
 };
