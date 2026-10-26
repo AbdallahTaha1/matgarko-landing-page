@@ -90,18 +90,38 @@ export function trackMetaPageView() {
   lastPage = page;
 }
 
-export function trackMetaSignupComplete(conversionId: string) {
-  if (!conversionId || !canTrack()) return;
+// Settles once the browser has finished Meta's request for this event, or after a bound. A
+// request still in flight can be dropped when the page navigates away, so callers wait for this
+// before leaving.
+const pixelRequestWaitMs = 4000;
+function pixelRequestDone(event: string) {
+  return new Promise<void>(resolve => {
+    let observer: PerformanceObserver | undefined;
+    const finish = () => { clearTimeout(timer); observer?.disconnect(); resolve(); };
+    const timer = setTimeout(finish, pixelRequestWaitMs);
+    try {
+      observer = new PerformanceObserver(list => {
+        if (list.getEntries().some(entry => entry.name.includes('facebook.com/tr') && entry.name.includes(`ev=${event}`))) finish();
+      });
+      observer.observe({ type: 'resource' });
+    } catch { /* The timer still bounds the wait. */ }
+  });
+}
+
+export function trackMetaSignupComplete(conversionId: string): Promise<void> {
+  if (!conversionId || !canTrack()) return Promise.resolve();
   initMetaPixel();
-  if (!loaded || !window.fbq) { pendingSignups.add(conversionId); return; }
-  pendingSignups.delete(conversionId);
   const key = `matgarko-conversion-meta-${pixelId}-${conversionId}`;
   let recorded = sentSignups.has(key);
   try { recorded ||= localStorage.getItem(key) === 'sent'; } catch { /* In-memory fallback. */ }
-  if (recorded) return;
+  if (recorded) return Promise.resolve();
+  const sent = pixelRequestDone('CompleteRegistration');
+  if (!loaded || !window.fbq) { pendingSignups.add(conversionId); return sent; }
+  pendingSignups.delete(conversionId);
   window.fbq('trackSingle', pixelId, 'CompleteRegistration', {}, { eventID: conversionId });
   sentSignups.add(key);
   try { localStorage.setItem(key, 'sent'); } catch { /* In-memory fallback. */ }
+  return sent;
 }
 
 // The server's Conversions API copy of CompleteRegistration. It carries the same event id as the

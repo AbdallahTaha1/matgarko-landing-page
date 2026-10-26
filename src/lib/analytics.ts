@@ -52,8 +52,9 @@ export function trackSignupStep(event: 'signup_start' | 'signup_details_submitte
   window.gtag('event', event, { send_to: gaId, method: 'email' });
 }
 export function trackSignupComplete(conversionId: string) {
-  trackMetaSignupComplete(conversionId);
-  if (getConsent() !== 'accepted' || !window.gtag) return Promise.resolve();
+  // The dashboard opens when this settles, so Meta's request gets to finish before the page leaves.
+  const meta = trackMetaSignupComplete(conversionId);
+  if (getConsent() !== 'accepted' || !window.gtag) return meta;
   const acquisition = getAcquisition();
   const pending: Promise<void>[] = [];
   for (const destination of ['ga', 'ads'] as const) {
@@ -89,5 +90,5 @@ export function trackSignupComplete(conversionId: string) {
       finish();
     }
   }
-  return Promise.all(pending).then(() => undefined);
+  return Promise.all([...pending, meta]).then(() => undefined);
 }
