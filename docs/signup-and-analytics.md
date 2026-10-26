@@ -37,7 +37,7 @@ The mobile field offers 22 Arab countries with calling codes. Local numbers, pas
 
 ## Meta Pixel
 
-- Production configuration uses Pixel ID `1988477075326444`. The public ID is set as `VITE_META_PIXEL_ID`; no access token belongs in frontend configuration.
+- Production configuration uses Pixel ID `2425524511606691`. The public ID is set as `VITE_META_PIXEL_ID`; no access token belongs in frontend configuration.
 - **Temporary:** production sets `VITE_META_REQUIRE_CONSENT=false`, so Meta loads for every visitor regardless of the cookie banner (GA4 and Google Ads still wait for consent). Delete that variable from `.env.production` and rebuild to require consent again.
 - Without that override, the script loads only after analytics/advertising consent. Route changes send one explicit `PageView`. Withdrawal revokes Meta consent and stops our events; an in-flight script cannot send our events after withdrawal.
 - `CompleteRegistration` is sent only when the backend reports a verified, provisioned store as `ready`, never for opening the form, submitting details, or requesting an email. Its non-secret conversion ID is used as `eventID` and for browser-local deduplication scoped to this Pixel ID. A reload does not send it again in the same browser/storage. This is browser measurement, not a server registration ledger.
