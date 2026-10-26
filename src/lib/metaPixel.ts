@@ -2,6 +2,9 @@ import { api } from './api';
 import { getConsent } from './consent';
 
 const pixelId = import.meta.env.VITE_META_PIXEL_ID?.trim();
+// Temporary: VITE_META_REQUIRE_CONSENT=false lets Meta run for every visitor, whatever they chose
+// in the cookie banner. Remove the variable to put the consent check back.
+const consentRequired = import.meta.env.VITE_META_REQUIRE_CONSENT !== 'false';
 interface PixelQueue {
   (...args: unknown[]): void;
   callMethod?: (...args: unknown[]) => void;
@@ -30,7 +33,7 @@ function safeUrl(value: string) {
   } catch { return false; }
 }
 function canTrack() {
-  return /^\d+$/.test(pixelId || '') && getConsent() === 'accepted'
+  return /^\d+$/.test(pixelId || '') && (!consentRequired || getConsent() === 'accepted')
     && safeUrl(window.location.href) && safeUrl(document.referrer);
 }
 
