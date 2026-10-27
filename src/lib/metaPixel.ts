@@ -1,4 +1,3 @@
-import { api } from './api';
 import { getConsent } from './consent';
 
 const pixelId = import.meta.env.VITE_META_PIXEL_ID?.trim();
@@ -124,20 +123,12 @@ export function trackMetaSignupComplete(conversionId: string): Promise<void> {
   return sent;
 }
 
-// The server's Conversions API copy of CompleteRegistration. It carries the same event id as the
-// browser event, so Meta counts the pair once, and it still arrives when an ad blocker stops
-// fbevents.js. Like the browser event it is sent only with consent.
-const serverSent = new Set<string>();
-export function reportMetaSignupServer(signupToken: string, conversionId: string) {
-  if (!signupToken || !conversionId || !canTrack()) return;
-  const key = `matgarko-conversion-meta-server-${pixelId}-${conversionId}`;
-  let recorded = serverSent.has(key);
-  try { recorded ||= localStorage.getItem(key) === 'sent'; } catch { /* In-memory fallback. */ }
-  if (recorded) return;
-  serverSent.add(key);
+// The server reports CompleteRegistration itself once the owner confirms their email, so a closed
+// tab or an ad blocker cannot lose it. It needs the ids Meta's pixel keeps in this browser to match
+// the signup to the ad click, so the signup request carries them. Nothing is sent when Meta is
+// not allowed to run here.
+export function metaBrowserIds() {
+  if (!canTrack()) return undefined;
   const cookie = (name: string) => document.cookie.split('; ').find(part => part.startsWith(name + '='))?.slice(name.length + 1);
-  api.conversion(signupToken, {
-    sourceUrl: window.location.origin + window.location.pathname, fbp: cookie('_fbp'), fbc: cookie('_fbc'),
-  }).then(() => { try { localStorage.setItem(key, 'sent'); } catch { /* In-memory fallback. */ } })
-    .catch(() => serverSent.delete(key));
+  return { sourceUrl: window.location.origin + window.location.pathname, fbp: cookie('_fbp'), fbc: cookie('_fbc') };
 }
