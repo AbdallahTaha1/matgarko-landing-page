@@ -13,7 +13,7 @@ async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknow
   ` }));
   await page.route('https://connect.facebook.net/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
   await page.route('https://www.facebook.com/tr**', route => route.abort());
-  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, baseDomain: 'matgarko.com', subdomainTaken: false, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false };
+  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, baseDomain: 'matgarko.com', subdomainTaken: false, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false, whatsApp: false };
   await page.route('**/api/signup/v1/**', async route => {
     const url = new URL(route.request().url());
     const action = url.pathname.split('/').pop();
@@ -31,7 +31,7 @@ async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknow
     }
     if (action === 'registrations') {
       state.submissions.push(route.request().postDataJSON());
-      return route.fulfill({ status: 202, json: { token, state: 'verification', retryAfterSeconds: 60, emailDeliveryFailed: state.emailDeliveryFailed } });
+      return route.fulfill({ status: 202, json: { token, state: 'verification', retryAfterSeconds: 60, emailDeliveryFailed: state.emailDeliveryFailed, whatsAppSent: state.whatsApp } });
     }
     expect(route.request().headers()['x-signup-token']).toBe(token);
     expect(url.search).toBe('');
@@ -444,3 +444,31 @@ for (const consent of ['accepted', 'declined'] as const) {
     expect(state.submissions[0]).toMatchObject({ meta: { sourceUrl: expect.stringMatching(/\/en\/register$/), fbp: 'fb.1.1700000000.123', fbc: 'fb.1.1700000000.AbC' } });
   });
 }
+
+test('the verification step says where the code went', async ({ page }) => {
+  const state = await mockSignup(page);
+  state.whatsApp = true;
+  await page.goto('/en/register');
+  await enterDetails(page);
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await expect(page.getByText('sent to your WhatsApp and your email')).toBeVisible();
+});
+
+test('the verification step tells email-only visitors to check spam and that the code lasts an hour', async ({ page }) => {
+  await mockSignup(page);
+  await page.goto('/en/register');
+  await enterDetails(page);
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await expect(page.getByText(/stays valid for an hour/)).toBeVisible();
+});
+
+test('a mistyped mail domain is offered the likely address', async ({ page }) => {
+  await mockSignup(page);
+  await page.goto('/en/register');
+  await page.getByLabel('Store name', { exact: true }).fill('Test shop');
+  await page.getByLabel(/^Store address/).fill('testshop');
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByLabel('Email', { exact: true }).fill('owner@gmai.com');
+  await page.getByRole('button', { name: 'owner@gmail.com' }).click();
+  await expect(page.getByLabel('Email', { exact: true })).toHaveValue('owner@gmail.com');
+});

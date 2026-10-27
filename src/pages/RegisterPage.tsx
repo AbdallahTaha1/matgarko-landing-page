@@ -6,6 +6,7 @@ import { api, ApiError, type SignupModel, type SignupStatus } from '@/lib/api';
 import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
 import { metaBrowserIds } from '@/lib/metaPixel';
+import { suggestEmail } from '@/lib/emailTypos';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
 import { readyStoreLinks, rememberStore, signupSignInUrl } from '@/lib/storeAccess';
@@ -61,6 +62,7 @@ export default function RegisterPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  const [codeOnWhatsApp, setCodeOnWhatsApp] = useState(false);
   const [cooldown, setCooldown] = useState(0);
   const [pollingPaused, setPollingPaused] = useState(false);
   const [availability, setAvailability] = useState({ value: '', state: 'idle' });
@@ -199,7 +201,7 @@ export default function RegisterPage() {
         setToken(result.token);
         try { sessionStorage.setItem(tokenKey, result.token); } catch { /* Still usable in this tab. */ }
         setForm(value => ({ ...value, password: '', confirmPassword: '' }));
-        setStage('verification'); setCooldown(result.retryAfterSeconds);
+        setStage('verification'); setCooldown(result.retryAfterSeconds); setCodeOnWhatsApp(!!result.whatsAppSent);
         if (result.emailDeliveryFailed) setError('EmailFailed');
         trackSignupStep('signup_details_submitted');
       } else if (stage === 'verification') {
@@ -210,10 +212,11 @@ export default function RegisterPage() {
     } catch (cause) { showError(cause); }
     finally { submitting.current = false; setBusy(false); }
   }
+  const emailSuggestion = suggestEmail(form.email);
   async function resend() {
     if (busy || cooldown > 0) return;
     setBusy(true); setError(''); setNotice('');
-    try { const result = await api.resend(token); setCooldown(result.retryAfterSeconds); setNotice(t('تم إرسال رمز جديد.', 'A new code has been sent.')); }
+    try { const result = await api.resend(token); setCooldown(result.retryAfterSeconds); setCodeOnWhatsApp(!!result.whatsAppSent); setNotice(t('تم إرسال رمز جديد.', 'A new code has been sent.')); }
     catch (cause) { showError(cause); }
     finally { setBusy(false); }
   }
@@ -302,6 +305,7 @@ export default function RegisterPage() {
           </>}
           {stage === 'account' && <>
             {field('email', t('البريد الإلكتروني', 'Email'), 'email', { maxLength: 320, autoComplete: 'email', dir: 'ltr' }, t('استخدم بريد تقدر تفتحه دلوقتي؛ هنبعت عليه رمز تأكيد حسابك.', 'Use an email you can access now. We will send your verification code there.'))}
+            {emailSuggestion && <p className="text-sm text-amber-800">{t('قصدك', 'Did you mean')} <button type="button" className="font-bold underline" dir="ltr" onClick={() => setForm(value => ({ ...value, email: emailSuggestion }))}>{emailSuggestion}</button>{t('؟', '?')}</p>}
             <div className="space-y-3">
               <label className="block text-sm font-bold text-gray-700" htmlFor="phoneCountry">{t('الدولة ومفتاح الاتصال', 'Country and calling code')}<select id="phoneCountry" name="phoneCountry" value={phoneCountry} onChange={event => setPhoneCountry(event.target.value as CountryCode)} className={inputClass} autoComplete="country">
                 {phoneCountries.map(country => <option key={country.code} value={country.code}>{t(country.ar, country.en)} ({'\u2066'}+{country.callingCode}{'\u2069'})</option>)}
@@ -319,7 +323,7 @@ export default function RegisterPage() {
             <button type="button" disabled={busy} className="btn btn-secondary w-full" onClick={() => { setStage('store'); setError(''); }}>{t('السابق', 'Back')}</button>
           </>}
           {stage === 'verification' && <>
-            <h2 className="text-xl font-bold">{t('أكّد بريدك الإلكتروني', 'Verify your email')}</h2><p className="text-sm leading-6 text-gray-600">{t('اكتب الرمز المكوّن من 6 أرقام اللي وصلك على البريد. راجع الرسائل غير المرغوب فيها كمان.', 'Enter the 6-digit code sent to your email. Check your spam folder too.')}</p>
+            <h2 className="text-xl font-bold">{t('أكّد بريدك الإلكتروني', 'Verify your email')}</h2><p className="text-sm leading-6 text-gray-600">{codeOnWhatsApp ? t('اكتب الرمز المكوّن من 6 أرقام اللي بعتناه لك على واتساب وعلى البريد. استخدم اللي يوصلك الأول.', 'Enter the 6-digit code we sent to your WhatsApp and your email. Use whichever arrives first.') : t('اكتب الرمز المكوّن من 6 أرقام اللي بعتناه على بريدك. ممكن يتأخر دقيقة؛ راجع الرسائل غير المرغوب فيها (Spam)، ولو ما وصلش اضغط إعادة الإرسال. الرمز بيفضل شغال ساعة.', 'Enter the 6-digit code we sent to your email. It can take a minute; check your spam folder, and press Resend if it does not arrive. The code stays valid for an hour.')}</p>
             <label htmlFor="code" className="block text-sm font-bold">{t('رمز التحقق', 'Verification code')}<input id="code" name="code" className={inputClass + ' text-center tracking-[0.4em]'} value={code} onChange={event => setCode(event.target.value.replace(/[^0-9]/g, '').slice(0, 6))} required pattern="[0-9]{6}" maxLength={6} inputMode="numeric" autoComplete="one-time-code" dir="ltr" /></label>
             <button type="submit" disabled={busy || code.length !== 6} className="btn btn-primary w-full disabled:opacity-50">{busy ? t('جاري التحقق…', 'Verifying…') : t('تأكيد البريد وإنشاء المتجر', 'Verify and create store')}</button>
             <button type="button" disabled={busy || cooldown > 0} className="btn btn-secondary w-full disabled:opacity-50" onClick={resend}>{t('إعادة إرسال الرمز', 'Resend code')}{cooldown > 0 && ` (${cooldown})`}</button>

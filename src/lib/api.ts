@@ -36,9 +36,9 @@ export const api = {
   checkSubdomain: (value: string, signal?: AbortSignal) => request<{ available: boolean; code: string; message?: string }>(`/check-subdomain?value=${encodeURIComponent(value)}`, { signal }),
   checkEmail: (email: string, signal?: AbortSignal) => request<{ available: boolean; code: string }>('/check-email', { data: { email }, signal }),
   checkPhone: (phone: string, signal?: AbortSignal) => request<{ available: boolean; code: string }>('/check-phone', { data: { phone }, signal }),
-  signup: (data: SignupModel) => request<{ token: string; state: 'verification'; emailDeliveryFailed: boolean; retryAfterSeconds: number }>('/registrations', { data }),
+  signup: (data: SignupModel) => request<{ token: string; state: 'verification'; emailDeliveryFailed: boolean; whatsAppSent?: boolean; retryAfterSeconds: number }>('/registrations', { data }),
   verify: (token: string, code: string) => request<SignupStatus>('/verify', { token, data: { code } }),
-  resend: (token: string) => request<{ retryAfterSeconds: number }>('/resend', { token, data: {} }),
+  resend: (token: string) => request<{ retryAfterSeconds: number; whatsAppSent?: boolean }>('/resend', { token, data: {} }),
   status: (token: string) => request<SignupStatus>('/status', { token }),
   // A single-use link that signs the new owner into their dashboard. Callers fall back to the
   // plain dashboard address, which asks for the password, if this fails.
