@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api, ApiError } from './api';
+import { api, ApiError, timeoutSignal } from './api';
 
 export function useSignupContactCheck(kind: 'email' | 'phone', value: string, enabled: boolean) {
   const [attempt, setAttempt] = useState(0);
@@ -17,7 +17,7 @@ export function useSignupContactCheck(kind: 'email' | 'phone', value: string, en
       }
       setResult({ value, attempt, state: 'checking' });
       try {
-        const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(10000)]);
+        const signal = timeoutSignal(10000, controller.signal);
         const response = await (kind === 'email' ? api.checkEmail(value, signal) : api.checkPhone(value, signal));
         if (!controller.signal.aborted) setResult({ value, attempt, state: response.available ? 'available' : response.code });
       } catch (error) {

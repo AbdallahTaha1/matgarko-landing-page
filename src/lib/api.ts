@@ -13,12 +13,20 @@ export class ApiError extends Error {
   code: string; retryAfterSeconds: number; status: number;
   constructor(code: string, retryAfterSeconds = 0, status = 0) { super(code); this.code = code; this.retryAfterSeconds = retryAfterSeconds; this.status = status; }
 }
+// AbortSignal.timeout needs iOS 16 and AbortSignal.any iOS 17.4; older iPhones threw before the
+// request left and saw "unable to connect". A plain controller works on every browser.
+export function timeoutSignal(ms: number, parent?: AbortSignal): AbortSignal {
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(new DOMException('The request timed out.', 'TimeoutError')), ms);
+  parent?.addEventListener('abort', () => controller.abort(parent.reason), { once: true });
+  return controller.signal;
+}
 async function request<T>(path: string, options: { data?: unknown; token?: string; signal?: AbortSignal } = {}): Promise<T> {
   let response: Response;
   try {
     response = await fetch(base + path, {
       method: options.data === undefined ? 'GET' : 'POST', credentials: 'omit', cache: 'no-store',
-      signal: options.signal || AbortSignal.timeout(20000),
+      signal: options.signal || timeoutSignal(20000),
       headers: { ...(options.data === undefined ? {} : { 'Content-Type': 'application/json' }), ...(options.token ? { 'X-Signup-Token': options.token } : {}) },
       body: options.data === undefined ? undefined : JSON.stringify(options.data),
     });

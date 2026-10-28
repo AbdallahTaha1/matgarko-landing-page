@@ -355,6 +355,18 @@ test('live contact checks reject taken and invalid values and recheck edits befo
   expect(state.submissions).toHaveLength(0);
 });
 
+test('signup works on iPhones without AbortSignal.any or AbortSignal.timeout', async ({ page }) => {
+  // iOS 16 to 17.3 lacks AbortSignal.any and iOS 15 lacks AbortSignal.timeout.
+  await page.addInitScript(() => { delete (AbortSignal as { any?: unknown }).any; delete (AbortSignal as { timeout?: unknown }).timeout; });
+  const state = await mockSignup(page, 'declined');
+  await page.goto('/en/register');
+  await enterDetails(page);
+  await expect(page.locator('#email-status')).toContainText('available for signup');
+  await expect(page.locator('#phone-status')).toContainText('available for signup');
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await expect.poll(() => state.submissions.length).toBe(1);
+});
+
 test('failed contact checks can be retried without changing the entered details', async ({ page }) => {
   const state = await mockSignup(page, 'declined'); state.contactNetworkFailure = true;
   await page.goto('/en/register');
