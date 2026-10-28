@@ -84,7 +84,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   test('registration page supports the signup journey', async ({ page }) => {
     await page.goto('/register');
 
-    await expect(page.getByRole('heading', { name: 'أنشئ متجرك الآن' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'ابدأ متجرك مجانًا' })).toBeVisible();
     await expect(page.locator('input[name="storeName"]')).toBeVisible();
     await expect(page.locator('input[name="subdomain"]')).toBeVisible();
   });

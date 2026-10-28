@@ -50,8 +50,6 @@ async function enterDetails(page: Page) {
   await page.getByLabel('Email', { exact: true }).fill('owner@example.com');
   await page.getByLabel('Mobile number', { exact: true }).fill('01012345678');
   await page.getByLabel('Password', { exact: true }).fill('A-safe-password-123');
-  await page.getByLabel('Confirm password', { exact: true }).fill('A-safe-password-123');
-  await page.locator('input[name="acceptTerms"]').check();
 }
 async function events(page: Page) {
   return page.evaluate(() => (window.dataLayer || []).map(item => Array.from(item as unknown[])).filter(item => item[0] === 'event'));
@@ -87,7 +85,7 @@ test('store address mistakes stay visible and cannot become a different availabl
   });
   await page.goto('/en/register');
   await page.getByLabel('Store name', { exact: true }).fill('My store');
-  const address = page.getByLabel('Store address', { exact: true });
+  const address = page.getByLabel('Store address (in English)', { exact: true });
   const next = page.getByRole('button', { name: 'Continue', exact: true });
   await address.fill('my-store');
   await expect(next).toBeEnabled();
@@ -115,43 +113,38 @@ test('store address mistakes stay visible and cannot become a different availabl
 
   await address.fill('Nour-Store');
   await expect(address).toHaveValue('nour-store');
-  await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.matgarko.com');
+  await expect(page.locator('#subdomain-status')).toContainText('available');
   await expect(next).toBeEnabled();
   expect(checked).toEqual(['my-store', 'nour-store']);
   await address.fill('');
-  await expect(page.locator('#subdomain-status')).toBeEmpty();
-  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.matgarko.com');
+  await expect(page.locator('#subdomain-status')).toHaveText('This is the link you will share with customers.');
   await expect(next).toBeDisabled();
 });
 
-test('store address preview follows the configured domain and a taken address stays blocked', async ({ page }) => {
+test('store address suffix follows the configured domain and a taken address stays blocked', async ({ page }) => {
   const state = await mockSignup(page, 'declined');
   state.baseDomain = 'shops.example.com';
   state.subdomainTaken = true;
   await page.goto('/en/register');
-  const address = page.getByLabel('Store address', { exact: true });
-  await expect(page.locator('#subdomain-hint')).toContainText('.shops.example.com');
-  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.shops.example.com');
+  const address = page.getByLabel('Store address (in English)', { exact: true });
+  await expect(address.locator('..').locator('span')).toHaveText('.shops.example.com');
   await address.fill('nour-store');
   await expect(page.locator('#subdomain-status')).toContainText('taken');
   await expect(address).toHaveAttribute('aria-invalid', 'true');
-  await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.shops.example.com');
   await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
 });
 
-test('Arabic store address guidance and preview fit narrow mobile screens', async ({ page }) => {
+test('Arabic store address and its suffix fit narrow mobile screens', async ({ page }) => {
   await mockSignup(page, 'declined');
   await page.setViewportSize({ width: 320, height: 812 });
   await page.goto('/register');
-  const address = page.getByLabel('رابط المتجر', { exact: true });
+  const address = page.getByLabel('رابط المتجر (بالإنجليزي)', { exact: true });
   await expect(address).toHaveAttribute('placeholder', 'my-store');
-  await expect(page.locator('#subdomain-hint')).toContainText('هنضيف');
-  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.matgarko.com');
+  await expect(page.locator('#subdomain-status')).toContainText('الرابط اللي هتبعته لعملائك');
   await address.fill('متجري');
   await expect(page.locator('#subdomain-status')).toContainText('حروف إنجليزية');
   await address.fill('n'.repeat(40));
   await expect(page.locator('#subdomain-status')).toContainText('الرابط متاح');
-  await expect(page.locator('#subdomain-preview')).toHaveText(`${'n'.repeat(40)}.matgarko.com`);
   const inputBounds = await address.boundingBox();
   const suffixBounds = await address.locator('..').locator('span').boundingBox();
   expect(inputBounds!.x + inputBounds!.width).toBeLessThanOrEqual(suffixBounds!.x + 1);
@@ -353,6 +346,28 @@ test('live contact checks reject taken and invalid values and recheck edits befo
   await page.getByLabel('Mobile number', { exact: true }).fill('123');
   await expect(page.locator('#phone-status')).toContainText('selected country code');
   expect(state.submissions).toHaveLength(0);
+});
+
+test('the short form asks for the password once and agrees to the terms by its button', async ({ page }) => {
+  const state = await mockSignup(page, 'declined');
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/en/register');
+  // The page is the signup; its header does not offer signup again.
+  await expect(page.locator('header').getByRole('link', { name: 'Start free', exact: true }).filter({ visible: true })).toHaveCount(0);
+  await expect(page.getByText('Step 1 of 2', { exact: true })).toBeVisible();
+  await enterDetails(page);
+  await expect(page.getByText('Step 2 of 2', { exact: true })).toBeVisible();
+  await expect(page.getByLabel('Confirm password')).toHaveCount(0);
+  await expect(page.locator('input[type="checkbox"]')).toHaveCount(0);
+  const password = page.getByLabel('Password', { exact: true });
+  await expect(password).toHaveAttribute('type', 'password');
+  await page.getByRole('button', { name: 'Show password' }).click();
+  await expect(password).toHaveAttribute('type', 'text');
+  await expect(page.locator('#terms-notice')).toContainText('you agree to the');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
+  expect(state.submissions[0]).toMatchObject({ acceptTerms: true, password: 'A-safe-password-123', confirmPassword: 'A-safe-password-123' });
 });
 
 test('signup works on iPhones without AbortSignal.any or AbortSignal.timeout', async ({ page }) => {

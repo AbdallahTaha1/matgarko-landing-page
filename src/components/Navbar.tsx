@@ -34,6 +34,8 @@ export function Navbar() {
   const signupLabel = store ? (isEnglish ? 'Dashboard' : 'لوحة التحكم') : (isEnglish ? "Start free" : "أنشئ متجرك مجاناً");
   const primaryUrl = store?.adminUrl || (isEnglish ? '/en/register' : SIGNUP_URL);
   const loginLabel = isEnglish ? "My store" : "ادخل متجرك";
+  // On the signup page itself the header's signup button only points back to the same form.
+  const showPrimary = !!store || !/^\/(en\/)?register\/?$/.test(pathname);
   const languageLabel = isEnglish ? "العربية" : "English";
   const menuLabel = isEnglish ? (isOpen ? "Close menu" : "Open menu") : isOpen ? "إغلاق القائمة" : "فتح القائمة";
   const navLabel = isEnglish ? "Main navigation" : "القائمة الرئيسية";
@@ -88,16 +90,16 @@ export function Navbar() {
             {languageLabel}
           </Link>
           <Link to={localizePath('/login', language)} className="btn btn-secondary h-10 whitespace-nowrap px-3 text-sm">{loginLabel}</Link>
-          <a href={primaryUrl} className="btn btn-primary h-10 whitespace-nowrap px-4 text-sm">
+          {showPrimary && <a href={primaryUrl} className="btn btn-primary h-10 whitespace-nowrap px-4 text-sm">
             {signupLabel}
-          </a>
+          </a>}
         </div>
 
         <div className="flex items-center gap-1 xl:hidden">
           {/* New visitors read a lone "ادخل متجرك" here as "start your store", reached the
               store-access page and asked support for a store they never made. Signup is the
               header button on phones; store access stays in the menu and under the hero. */}
-          <a href={primaryUrl} onClick={() => setIsOpen(false)} className="inline-flex h-10 shrink-0 items-center whitespace-nowrap rounded-lg bg-emerald-700 px-3 text-xs font-bold text-white hover:bg-emerald-800">{signupLabel}</a>
+          {showPrimary && <a href={primaryUrl} onClick={() => setIsOpen(false)} className="inline-flex h-10 shrink-0 items-center whitespace-nowrap rounded-lg bg-emerald-700 px-3 text-xs font-bold text-white hover:bg-emerald-800">{signupLabel}</a>}
           <Link
             to={alternateLanguagePath(pathname)}
             hrefLang={isEnglish ? "ar" : "en"}
