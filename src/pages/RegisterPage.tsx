@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Loader2, Store, CheckCircle2, CircleAlert, Eye, EyeOff } from 'lucide-react';
+import { Loader2, Store, CheckCircle2, CircleAlert, Eye, EyeOff, Globe2 } from 'lucide-react';
 import { api, ApiError, type SignupModel, type SignupStatus } from '@/lib/api';
 import { getAcquisition } from '@/lib/attribution';
 import { trackSignupComplete, trackSignupStep } from '@/lib/analytics';
@@ -285,14 +285,20 @@ export default function RegisterPage() {
                 />
                 <span aria-hidden="true" className="flex shrink-0 items-center border-l border-gray-200 bg-gray-50 px-3 text-xs font-medium text-gray-500 sm:text-sm">.{baseDomain}</span>
               </div>
-              {/* One line under the address: what customers will open, then whether it is free.
-                  The rules appear only as the error for an address that breaks them. */}
+              {/* Whether the address is free; the rules appear only as the error for one that breaks them. */}
               <p id="subdomain-status" role="status" aria-atomic="true" className={`mt-2 flex items-start gap-2 text-xs leading-5 ${subdomainHasError ? 'text-red-600' : available ? 'text-emerald-700' : 'text-gray-500'}`}>
                 {subdomainHasError ? <><CircleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span>{(messages[subdomainState] || messages.InvalidRequest)[english ? 1 : 0]}</span></>
                   : available ? <><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span>{t('الرابط متاح، تقدر تكمل', 'Address available. You can continue.')}</span></>
-                  : subdomainState === 'checking' ? <><Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin" aria-hidden="true" /><span>{t('جاري فحص الرابط…', 'Checking address…')}</span></>
-                  : <span>{t('ده الرابط اللي هتبعته لعملائك.', 'This is the link you will share with customers.')}</span>}
+                  : subdomainState === 'checking' ? <><Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin" aria-hidden="true" /><span>{t('جاري فحص الرابط…', 'Checking address…')}</span></> : null}
               </p>
+              <div className="mt-4 flex items-start gap-3 rounded-xl border border-emerald-100 bg-emerald-50/70 p-3.5">
+                <Globe2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs leading-5 text-emerald-900">{subdomainValid ? t('معاينة رابط متجرك', 'Your store address preview') : t('مثال على رابط متجرك', 'Example store address')}</p>
+                  <p id="subdomain-preview" dir="ltr" className="mt-1 break-all text-left text-sm leading-6 text-emerald-800"><span className="font-bold">{subdomainValid ? form.subdomain : 'my-store'}</span><span>.{baseDomain}</span></p>
+                  <p className="mt-1 text-xs leading-5 text-gray-600">{t('ده الرابط اللي هتبعته لعملائك عشان يفتحوا متجرك.', 'Share this link with customers so they can visit your store.')}</p>
+                </div>
+              </div>
             </div>
             <button type="submit" disabled={!available || !config?.enabled} className="btn btn-primary w-full disabled:opacity-50">{t('التالي', 'Continue')}</button>
           </>}

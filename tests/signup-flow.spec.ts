@@ -113,38 +113,42 @@ test('store address mistakes stay visible and cannot become a different availabl
 
   await address.fill('Nour-Store');
   await expect(address).toHaveValue('nour-store');
-  await expect(page.locator('#subdomain-status')).toContainText('available');
+  await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.matgarko.com');
   await expect(next).toBeEnabled();
   expect(checked).toEqual(['my-store', 'nour-store']);
   await address.fill('');
-  await expect(page.locator('#subdomain-status')).toHaveText('This is the link you will share with customers.');
+  await expect(page.locator('#subdomain-status')).toBeEmpty();
+  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.matgarko.com');
   await expect(next).toBeDisabled();
 });
 
-test('store address suffix follows the configured domain and a taken address stays blocked', async ({ page }) => {
+test('store address preview follows the configured domain and a taken address stays blocked', async ({ page }) => {
   const state = await mockSignup(page, 'declined');
   state.baseDomain = 'shops.example.com';
   state.subdomainTaken = true;
   await page.goto('/en/register');
   const address = page.getByLabel('Store address (in English)', { exact: true });
   await expect(address.locator('..').locator('span')).toHaveText('.shops.example.com');
+  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.shops.example.com');
   await address.fill('nour-store');
   await expect(page.locator('#subdomain-status')).toContainText('taken');
   await expect(address).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.shops.example.com');
   await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
 });
 
-test('Arabic store address and its suffix fit narrow mobile screens', async ({ page }) => {
+test('Arabic store address and its preview fit narrow mobile screens', async ({ page }) => {
   await mockSignup(page, 'declined');
   await page.setViewportSize({ width: 320, height: 812 });
   await page.goto('/register');
   const address = page.getByLabel('رابط المتجر (بالإنجليزي)', { exact: true });
   await expect(address).toHaveAttribute('placeholder', 'my-store');
-  await expect(page.locator('#subdomain-status')).toContainText('الرابط اللي هتبعته لعملائك');
+  await expect(page.locator('#subdomain-preview')).toHaveText('my-store.matgarko.com');
   await address.fill('متجري');
   await expect(page.locator('#subdomain-status')).toContainText('حروف إنجليزية');
   await address.fill('n'.repeat(40));
   await expect(page.locator('#subdomain-status')).toContainText('الرابط متاح');
+  await expect(page.locator('#subdomain-preview')).toHaveText(`${'n'.repeat(40)}.matgarko.com`);
   const inputBounds = await address.boundingBox();
   const suffixBounds = await address.locator('..').locator('span').boundingBox();
   expect(inputBounds!.x + inputBounds!.width).toBeLessThanOrEqual(suffixBounds!.x + 1);
