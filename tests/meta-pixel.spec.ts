@@ -46,6 +46,21 @@ test('URLs containing private parameters or referrers do not load Meta', async (
   expect(await commands(page)).toEqual([]);
 });
 
+for (const referer of ['https://m.facebook.com/', 'https://m.facebook.com/?_rdr', 'https://l.facebook.com/l.php?u=https%3A%2F%2Fmatgarko.com&h=AT0abc', 'https://l.instagram.com/?u=https%3A%2F%2Fmatgarko.com&e=AT0abc']) {
+  test(`a visitor sent by a Facebook or Instagram ad still loads Meta (${referer})`, async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('matgarko-consent', 'accepted'));
+    await page.goto('/en?utm_source=fb&utm_medium=paid&utm_campaign=leads_oct&utm_content=b_before_after&utm_term=52540161156250&fbclid=IwAR0abc', { referer });
+    await expect.poll(() => views(page)).toHaveLength(1);
+  });
+}
+
+test('a lookalike of a Meta host does not get the exemption', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('matgarko-consent', 'accepted'));
+  await page.goto('/en', { referer: 'https://evilfacebook.com/?token=private' });
+  await expect(page.getByRole('navigation')).toBeVisible();
+  expect(await commands(page)).toEqual([]);
+});
+
 test('a delayed script cannot send after consent is withdrawn', async ({ page }) => {
   let release!: () => void;
   const blocked = new Promise<void>(resolve => { release = resolve; });

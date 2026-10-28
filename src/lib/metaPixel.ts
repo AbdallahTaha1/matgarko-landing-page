@@ -31,9 +31,16 @@ function safeUrl(value: string) {
     return !url.hash && [...url.searchParams.keys()].every(key => allowedQueryKeys.has(key));
   } catch { return false; }
 }
+// A visitor coming from Facebook or Instagram carries a referrer such as m.facebook.com/?_rdr or
+// l.facebook.com/l.php?u=...; those are Meta's own addresses, so showing them to Meta leaks nothing.
+const metaHosts = /(^|\.)(facebook\.com|instagram\.com|messenger\.com|fb\.com|fb\.me)$/;
+function safeReferrer(value: string) {
+  try { if (value && metaHosts.test(new URL(value).hostname)) return true; } catch { return false; }
+  return safeUrl(value);
+}
 function canTrack() {
   return /^\d+$/.test(pixelId || '') && (!consentRequired || getConsent() === 'accepted')
-    && safeUrl(window.location.href) && safeUrl(document.referrer);
+    && safeUrl(window.location.href) && safeReferrer(document.referrer);
 }
 
 export function initMetaPixel() {

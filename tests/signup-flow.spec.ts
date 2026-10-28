@@ -472,3 +472,13 @@ test('a mistyped mail domain is offered the likely address', async ({ page }) =>
   await page.getByRole('button', { name: 'owner@gmail.com' }).click();
   await expect(page.getByLabel('Email', { exact: true })).toHaveValue('owner@gmail.com');
 });
+
+test('a signup that follows a Facebook ad click carries the Meta browser ids', async ({ page }) => {
+  const state = await mockSignup(page, 'accepted');
+  await page.addInitScript(() => { document.cookie = '_fbp=fb.1.1700000000.123; path=/'; });
+  await page.goto('/en/register?utm_source=fb&utm_medium=paid&utm_campaign=leads_oct&utm_content=b_before_after&utm_term=52540161156250&fbclid=IwAR0abc', { referer: 'https://m.facebook.com/?_rdr' });
+  await enterDetails(page);
+  await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+  await expect.poll(() => state.submissions.length).toBe(1);
+  expect(state.submissions[0]).toMatchObject({ meta: { fbp: 'fb.1.1700000000.123' }, acquisition: { first: { source: 'fb', campaign: 'leads_oct' } } });
+});
