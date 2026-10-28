@@ -95,6 +95,11 @@ export const englishFaqs = [
       "Yes. From the web dashboard, upload an Excel file of up to 500 products with name, price, category, quantity, description, and cost, using the template you download from the same page. Photos, sizes, and colors are added after the import.",
   },
   {
+    question: "Can I use my own domain, like mystore.com?",
+    answer:
+      "Yes, on every plan. In the dashboard, go to Settings, then Domain, type your domain, add the two DNS records shown at your domain company, and press «Check now». Once it's ready, make it your store's address in one tap; your old link keeps redirecting to it. Our support team helps on WhatsApp if you need it.",
+  },
+  {
     question: "Are the core tools available on Starter?",
     answer:
       "Yes. Every plan includes product, stock and order management, coupons, shipping settings and WhatsApp support. Plans differ in monthly subscription, commission rate and per-order cap.",
@@ -143,8 +148,8 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Grow without rebuilding",
         text:
-          "Start with the essentials, then move to lower-commission plans and your own domain, which our team connects for you, as your business grows.",
-        items: ["Plans for different stages", "Custom domain, connected for you", "Support for growing catalogs"],
+          "Start with the essentials, then move to lower-commission plans as your business grows. Connect your own domain yourself in minutes on any plan, and our support team helps on WhatsApp if you need it.",
+        items: ["Plans for different stages", "Your own domain, self-serve on every plan", "Support for growing catalogs"],
       },
     ],
   },

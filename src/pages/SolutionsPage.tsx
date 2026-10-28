@@ -171,7 +171,7 @@ export const SolutionsPage = () => {
           <div className="grid gap-8 md:grid-cols-3">
             {[
               { title: "تسجيل سريع", desc: "ابدأ متجرك بدون خطوات طويلة أو إعداد يدوي." },
-              { title: "رابط خاص", desc: "استخدم رابط واضح لمتجرك تشاركه مع العملاء." },
+              { title: "رابط خاص", desc: "رابط واضح لمتجرك تشاركه مع العملاء، أو دومينك الخاص تربطه بنفسك في دقائق." },
               { title: "إدارة يومية", desc: "منتجات وطلبات وعملاء وعروض من تطبيق أندرويد أو من متصفح أي موبايل." },
             ].map((card) => (
               <div key={card.title} className="premium-card p-7 text-center">

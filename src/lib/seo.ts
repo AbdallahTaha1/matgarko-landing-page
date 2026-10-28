@@ -672,7 +672,7 @@ export function softwareSchema(page?: SeoPage) {
       "Meta Pixel, Conversions API, and Google Analytics",
       "Store statistics with profit and visit sources",
       "Import products from Excel",
-      "Custom domain connected by our team",
+      "Connect your own domain yourself in minutes, on every plan",
     ] : [
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
@@ -684,7 +684,7 @@ export function softwareSchema(page?: SeoPage) {
       "Meta Pixel وConversions API وGoogle Analytics",
       "إحصائيات المتجر بالأرباح ومصادر الزيارات",
       "استيراد المنتجات من Excel",
-      "دومين خاص يربطه فريقنا",
+      "اربط دومينك الخاص بنفسك في دقائق، على كل الباقات",
     ],
   };
 }
