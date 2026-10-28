@@ -35,6 +35,12 @@ export function LoginPage({ language = 'ar' }: { language?: AppLanguage }) {
       <h1 className="mt-4 text-center text-3xl font-black font-heading">{en ? 'Access your store' : 'ادخل متجرك'}</h1>
       <p className="mt-3 text-center text-sm leading-7 text-gray-600">{en ? 'Open your dashboard to manage products and orders using the email and password you registered with.' : 'افتح لوحة التحكم وتابع منتجاتك وطلباتك بنفس البريد وكلمة المرور اللي سجلت بيهم.'}</p>
 
+      {!store && <div className="mt-7 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 text-center sm:p-6">
+        <h2 className="text-lg font-bold text-gray-950">{en ? 'No store yet?' : 'لسه ما عملتش متجر؟'}</h2>
+        <p className="mt-2 text-sm leading-7 text-gray-600">{en ? 'This page is for stores that already exist. Creating yours takes a few minutes.' : 'الصفحة دي للي عندهم متجر بالفعل. إنشاء متجرك بياخد دقايق.'}</p>
+        <Link className="btn btn-primary mt-4 w-full" to={localizePath('/register', language)}>{en ? 'Create your store free' : 'أنشئ متجرك مجاناً'}</Link>
+      </div>}
+
       {store && <div className="mt-7 rounded-2xl border border-emerald-200 bg-white p-5 shadow-sm sm:p-7">
         <h2 className="text-lg font-bold text-gray-950">{en ? 'Your saved store' : 'متجرك المحفوظ'}</h2>
         <p className="mt-2 text-sm text-gray-600">{en ? 'Your store link — share it with your customers:' : 'ده رابط متجرك اللي تبعته لعملائك:'}</p>
@@ -61,10 +67,11 @@ export function LoginPage({ language = 'ar' }: { language?: AppLanguage }) {
           <summary className="cursor-pointer py-2 font-bold text-emerald-800">{en ? 'Forgot your store link?' : 'مش فاكر رابط متجرك؟'}</summary>
           <p className="mt-2 text-gray-600">{en ? 'Search the email you registered with for the Matgarko message titled “تم تفعيل متجرك”. Copy the store link from that message and paste it above. Check your spam folder too.' : 'افتح البريد اللي سجلت بيه، ودوّر على رسالة متجركو بعنوان «تم تفعيل متجرك». انسخ رابط المتجر من الرسالة وحطه فوق. راجع الرسائل غير المرغوب فيها كمان.'}</p>
           <p className="mt-3 text-gray-600">{en ? 'Still cannot find it? Contact us and we will help you get back to your existing store.' : 'مش لاقي الرسالة؟ تواصل معانا وهنساعدك ترجع لمتجرك الحالي.'}</p>
-          <a className="btn btn-secondary mt-3 w-full" href={`https://wa.me/201080312538?text=${encodeURIComponent(en ? 'I already have a Matgarko store and need help finding its link.' : 'عندي متجر على متجركو ومش فاكر الرابط، محتاج مساعدة للوصول لمتجري.')}`} target="_blank" rel="noopener noreferrer">{en ? 'Help me find my store' : 'ساعدني أوصل لمتجري'}</a>
+          {/* The message stays neutral: a pre-written "I have a store" was sent as-is by visitors who never made one. */}
+          <a className="btn btn-secondary mt-3 w-full" href={`https://wa.me/201080312538?text=${encodeURIComponent(en ? 'Hi, I need help signing in to Matgarko.' : 'مرحبًا، محتاج مساعدة في الدخول على متجركو.')}`} target="_blank" rel="noopener noreferrer">{en ? 'Contact us on WhatsApp' : 'كلّمنا على واتساب'}</a>
         </details>
       </div>
-      <p className="mt-6 text-center text-sm text-gray-600">{en ? 'New to Matgarko?' : 'لسه معندكش متجر؟'} <Link className="font-bold text-emerald-800 underline" to={localizePath('/register', language)}>{en ? 'Create your store free' : 'أنشئ متجرك مجاناً'}</Link></p>
+      {store && <p className="mt-6 text-center text-sm text-gray-600">{en ? 'New to Matgarko?' : 'لسه معندكش متجر؟'} <Link className="font-bold text-emerald-800 underline" to={localizePath('/register', language)}>{en ? 'Create your store free' : 'أنشئ متجرك مجاناً'}</Link></p>}
     </div>
   </section>;
 }

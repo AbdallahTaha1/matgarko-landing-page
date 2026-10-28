@@ -12,15 +12,18 @@ test.beforeEach(async ({ page }) => {
   await page.route(adminUrl, route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
 });
 
-test('Arabic and English headers expose store access with the mobile menu closed', async ({ page }, testInfo) => {
+// On phones a lone "ادخل متجرك" in the header read as "start your store": visitors with no store
+// reached store access and asked support for one. Signup is the phone header button; store
+// access is in the menu there, and beside signup on wide screens.
+test('Arabic and English headers lead with signup on phones and keep store access reachable', async ({ page }, testInfo) => {
   for (const width of [320, 375, 1024, 1280]) {
     await page.setViewportSize({ width, height: 900 });
     for (const en of [false, true]) {
       await page.goto(en ? '/en' : '/');
       const header = page.locator('header');
-      await header.getByRole('link', { name: en ? 'My store' : 'ادخل متجرك', exact: true }).filter({ visible: true }).click();
-      await expect(page).toHaveURL(en ? /\/en\/login$/ : /\/login$/);
-      await expect(page.getByRole('heading', { level: 1, name: en ? 'Access your store' : 'ادخل متجرك' })).toBeVisible();
+      const signup = header.getByRole('link', { name: en ? 'Start free' : 'أنشئ متجرك مجاناً', exact: true }).filter({ visible: true });
+      await expect(signup).toHaveCount(1);
+      await expect(signup).toHaveAttribute('href', en ? '/en/register' : '/register');
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       const overlaps = await header.evaluate(element => {
         const children = Array.from(element.firstElementChild!.children).filter(child => child.getBoundingClientRect().width > 0);
@@ -31,6 +34,12 @@ test('Arabic and English headers expose store access with the mobile menu closed
       });
       expect(overlaps).toBe(false);
       if (!en && width === 375) await page.screenshot({ path: testInfo.outputPath('store-access-mobile.png'), fullPage: true });
+      const phone = width < 1280;
+      await expect(header.getByRole('link', { name: en ? 'My store' : 'ادخل متجرك', exact: true }).filter({ visible: true })).toHaveCount(phone ? 0 : 1);
+      if (phone) await header.getByRole('button', { name: en ? 'Open menu' : 'فتح القائمة' }).click();
+      await header.getByRole('link', { name: en ? 'My store' : 'ادخل متجرك', exact: true }).filter({ visible: true }).click();
+      await expect(page).toHaveURL(en ? /\/en\/login$/ : /\/login$/);
+      await expect(page.getByRole('heading', { level: 1, name: en ? 'Access your store' : 'ادخل متجرك' })).toBeVisible();
     }
   }
 });
@@ -38,9 +47,16 @@ test('Arabic and English headers expose store access with the mobile menu closed
 test('forgotten-link help is useful on a fresh browser without a saved store', async ({ page }) => {
   await page.goto('/login');
   await expect(page.getByRole('heading', { name: 'متجرك المحفوظ' })).toHaveCount(0);
+  // Someone without a store is sent to signup before any store-access step.
+  await expect(page.getByRole('heading', { name: 'لسه ما عملتش متجر؟' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'لسه ما عملتش متجر؟' }).locator('..').getByRole('link', { name: 'أنشئ متجرك مجاناً' })).toHaveAttribute('href', '/register');
   await page.getByText('مش فاكر رابط متجرك؟', { exact: true }).click();
   await expect(page.getByText(/تم تفعيل متجرك/)).toBeVisible();
-  await expect(page.getByRole('link', { name: 'ساعدني أوصل لمتجري' })).toHaveAttribute('href', /^https:\/\/wa\.me\/201080312538\?text=/);
+  const help = page.getByRole('link', { name: 'كلّمنا على واتساب' });
+  await expect(help).toHaveAttribute('href', /^https:\/\/wa\.me\/201080312538\?text=/);
+  // The pre-written message never claims a store the visitor may not have.
+  const message = new URL((await help.getAttribute('href'))!).searchParams.get('text')!;
+  expect(message).not.toContain('عندي متجر');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
 });
 
@@ -52,6 +68,7 @@ for (const address of ['testshop', ' TestShop.matgarko.com ', 'https://testshop.
     await expect(page).toHaveURL(adminUrl);
     await page.goto('/en/login');
     await expect(page.getByRole('heading', { name: 'Your saved store' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'No store yet?' })).toHaveCount(0);
     await expect(page.getByRole('link', { name: storeUrl, exact: true })).toHaveAttribute('href', storeUrl);
     await expect(page.getByRole('link', { name: 'Open your dashboard' })).toHaveAttribute('href', adminUrl);
   });

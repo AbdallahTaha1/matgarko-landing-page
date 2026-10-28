@@ -94,7 +94,10 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-1 xl:hidden">
-          <Link to={localizePath('/login', language)} onClick={() => setIsOpen(false)} className="inline-flex h-10 shrink-0 items-center rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 text-xs font-bold text-emerald-800">{loginLabel}</Link>
+          {/* New visitors read a lone "ادخل متجرك" here as "start your store", reached the
+              store-access page and asked support for a store they never made. Signup is the
+              header button on phones; store access stays in the menu and under the hero. */}
+          <a href={primaryUrl} onClick={() => setIsOpen(false)} className="inline-flex h-10 shrink-0 items-center whitespace-nowrap rounded-lg bg-emerald-700 px-3 text-xs font-bold text-white hover:bg-emerald-800">{signupLabel}</a>
           <Link
             to={alternateLanguagePath(pathname)}
             hrefLang={isEnglish ? "ar" : "en"}
@@ -142,6 +145,9 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
+            <Link to={localizePath('/login', language)} onClick={() => setIsOpen(false)} className="btn btn-secondary mt-3 w-full">
+              {loginLabel}
+            </Link>
             <a href={primaryUrl} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">
               {signupLabel}
             </a>
