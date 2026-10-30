@@ -336,7 +336,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Unused stores",
         text:
-          "If a store has no products and no orders and its dashboard has not been used for 60 consecutive days, Matgarko may permanently delete the store and its data. We send a notice to the registered email or WhatsApp number at least 14 days before deletion, and signing in to the dashboard during that time cancels it. This rule never applies to a store that has products or orders. After deletion, the store address can be registered again.",
+          "If a store has no products and no orders and its dashboard has not been used for 14 consecutive days, Matgarko may permanently delete the store and its data. We send a notice to the registered email or WhatsApp number at least 7 days before deletion, and signing in to the dashboard during that time cancels it. This rule never applies to a store that has products or orders. After deletion, the store address can be registered again.",
       },
       {
         title: "Service changes",
