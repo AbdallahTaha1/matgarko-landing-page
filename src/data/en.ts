@@ -319,9 +319,24 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
           "Plan prices and commissions are shown on the pricing page. Delivery companies may charge separate fees outside Matgarko subscription or commission fees.",
       },
       {
-        title: "Store content",
+        title: "Prohibited products and content",
         text:
-          "Users must not publish illegal, misleading, harmful, or infringing content. Matgarko may restrict access to stores that misuse the service or violate platform rules.",
+          "We do not allow selling or showing any product or content that breaks Egyptian law, the values of Egyptian society, or Islamic Sharia. Examples include alcohol and intoxicants, drugs, pork products, pornographic or indecent content, gambling and betting, weapons and ammunition, counterfeit or stolen goods, selling medicines without a pharmacy license, and content that insults religions or incites hatred or violence. Matgarko may hide any such product or suspend the store.",
+      },
+      {
+        title: "Modest images",
+        text:
+          "We encourage store and product images that are modest and suitable for the whole family, without inappropriate images of women. Clothes can be shown on a mannequin or without a model, for example. Matgarko may ask for changes to, or hide, any indecent image.",
+      },
+      {
+        title: "Scams and fraud",
+        text:
+          "We act firmly against any store created to scam or defraud people, such as taking money without delivering orders, listing products that do not exist, impersonating another store or brand, or using fake prices, offers, or reviews. In these cases Matgarko may suspend the store immediately and without notice, delete it, bar its owner from registering again, and keep the necessary data and provide it to the competent authorities. Any customer can report a suspicious store through the contact page.",
+      },
+      {
+        title: "Unused stores",
+        text:
+          "If a store has no products and no orders and its dashboard has not been used for 60 consecutive days, Matgarko may permanently delete the store and its data. We send a notice to the registered email or WhatsApp number at least 14 days before deletion, and signing in to the dashboard during that time cancels it. This rule never applies to a store that has products or orders. After deletion, the store address can be registered again.",
       },
       {
         title: "Service changes",
@@ -353,7 +368,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Third-party services",
         text:
-          "Analytics, hosting, or communication providers may process limited data where needed to provide their part of the service.",
+          "Analytics, hosting, or communication providers may process limited data where needed to provide their part of the service. We may also provide necessary data to competent authorities when the law requires it, or when investigating fraud on the platform.",
       },
       {
         title: "Contact",
