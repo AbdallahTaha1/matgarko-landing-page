@@ -22,7 +22,7 @@ const CORE_TOPICS = [
   "Egyptian pound ecommerce pricing",
   "Cash on delivery",
   "Delivery area pricing",
-  "Store templates",
+  "Store design with ready colour palettes",
   "Product and order management",
 ];
 
@@ -74,10 +74,10 @@ export const seoPages: Record<string, SeoPage> = {
   },
   "/themes": {
     path: "/themes",
-    title: "قوالب متجر إلكتروني جاهزة عربية | متجركو",
+    title: "تصميم متجر إلكتروني جاهز للموبايل | متجركو",
     description:
-      "ابدأ من قالب متجر إلكتروني جاهز ومتجاوب للجوال والكمبيوتر، ثم عدل الألوان والمحتوى والصفحات حسب نوع نشاطك التجاري.",
-    keywords: ["قوالب متجر إلكتروني", "ثيمات متجر", "تصميم متجر إلكتروني", "قالب متجر عربي", "قوالب جاهزة"],
+      "بدل ما تختار من قوالب كتير: شكل واحد سريع ومجرب على الموبايل، بألوان جاهزة حسب نشاطك ولوجو متجرك وخطه وصورك.",
+    keywords: ["تصميم متجر إلكتروني", "شكل متجر إلكتروني", "ألوان المتجر", "متجر إلكتروني للموبايل", "قوالب متجر إلكتروني"],
   },
   "/getting-started": {
     path: "/getting-started",
@@ -154,14 +154,14 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/store/clothing",
     title: "إنشاء متجر ملابس إلكتروني في مصر | متجركو",
     description:
-      "افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، ومتابعة طلبات عملائك.",
+      "افتح متجر ملابس أونلاين بشكل جاهز وألوان تناسب الموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، ومتابعة طلبات عملائك.",
     keywords: ["إنشاء متجر ملابس إلكتروني", "متجر ملابس أونلاين مصر", "متجر موضة إلكتروني", "بيع ملابس أونلاين"],
   },
   "/store/electronics": {
     path: "/store/electronics",
     title: "إنشاء متجر إلكترونيات أونلاين في مصر | متجركو",
     description:
-      "افتح متجر إلكترونيات وأجهزة أونلاين بقالب احترافي. عرض المواصفات والأسعار، مقارنة المنتجات، وإدارة المخزون بسهولة.",
+      "افتح متجر إلكترونيات وأجهزة أونلاين بشكل جاهز ومجرب على الموبايل. عرض المواصفات والأسعار، مقارنة المنتجات، وإدارة المخزون بسهولة.",
     keywords: ["إنشاء متجر إلكترونيات", "متجر أجهزة أونلاين مصر", "بيع إلكترونيات أونلاين", "متجر تقنية إلكتروني"],
   },
   "/store/cosmetics": {
@@ -664,7 +664,7 @@ export function softwareSchema(page?: SeoPage) {
     featureList: isEnglish ? [
       "Create an online store without coding",
       "Manage products and orders",
-      "Use editable store templates and a home page builder",
+      "One ready store look with colour palettes by business type and a home page builder",
       "Accept cash-on-delivery orders",
       "Order now button on product pages",
       "Set delivery prices by area",
@@ -676,7 +676,7 @@ export function softwareSchema(page?: SeoPage) {
     ] : [
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
-      "قوالب متجر قابلة للتعديل ومنشئ للصفحة الرئيسية",
+      "شكل متجر جاهز بألوان حسب نشاطك ومنشئ للصفحة الرئيسية",
       "استقبال طلبات الدفع عند الاستلام",
       "زر «اطلب الآن» في صفحة المنتج",
       "تحديد سعر التوصيل لكل منطقة",
@@ -845,7 +845,7 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
-- Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and use store templates.
+- Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and style one ready mobile-first store look with their own colours (palettes grouped by business type), logo, font, and photos.
 - Differentiators: mobile-first, Arabic-first, built for solo merchants, EGP pricing, and no technical experience required.
 - Not a marketplace: Matgarko provides software for merchants to create their own stores.
 
@@ -943,7 +943,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 
 - Pricing and commission: ${canonicalUrl("/pricing")}
 - How to start: ${canonicalUrl("/getting-started")}
-- Templates: ${canonicalUrl("/themes")}
+- Store design: ${canonicalUrl("/themes")}
 - Cash on delivery and delivery prices: ${canonicalUrl("/integrations")}
 - Company/entity details: ${canonicalUrl("/about")}
 - Contact/support: ${canonicalUrl("/contact")}

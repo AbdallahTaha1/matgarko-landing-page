@@ -15,6 +15,7 @@ import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { HomePage } from "@/pages/HomePage";
 import { PricingPage } from "@/pages/PricingPage";
+import { StoreShowcase } from "@/components/StoreShowcase";
 
 const SIGNUP_URL = "/en/register";
 const WHATSAPP_URL = "https://wa.me/201080312538";
@@ -153,7 +154,15 @@ export function EnglishIntegrationsPage() {
 }
 
 export function EnglishThemesPage() {
-  return <EnglishStandardPage content={englishSimplePages.themes} />;
+  const content = englishSimplePages.themes;
+  return (
+    <>
+      <PageHero {...content} />
+      <SectionCards sections={content.sections} />
+      <StoreShowcase language="en" />
+      <FinalCta />
+    </>
+  );
 }
 
 export function EnglishGettingStartedPage() {

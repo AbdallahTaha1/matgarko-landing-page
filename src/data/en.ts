@@ -193,29 +193,29 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     ],
   },
   themes: {
-    kicker: "Store themes",
-    title: "Start from a storefront layout that already fits your business category",
+    kicker: "Store design",
+    title: "One ready store look, built and tested for phones, in your colors",
     lead:
-      "Use ready-made store structures for product-led businesses, then adjust colors, content, products, and page sections around your brand.",
-    primaryCta: "Start with a template",
-    secondaryCta: "Explore store types",
+      "Instead of picking from a long list of templates, you get one fast store look tested on phones, where most of your shoppers buy. You choose the colors for your kind of business, your logo, font, and photos.",
+    primaryCta: "Start your store",
+    secondaryCta: "See pricing",
     sections: [
       {
-        title: "Designed for fast decisions",
+        title: "Ready colors for your business",
         text:
-          "Templates should help shoppers understand the product, price, delivery promise, and next step without friction.",
-        items: ["Clear product grids", "Mobile-first sections", "Prominent contact and order actions"],
+          "Pick from 42 color palettes grouped into 7 kinds of business, and see the result in a live preview before you save.",
+        items: ["General", "Fashion", "Electronics", "Beauty & care", "Food & drinks", "Kids & toys", "Home & decor"],
       },
       {
-        title: "Useful for real categories",
+        title: "Your brand on every page",
         text:
-          "Restaurants, clothing stores, electronics sellers, beauty brands, and furniture businesses each need different product details and buying cues.",
-        items: ["Food menus", "Size and color choices", "Specifications and product details"],
+          "Add your logo and product photos, choose a font, a header style, and a button shape, so the store feels like your own.",
+        items: ["Logo and photos", "Font", "Header style", "Button shape"],
       },
       {
-        title: "Brand controls",
+        title: "A home page you arrange",
         text:
-          "Adjust the storefront around your own business name, logo, colors, catalog, and content so the store feels owned by your brand.",
+          "Build your home page from more than 20 section types: sliders, offers, categories, products, and customer reviews.",
       },
     ],
   },
@@ -810,10 +810,10 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
     keywords: ["cash on delivery ecommerce", "store delivery prices", "delivery areas", "Meta Pixel for online store", "Conversions API"],
   },
   "/en/themes": {
-    title: "Online store templates for MENA businesses | Matgarko",
+    title: "Online store design, ready for phones | Matgarko",
     description:
-      "Start from mobile-ready ecommerce templates for restaurants, clothing, electronics, cosmetics, furniture, and other product businesses.",
-    keywords: ["online store templates", "ecommerce themes MENA", "mobile store template", "Arabic online store design"],
+      "Instead of many templates: one fast store look tested on phones, with ready color palettes for your kind of business, your logo, font, and photos.",
+    keywords: ["online store design", "mobile online store", "store color palettes", "online store templates", "Arabic online store design"],
   },
   "/en/getting-started": {
     title: "How to start an online store with Matgarko",

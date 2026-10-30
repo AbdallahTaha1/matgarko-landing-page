@@ -15,7 +15,7 @@ const footerColumns = [
       { path: "/login", ar: "ادخل متجرك", en: "Access your store" },
       { path: "/download", ar: "تحميل التطبيق", en: "Get the app" },
       { path: "/solutions", ar: "الحلول", en: "Solutions" },
-      { path: "/themes", ar: "القوالب", en: "Themes" },
+      { path: "/themes", ar: "تصميم المتجر", en: "Store design" },
       { path: "/integrations", ar: "الدفع والشحن", en: "Payment and shipping" },
       { path: "/getting-started", ar: "خطوات البدء", en: "Getting started" },
       { path: "/pricing", ar: "الأسعار", en: "Pricing" },

@@ -41,7 +41,7 @@ export function FurniturePage() {
         },
       ]}
       benefits={[
-        "قالب أثاث وديكور جاهز ومتجاوب",
+        "شكل جاهز ومجرب على الموبايل بألوان للبيت والديكور",
         "عرض المقاسات والمواصفات بوضوح",
         "ابدأ مجاناً بدون رسوم شهرية",
         "تسعير شحن مرن حسب المنطقة",
@@ -71,7 +71,7 @@ export function FurniturePage() {
       ctaText="أنشئ متجر الأثاث الآن"
       relatedLinks={[
         { label: "أسعار الباقات", href: "/pricing" },
-        { label: "قوالب المتجر", href: "/themes" },
+        { label: "تصميم المتجر", href: "/themes" },
         { label: "الدفع والشحن", href: "/integrations" },
         { label: "كيفية البدء", href: "/getting-started" },
       ]}

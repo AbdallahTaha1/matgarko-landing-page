@@ -30,7 +30,7 @@ export function VsShopifyPage() {
         { feature: "متجر تطبيقات", matgarko: "غير متاح؛ Meta Pixel وGoogle Analytics مدمجين", competitor: "آلاف التطبيقات" },
         { feature: "تسويق عالمي متقدم", matgarko: "محدود", competitor: true },
         { feature: "بدء مجاني حقيقي", matgarko: true, competitor: "تجربة 3 أيام فقط" },
-        { feature: "قوالب عربية متخصصة", matgarko: true, competitor: "محدود" },
+        { feature: "شكل جاهز وألوان حسب نشاطك", matgarko: true, competitor: "قوالب، أغلبها مدفوعة" },
       ]}
       faqs={[
         {

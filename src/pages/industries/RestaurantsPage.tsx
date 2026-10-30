@@ -42,7 +42,7 @@ export function RestaurantsPage() {
       ]}
       benefits={[
         "ابدأ مجاناً — بدون رسوم شهرية",
-        "قالب مطعم جاهز ومتجاوب للجوال",
+        "شكل جاهز ومجرب على الموبايل بألوان للأكل والمشروبات",
         "لا تحتاج خبرة في البرمجة",
         "دعم اللغة العربية بالكامل",
         "استقبال طلبات 24/7",
@@ -71,7 +71,7 @@ export function RestaurantsPage() {
       ctaText="أنشئ متجر مطعمك الآن"
       relatedLinks={[
         { label: "أسعار الباقات", href: "/pricing" },
-        { label: "قوالب المتجر", href: "/themes" },
+        { label: "تصميم المتجر", href: "/themes" },
         { label: "الدفع والشحن", href: "/integrations" },
         { label: "كيفية البدء", href: "/getting-started" },
       ]}

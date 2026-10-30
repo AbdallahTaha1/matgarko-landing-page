@@ -26,7 +26,7 @@ export function VsSallaPage() {
         { feature: "واجهة عربية RTL", matgarko: true, competitor: true },
         { feature: "سهولة الإعداد", matgarko: true, competitor: true },
         { feature: "متجر تطبيقات عربي", matgarko: "غير متاح؛ Meta Pixel وGoogle Analytics مدمجين", competitor: "متقدم جداً" },
-        { feature: "قوالب متخصصة", matgarko: true, competitor: true },
+        { feature: "شكل جاهز وألوان حسب نشاطك", matgarko: true, competitor: "متجر قوالب" },
         { feature: "بكسل ميتا وConversions API", matgarko: true, competitor: true },
         { feature: "تسويق بالعمولة", matgarko: false, competitor: true },
         { feature: "دعم فني بالعربي على واتساب", matgarko: true, competitor: true },
@@ -43,7 +43,7 @@ export function VsSallaPage() {
         },
         {
           q: "هل متجركو تقدم نفس مزايا سلة؟",
-          a: "متجركو توفر إدارة المنتجات والطلبات، والدفع عند الاستلام، والكوبونات والقوالب الجاهزة. قارن الخصائص التي يحتاجها نشاطك في كل منصة.",
+          a: "متجركو توفر إدارة المنتجات والطلبات، والدفع عند الاستلام، والكوبونات وشكل متجر جاهز بألوان حسب نشاطك. قارن الخصائص التي يحتاجها نشاطك في كل منصة.",
         },
         {
           q: "هل الانتقال من سلة لمتجركو سهل؟",

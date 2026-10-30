@@ -11,7 +11,7 @@ type NavItem = { path: string; ar: string; en: string; arabicOnly?: boolean };
 
 const navItems: NavItem[] = [
   { path: "/solutions", ar: "الحلول", en: "Solutions" },
-  { path: "/themes", ar: "القوالب", en: "Themes" },
+  { path: "/themes", ar: "تصميم المتجر", en: "Store design" },
   { path: "/integrations", ar: "الدفع والشحن", en: "Payment and shipping" },
   { path: "/getting-started", ar: "خطوات البدء", en: "Getting started" },
   { path: "/learn", ar: "مركز التعلّم", en: "Learn", arabicOnly: true },

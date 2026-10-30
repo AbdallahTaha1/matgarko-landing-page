@@ -56,7 +56,7 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 
 ### هل المتجر يشتغل كويس على الموبايل؟
 
-نعم. كل القوالب متجاوبة وتعمل على الموبايل والكمبيوتر، لأن أغلب عملائك في مصر بيشتروا من الموبايل.
+نعم. شكل المتجر مبني ومجرب على الموبايل أولًا ويشتغل كمان على الكمبيوتر، لأن أغلب عملائك في مصر بيشتروا من الموبايل.
 
 ### What is Matgarko and who is it for?
 
@@ -120,12 +120,12 @@ Type: Landing page
 Description: استقبل طلبات الدفع عند الاستلام، وحدد مناطق الشحن وسعر التوصيل بوضوح لعملاء متجرك.
 Keywords: دفع عند الاستلام, أسعار التوصيل, مناطق الشحن
 
-## قوالب متجر إلكتروني جاهزة عربية
+## تصميم متجر إلكتروني جاهز للموبايل
 
 URL: https://matgarko.com/themes
 Type: Landing page
-Description: ابدأ من قالب متجر إلكتروني جاهز ومتجاوب للجوال والكمبيوتر، ثم عدل الألوان والمحتوى والصفحات حسب نوع نشاطك التجاري.
-Keywords: قوالب متجر إلكتروني, ثيمات متجر, تصميم متجر إلكتروني, قالب متجر عربي, قوالب جاهزة
+Description: بدل ما تختار من قوالب كتير: شكل واحد سريع ومجرب على الموبايل، بألوان جاهزة حسب نشاطك ولوجو متجرك وخطه وصورك.
+Keywords: تصميم متجر إلكتروني, شكل متجر إلكتروني, ألوان المتجر, متجر إلكتروني للموبايل, قوالب متجر إلكتروني
 
 ## كيفية إنشاء متجر إلكتروني خطوة بخطوة
 
@@ -180,14 +180,14 @@ Keywords: إنشاء متجر إلكتروني للمطاعم, متجر أونل
 
 URL: https://matgarko.com/store/clothing
 Type: Landing page
-Description: افتح متجر ملابس أونلاين بقالب جاهز للموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، ومتابعة طلبات عملائك.
+Description: افتح متجر ملابس أونلاين بشكل جاهز وألوان تناسب الموضة والأزياء. عرض المقاسات والألوان، إدارة المخزون، ومتابعة طلبات عملائك.
 Keywords: إنشاء متجر ملابس إلكتروني, متجر ملابس أونلاين مصر, متجر موضة إلكتروني, بيع ملابس أونلاين
 
 ## إنشاء متجر إلكترونيات أونلاين في مصر
 
 URL: https://matgarko.com/store/electronics
 Type: Landing page
-Description: افتح متجر إلكترونيات وأجهزة أونلاين بقالب احترافي. عرض المواصفات والأسعار، مقارنة المنتجات، وإدارة المخزون بسهولة.
+Description: افتح متجر إلكترونيات وأجهزة أونلاين بشكل جاهز ومجرب على الموبايل. عرض المواصفات والأسعار، مقارنة المنتجات، وإدارة المخزون بسهولة.
 Keywords: إنشاء متجر إلكترونيات, متجر أجهزة أونلاين مصر, بيع إلكترونيات أونلاين, متجر تقنية إلكتروني
 
 ## إنشاء متجر مستحضرات تجميل أونلاين
@@ -302,12 +302,12 @@ Type: Landing page
 Description: Accept cash-on-delivery orders and set delivery areas and prices so customers know the cost before ordering.
 Keywords: cash on delivery ecommerce, store delivery prices, delivery areas
 
-## Online store templates for MENA businesses
+## Online store design, ready for phones
 
 URL: https://matgarko.com/en/themes
 Type: Landing page
-Description: Start from mobile-ready ecommerce templates for restaurants, clothing, electronics, cosmetics, furniture, and other product businesses.
-Keywords: online store templates, ecommerce themes MENA, mobile store template, Arabic online store design
+Description: Instead of many templates: one fast store look tested on phones, with ready color palettes for your kind of business, your logo, font, and photos.
+Keywords: online store design, mobile online store, store color palettes, online store templates, Arabic online store design
 
 ## How to start an online store with Matgarko
 
@@ -804,7 +804,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 
 - Pricing and commission: https://matgarko.com/pricing
 - How to start: https://matgarko.com/getting-started
-- Templates: https://matgarko.com/themes
+- Store design: https://matgarko.com/themes
 - Cash on delivery and delivery prices: https://matgarko.com/integrations
 - Company/entity details: https://matgarko.com/about
 - Contact/support: https://matgarko.com/contact

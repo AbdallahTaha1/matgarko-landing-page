@@ -222,7 +222,7 @@ export function CompetitorPage({
           <div className="flex flex-wrap justify-center gap-3">
             {[
               { label: "أسعار متجركو", href: "/pricing" },
-              { label: "قوالب المتجر", href: "/themes" },
+              { label: "تصميم المتجر", href: "/themes" },
               { label: "الدفع والشحن", href: "/integrations" },
               { label: "مقارنة المنصات", href: "/blog/best-ecommerce-platform-egypt" },
               { label: "ابدأ متجرك الآن", href: "/getting-started" },

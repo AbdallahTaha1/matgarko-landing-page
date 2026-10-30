@@ -41,7 +41,7 @@ export function CosmeticsPage() {
         },
       ]}
       benefits={[
-        "قالب جمال جاهز ومتجاوب للجوال",
+        "شكل جاهز ومجرب على الموبايل بألوان للجمال والعناية",
         "وصف تفصيلي للمكونات والاستخدام",
         "ابدأ مجاناً بدون رسوم شهرية",
         "تحديد مناطق التوصيل وأسعارها",
@@ -71,7 +71,7 @@ export function CosmeticsPage() {
       ctaText="أنشئ متجر التجميل الآن"
       relatedLinks={[
         { label: "أسعار الباقات", href: "/pricing" },
-        { label: "قوالب المتجر", href: "/themes" },
+        { label: "تصميم المتجر", href: "/themes" },
         { label: "الدفع والشحن", href: "/integrations" },
         { label: "كيفية البدء", href: "/getting-started" },
       ]}

@@ -23,7 +23,7 @@ export function VsEasyOrdersPage() {
         { feature: "الباقة المدفوعة", matgarko: "احترافي: 1,499 ج.م شهرياً بدون عمولة", competitor: "100 دولار/شهر بدون عمولة على الطلبات", highlight: false },
         { feature: "أسعار بالجنيه المصري", matgarko: true, competitor: false, highlight: true },
         { feature: "بدون تأثر بسعر الصرف", matgarko: true, competitor: false, highlight: true },
-        { feature: "قوالب متجر كاملة", matgarko: true, competitor: true },
+        { feature: "شكل جاهز وألوان حسب نشاطك", matgarko: true, competitor: "قوالب حسب النشاط" },
         { feature: "دفع عند الاستلام", matgarko: true, competitor: true },
         { feature: "إدارة كتالوج ومنتجات", matgarko: true, competitor: true },
         { feature: "كوبونات وخصومات", matgarko: "كل الباقات", competitor: true },
