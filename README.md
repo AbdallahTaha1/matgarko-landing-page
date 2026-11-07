@@ -22,12 +22,12 @@ Pricing lives in one place, `src/data/pricing.ts`, and feeds the pricing pages, 
 
 | Plan    | Monthly fee | Commission per completed order |
 | ------- | ----------- | ------------------------------ |
-| Starter | 0 EGP       | 1%, capped at 5 EGP            |
-| Pro     | 1,499 EGP   | 0%                             |
+| Starter | 0 EGP       | 2 EGP per order                |
+| Pro     | 2,000 EGP   | none                           |
 
 The Growth plan was retired on 2026-10-23. The pricing page also has a cost calculator (`src/components/PricingCalculator.tsx`) that reads the same data.
 
-The cap applies once per order to merchandise after discounts, excluding shipping and tax. All plans include the same current store tools and WhatsApp support; there are no advertised plan-specific product limits, reports or support priority. Starter has no expiring trial. Monthly examples assume every order has the stated value: real fees sum each order separately. Billing changes must be deployed in the main application alongside this pricing update.
+Since 2026-11-07 the per-order fee is the same for every order whatever its value, and every order placed is billed except a fake one (flagged by the fake-order shield, then canceled) and orders the merchant records by hand. Stores outside Egypt pay $0.05 per order or $35 a month. All plans include the same current store tools and WhatsApp support; there are no advertised plan-specific product limits, reports or support priority. Starter has no expiring trial. Billing changes must be deployed in the main application alongside this pricing update.
 
 ## Main Pages
 
