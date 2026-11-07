@@ -321,7 +321,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Prohibited products and content",
         text:
-          "We do not allow selling or showing any product or content that breaks Egyptian law, the values of Egyptian society, or Islamic Sharia. Examples include alcohol and intoxicants, drugs, pork products, pornographic or indecent content, gambling and betting, weapons and ammunition, counterfeit or stolen goods, selling medicines without a pharmacy license, and content that insults religions or incites hatred or violence. Matgarko may hide any such product or suspend the store.",
+          "We do not allow selling or showing any product or content that breaks Egyptian law or the law of the country the store sells in, the values of society, or Islamic Sharia. Examples include alcohol and intoxicants, drugs, pork products, pornographic or indecent content, gambling and betting, weapons and ammunition, counterfeit or stolen goods, selling medicines without a pharmacy license, and content that insults religions or incites hatred or violence. Matgarko may hide any such product or suspend the store.",
       },
       {
         title: "Modest images",

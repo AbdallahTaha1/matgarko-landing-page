@@ -3,6 +3,8 @@ const base = (import.meta.env.VITE_SIGNUP_API_URL || 'https://signup.matgarko.co
 export interface SignupModel {
   storeName: string; subdomain: string; email: string; phone: string;
   password: string; confirmPassword: string; acceptTerms: boolean; acquisition?: Acquisition; discoverySource?: string;
+  /** The country the store sells in (prices in its currency, deliveries inside it), apart from the owner's phone. */
+  country?: string;
   meta?: { sourceUrl: string; fbp?: string; fbc?: string };
 }
 export interface SignupStatus {

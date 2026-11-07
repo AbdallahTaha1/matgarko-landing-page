@@ -51,7 +51,7 @@ export default function RegisterPage() {
   const english = isEnglishPath(useLocation().pathname);
   const t = (ar: string, en: string) => english ? en : ar;
   const consent = useSyncExternalStore(subscribeConsent, getConsent, serverConsent);
-  const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false });
+  const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false, country: 'EG' });
   const [phoneCountry, setPhoneCountry] = useState<CountryCode>('EG');
   const internationalPhone = signupPhoneNumber(form.phone, phoneCountry);
   const [config, setConfig] = useState<{ enabled: boolean; baseDomain: string } | null>(null);
@@ -299,6 +299,13 @@ export default function RegisterPage() {
                   <p className="mt-1 text-xs leading-5 text-gray-600">{t('ده الرابط اللي هتبعته لعملائك عشان يفتحوا متجرك.', 'Share this link with customers so they can visit your store.')}</p>
                 </div>
               </div>
+            </div>
+            {/* The store's country, apart from the owner's phone: many Egyptian merchants sign up with a Gulf number. */}
+            <div>
+              <label className="block text-sm font-bold text-gray-700" htmlFor="storeCountry">{t('بلد المتجر', 'Store country')}<select id="storeCountry" name="storeCountry" value={form.country || 'EG'} onChange={event => setForm(value => ({ ...value, country: event.target.value }))} className={inputClass} aria-describedby="storeCountry-hint">
+                {phoneCountries.map(country => <option key={country.code} value={country.code}>{t(country.ar, country.en)}</option>)}
+              </select></label>
+              <p id="storeCountry-hint" className={hintClass}>{t('البلد اللي بتبيع وتوصّل فيه: الأسعار هتبقى بعملته. مش لازم يكون بلد رقم موبايلك.', 'Where you sell and deliver: prices will be in its currency. It need not be your phone number’s country.')}</p>
             </div>
             <button type="submit" disabled={!available || !config?.enabled} className="btn btn-primary w-full disabled:opacity-50">{t('التالي', 'Continue')}</button>
           </>}
