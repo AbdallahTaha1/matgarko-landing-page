@@ -42,8 +42,9 @@ export type HomeContent = {
     title: string;
     lead: string;
     monthly: string;
-    commission: string;
-    noCommission: string;
+    perOrder: string;
+    noPerOrderFee: string;
+    fakeFree: string;
     popular: string;
     included: string;
     compare: string;
@@ -72,7 +73,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "أضف منتجاتك، استقبل طلباتك، وتابع مبيعاتك في لوحة واحدة بالعربي، بدون خبرة تقنية أو فريق عمل.",
       primaryCta: "أنشئ متجرك مجاناً",
       secondaryCta: "شوف الأسعار",
-      trust: ["بدون بطاقة ائتمان", "ابدأ بـ 0 ج.م", "1% فقط لما تبيع"],
+      trust: ["بدون بطاقة ائتمان", "ابدأ بـ 0 ج.م", "2 ج.م بس على الطلب"],
       mock: {
         storeName: "متجر نور",
         storeTag: "عطور وعناية",
@@ -122,14 +123,15 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     pricing: {
       kicker: "الأسعار",
       title: "ابدأ مجاناً، وادفع لما تبيع",
-      lead: "نفس أدوات المتجر في كل الباقات. الفرق في الاشتراك والعمولة، وكل الأسعار بالجنيه المصري.",
+      lead: "نفس أدوات المتجر في كل الباقات. الفرق في الاشتراك ورسوم الطلب، وكل الأسعار بالجنيه المصري.",
       monthly: "شهرياً",
-      commission: "عمولة على الطلب",
-      noCommission: "بدون عمولة",
+      perOrder: "على الطلب",
+      noPerOrderFee: "بدون رسوم على الطلب",
+      fakeFree: "والطلبات الوهمية ببلاش",
       popular: "الأنسب للبداية",
       included: "كل الباقات تشمل",
       compare: "قارن الباقات بالتفصيل",
-      note: "العمولة على الطلبات المكتملة حسب باقتك.",
+      note: "سعر ثابت على الطلب مهما كانت قيمته، والطلبات الوهمية وطلبات واتساب اللي بتسجلها بنفسك ببلاش.",
     },
     faq: {
       kicker: "أسئلة شائعة",
@@ -152,7 +154,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "Add products, take orders, and track sales in one Arabic dashboard, with no technical experience or team.",
       primaryCta: "Create your store free",
       secondaryCta: "See pricing",
-      trust: ["No credit card", "Start at 0 EGP", "1% only when you sell"],
+      trust: ["No credit card", "Start at 0 EGP", "Just 2 EGP per order"],
       mock: {
         storeName: "Nour Store",
         storeTag: "Perfume and care",
@@ -202,14 +204,15 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     pricing: {
       kicker: "Pricing",
       title: "Start free, pay when you sell",
-      lead: "The same store tools on every plan. Choose your monthly fee and commission, all in EGP.",
+      lead: "The same store tools on every plan. Choose your monthly fee and per-order fee, all in EGP.",
       monthly: "per month",
-      commission: "commission per order",
-      noCommission: "no commission",
+      perOrder: "per order",
+      noPerOrderFee: "no per-order fee",
+      fakeFree: "and fake orders are free",
       popular: "Best way to start",
       included: "Every plan includes",
       compare: "Compare plans in detail",
-      note: "Commission applies to completed orders according to your plan.",
+      note: "A flat fee per order whatever its value; fake orders and WhatsApp orders you record yourself are free.",
     },
     faq: {
       kicker: "FAQ",

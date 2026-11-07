@@ -1,11 +1,11 @@
 # Matgarko Full AI Context
 
-Last updated: 2026-09-24
+Last updated: 2026-11-07
 Canonical site: https://matgarko.com/
 
 Matgarko helps solo merchants in Egypt and the Arab world launch and run their online store directly from their phone — simply, quickly, and in Arabic, without technical experience or a team. This file contains product information, public guide text, and canonical page URLs.
 
-Mobile app availability: Choose a Matgarko app download for your device, or start in your browser.
+Mobile app availability: Matgarko is now available on Google Play for Android. Manage orders, products, and inventory from your phone, with a notification for every new order. On iPhone or any other device, your store dashboard opens in the browser.
 
 ## Entity Summary
 
@@ -16,23 +16,24 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 - Email: support@matgarko.com
 - WhatsApp: https://wa.me/201080312538
 - Service: ecommerce store creation and store management software.
-- Core offer: start free and pay only when selling, or upgrade to monthly plans for lower commission.
+- Core offer: start free and pay a flat fee per order, or upgrade to Pro for no per-order fee.
 
 ## Pricing Summary
 
-- Starter: 0 EGP/month with 1% commission per completed order. Capped at 5 EGP per order.
-- Pro: 1,499 EGP/month with 0% commission per completed order.
+- Starter: 0 EGP/month + 2 EGP per order.
+- Pro: 2,000 EGP/month with no per-order fee.
+- Billable orders: Every order placed in your store is billed, with two exceptions that stay free: fake orders, meaning orders the fake-order shield flagged when they were placed (a duplicate, or many orders from the same number) and that were then canceled, and orders you record yourself from WhatsApp or phone calls with «New order».
 - Pricing source: https://matgarko.com/pricing
 
 ## Frequently Asked Questions
 
 ### ما هي متجركو ولمن تناسب؟
 
-متجركو منصة عربية مصممة للموبايل، تساعد التاجر الصغير في مصر والعالم العربي يطلق ويدير متجره الإلكتروني من موبايله، بدون خبرة تقنية أو فريق عمل. التاجر يجهز منتجاته ويتابع طلباته ويسوّق لمتجره لجذب العملاء.
+متجركو منصة عربية تساعد التاجر الصغير في مصر والعالم العربي يطلق ويدير متجره الإلكتروني من موبايله، بدون خبرة تقنية أو فريق عمل. التاجر يجهز منتجاته ويتابع طلباته ويسوّق لمتجره لجذب العملاء.
 
 ### هل تطبيق متجركو متاح للتحميل؟
 
-اختار طريقة تحميل تطبيق متجركو المناسبة لجهازك، أو ابدأ من المتصفح.
+تطبيق متجركو متاح دلوقتي على Google Play لأجهزة أندرويد. تابع طلباتك ومنتجاتك ومخزونك من موبايلك، ويوصلك إشعار مع كل طلب جديد. وعلى الآيفون أو أي جهاز تاني، لوحة تحكم متجرك بتفتح من المتصفح.
 
 ### هل أقدر أعمل المتجر بنفسي بدون برمجة؟
 
@@ -40,7 +41,7 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 
 ### هل أقدر أبدأ بدون اشتراك شهري؟
 
-نعم، تقدر تبدأ على الباقة المجانية بدون رسوم شهرية، وتدفع 1% فقط على الطلبات المكتملة، بحد أقصى 5 ج.م للطلب. لما يكبر متجرك تقدر تنتقل لباقة احترافي بدون عمولة.
+نعم، باقة البداية بدون اشتراك شهري أو مدة تجريبية تنتهي. تدفع 2 ج.م ثابتة على الطلب مهما كانت قيمته، والطلبات الوهمية ببلاش، ولو مفيش طلبات مفيش رسوم. واحترافي بـ2,000 ج.م شهرياً بدون رسوم على الطلب.
 
 ### هل المنصة تدعم الدفع عند الاستلام؟
 
@@ -50,9 +51,21 @@ Mobile app availability: Choose a Matgarko app download for your device, or star
 
 نعم. تحدد مناطق الشحن وسعر التوصيل لكل محافظة أو منطقة من إعدادات المتجر، ويشوف العميل التكلفة بوضوح قبل ما يأكد الطلب.
 
-### هل أقدر أستخدم دومين خاص بمتجري؟
+### هل أقدر أربط دومين خاص زي mystore.com؟
 
-تبدأ برابط متجرك على متجركو مجاناً، وتقدر تربط دومين خاص بعلامتك التجارية.
+نعم، على كل الباقات. من لوحة التحكم ← الإعدادات ← الدومين تكتب الدومين، وتضيف سجلين DNS عند شركة الدومين، وتضغط «تحقّق الآن». لما يبقى جاهز تخليه عنوان متجرك بضغطة، والرابط القديم بيحوّل عليه تلقائيًا. ولو احتجت مساعدة، فريق الدعم معاك على واتساب.
+
+### هل الأدوات الأساسية متاحة في باقة البداية؟
+
+نعم. كل الباقات تشمل إدارة المنتجات والمخزون والطلبات، والكوبونات والخصومات، وإعدادات الشحن، والدعم عبر واتساب. الفرق في الاشتراك الشهري ورسوم الطلب.
+
+### هل أقدر أربط بكسل فيسبوك (Meta Pixel) بمتجري؟
+
+نعم. من إعدادات تصميم المتجر تضيف رقم Meta Pixel (أو تلصق كود البكسل كله) وتوكن Conversions API، ومعاهم Google Analytics وGoogle Search Console، بدون مبرمج. المتجر يبعت المشاهدة والإضافة للسلة وبدء الدفع والشراء لإعلاناتك، والشراء بيوصل من المتصفح والسيرفر من غير ما يتحسب مرتين.
+
+### هل أقدر أنقل منتجاتي من ملف Excel أو من منصة تانية؟
+
+نعم. من لوحة التحكم على الويب ترفع ملف Excel فيه لحد 500 منتج بالاسم والسعر والقسم والكمية والوصف وسعر التكلفة، على القالب اللي بتنزله من نفس الصفحة. الصور والمقاسات والألوان تضيفها بعد الاستيراد.
 
 ### هل المتجر يشتغل كويس على الموبايل؟
 
@@ -64,7 +77,7 @@ Matgarko helps solo merchants in Egypt and the Arab world launch and run their o
 
 ### Can I download the Matgarko mobile app?
 
-Choose a Matgarko app download for your device, or start in your browser.
+Matgarko is now available on Google Play for Android. Manage orders, products, and inventory from your phone, with a notification for every new order. On iPhone or any other device, your store dashboard opens in the browser.
 
 ### Can I build the store myself?
 
@@ -80,15 +93,27 @@ No. You do not need to buy hosting, install plugins, or manage servers. Matgarko
 
 ### Can I start before paying monthly?
 
-Yes. The free plan lets you start with no monthly fee and pay a 1% commission on completed orders, capped at 5 EGP per order. The Pro plan removes the commission as your store grows.
+Yes. Starter has no monthly fee or expiring trial: a flat 2 EGP per order, and fake orders are free. Pro costs 2,000 EGP monthly with no per-order fee.
 
 ### Does Matgarko support cash on delivery?
 
 Yes. Cash on delivery is available on every plan. You can also set delivery prices for each area so customers see the cost before placing an order.
 
-### Can I use my own domain?
+### Can I connect Meta Pixel to my store?
 
-You can start with a Matgarko store link, then connect a custom domain when your plan and store setup are ready for it.
+Yes. In your store design settings, add your Meta Pixel ID (or paste the whole pixel code) and a Conversions API token, plus Google Analytics and Google Search Console, without a developer. The store sends views, add-to-carts, checkouts, and purchases to your ads, and each purchase arrives from both the browser and the server without being counted twice.
+
+### Can I bring my products from Excel or another platform?
+
+Yes. From the web dashboard, upload an Excel file of up to 500 products with name, price, category, quantity, description, and cost, using the template you download from the same page. Photos, sizes, and colors are added after the import.
+
+### Can I use my own domain, like mystore.com?
+
+Yes, on every plan. In the dashboard, go to Settings, then Domain, type your domain, add the two DNS records shown at your domain company, and press «Check now». Once it's ready, make it your store's address in one tap; your old link keeps redirecting to it. Our support team helps on WhatsApp if you need it.
+
+### Are the core tools available on Starter?
+
+Yes. Every plan includes product, stock and order management, coupons, shipping settings and WhatsApp support. Plans differ in monthly subscription and per-order fee.
 
 ## Public Pages
 
@@ -96,29 +121,29 @@ You can start with a Matgarko store link, then connect a custom domain when your
 
 URL: https://matgarko.com/download
 Type: Landing page
-Description: خيارات تحميل تطبيق متجركو لإدارة الطلبات والمنتجات من الموبايل، مع إمكانية إدارة متجرك من المتصفح بدون تثبيت تطبيق.
+Description: حمّل تطبيق متجركو لأندرويد من Google Play لإدارة الطلبات والمنتجات والمخزون من موبايلك، أو ادخل لوحة متجرك من المتصفح.
 Keywords: تحميل متجركو, تطبيق إدارة المتجر, متجركو أندرويد
 
 ## إنشاء وإدارة متجر إلكتروني من الموبايل في مصر
 
 URL: https://matgarko.com/
 Type: Landing page
-Description: ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 1% على الطلبات المكتملة.
+Description: ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 2 ج.م بس على الطلب والطلبات الوهمية ببلاش.
 Keywords: إنشاء متجر إلكتروني, متجر إلكتروني مصر, منصة تجارة إلكترونية, متجركو, بيع أونلاين, متجر بدون برمجة, ابدأ مجاناً متجر إلكتروني
 
 ## حلول إدارة المتجر الإلكتروني
 
 URL: https://matgarko.com/solutions
 Type: Landing page
-Description: كل أدوات إدارة المتجر في مكان واحد: منتجات، طلبات، عملاء، عروض، وصفحات مهمة لنشاطك.
-Keywords: إدارة متجر إلكتروني, إدارة الطلبات, إدارة المنتجات, لوحة تحكم متجر
+Description: كل أدوات إدارة المتجر في مكان واحد: منتجات واستيراد Excel، طلبات، عملاء، عروض، بكسل ميتا، إحصائيات المبيعات والأرباح، وتصميم صفحتك الرئيسية.
+Keywords: إدارة متجر إلكتروني, إدارة الطلبات, إدارة المنتجات, لوحة تحكم متجر, إحصائيات المتجر, استيراد منتجات من Excel
 
-## الدفع عند الاستلام وأسعار التوصيل
+## الدفع عند الاستلام والتوصيل وبكسل ميتا
 
 URL: https://matgarko.com/integrations
 Type: Landing page
-Description: استقبل طلبات الدفع عند الاستلام، وحدد مناطق الشحن وسعر التوصيل بوضوح لعملاء متجرك.
-Keywords: دفع عند الاستلام, أسعار التوصيل, مناطق الشحن
+Description: استقبل طلبات الدفع عند الاستلام، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وGoogle Analytics وواتساب بمتجرك.
+Keywords: دفع عند الاستلام, أسعار التوصيل, مناطق الشحن, بكسل فيسبوك للمتجر, Conversions API, Google Analytics للمتجر
 
 ## تصميم متجر إلكتروني جاهز للموبايل
 
@@ -138,7 +163,7 @@ Keywords: خطوات إنشاء متجر إلكتروني, كيفية إنشاء
 
 URL: https://matgarko.com/pricing
 Type: Landing page
-Description: ابدأ مجاناً بعمولة 1% فقط على كل طلب (بحد أقصى 5 ج.م)، أو الاحترافي 1,499 ج.م بدون عمولة. أسعار بالجنيه المصري بدون رسوم مخفية.
+Description: البداية بدون اشتراك شهري: 2 ج.م على الطلب، والطلبات الوهمية ببلاش. الاحترافي 2,000 ج.م شهرياً بدون رسوم على الطلب.
 Keywords: تكلفة إنشاء متجر إلكتروني في مصر, أسعار متجر إلكتروني, باقات متجر إلكتروني, متجر إلكتروني مجاني, عمولة متجر إلكتروني
 
 ## عن متجركو
@@ -274,11 +299,81 @@ Type: Landing page
 Description: ووكومرس مجاني لكن يحتاج سيرفر ومطوراً. متجركو تمنحك متجراً كاملاً في 5 دقائق بدون تعقيدات تقنية وبأسعار بالجنيه المصري.
 Keywords: بديل ووكومرس في مصر, ووكومرس مقارنة, متجركو vs ووكومرس, woocommerce alternative egypt, بديل WooCommerce
 
+## مركز التعلّم
+
+URL: https://matgarko.com/learn
+Type: Landing page
+Description: شروحات قصيرة بالصور من لوحة تحكم متجركو: إضافة المنتجات، متابعة الطلبات، ضبط الشحن، كوبونات الخصم، البيكسل، وتصميم المتجر.
+Keywords: مركز تعلم متجركو, شرح لوحة تحكم المتجر, إدارة متجر إلكتروني, شرح إضافة منتج, شرح الشحن والطلبات
+
+## ابدأ هنا: جهّز متجرك للبيع في 7 خطوات
+
+URL: https://matgarko.com/learn/start-here
+Type: Guide article
+Description: الخطوات السبع اللي بتخلي متجرك جاهز لاستقبال أول طلب: أول منتج، الدفع، الشحن، الشعار، واتساب، ومشاركة الرابط.
+Keywords: جهز متجرك, بداية المتجر, أول طلب, إعداد المتجر, شرح متجركو, مركز التعلم
+
+## إزاي تضيف منتج جديد لمتجرك
+
+URL: https://matgarko.com/learn/add-product
+Type: Guide article
+Description: شرح إضافة منتج خطوة بخطوة: الصور والاسم والسعر والمخزون والظهور في المتجر، وإزاي تستورد منتجاتك من Excel.
+Keywords: إضافة منتج, استيراد منتجات, Excel, مخزون, سعر المنتج, شرح متجركو, مركز التعلم
+
+## إزاي تتابع الطلبات وتغيّر حالتها
+
+URL: https://matgarko.com/learn/manage-orders
+Type: Guide article
+Description: كل اللي تحتاجه لمتابعة طلبات عملائك: مراحل الطلب، التواصل مع العميل بواتساب، الفاتورة، وإلغاء الطلب.
+Keywords: الطلبات, حالة الطلب, فاتورة, إلغاء طلب, واتساب العميل, شرح متجركو, مركز التعلم
+
+## إزاي تحدد مصاريف الشحن لكل محافظة
+
+URL: https://matgarko.com/learn/shipping
+Type: Guide article
+Description: ضبط الشحن في متجرك: شحن مجاني أو بمصاريف، سعر موحّد لكل المحافظات، وأسعار خاصة لمحافظات أو مناطق معينة.
+Keywords: مصاريف الشحن, شحن مجاني, أسعار المحافظات, مناطق الشحن, شرح متجركو, مركز التعلم
+
+## إزاي تعمل كوبون خصم
+
+URL: https://matgarko.com/learn/coupons
+Type: Guide article
+Description: إنشاء كوبون خصم بنسبة أو مبلغ ثابت، مع تحديد فترة الصلاحية وحدود الاستخدام والمنتجات المشمولة.
+Keywords: كوبون خصم, كود خصم, نسبة خصم, عروض, شرح متجركو, مركز التعلم
+
+## إزاي تربط بيكسل فيسبوك وتحليلات جوجل
+
+URL: https://matgarko.com/learn/tracking-pixel
+Type: Guide article
+Description: ربط متجرك ببيكسل فيسبوك وإنستجرام وتحليلات جوجل عشان تقيس نتائج إعلاناتك وزيارات متجرك.
+Keywords: بيكسل فيسبوك, Meta Pixel, تحليلات جوجل, Google Analytics, إعلانات, شرح متجركو, مركز التعلم
+
+## إزاي تغيّر ألوان متجرك وشكله
+
+URL: https://matgarko.com/learn/design-store
+Type: Guide article
+Description: اختار ألوان متجرك والخط وشكل الحواف والأزرار ومكان الشعار، وشوف النتيجة في معاينة مباشرة قبل الحفظ.
+Keywords: تصميم المتجر, ألوان المتجر, شعار, خط المتجر, شرح متجركو, مركز التعلم
+
+## إزاي ترتّب الصفحة الرئيسية لمتجرك
+
+URL: https://matgarko.com/learn/storefront-sections
+Type: Guide article
+Description: أضف وعدّل ورتّب أجزاء الصفحة الرئيسية: الشرائح والأقسام والأكثر مبيعًا وأحدث المنتجات وآراء العملاء ورسالة أعلى المتجر.
+Keywords: الصفحة الرئيسية, واجهة المتجر, شرائح, رسالة أعلى المتجر, أقسام, شرح متجركو, مركز التعلم
+
+## اربط الدومين الخاص بمتجرك
+
+URL: https://matgarko.com/learn/connect-domain
+Type: Guide article
+Description: اربط دومينك الخاص (زي ahmedstore.com) بمتجرك على متجركو بنفسك: تضيف سجلات DNS عند شركة الدومين، تتحقّق، وتخليه عنوان المتجر.
+Keywords: دومين, نطاق, domain, ربط الدومين, GoDaddy, Namecheap, Cloudflare, DNS, شرح متجركو, مركز التعلم
+
 ## Download Matgarko for Android
 
 URL: https://matgarko.com/en/download
 Type: Landing page
-Description: Find Matgarko app download options to manage your products and orders on mobile, or use your store dashboard in the browser without installing an app.
+Description: Get Matgarko for Android on Google Play to manage orders, products, and inventory from your phone, or use your store dashboard in the browser.
 Keywords: download Matgarko, Android merchant app, Matgarko APK
 
 ## Run your online store from your phone
@@ -292,15 +387,15 @@ Keywords: ecommerce platform MENA, online store builder Middle East, create onli
 
 URL: https://matgarko.com/en/solutions
 Type: Landing page
-Description: Manage storefronts, products, orders, customers, and offers in one Arabic-first ecommerce platform.
-Keywords: ecommerce store management, online store dashboard, product and order management, Arabic ecommerce software
+Description: Manage storefronts, products, Excel imports, orders, customers, offers, Meta Pixel, and sales and profit statistics in one Arabic-first ecommerce platform.
+Keywords: ecommerce store management, online store dashboard, product and order management, Arabic ecommerce software, store statistics
 
-## Cash on delivery and delivery prices
+## Cash on delivery, delivery prices, and Meta Pixel
 
 URL: https://matgarko.com/en/integrations
 Type: Landing page
-Description: Accept cash-on-delivery orders and set delivery areas and prices so customers know the cost before ordering.
-Keywords: cash on delivery ecommerce, store delivery prices, delivery areas
+Description: Accept cash-on-delivery orders, set delivery prices by area, and connect Meta Pixel, the Conversions API, Google Analytics, and WhatsApp to your store.
+Keywords: cash on delivery ecommerce, store delivery prices, delivery areas, Meta Pixel for online store, Conversions API
 
 ## Online store design, ready for phones
 
@@ -320,7 +415,7 @@ Keywords: start online store, ecommerce launch checklist, create online store Eg
 
 URL: https://matgarko.com/en/pricing
 Type: Landing page
-Description: Start free with 1% commission capped at 5 EGP per order, or choose Pro at 1,499 EGP with zero commission.
+Description: Starter has no monthly fee: a flat 2 EGP per order, and fake orders are free. Pro is 2,000 EGP per month with no per-order fee.
 Keywords: online store pricing Egypt, ecommerce platform pricing, free online store Egypt, EGP ecommerce plans
 
 ## About Matgarko
@@ -341,7 +436,7 @@ Keywords: contact Matgarko, ecommerce setup support, online store support Egypt,
 
 URL: https://matgarko.com/en/terms
 Type: Landing page
-Description: English summary of Matgarko terms covering merchant responsibility, platform use, plan fees, commissions, content, and service changes.
+Description: English summary of Matgarko terms covering merchant responsibility, platform use, plan and per-order fees, content, and service changes.
 Keywords: Matgarko terms, ecommerce platform terms, online store terms
 
 ## Privacy policy
@@ -553,19 +648,20 @@ Summary: كم تكلف إنشاء متجر إلكتروني في مصر؟ مقا
 
 ### التكاليف الأساسية لمتجر إلكتروني في مصر
 
-- منصة المتجر: من 0 (مجاني بعمولة) إلى 1,499 ج.م شهرياً
+- منصة المتجر: من 0 ج.م شهرياً (مع رسوم صغيرة على كل طلب) إلى 2,000 ج.م شهرياً
 - الدومين الخاص (اختياري): 200-500 ج.م سنوياً
 - تصوير المنتجات: 0 (تصوير بالموبايل) إلى 500+ ج.م لكل جلسة
 - شركة الشحن: حسب اتفاقك معها والوزن والمنطقة
 
-### متى تكون العمولة أوفر من الاشتراك الشهري؟
+### متى تكون رسوم الطلب أوفر من الاشتراك الشهري؟
 
-بافتراض متوسط قيمة طلب 700 ج.م:
+في متجركو، باقة البداية بدون اشتراك شهري وتدفع فيها 2 ج.م ثابتة على كل طلب مهما كانت قيمته، وباقة احترافي 2,000 ج.م شهرياً بدون رسوم على الطلب:
 
-- أقل من 300 طلب شهرياً: الباقة المجانية بعمولة 1% (بحد أقصى 5 ج.م للطلب) أوفر
-- من 300 طلب شهرياً: الباقة الاحترافية (1,499 ج.م بدون عمولة) أوفر
+- أقل من 1,000 طلب شهرياً: البداية أوفر
+- عند 1,000 طلب شهرياً: التكلفة متساوية (1,000 × 2 ج.م = 2,000 ج.م)
+- أكثر من 1,000 طلب شهرياً: احترافي بـ2,000 ج.م بدون رسوم على الطلب أوفر
 
-💡 نصيحة: ابدأ بالباقة المجانية وانتقل تلقائياً للباقة الأنسب مع نمو مبيعاتك.
+💡 نصيحة: ابدأ بدون اشتراك شهري، وراجع الباقة الأوفر مع نمو مبيعاتك. الطلبات الوهمية التي يكشفها درع الطلبات الوهمية ثم تُلغى لا تُحتسب، وكذلك الطلبات التي تسجلها بنفسك من واتساب أو التليفون. تواصل معنا لتغيير الباقة.
 
 ### التكاليف الخفية التي كثيراً ما تُنسى
 
@@ -576,7 +672,7 @@ Summary: كم تكلف إنشاء متجر إلكتروني في مصر؟ مقا
 
 ### الخلاصة
 
-يمكنك البدء بدون اشتراك شهري إذا اخترت منصة تعمل بالعمولة. احسب تكاليف الشحن والتحصيل والإرجاع في هامش ربحك من البداية.
+يمكنك البدء بدون اشتراك شهري إذا اخترت منصة تحاسبك على الطلب. احسب تكاليف الشحن والتحصيل والإرجاع في هامش ربحك من البداية.
 
 ## Blog Article: أفضل منصة لإنشاء متجر إلكتروني في مصر 2026 — مقارنة شاملة
 
@@ -622,7 +718,7 @@ Summary: مقارنة بين منصات التجارة الإلكترونية ف
 4. هل يمكن ربط دومين خاص؟
 5. هل هناك تجربة مجانية قبل الدفع؟
 
-💡 نصيحة: اطلب دائماً تجربة مجانية قبل الاشتراك. منصة متجركو تتيح البدء مجاناً مع عمولة 1% فقط على كل طلب (بحد أقصى 5 ج.م) — بدون أي التزام شهري.
+💡 نصيحة: جرّب أدوات المتجر قبل اختيار اشتراك. باقة البداية في متجركو بدون اشتراك شهري أو مدة تجريبية تنتهي، وتدفع فيها 2 ج.م فقط على الطلب، والطلبات الوهمية مجاناً.
 
 ### الخلاصة
 
@@ -649,10 +745,10 @@ Summary: هل المتجر الإلكتروني المجاني مناسب لتج
 
 المجاني الحقيقي غير موجود — إما تدفع بوقتك، أو بعمولة على مبيعاتك، أو برابط متجر يحمل اسم المنصة.
 
-- عمولة على كل طلب (1% بحد أقصى 5 ج.م في متجركو) تُخصم من مبيعاتك
-- رابط المتجر يحمل اسم المنصة (بدلاً من دومين خاص)
-- عدد منتجات محدود في بعض المنصات
-- ميزات محدودة مقارنة بالباقات المدفوعة
+- باقة البداية في متجركو: 2 ج.م ثابتة لكل طلب والطلبات الوهمية مجاناً، تُجمع في فاتورة
+- رابط متجر على متجركو
+- نفس أدوات المنتجات والمخزون والطلبات والكوبونات والشحن في كل باقات متجركو
+- قد تضع منصات أخرى حدوداً للمنتجات أو الأدوات؛ راجع شروط كل منصة
 
 ### متى يناسبك المتجر المجاني؟
 
@@ -663,11 +759,11 @@ Summary: هل المتجر الإلكتروني المجاني مناسب لتج
 
 ### متى تنتقل للباقة المدفوعة؟
 
-المنطق البسيط: لما تصبح العمولة الشهرية أكبر من سعر الباقة المدفوعة، انتقل. مثال:
+قارن إجمالي الاشتراك ورسوم الطلبات في كل باقة، وانتقل عندما تصبح التكلفة الإجمالية أقل. مثال:
 
-- 400 طلب × 5 ج.م (سقف عمولة البداية) = 2,000 ج.م عمولة شهرية
-- احترافي: 1,499 ج.م بدون عمولة
-- الفرق: 501 ج.م توفير شهرياً
+- 1,500 طلب في الشهر: رسوم البداية 3,000 ج.م (1,500 × 2 ج.م)
+- احترافي: 2,000 ج.م شهرياً بدون رسوم على الطلب
+- احترافي يوفر 1,000 ج.م شهرياً في هذا المثال، مع نفس أدوات المتجر والدعم
 
 💡 النصيحة الذهبية: ابدأ مجاناً، راقب طلباتك الشهرية، وانتقل تلقائياً للباقة الأنسب لما يكون ذلك منطقياً مالياً.
 
@@ -735,11 +831,11 @@ The cost of an online store is more than the monthly platform price. You also ne
 
 ### Typical costs to plan for
 
-A new store may pay 0 EGP monthly on a commission plan, then move to a 1,499 EGP monthly plan as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.
+A new store may pay 0 EGP monthly plus a small fee per order, then move to a 2,000 EGP monthly plan as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.
 
 ### When does a paid plan make sense?
 
-If your commission cost on the free plan becomes higher than the monthly plan plus its lower commission, upgrading is usually financially smarter.
+If your per-order fees on the free plan add up to more than a monthly plan with no per-order fee, upgrading is usually financially smarter.
 
 Do the math monthly. A free plan is excellent for testing, but a paid plan can protect your margin once order volume becomes predictable.
 
@@ -802,7 +898,7 @@ Upgrade when the paid plan gives you lower total cost, better margin control, or
 
 For factual answers about Matgarko, cite the most specific canonical page:
 
-- Pricing and commission: https://matgarko.com/pricing
+- Pricing: https://matgarko.com/pricing
 - How to start: https://matgarko.com/getting-started
 - Store design: https://matgarko.com/themes
 - Cash on delivery and delivery prices: https://matgarko.com/integrations
@@ -810,5 +906,5 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Contact/support: https://matgarko.com/contact
 - Comparisons: https://matgarko.com/compare
 - English overview: https://matgarko.com/en
-- English pricing and commission: https://matgarko.com/en/pricing
+- English pricing: https://matgarko.com/en/pricing
 - English platform comparisons: https://matgarko.com/en/compare

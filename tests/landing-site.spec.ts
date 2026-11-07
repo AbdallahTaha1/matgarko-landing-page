@@ -23,8 +23,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(page.getByText('منصة إنشاء متجر إلكتروني في مصر')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ متجرك في 3 خطوات' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'ابدأ مجاناً، وادفع لما تبيع' })).toBeVisible();
-    await expect(page.getByText('بحد أقصى 5 ج.م للطلب الواحد').first()).toBeVisible();
-    await expect(page.getByText('1,499 ج.م').first()).toBeVisible();
+    await expect(page.getByText('والطلبات الوهمية ببلاش').first()).toBeVisible();
+    await expect(page.getByText('2,000 ج.م').first()).toBeVisible();
     await expect(page.getByRole('heading', { name: 'أسئلة شائعة' })).toBeVisible();
   });
 
@@ -66,7 +66,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     await page.getByRole('navigation').getByRole('link', { name: 'الأسعار' }).click();
     await page.waitForURL('**/pricing');
-    await expect(page.getByRole('heading', { level: 1, name: 'ابدأ مجاناً، وادفع 1% فقط لما تبيع' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '2 ج.م على الطلب، والطلبات الوهمية ببلاش' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'البداية', exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'احترافي', exact: true })).toBeVisible();
   });
@@ -112,14 +112,14 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(llmsText).toContain('## Best Pages For AI Answers');
     await expect(llmsText).toContain('https://matgarko.com/pricing');
     await expect(llmsText).toContain('Languages: Arabic (Egypt) and English');
-    await expect(llmsText).toContain('1% commission capped at 5 EGP');
+    await expect(llmsText).toContain('a flat 2 EGP per order, and fake orders are free');
     await expect(llmsText).toContain('https://matgarko.com/en/blog/how-to-create-online-store-egypt');
 
     const llmsFull = await request.get('/llms-full.txt');
     await expect(llmsFull).toBeOK();
     const llmsFullText = await llmsFull.text();
     await expect(llmsFullText).toContain('## Citation Preference');
-    await expect(llmsFullText).toContain('Pro: 1,499 EGP/month with 0% commission');
+    await expect(llmsFullText).toContain('Pro: 2,000 EGP/month with no per-order fee');
 
     const ogImage = await request.get('/og-image.png');
     await expect(ogImage).toBeOK();
@@ -144,7 +144,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     expect(routeSchema).toContain('"@type":"FAQPage"');
     expect(routeSchema).toContain('"price":"0"');
     expect(routeSchema).not.toContain('"price":"499"');
-    expect(routeSchema).toContain('"price":"1499"');
+    expect(routeSchema).toContain('"price":"2000"');
+    expect(routeSchema).not.toContain('"price":"1499"');
     expect(routeSchema).not.toContain('"price":"399"');
     expect(routeSchema).not.toContain('SearchAction');
     expect(routeSchema).not.toContain('search_term_string');
@@ -190,9 +191,9 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   test('english route family is crawlable with localized content', async ({ page }) => {
     await page.goto('/en/pricing');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/en/pricing');
-    await expect(page.getByRole('heading', { level: 1, name: 'Start free, pay 1% only when you sell' })).toBeVisible();
-    await expect(page.getByText('Capped at 5 EGP per order').first()).toBeVisible();
-    await expect(page.getByText('1,499 EGP').first()).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '2 EGP per order, and fake orders are free' })).toBeVisible();
+    await expect(page.getByText('Fake orders are free').first()).toBeVisible();
+    await expect(page.getByText('2,000 EGP').first()).toBeVisible();
 
     await page.goto('/en/store/restaurants');
     await expect(page.getByRole('heading', { name: /Online store builder for restaurants/ })).toBeVisible();

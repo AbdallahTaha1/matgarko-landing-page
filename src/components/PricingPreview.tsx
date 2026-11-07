@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { homeContent } from "@/data/home";
-import { SIGNUP_URL, commissionCapLabel, formatCommission, formatEgp, includedInEveryPlan, plans } from "@/data/pricing";
+import { SIGNUP_URL, formatEgp, includedInEveryPlan, plans } from "@/data/pricing";
 import { localizePath, type AppLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check } from "lucide-react";
@@ -43,11 +43,11 @@ export function PricingPreview({ language }: { language: AppLanguage }) {
                 <span className="num text-3xl font-extrabold text-gray-950">{formatEgp(plan.monthly, language)}</span>
                 <span className="text-xs font-semibold text-gray-500">/ {t.monthly}</span>
               </div>
-              <p className={cn("mt-1 text-sm font-bold", plan.commission === 0 ? "text-emerald-700" : "text-gray-700")}>
-                {plan.commission === 0 ? t.noCommission : `+ ${formatCommission(plan)} ${t.commission}`}
+              <p className={cn("mt-1 text-sm font-bold", plan.perOrderFee === 0 ? "text-emerald-700" : "text-gray-700")}>
+                {plan.perOrderFee === 0 ? t.noPerOrderFee : `+ ${formatEgp(plan.perOrderFee, language)} ${t.perOrder}`}
               </p>
 
-              {plan.commission > 0 && <p className="mt-1 text-xs font-semibold text-emerald-700">{commissionCapLabel(plan, language)}</p>}
+              {plan.perOrderFee > 0 && <p className="mt-1 text-xs font-semibold text-emerald-700">{t.fakeFree}</p>}
 
               <div className="flex-1" />
 

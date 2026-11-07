@@ -3,16 +3,12 @@ import { Reveal } from "@/components/motion/Reveal";
 import { PricingCalculator } from "@/components/PricingCalculator";
 import { SectionHeading } from "@/components/SectionHeading";
 import {
-  AVERAGE_ORDER_VALUE,
-  FREE_TO_PRO_ORDERS,
+  PRO_CHEAPER_ABOVE_LABEL,
   SIGNUP_URL,
-  STARTER_CAP_ORDER_VALUE,
-  commissionCapLabel,
   costTable,
-  formatCommission,
   formatEgp,
   getPlan,
-  orderCommission,
+  perOrderFeeLabel,
   plans,
   pricingFaqs,
 } from "@/data/pricing";
@@ -21,76 +17,87 @@ import { WHATSAPP_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, Crown, Sparkles } from "lucide-react";
 
-const EXAMPLE_ORDERS = [100, 250, 500, 1000, 2500];
-
 const starter = getPlan("free");
+const pro = getPlan("pro");
+const fee = formatEgp(starter.perOrderFee, "ar");
+const feeEn = formatEgp(starter.perOrderFee, "en");
 
 const copy = {
   ar: {
     kicker: "الأسعار",
-    title: `ابدأ مجاناً، وادفع ${formatCommission(starter)} فقط لما تبيع`,
-    lead: `بدون اشتراك شهري ولا مدة تجريبية تنتهي. العمولة على الطلبات المكتملة بس، ${commissionCapLabel(starter, "ar")} مهما كبر. كل الأسعار بالجنيه المصري.`,
-    highlights: ["بدون بطاقة ائتمان", "بدون اشتراك شهري", "العمولة على الطلب المكتمل فقط", "دفع عند الاستلام"],
+    title: `${fee} على الطلب، والطلبات الوهمية ببلاش`,
+    lead: "ابدأ بدون اشتراك شهري ولا مدة تجريبية تنتهي. سعر ثابت على كل طلب مهما كانت قيمته، ومفيش نسبة من مبيعاتك. كل الأسعار بالجنيه المصري.",
+    highlights: ["بدون بطاقة ائتمان", "بدون اشتراك شهري", "سعر ثابت على الطلب", "الطلبات الوهمية ببلاش"],
     popular: "الأنسب للبداية",
     monthlyFee: "الاشتراك الشهري",
-    commissionLabel: "عمولة الطلب المكتمل",
-    noCommission: "بدون عمولة",
-    proHint: `أوفر من البداية من حوالي ${FREE_TO_PRO_ORDERS} طلب في الشهر، لو متوسط الطلب ${AVERAGE_ORDER_VALUE} ج.م.`,
-    note: "العمولة على قيمة المنتجات بعد الخصم، قبل الشحن والضرائب. السقف لكل طلب مكتمل مهما كان عدد المنتجات فيه.",
-    capTitle: "العمولة لها سقف، مهما كبر الطلب",
-    capLead: `بتدفع ${formatCommission(starter)} من قيمة الطلب لحد ${formatEgp(STARTER_CAP_ORDER_VALUE, "ar")}، وبعدها ${formatEgp(starter.commissionCap, "ar")} ثابتة. طلب بـ ${formatEgp(5000, "ar")} بيدفع نفس عمولة طلب بـ ${formatEgp(STARTER_CAP_ORDER_VALUE, "ar")}.`,
-    orderValue: "قيمة الطلب",
-    fee: "عمولة البداية",
-    capped: "السقف",
-    rulesTitle: "إزاي بنحسب العمولة؟",
+    perOrderLabel: "على كل طلب",
+    noPerOrderFee: "بدون رسوم",
+    fakeFree: "الطلب الوهمي ببلاش",
+    proHint: `أوفر من البداية لو طلباتك أكتر من ${PRO_CHEAPER_ABOVE_LABEL} طلب في الشهر.`,
+    note: "السعر ثابت لكل طلب مهما كانت قيمته أو عدد المنتجات فيه.",
+    rulesTitle: "إيه اللي بيتحسب وإيه اللي ببلاش؟",
+    rulesLead: `${fee} ثابتة على الطلب، سواء الطلب بـ ${formatEgp(150, "ar")} أو بـ ${formatEgp(5000, "ar")}.`,
+    examplesTitle: "أمثلة",
+    rulesCardTitle: "بالتفصيل",
+    examples: [
+      { label: `طلب بـ ${formatEgp(150, "ar")}`, fee: starter.perOrderFee },
+      { label: `طلب بـ ${formatEgp(5000, "ar")}`, fee: starter.perOrderFee },
+      { label: "طلب وهمي علّم عليه الدرع واتلغى", fee: 0 },
+      { label: "طلب من واتساب سجلته بنفسك", fee: 0 },
+    ],
     rules: [
-      "على الطلبات المكتملة فقط. الملغي أو المسترد قبل الفاتورة مش بيتحسب.",
-      "على قيمة المنتجات بعد الخصم، قبل الشحن والضرائب.",
-      "السقف لكل طلب لوحده، مش سقف شهري.",
+      "كل طلب يتعمل في متجرك بيتحسب، حتى لو اتلغى أو رجع بعد كده.",
+      "الطلب الوهمي ببلاش: لو درع الطلبات الوهمية علّم عليه وقت ما اتعمل (مكرر، أو طلبات كتير من نفس الرقم) وبعدين اتلغى، مش بيتحسب.",
+      "الطلبات اللي بتسجلها بنفسك من واتساب أو التليفون من «طلب جديد» ببلاش.",
       "بتوصلك فاتورة شهرية في لوحة التحكم، وتدفع بتحويل حسب التعليمات في الفاتورة.",
     ],
     tableTitle: "أمثلة جاهزة للتكلفة الشهرية",
-    tableLead: `اشتراك + عمولة، بافتراض أن كل طلب مكتمل قيمته ${AVERAGE_ORDER_VALUE} ج.م. المبلغ الفعلي يعتمد على قيمة كل طلب.`,
+    tableLead: `الاشتراك + ${perOrderFeeLabel(starter, "ar")} في البداية. احترافي ${formatEgp(pro.monthly, "ar")} ثابتة مهما كان عدد الطلبات.`,
     orders: "طلبات / شهر",
     cheapest: "الأوفر",
     faqTitle: "أسئلة حول الأسعار",
     faqLead: "لو عندك سؤال تاني، كلمنا على واتساب.",
     ctaTitle: "ابدأ الآن بدون مخاطرة",
-    ctaLead: `لا بطاقة ائتمان ولا التزام. سجّل وابدأ البيع بعمولة ${formatCommission(starter)} فقط.`,
+    ctaLead: `لا بطاقة ائتمان ولا التزام. سجّل وابدأ البيع بـ ${perOrderFeeLabel(starter, "ar")} بس.`,
     ctaPrimary: "ابدأ مجاناً الآن",
     ctaSecondary: "اسأل على واتساب",
   },
   en: {
     kicker: "Pricing",
-    title: `Start free, pay ${formatCommission(starter)} only when you sell`,
-    lead: `No monthly fee and no expiring trial. We charge only on completed orders, and never more than ${formatEgp(starter.commissionCap, "en")} per order however large. All prices in EGP.`,
-    highlights: ["No credit card", "No monthly fee", "Completed orders only", "Cash on delivery"],
+    title: `${feeEn} per order, and fake orders are free`,
+    lead: "Start with no monthly fee and no expiring trial. One flat fee per order whatever its value, never a percentage of your sales. All prices in EGP.",
+    highlights: ["No credit card", "No monthly fee", "Flat fee per order", "Fake orders are free"],
     popular: "Best way to start",
     monthlyFee: "Monthly fee",
-    commissionLabel: "Commission on completed orders",
-    noCommission: "No commission",
-    proHint: `Cheaper than Starter from about ${FREE_TO_PRO_ORDERS} orders a month, if the average order is ${AVERAGE_ORDER_VALUE} EGP.`,
-    note: "Commission is based on merchandise after discounts, excluding shipping and tax. The cap applies to each completed order, regardless of item count.",
-    capTitle: "Commission has a cap, however big the order",
-    capLead: `You pay ${formatCommission(starter)} of the order value up to ${formatEgp(STARTER_CAP_ORDER_VALUE, "en")}, then a flat ${formatEgp(starter.commissionCap, "en")}. A ${formatEgp(5000, "en")} order pays the same as a ${formatEgp(STARTER_CAP_ORDER_VALUE, "en")} one.`,
-    orderValue: "Order value",
-    fee: "Starter commission",
-    capped: "Cap",
-    rulesTitle: "How is commission calculated?",
+    perOrderLabel: "Per order",
+    noPerOrderFee: "No fee",
+    fakeFree: "Fake orders are free",
+    proHint: `Cheaper than Starter above ${PRO_CHEAPER_ABOVE_LABEL} orders a month.`,
+    note: "The fee is the same for every order, whatever its value or item count.",
+    rulesTitle: "What is billed and what is free?",
+    rulesLead: `A flat ${feeEn} per order, whether the order is ${formatEgp(150, "en")} or ${formatEgp(5000, "en")}.`,
+    examplesTitle: "Examples",
+    rulesCardTitle: "In detail",
+    examples: [
+      { label: `A ${formatEgp(150, "en")} order`, fee: starter.perOrderFee },
+      { label: `A ${formatEgp(5000, "en")} order`, fee: starter.perOrderFee },
+      { label: "A fake order flagged by the shield, then canceled", fee: 0 },
+      { label: "A WhatsApp order you recorded yourself", fee: 0 },
+    ],
     rules: [
-      "Completed orders only. Orders cancelled or refunded before invoicing are not counted.",
-      "Based on merchandise after discounts, before shipping and tax.",
-      "The cap applies to each order on its own, not to the month.",
+      "Every order placed in your store is billed, even if it is later canceled or returned.",
+      "Fake orders are free: if the fake-order shield flagged an order when it was placed (a duplicate, or many orders from the same number) and it was then canceled, it is not billed.",
+      "Orders you record yourself from WhatsApp or phone calls with «New order» are free.",
       "You get a monthly invoice in your dashboard and pay by transfer following the instructions on the invoice.",
     ],
     tableTitle: "Ready-made monthly examples",
-    tableLead: `Subscription + commission, assuming every completed order is worth ${AVERAGE_ORDER_VALUE} EGP. Actual fees depend on each order's value.`,
+    tableLead: `Subscription + ${perOrderFeeLabel(starter, "en")} on Starter. Pro is a flat ${formatEgp(pro.monthly, "en")} however many orders you get.`,
     orders: "Orders / month",
     cheapest: "Cheapest",
     faqTitle: "Pricing questions",
     faqLead: "Have another question? Message us on WhatsApp.",
     ctaTitle: "Start now with zero risk",
-    ctaLead: `No credit card and no commitment. Sign up and start selling with ${formatCommission(starter)} commission only.`,
+    ctaLead: `No credit card and no commitment. Sign up and start selling for just ${perOrderFeeLabel(starter, "en")}.`,
     ctaPrimary: "Start free now",
     ctaSecondary: "Ask on WhatsApp",
   },
@@ -152,14 +159,14 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
                     <dd className="num text-2xl font-extrabold text-gray-950">{formatEgp(plan.monthly, language)}</dd>
                   </div>
                   <div className="flex items-center justify-between gap-3 py-4">
-                    <dt className="text-sm font-semibold text-gray-600">{t.commissionLabel}</dt>
+                    <dt className="whitespace-nowrap text-sm font-semibold text-gray-600">{t.perOrderLabel}</dt>
                     <dd className="text-end">
-                      {plan.commission === 0 ? (
-                        <span className="whitespace-nowrap text-xl font-extrabold text-emerald-700 sm:text-2xl">{t.noCommission}</span>
+                      {plan.perOrderFee === 0 ? (
+                        <span className="whitespace-nowrap text-lg font-extrabold text-emerald-700 sm:text-xl">{t.noPerOrderFee}</span>
                       ) : (
                         <>
-                          <span className="num text-2xl font-extrabold text-gray-950">{formatCommission(plan)}</span>
-                          <span className="mt-0.5 block text-xs font-semibold text-emerald-700">{commissionCapLabel(plan, language)}</span>
+                          <span className="num text-2xl font-extrabold text-gray-950">{formatEgp(plan.perOrderFee, language)}</span>
+                          <span className="mt-0.5 block text-xs font-semibold text-emerald-700">{t.fakeFree}</span>
                         </>
                       )}
                     </dd>
@@ -175,7 +182,7 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
                   ))}
                 </ul>
 
-                {plan.commission === 0 ? <p className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-semibold leading-6 text-emerald-800">{t.proHint}</p> : null}
+                {plan.perOrderFee === 0 ? <p className="mt-4 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-semibold leading-6 text-emerald-800">{t.proHint}</p> : null}
 
                 <a href={signupHref} className={cn("btn mt-6 w-full", plan.popular ? "btn-primary" : "btn-secondary")}>
                   {plan.cta[language]}
@@ -187,42 +194,26 @@ export const PricingPage = ({ language = "ar" }: { language?: AppLanguage }) => 
         </div>
       </section>
 
-      <section className="bg-[#f7faf8] py-12 sm:py-16" aria-labelledby="cap-title">
+      <section className="bg-[#f7faf8] py-12 sm:py-16" aria-labelledby="billing-rules-title">
         <div className="container-x">
           <Reveal>
-            <SectionHeading id="cap-title" title={t.capTitle} lead={t.capLead} />
+            <SectionHeading id="billing-rules-title" title={t.rulesTitle} lead={t.rulesLead} />
           </Reveal>
-          <div className="mx-auto mt-8 grid max-w-4xl gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="mx-auto mt-8 grid max-w-4xl gap-5 lg:grid-cols-[0.85fr_1.15fr]">
             <Reveal delay={80} className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
-              <div className="mb-4 flex items-center justify-between text-xs font-bold text-gray-500">
-                <span>{t.orderValue}</span>
-                <span>{t.fee}</span>
-              </div>
-              <ul className="space-y-3.5">
-                {EXAMPLE_ORDERS.map((value) => {
-                  const fee = orderCommission(starter, value);
-                  const atCap = value >= STARTER_CAP_ORDER_VALUE;
-                  return (
-                    <li key={value} className="grid grid-cols-[5.5rem_1fr_5.5rem] items-center gap-3 sm:grid-cols-[6.5rem_1fr_6.5rem]">
-                      <span className="num text-xs font-semibold text-gray-700 sm:text-sm">{formatEgp(value, language)}</span>
-                      <span aria-hidden="true" className="h-3 overflow-hidden rounded-full bg-emerald-100">
-                        <span
-                          className={cn("block h-full rounded-full", atCap ? "bg-emerald-700" : "bg-emerald-500")}
-                          style={{ width: `${Math.max(6, (fee / starter.commissionCap) * 100)}%` }}
-                        />
-                      </span>
-                      <span className="num text-end text-sm font-extrabold text-emerald-700">
-                        {formatEgp(fee, language)}
-                        {atCap ? <span className="ms-1 text-[10px] font-bold text-gray-500">({t.capped})</span> : null}
-                      </span>
-                    </li>
-                  );
-                })}
+              <h3 className="text-base font-extrabold text-gray-950 font-heading">{t.examplesTitle}</h3>
+              <ul className="mt-4 divide-y divide-gray-100">
+                {t.examples.map((example) => (
+                  <li key={example.label} className="flex items-center justify-between gap-3 py-3 text-sm">
+                    <span className="text-gray-700">{example.label}</span>
+                    <span className={cn("num shrink-0 font-extrabold", example.fee === 0 ? "text-emerald-700" : "text-gray-950")}>{formatEgp(example.fee, language)}</span>
+                  </li>
+                ))}
               </ul>
             </Reveal>
 
             <Reveal delay={140} className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
-              <h3 className="text-base font-extrabold text-gray-950 font-heading">{t.rulesTitle}</h3>
+              <h3 className="text-base font-extrabold text-gray-950 font-heading">{t.rulesCardTitle}</h3>
               <ul className="mt-4 space-y-3">
                 {t.rules.map((rule) => (
                   <li key={rule} className="flex items-start gap-2.5 text-sm leading-6 text-gray-700">

@@ -77,7 +77,7 @@ export const englishFaqs = [
   {
     question: "Can I start before paying monthly?",
     answer:
-      "Yes. Starter has no monthly fee or expiring trial: 1% per completed order, capped at 5 EGP. Pro costs 1,499 EGP monthly with no commission.",
+      "Yes. Starter has no monthly fee or expiring trial: a flat 2 EGP per order, and fake orders are free. Pro costs 2,000 EGP monthly with no per-order fee.",
   },
   {
     question: "Does Matgarko support cash on delivery?",
@@ -102,7 +102,7 @@ export const englishFaqs = [
   {
     question: "Are the core tools available on Starter?",
     answer:
-      "Yes. Every plan includes product, stock and order management, coupons, shipping settings and WhatsApp support. Plans differ in monthly subscription, commission rate and per-order cap.",
+      "Yes. Every plan includes product, stock and order management, coupons, shipping settings and WhatsApp support. Plans differ in monthly subscription and per-order fee.",
   },
 ];
 
@@ -148,7 +148,7 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Grow without rebuilding",
         text:
-          "Start with the essentials, then move to lower-commission plans as your business grows. Connect your own domain yourself in minutes on any plan, and our support team helps on WhatsApp if you need it.",
+          "Start with the essentials, then move to Pro, with no per-order fee, as your business grows. Connect your own domain yourself in minutes on any plan, and our support team helps on WhatsApp if you need it.",
         items: ["Plans for different stages", "Your own domain, self-serve on every plan", "Support for growing catalogs"],
       },
     ],
@@ -314,9 +314,9 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
           "Merchants are responsible for the products, prices, descriptions, policies, customer communication, delivery commitments, and legal compliance of their own stores.",
       },
       {
-        title: "Plans, commissions, and payments",
+        title: "Plans, fees, and payments",
         text:
-          "Plan prices and commissions are shown on the pricing page. Delivery companies may charge separate fees outside Matgarko subscription or commission fees.",
+          "Plan prices and per-order fees are shown on the pricing page. Delivery companies may charge separate fees outside Matgarko subscription or per-order fees.",
       },
       {
         title: "Prohibited products and content",
@@ -523,7 +523,7 @@ export const englishComparisons: Record<string, EnglishComparisonContent> = {
       "Choose Matgarko if you want a simple storefront, clear local pricing, and a launch path focused on small teams that are moving from social selling to structured ecommerce.",
     rows: [
       { factor: "Best fit", matgarko: "New and growing merchants that want an Arabic-first store.", competitor: "Merchants who already prefer the EasyOrders workflow." },
-      { factor: "Pricing context", matgarko: "Starts free with a capped commission, then an EGP monthly plan with none.", competitor: "Review current EasyOrders pricing before deciding." },
+      { factor: "Pricing context", matgarko: "Starts free at a flat 2 EGP per order, with fake orders free; Pro is 2,000 EGP a month with no per-order fee.", competitor: "$0.04 per order, charged on every order including canceled ones, or $100 a month (about 5,600 EGP). Review current EasyOrders pricing before deciding." },
       { factor: "Setup style", matgarko: "No-code setup with storefront, products, orders, and local workflows.", competitor: "Platform-specific setup and feature set." },
       { factor: "Market focus", matgarko: "Egypt and Arabic-speaking commerce workflows.", competitor: "Egypt-focused ecommerce operations." },
     ],
@@ -682,7 +682,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "A new store may pay 0 EGP monthly on a commission plan, then move to a 1,499 EGP monthly plan as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.",
+          "A new store may pay 0 EGP monthly plus a small fee per order, then move to a 2,000 EGP monthly plan as volume grows. Other costs can include a custom domain, product photos, ads, shipping, and returns.",
       },
       {
         type: "h2",
@@ -691,7 +691,7 @@ export const englishBlogArticles: BlogArticle[] = [
       {
         type: "p",
         text:
-          "If your commission cost on the free plan becomes higher than a monthly plan with no commission, upgrading is usually financially smarter.",
+          "If your per-order fees on the free plan add up to more than a monthly plan with no per-order fee, upgrading is usually financially smarter.",
       },
       {
         type: "callout",
@@ -855,7 +855,7 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/terms": {
     title: "Terms and conditions | Matgarko",
     description:
-      "English summary of Matgarko terms covering merchant responsibility, platform use, plan fees, commissions, content, and service changes.",
+      "English summary of Matgarko terms covering merchant responsibility, platform use, plan and per-order fees, content, and service changes.",
     keywords: ["Matgarko terms", "ecommerce platform terms", "online store terms"],
   },
   "/en/privacy": {

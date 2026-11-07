@@ -1,3 +1,26 @@
+# Pricing update — 2026-11-07
+
+No more percentage. Starter: 0 EGP/month + a flat 2 EGP per order, whatever the order's value.
+Pro: 2,000 EGP/month (was 1,499), no per-order fee; Pro is cheaper than Starter above 1,000
+orders a month (2,000 ÷ 2), and both cost the same at exactly 1,000. Stores outside Egypt are
+billed in US dollars: Starter $0.05 per order (was 1% capped at $0.10), Pro $35/month (was $29);
+the marketing site does not show dollar prices.
+
+Every order placed in the store is billed, including ones later canceled or returned, except:
+(a) fake orders, meaning orders the fake-order shield flagged when they were placed (duplicate, or
+many orders from the same number) and that were then canceled, and (b) orders the merchant records
+by hand from WhatsApp/phone with «طلب جديد». Headline: «2 ج.م على الطلب، والطلبات الوهمية ببلاش».
+
+`src/data/pricing.ts` now models plans as `monthly` + `perOrderFee`; `monthlyCost` is
+monthly + orders × fee, and `AVERAGE_ORDER_VALUE`, the commission cap and its helpers are gone.
+The pricing page lost the cap bar chart (replaced by a "what is billed and what is free" section
+with fixed examples), and the calculator only asks for monthly orders. Comparisons now quote
+EasyOrders at $0.04 per order (≈2.24 EGP at 56 EGP/USD) on every order including canceled and fake
+ones, and $100/month (≈5,600 EGP) for their high-volume plan. The share image (og-image.png) was
+regenerated with the new line.
+
+---
+
 # Pricing update — 2026-10-23
 
 Two plans only. Starter: 0 EGP/month, 1% of each completed order capped at 5 EGP (the cap is

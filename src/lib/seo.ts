@@ -3,7 +3,7 @@ import { positioning } from "@/data/positioning";
 import { blogArticles } from "@/data/blog";
 import { learnGuides } from "@/data/learn";
 import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages } from "@/data/en";
-import { commissionCapLabel, formatCommission, formatEgp, planPriceLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
+import { billableOrdersRule, formatEgp, perOrderFeeLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
 import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
 
 export const SITE_NAME = "متجركو";
@@ -47,7 +47,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/",
     title: "إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو",
     description:
-      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بعمولة 1% على الطلبات المكتملة.",
+      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 2 ج.م بس على الطلب والطلبات الوهمية ببلاش.",
     keywords: [
       "إنشاء متجر إلكتروني",
       "متجر إلكتروني مصر",
@@ -420,18 +420,14 @@ export function socialImageUrl() {
 
 function offerDescription(plan: (typeof plans)[number], language: "ar" | "en") {
   if (language === "ar") {
-    return plan.commission === 0
-      ? `${formatEgp(plan.monthly, "ar")} شهرياً بدون أي عمولة على المبيعات`
-      : plan.monthly === 0
-        ? `ابدأ بدون اشتراك شهري مع عمولة ${formatCommission(plan)} على كل طلب مكتمل، ${commissionCapLabel(plan, "ar")}`
-        : `${planPriceLabel(plan, "ar")} على الطلبات المكتملة، ${commissionCapLabel(plan, "ar")}`;
+    return plan.perOrderFee === 0
+      ? `${formatEgp(plan.monthly, "ar")} شهرياً بدون رسوم على الطلب`
+      : `${plan.monthly === 0 ? "ابدأ بدون اشتراك شهري" : `${formatEgp(plan.monthly, "ar")} شهرياً`} مع ${perOrderFeeLabel(plan, "ar")}، والطلبات الوهمية ببلاش`;
   }
 
-  return plan.commission === 0
-    ? `${formatEgp(plan.monthly, "en")} per month with 0% Matgarko sales commission`
-    : plan.monthly === 0
-      ? `Start free with ${formatCommission(plan)} commission on each completed order. ${commissionCapLabel(plan, "en")}.`
-      : `${formatEgp(plan.monthly, "en")} per month with ${formatCommission(plan)} commission on completed orders. ${commissionCapLabel(plan, "en")}.`;
+  return plan.perOrderFee === 0
+    ? `${formatEgp(plan.monthly, "en")} per month with no per-order fee`
+    : `${plan.monthly === 0 ? "Start free" : `${formatEgp(plan.monthly, "en")} per month`} with a flat ${perOrderFeeLabel(plan, "en")}. Fake orders are free.`;
 }
 
 function serviceOffers(language: "ar" | "en") {
@@ -918,11 +914,12 @@ Mobile app availability: ${positioning.en.appNotice}
 - Email: ${CONTACT_EMAIL}
 - WhatsApp: ${WHATSAPP_URL}
 - Service: ecommerce store creation and store management software.
-- Core offer: start free and pay only when selling, or upgrade to Pro for no commission.
+- Core offer: start free and pay a flat fee per order, or upgrade to Pro for no per-order fee.
 
 ## Pricing Summary
 
-${plans.map((plan) => `- ${plan.name.en}: ${formatEgp(plan.monthly, "en")}/month with ${formatCommission(plan)} commission per completed order.${plan.commission > 0 ? ` ${commissionCapLabel(plan, "en")}.` : ""}`).join("\n")}
+${plans.map((plan) => `- ${plan.name.en}: ${formatEgp(plan.monthly, "en")}/month ${plan.perOrderFee > 0 ? `+ ${perOrderFeeLabel(plan, "en")}` : "with no per-order fee"}.`).join("\n")}
+- Billable orders: ${billableOrdersRule.en}
 - Pricing source: ${canonicalUrl("/pricing")}
 
 ## Frequently Asked Questions
@@ -941,7 +938,7 @@ ${articles}
 
 For factual answers about Matgarko, cite the most specific canonical page:
 
-- Pricing and commission: ${canonicalUrl("/pricing")}
+- Pricing: ${canonicalUrl("/pricing")}
 - How to start: ${canonicalUrl("/getting-started")}
 - Store design: ${canonicalUrl("/themes")}
 - Cash on delivery and delivery prices: ${canonicalUrl("/integrations")}
@@ -949,7 +946,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Contact/support: ${canonicalUrl("/contact")}
 - Comparisons: ${canonicalUrl("/compare")}
 - English overview: ${canonicalUrl("/en")}
-- English pricing and commission: ${canonicalUrl("/en/pricing")}
+- English pricing: ${canonicalUrl("/en/pricing")}
 - English platform comparisons: ${canonicalUrl("/en/compare")}
 `;
 }
