@@ -47,12 +47,13 @@ const messages: Record<string, [string, string]> = {
   InvalidResponse: ['حصل خطأ في الخدمة. حاول تاني.', 'The service returned an unexpected response. Please retry.'],
 };
 
-export default function RegisterPage() {
+/** `country` preselects the store's country and the phone's, for the signup page of a country version (/ar-sa/register). */
+export default function RegisterPage({ country = 'EG' }: { country?: CountryCode } = {}) {
   const english = isEnglishPath(useLocation().pathname);
   const t = (ar: string, en: string) => english ? en : ar;
   const consent = useSyncExternalStore(subscribeConsent, getConsent, serverConsent);
-  const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false, country: 'EG' });
-  const [phoneCountry, setPhoneCountry] = useState<CountryCode>('EG');
+  const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false, country });
+  const [phoneCountry, setPhoneCountry] = useState<CountryCode>(country);
   const internationalPhone = signupPhoneNumber(form.phone, phoneCountry);
   const [config, setConfig] = useState<{ enabled: boolean; baseDomain: string } | null>(null);
   const [stage, setStage] = useState<'store' | 'account' | SignupStatus['state']>('store');

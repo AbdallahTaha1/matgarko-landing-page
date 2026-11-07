@@ -1,4 +1,5 @@
-import { languageFromPath, localizePath } from "@/lib/i18n";
+import { countries, countryFromPath } from "@/data/countries";
+import { languageFromPath, localizeFor } from "@/lib/i18n";
 import { Facebook, Mail, MapPin, Phone } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -62,16 +63,19 @@ export function Footer() {
   const language = languageFromPath(pathname);
   const isEnglish = language === "en";
   const brandName = isEnglish ? "Matgarko" : "متجركو";
+  const country = countryFromPath(pathname);
   const brandDescription = isEnglish
-    ? "An Arabic-first ecommerce platform for merchants in Egypt. Create your store, receive orders, and grow with pricing in EGP."
-    : "منصة مصرية لإنشاء المتاجر الإلكترونية. أنشئ متجرك، استقبل الطلبات، وكبّر تجارتك بأسعار بالجنيه.";
+    ? "An Arabic-first ecommerce platform for merchants in Egypt and the Gulf. Create your store, take cash-on-delivery orders, and pay a fixed fee per order."
+    : country
+      ? `منصة عربية لإنشاء المتاجر الإلكترونية ${country.inName} ومصر والخليج. أنشئ متجرك واستقبل طلبات الدفع عند الاستلام برسوم ثابتة على الطلب.`
+      : "منصة مصرية لإنشاء المتاجر الإلكترونية. أنشئ متجرك، استقبل الطلبات، وكبّر تجارتك بأسعار بالجنيه.";
 
   return (
     <footer className="border-t border-gray-200 bg-gray-50" dir={isEnglish ? "ltr" : "rtl"}>
       <div className="container-x pb-8 pt-12 sm:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div className="max-w-sm">
-            <Link to={localizePath("/", language)} className="inline-flex items-center gap-2" aria-label={brandName}>
+            <Link to={localizeFor("/", pathname)} className="inline-flex items-center gap-2" aria-label={brandName}>
               <img src={logo} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
               <span className="text-xl font-extrabold text-gray-950 font-heading">{brandName}</span>
             </Link>
@@ -127,7 +131,7 @@ export function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {column.links.filter((link) => !("arabicOnly" in link) || !isEnglish).map((link) => (
                     <li key={link.path}>
-                      <Link to={localizePath(link.path, language)} className="text-sm text-gray-600 transition-colors hover:text-emerald-700">
+                      <Link to={localizeFor(link.path, pathname)} className="text-sm text-gray-600 transition-colors hover:text-emerald-700">
                         {link[language]}
                       </Link>
                     </li>
@@ -138,7 +142,21 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 sm:flex-row">
+        <div className="mt-10 border-t border-gray-200 pt-6">
+          <p className="text-sm font-extrabold text-gray-950 font-heading">{isEnglish ? "Matgarko in" : "متجركو في"}</p>
+          <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            <li><Link to="/" hrefLang="ar-EG" className="text-gray-600 transition-colors hover:text-emerald-700">{isEnglish ? "Egypt" : "مصر"}</Link></li>
+            {countries.map((item) => (
+              <li key={item.slug}>
+                <Link to={`/${item.slug}`} hrefLang={item.locale} className="text-gray-600 transition-colors hover:text-emerald-700">
+                  {isEnglish ? item.englishName : item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 sm:flex-row">
           <p className="text-xs text-gray-500 sm:text-sm">
             © {new Date().getFullYear()} {brandName}. {isEnglish ? "All rights reserved." : "جميع الحقوق محفوظة."}
           </p>

@@ -5,6 +5,7 @@ import {
   alternateLinksForPage,
   breadcrumbSchema,
   canonicalUrl,
+  countryQuestionsSchema,
   faqSchema,
   getSeoPage,
   indexableSeoPages,
@@ -146,6 +147,7 @@ export function SEO() {
       ...(pageArticleSchema ? [pageArticleSchema] : []),
       ...(page.path === "/" || page.path === "/en" ? [faqSchema(page)] : []),
       ...(page.path === "/pricing" || page.path === "/en/pricing" ? [pricingFaqSchema(page)] : []),
+      ...(countryQuestionsSchema(page) ? [countryQuestionsSchema(page)] : []),
     ];
 
     upsertJsonLd("matgarko-route-schema", jsonLd);

@@ -22,10 +22,12 @@ export function captureAcquisition() {
       if (host !== window.location.hostname && host !== 'matgarko.com' && host !== 'www.matgarko.com') referrerHost = host;
     } catch { /* Direct visit. */ }
     const paidGoogle = value('gclid', 512) || value('gbraid', 512) || value('wbraid', 512);
-    const organic = referrerHost && /(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(referrerHost);
+    // AI assistants first: gemini.google.com would otherwise count as Google search.
+    const aiSource = aiAssistant(value('utm_source', 100)) || aiAssistant(referrerHost);
+    const organic = !aiSource && referrerHost && /(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|search\.yahoo\.com)$/.test(referrerHost);
     initial = {
       source: value('utm_source', 100) || (paidGoogle ? 'google' : referrerHost || 'direct'),
-      medium: value('utm_medium', 100) || (paidGoogle ? 'cpc' : organic ? 'organic' : referrerHost ? 'referral' : 'none'),
+      medium: value('utm_medium', 100) || (paidGoogle ? 'cpc' : aiSource ? 'ai' : organic ? 'organic' : referrerHost ? 'referral' : 'none'),
       campaign: value('utm_campaign'), content: value('utm_content'), term: value('utm_term'),
       gclid: value('gclid', 512), gbraid: value('gbraid', 512), wbraid: value('wbraid', 512),
       referrerHost, landingPath: window.location.pathname.slice(0, 512), capturedAt: new Date().toISOString(),
@@ -41,6 +43,12 @@ export function captureAcquisition() {
   current = { first: saved?.first || initial, last: initial.source === 'direct' && saved ? saved.last : initial };
   try { localStorage.setItem('matgarko-acquisition', JSON.stringify(current)); } catch { /* Signup still works. */ }
 }
+/** Hosts of AI assistants that link to the sites they cite (ChatGPT also adds utm_source=chatgpt.com). */
+const aiHosts = /(^|\.)(chatgpt\.com|chat\.openai\.com|openai\.com|perplexity\.ai|gemini\.google\.com|bard\.google\.com|copilot\.microsoft\.com|claude\.ai|chat\.deepseek\.com|deepseek\.com|you\.com|phind\.com|meta\.ai|grok\.com|chat\.mistral\.ai)$/;
+export function aiAssistant(hostOrSource?: string) {
+  return hostOrSource && aiHosts.test(hostOrSource.toLowerCase()) ? hostOrSource.toLowerCase() : undefined;
+}
+
 export function getAcquisition() {
   captureAcquisition();
   return getConsent() === 'accepted' ? current : undefined;

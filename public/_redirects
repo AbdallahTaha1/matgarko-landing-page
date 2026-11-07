@@ -1,0 +1,3 @@
+# Egypt is the main site at "/"; /ar-eg is an alias for people who guess the country prefix.
+/ar-eg          /           301
+/ar-eg/*        /:splat     301

@@ -20,6 +20,11 @@ export type CompetitorPageProps = {
   comparisonRows: ComparisonRow[];
   faqs: { q: string; a: string }[];
   targetKeywords?: string[];
+  /** Links for a country version (/ar-sa/…); the Egyptian site's by default. */
+  homePath?: string;
+  comparePath?: string;
+  pricingPath?: string;
+  signupUrl?: string;
 };
 
 const SIGNUP_URL = "/register";
@@ -50,6 +55,10 @@ export function CompetitorPage({
   matgarkoAdvantages,
   comparisonRows,
   faqs,
+  homePath = "/",
+  comparePath = "/compare",
+  pricingPath = "/pricing",
+  signupUrl = SIGNUP_URL,
 }: CompetitorPageProps) {
   return (
     <div className="bg-white text-right" dir="rtl">
@@ -57,14 +66,14 @@ export function CompetitorPage({
       <nav className="container px-4 mx-auto pt-6 text-sm text-gray-500" aria-label="Breadcrumb">
         <ol className="flex items-center gap-2 flex-wrap" itemScope itemType="https://schema.org/BreadcrumbList">
           <li itemScope itemType="https://schema.org/ListItem" itemProp="itemListElement">
-            <Link to="/" className="hover:text-emerald-600 transition-colors" itemProp="item">
+            <Link to={homePath} className="hover:text-emerald-600 transition-colors" itemProp="item">
               <span itemProp="name">متجركو</span>
             </Link>
             <meta itemProp="position" content="1" />
           </li>
           <li aria-hidden="true">/</li>
           <li itemScope itemType="https://schema.org/ListItem" itemProp="itemListElement">
-            <Link to="/compare" className="hover:text-emerald-600 transition-colors" itemProp="item">
+            <Link to={comparePath} className="hover:text-emerald-600 transition-colors" itemProp="item">
               <span itemProp="name">المقارنات</span>
             </Link>
             <meta itemProp="position" content="2" />
@@ -88,10 +97,10 @@ export function CompetitorPage({
           <p className="page-lead">{lead}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
             <Button asChild className="bg-emerald-600 text-white font-extrabold hover:bg-emerald-700 h-12 px-8">
-              <a href={SIGNUP_URL}>ابدأ مجاناً مع متجركو ←</a>
+              <a href={signupUrl}>ابدأ مجاناً مع متجركو ←</a>
             </Button>
             <Button asChild variant="outline" className="h-12 px-6 font-bold border-gray-300 hover:border-emerald-400">
-              <Link to="/pricing">شوف الأسعار</Link>
+              <Link to={pricingPath}>شوف الأسعار</Link>
             </Button>
           </div>
         </div>
@@ -183,7 +192,7 @@ export function CompetitorPage({
             ابدأ بدون اشتراك شهري بـ 2 ج.م بس على الطلب، والطلبات الوهمية ببلاش. جهّز متجرك وابدأ البيع بدون مدة تجريبية تنتهي.
           </p>
           <a
-            href={SIGNUP_URL}
+            href={signupUrl}
             className="inline-flex items-center gap-2 bg-emerald-500 text-gray-950 font-extrabold hover:bg-emerald-400 px-8 py-3 rounded-lg transition-colors"
           >
             ابدأ مجاناً الآن ←

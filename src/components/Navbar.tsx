@@ -1,5 +1,5 @@
 import { SIGNUP_URL } from "@/data/pricing";
-import { alternateLanguagePath, languageFromPath, localizePath } from "@/lib/i18n";
+import { alternateLanguagePath, languageFromPath, localizeFor } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { useRememberedStore } from "@/lib/storeAccess";
 import { Languages, Menu, X } from "lucide-react";
@@ -32,10 +32,10 @@ export function Navbar() {
   const brandName = isEnglish ? "Matgarko" : "متجركو";
   const shownNavItems = navItems.filter((item) => !item.arabicOnly || !isEnglish);
   const signupLabel = store ? (isEnglish ? 'Dashboard' : 'لوحة التحكم') : (isEnglish ? "Start free" : "أنشئ متجرك مجاناً");
-  const primaryUrl = store?.adminUrl || (isEnglish ? '/en/register' : SIGNUP_URL);
+  const primaryUrl = store?.adminUrl || localizeFor(SIGNUP_URL, pathname);
   const loginLabel = isEnglish ? "My store" : "ادخل متجرك";
   // On the signup page itself the header's signup button only points back to the same form.
-  const showPrimary = !!store || !/^\/(en\/)?register\/?$/.test(pathname);
+  const showPrimary = !!store || !/^\/((en|ar-[a-z]{2})\/)?register\/?$/.test(pathname);
   const languageLabel = isEnglish ? "العربية" : "English";
   const menuLabel = isEnglish ? (isOpen ? "Close menu" : "Open menu") : isOpen ? "إغلاق القائمة" : "فتح القائمة";
   const navLabel = isEnglish ? "Main navigation" : "القائمة الرئيسية";
@@ -52,14 +52,14 @@ export function Navbar() {
   }, [isOpen]);
 
   const isActive = (path: string) => {
-    const localized = localizePath(path, language);
+    const localized = localizeFor(path, pathname);
     return pathname === localized || pathname.startsWith(`${localized}/`);
   };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200/70 bg-white/85 backdrop-blur-xl" dir={isEnglish ? "ltr" : "rtl"}>
       <div className="container-x flex h-16 items-center justify-between gap-3">
-        <Link to={localizePath("/", language)} className="flex shrink-0 items-center gap-2" aria-label={brandName}>
+        <Link to={localizeFor("/", pathname)} className="flex shrink-0 items-center gap-2" aria-label={brandName}>
           <img src={logo} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
           <span className="hidden text-xl font-extrabold text-gray-950 font-heading min-[360px]:inline">{brandName}</span>
         </Link>
@@ -68,7 +68,7 @@ export function Navbar() {
           {shownNavItems.map((item) => (
             <Link
               key={item.path}
-              to={localizePath(item.path, language)}
+              to={localizeFor(item.path, pathname)}
               aria-current={isActive(item.path) ? "page" : undefined}
               className={cn(
                 "whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-bold transition-colors hover:bg-gray-100 hover:text-gray-950",
@@ -89,7 +89,7 @@ export function Navbar() {
             <Languages className="h-4 w-4" aria-hidden="true" />
             {languageLabel}
           </Link>
-          <Link to={localizePath('/login', language)} className="btn btn-secondary h-10 whitespace-nowrap px-3 text-sm">{loginLabel}</Link>
+          <Link to={localizeFor('/login', pathname)} className="btn btn-secondary h-10 whitespace-nowrap px-3 text-sm">{loginLabel}</Link>
           {showPrimary && <a href={primaryUrl} className="btn btn-primary h-10 whitespace-nowrap px-4 text-sm">
             {signupLabel}
           </a>}
@@ -134,7 +134,7 @@ export function Navbar() {
               {[...shownNavItems, ...mobileExtraItems].map((item) => (
                 <li key={item.path}>
                   <Link
-                    to={localizePath(item.path, language)}
+                    to={localizeFor(item.path, pathname)}
                     onClick={() => setIsOpen(false)}
                     aria-current={isActive(item.path) ? "page" : undefined}
                     className={cn(
@@ -147,7 +147,7 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <Link to={localizePath('/login', language)} onClick={() => setIsOpen(false)} className="btn btn-secondary mt-3 w-full">
+            <Link to={localizeFor('/login', pathname)} onClick={() => setIsOpen(false)} className="btn btn-secondary mt-3 w-full">
               {loginLabel}
             </Link>
             <a href={primaryUrl} onClick={() => setIsOpen(false)} className="btn btn-primary mt-3 w-full">

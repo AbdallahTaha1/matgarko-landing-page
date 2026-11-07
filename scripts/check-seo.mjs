@@ -12,7 +12,9 @@ assert(urls.length > 0, 'Sitemap is empty');
 assert.equal(new Set(urls.map(String)).size, urls.length, 'Duplicate sitemap URLs');
 assert(!sitemap.includes('<lastmod>'), 'Do not claim a new modification date on every build');
 const origin = urls[0].origin;
-const routes = new Set([...urls.map((url) => url.pathname), '/register', '/en/register', '/login', '/en/login', '/404', '/en/404']);
+// Signup pages are noindex, so not in the sitemap: the main ones and one per country version.
+const countrySignups = [...new Set(urls.map((url) => /^\/(ar-[a-z]{2})(?:\/|$)/.exec(url.pathname)?.[1]).filter(Boolean))].map((slug) => `/${slug}/register`);
+const routes = new Set([...urls.map((url) => url.pathname), '/register', '/en/register', ...countrySignups, '/login', '/en/login', '/404', '/en/404']);
 const browser = await chromium.launch();
 const page = await browser.newPage();
 const titles = new Set();
@@ -42,7 +44,8 @@ try {
     titles.add(data.title);
     assert.equal(data.headings.length, 1, `${route}: expected one visible-content H1`);
     assert.equal(data.canonical, new URL(route, origin).href, `${route}: wrong canonical`);
-    assert.equal(data.lang, /^\/en(?:\/|$)/.test(route) ? 'en' : 'ar', `${route}: wrong language`);
+    const countryPrefix = /^\/ar-([a-z]{2})(?:\/|$)/.exec(route);
+    assert.equal(data.lang, /^\/en(?:\/|$)/.test(route) ? 'en' : countryPrefix ? `ar-${countryPrefix[1].toUpperCase()}` : 'ar', `${route}: wrong language`);
     assert.equal(data.robots.startsWith('noindex'), noindex, `${route}: wrong indexing policy`);
     for (const href of [...data.links, ...data.alternates]) {
       const url = new URL(href, new URL(route, origin));

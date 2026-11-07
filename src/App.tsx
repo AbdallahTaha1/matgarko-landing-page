@@ -1,3 +1,8 @@
+import { Fragment } from "react";
+import { countries } from "./data/countries";
+import { CountryCodPage, CountryHomePage, CountryPricingPage, CountryRegisterPage } from "./pages/country/CountryPages";
+import { SaudiVsSallaPage } from "./pages/country/SaudiVsSallaPage";
+import { AnswersPage } from "./pages/AnswersPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import { HomePage } from "./pages/HomePage";
@@ -103,6 +108,17 @@ export function AppRoutes() {
           <Route path="compare/shopify" element={<VsShopifyPage />} />
           <Route path="compare/salla" element={<VsSallaPage />} />
           <Route path="compare/woocommerce" element={<VsWooCommercePage />} />
+          {/* Country versions (ar-sa, ar-ae, …): Arabic pages with the country's currency and prices */}
+          {countries.map((country) => (
+            <Fragment key={country.slug}>
+              <Route path={country.slug} element={<CountryHomePage country={country} />} />
+              <Route path={`${country.slug}/pricing`} element={<CountryPricingPage country={country} />} />
+              <Route path={`${country.slug}/cod`} element={<CountryCodPage country={country} />} />
+              <Route path={`${country.slug}/register`} element={<CountryRegisterPage country={country} />} />
+            </Fragment>
+          ))}
+          <Route path="ar-sa/compare/salla" element={<SaudiVsSallaPage />} />
+          <Route path="answers" element={<AnswersPage />} />
           {/* English localized pages */}
           <Route path="en" element={<EnglishHomePage />} />
           <Route path="en/solutions" element={<EnglishSolutionsPage />} />

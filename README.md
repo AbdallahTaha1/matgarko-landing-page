@@ -101,6 +101,10 @@ Regenerate the social share image from `src/assets/logo.png` and the favicon/PWA
 node scripts/generate-assets.mjs
 ```
 
+## Country Versions
+
+Egypt is the main Arabic site at `/` (`ar-EG`); `/ar-eg` redirects there (`public/_redirects`). Saudi Arabia, the UAE, Kuwait, Qatar, Oman and Bahrain each have `/ar-xx`, `/ar-xx/pricing`, `/ar-xx/cod` and `/ar-xx/register` (which preselects the store country), in plain formal Arabic with dollar prices and their local-currency equivalent. Countries, currencies and the dollar prices live in `src/data/countries.ts`; the pages in `src/pages/country/`. Every version links to the others with hreflang, and `/ar-sa/compare/salla` compares Matgarko with Salla for Saudi merchants. `/answers` holds short standalone answers for search engines and AI assistants; they also feed `llms-full.txt` and FAQ structured data. Visits from AI assistants (ChatGPT, Perplexity, Gemini, Copilot, Claude and others) are recorded with medium `ai` in signup attribution.
+
 ## Deployment Notes
 
 Deploy to Cloudflare Pages with the React (Vite) preset, production branch `main`, build command `npm run build`, output directory `dist`, and an empty root directory.

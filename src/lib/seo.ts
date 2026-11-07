@@ -5,6 +5,18 @@ import { learnGuides } from "@/data/learn";
 import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages } from "@/data/en";
 import { billableOrdersRule, formatEgp, perOrderFeeLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
 import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
+import { answers } from "@/data/answers";
+import {
+  ABROAD_PER_ORDER_USD,
+  ABROAD_PRO_MONTHLY_USD,
+  type Country,
+  countries,
+  countryFromPath,
+  countryPath,
+  localMoney,
+  stripCountryPrefix,
+} from "@/data/countries";
+import { countryFaqs } from "@/pages/country/countryContent";
 
 export const SITE_NAME = "متجركو";
 export const DEFAULT_SITE_URL = "https://matgarko.com";
@@ -31,7 +43,8 @@ export type SeoPage = {
   title: string;
   description: string;
   keywords: string[];
-  locale?: "ar-EG" | "en";
+  /** "ar-EG" (the main site), "en", or a country version's tag such as "ar-SA". */
+  locale?: string;
   type?: "website" | "article";
   noindex?: boolean;
 };
@@ -276,6 +289,61 @@ for (const guide of learnGuides) {
   };
 }
 
+// Country versions (since 2026-11-07): home, pricing, cash on delivery and signup per Gulf country.
+function countrySeoPages(country: Country): SeoPage[] {
+  const fee = localMoney(country, ABROAD_PER_ORDER_USD);
+  const base = { locale: country.locale, type: "website" as const };
+  return [
+    {
+      ...base,
+      path: countryPath(country, ""),
+      title: `إنشاء متجر إلكتروني ${country.inName} بالدفع عند الاستلام | متجركو`,
+      description: `أنشئ متجرك الإلكتروني ${country.inName} بدون اشتراك شهري: ${ABROAD_PER_ORDER_USD}$ (حوالي ${fee}) على الطلب، والطلبات الوهمية لا تُحتسب. دفع عند الاستلام، أسعار ب${country.currencyName}، ودعم بالعربي.`,
+      keywords: [`إنشاء متجر إلكتروني ${country.inName}`, `منصة متاجر ${country.inName}`, `متجر دفع عند الاستلام ${country.inName}`, `بديل سلة ${country.inName}`, "متجركو", `ecommerce platform ${country.englishName}`],
+    },
+    {
+      ...base,
+      path: countryPath(country, "/pricing"),
+      title: `أسعار متجركو ${country.inName}: ${ABROAD_PER_ORDER_USD}$ على الطلب | متجركو`,
+      description: `باقة البداية ${ABROAD_PER_ORDER_USD}$ (حوالي ${fee}) على كل طلب بدون اشتراك، وباقة احترافي ${ABROAD_PRO_MONTHLY_USD}$ شهرياً (حوالي ${localMoney(country, ABROAD_PRO_MONTHLY_USD)}) بدون رسوم على الطلب. الطلبات الوهمية مجاناً.`,
+      keywords: [`أسعار متجر إلكتروني ${country.inName}`, `تكلفة متجر إلكتروني ${country.inName}`, "متجركو الأسعار"],
+    },
+    {
+      ...base,
+      path: countryPath(country, "/cod"),
+      title: `الدفع عند الاستلام والطلبات الوهمية ${country.inName} | متجركو`,
+      description: `درع الطلبات الوهمية في متجركو ${country.inName}: تنبيه للأرقام المكررة والطلبات الكثيرة ومن رفض الاستلام، وحظر الأرقام، ونسبة التسليم الحقيقية. والطلب الوهمي لا يُحتسب.`,
+      keywords: [`الطلبات الوهمية ${country.inName}`, `الدفع عند الاستلام ${country.inName}`, "درع الطلبات الوهمية", "تقليل الطلبات الوهمية"],
+    },
+    {
+      ...base,
+      path: countryPath(country, "/register"),
+      title: `أنشئ متجرك ${country.inName} مجاناً | متجركو`,
+      description: `سجّل متجرك ${country.inName} في دقائق: اختر اسم المتجر ورابطه، والأسعار ب${country.currencyName}. بدون اشتراك شهري.`,
+      keywords: [`فتح متجر إلكتروني ${country.inName}`, "تسجيل متجركو"],
+      noindex: true,
+    },
+  ];
+}
+for (const country of countries) for (const page of countrySeoPages(country)) seoPages[page.path] = page;
+
+seoPages["/ar-sa/compare/salla"] = {
+  path: "/ar-sa/compare/salla",
+  locale: "ar-SA",
+  type: "website",
+  title: "متجركو أم سلة؟ مقارنة الأسعار والمزايا للتاجر في السعودية | متجركو",
+  description: `مقارنة صريحة بين متجركو وسلة في السعودية: بيسك مجانية وبلس 99 ريالاً وبرو 299 ريالاً في سلة، مقابل ${ABROAD_PER_ORDER_USD}$ على الطلب أو ${ABROAD_PRO_MONTHLY_USD}$ شهرياً في متجركو، ودرع للطلبات الوهمية.`,
+  keywords: ["بديل سلة", "متجركو أم سلة", "مقارنة سلة", "أسعار سلة", "منصة متاجر السعودية"],
+};
+
+seoPages["/answers"] = {
+  path: "/answers",
+  type: "website",
+  title: "متجركو في أسئلة وإجابات: الأسعار والدول والطلبات الوهمية | متجركو",
+  description: "إجابات مباشرة: كم تكلفة متجركو، هل هي متاحة في السعودية والخليج، ما بديل إيزي أوردرز، وكيف تقلل الطلبات الوهمية في متجر الدفع عند الاستلام.",
+  keywords: ["متجركو", "أرخص منصة متجر إلكتروني", "بديل إيزي أوردرز", "منصة متاجر الخليج", "الطلبات الوهمية"],
+};
+
 Object.assign(
   seoPages,
   Object.fromEntries(
@@ -342,6 +410,10 @@ const arabicOrderedSeoPages = [
   seoPages["/compare/shopify"],
   seoPages["/compare/salla"],
   seoPages["/compare/woocommerce"],
+  seoPages["/answers"],
+  // Country versions
+  ...countries.flatMap((country) => countrySeoPages(country).map((page) => seoPages[page.path])),
+  seoPages["/ar-sa/compare/salla"],
 ];
 
 const englishOrderedSeoPages = englishOrderedPaths
@@ -373,11 +445,13 @@ export function pageLocale(page: SeoPage) {
 }
 
 export function pageLanguageCode(page: SeoPage) {
-  return pageLocale(page) === "en" ? "en" : "ar-EG";
+  return pageLocale(page);
 }
 
 export function pageHtmlLang(page: SeoPage) {
-  return pageLocale(page) === "en" ? "en" : "ar";
+  const locale = pageLocale(page);
+  // The main Arabic site keeps lang="ar"; a country version names its country (ar-SA).
+  return locale === "en" ? "en" : locale === "ar-EG" ? "ar" : locale;
 }
 
 export function pageHtmlDir(page: SeoPage) {
@@ -385,7 +459,8 @@ export function pageHtmlDir(page: SeoPage) {
 }
 
 export function pageOgLocale(page: SeoPage) {
-  return pageLocale(page) === "en" ? "en_US" : "ar_EG";
+  const locale = pageLocale(page);
+  return locale === "en" ? "en_US" : locale.replace("-", "_");
 }
 
 export function siteNameForPage(page: SeoPage) {
@@ -398,7 +473,33 @@ export function socialImageAltForPage(page: SeoPage) {
     : "متجركو - منصة إنشاء متجر إلكتروني عربي";
 }
 
+/** The main-site page a country version's page matches ("/ar-sa/pricing" → "/pricing"). */
+const COUNTRY_TO_MAIN: Record<string, string> = { "": "/", "/pricing": "/pricing", "/register": "/register" };
+
+function countryAlternates(countryPage: string) {
+  return countries
+    .map((country) => ({ hreflang: country.locale, href: canonicalUrl(countryPath(country, countryPage)) }))
+    .filter((link) => seoPages[new URL(link.href).pathname]);
+}
+
 export function alternateLinksForPage(page: SeoPage) {
+  // Country versions: the same page in every country, plus Egypt and English where they exist.
+  const country = countryFromPath(page.path);
+  const countryPage = country ? stripCountryPrefix(page.path) : Object.entries(COUNTRY_TO_MAIN).find(([, main]) => main === stripLanguagePrefix(page.path))?.[0];
+  if (countryPage !== undefined && (country || COUNTRY_TO_MAIN[countryPage])) {
+    const main = COUNTRY_TO_MAIN[countryPage];
+    const others = countryAlternates(countryPage);
+    if (country && !others.length) return [];
+    const mainLinks = main && seoPages[main]
+      ? [
+          { hreflang: "ar-EG", href: canonicalUrl(main) },
+          ...(seoPages[localizePath(main, "en")] ? [{ hreflang: "en", href: canonicalUrl(localizePath(main, "en")) }] : []),
+        ]
+      : [];
+    if (!mainLinks.length && others.length < 2) return [];
+    return [...mainLinks, ...others, { hreflang: "x-default", href: mainLinks[0]?.href ?? others[0].href }];
+  }
+
   const basePath = stripLanguagePrefix(page.path);
   const arabicPath = localizePath(basePath, "ar");
   const englishPath = localizePath(basePath, "en");
@@ -448,6 +549,65 @@ function serviceOffers(language: "ar" | "en") {
   }));
 }
 
+/** Egypt and the Gulf countries that have their own version of the site. */
+const AREA_SERVED = [
+  { "@type": "Country", name: "Egypt" },
+  ...countries.map((country) => ({ "@type": "Country", name: country.englishName })),
+];
+
+/** Prices for a store outside Egypt, billed in US dollars. */
+export function abroadOffers(country: Country) {
+  const url = canonicalUrl(countryPath(country, "/pricing"));
+  return [
+    {
+      "@type": "Offer",
+      name: "البداية",
+      price: "0",
+      priceCurrency: "USD",
+      description: `بدون اشتراك شهري، ${ABROAD_PER_ORDER_USD}$ على كل طلب (حوالي ${localMoney(country, ABROAD_PER_ORDER_USD)})، والطلبات الوهمية لا تُحتسب`,
+      url,
+      priceSpecification: { "@type": "UnitPriceSpecification", price: String(ABROAD_PER_ORDER_USD), priceCurrency: "USD", referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitText: "order" } },
+      eligibleRegion: { "@type": "Country", name: country.englishName },
+    },
+    {
+      "@type": "Offer",
+      name: "احترافي",
+      price: String(ABROAD_PRO_MONTHLY_USD),
+      priceCurrency: "USD",
+      description: `${ABROAD_PRO_MONTHLY_USD}$ شهرياً بدون رسوم على الطلب`,
+      url,
+      priceSpecification: { "@type": "UnitPriceSpecification", price: String(ABROAD_PRO_MONTHLY_USD), priceCurrency: "USD", unitCode: "MON", billingIncrement: 1 },
+      eligibleRegion: { "@type": "Country", name: country.englishName },
+    },
+  ];
+}
+
+/** A FAQPage schema for any list of questions. */
+export function questionsSchema(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
+
+export function countryQuestionsSchema(page: SeoPage) {
+  const country = countryFromPath(page.path);
+  if (page.path === "/answers") return questionsSchema(answers);
+  if (country && stripCountryPrefix(page.path) === "") return questionsSchema(countryFaqs(country));
+  return null;
+}
+
+function offersForPage(page: SeoPage | undefined, isEnglish: boolean) {
+  const country = page ? countryFromPath(page.path) : undefined;
+  if (country) return abroadOffers(country);
+  return isEnglish ? EN_SERVICE_OFFERS : SERVICE_OFFERS;
+}
+
 const SERVICE_OFFERS = serviceOffers("ar");
 const EN_SERVICE_OFFERS = serviceOffers("en");
 
@@ -471,10 +631,7 @@ export function organizationSchema() {
       addressRegion: "القاهرة",
       addressCountry: "EG",
     },
-    areaServed: {
-      "@type": "Country",
-      name: "Egypt",
-    },
+    areaServed: AREA_SERVED,
     sameAs: [
       "https://www.facebook.com/matgarko2/",
       "https://wa.me/201080312538",
@@ -486,7 +643,7 @@ export function organizationSchema() {
         contactType: "customer support",
         telephone: "+20-108-031-2538",
         email: CONTACT_EMAIL,
-        areaServed: "EG",
+        areaServed: ["EG", ...countries.map((country) => country.code)],
         availableLanguage: ["Arabic", "English"],
       },
     ],
@@ -561,7 +718,7 @@ export function serviceSchema(page?: SeoPage) {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${SITE_URL}/#ecommerce-service`,
-    name: "متجركو - إنشاء متجر إلكتروني في مصر",
+    name: "متجركو - إنشاء متجر إلكتروني في مصر والخليج",
     alternateName: "Matgarko ecommerce store builder",
     serviceType: "Ecommerce platform",
     category: "BusinessApplication",
@@ -569,10 +726,7 @@ export function serviceSchema(page?: SeoPage) {
     provider: {
       "@id": `${SITE_URL}/#organization`,
     },
-    areaServed: {
-      "@type": "Country",
-      name: "Egypt",
-    },
+    areaServed: AREA_SERVED,
     audience: {
       "@type": "BusinessAudience",
       audienceType: "Solo merchants and small businesses in Egypt and the Arab world",
@@ -580,7 +734,7 @@ export function serviceSchema(page?: SeoPage) {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Matgarko pricing plans",
-      itemListElement: isEnglish ? EN_SERVICE_OFFERS : SERVICE_OFFERS,
+      itemListElement: offersForPage(page, isEnglish),
     },
     termsOfService: canonicalUrl(isEnglish ? "/en/terms" : "/terms"),
     url: SITE_URL,
@@ -652,11 +806,11 @@ export function softwareSchema(page?: SeoPage) {
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: SITE_URL,
-    inLanguage: isEnglish ? "en" : "ar-EG",
+    inLanguage: page ? pageLocale(page) : "ar-EG",
     publisher: {
       "@id": `${SITE_URL}/#organization`,
     },
-    offers: isEnglish ? EN_SERVICE_OFFERS : SERVICE_OFFERS,
+    offers: offersForPage(page, isEnglish),
     featureList: isEnglish ? [
       "Create an online store without coding",
       "Manage products and orders",
@@ -819,7 +973,8 @@ function markdownPageList(pages = sitemapPages) {
 
 export function llmsTxt(lastmod = new Date().toISOString().slice(0, 10)) {
   const commercialPages = sitemapPages.filter((page) =>
-    ["/", "/pricing", "/solutions", "/themes", "/integrations", "/getting-started", "/compare"].includes(stripLanguagePrefix(page.path)) ||
+    ["/", "/pricing", "/solutions", "/themes", "/integrations", "/getting-started", "/compare", "/answers"].includes(stripLanguagePrefix(page.path)) ||
+    (countryFromPath(page.path) !== undefined && !page.path.endsWith("/register")) ||
     stripLanguagePrefix(page.path).startsWith("/compare/"),
   );
   const articlePages = sitemapPages.filter((page) => page.type === "article");
@@ -830,9 +985,10 @@ export function llmsTxt(lastmod = new Date().toISOString().slice(0, 10)) {
 
 Last updated: ${lastmod}
 Official website: ${SITE_URL}/
-Languages: Arabic (Egypt) and English
-Primary market: Egypt, with English content for MENA-facing discovery
-Pricing: ${pricingSummary("en")}
+Languages: Arabic and English
+Markets: Egypt (main site), Saudi Arabia, United Arab Emirates, Kuwait, Qatar, Oman and Bahrain (country versions), and stores in every other Arab country
+Pricing in Egypt: ${pricingSummary("en")}
+Pricing outside Egypt (billed in US dollars): Starter $${ABROAD_PER_ORDER_USD} per order with no monthly fee; Pro $${ABROAD_PRO_MONTHLY_USD} per month with no per-order fee. Fake orders flagged by the fake-order shield and then canceled are not billed, nor are orders the merchant records by hand.
 Mobile app availability: ${positioning.en.appNotice}
 Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 
@@ -842,7 +998,17 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
 - Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and style one ready mobile-first store look with their own colours (palettes grouped by business type), logo, font, and photos.
-- Differentiators: mobile-first, Arabic-first, built for solo merchants, EGP pricing, and no technical experience required.
+- Differentiators: a flat fee per order with fake orders free, a fake-order shield for cash on delivery, Meta Pixel with Conversions API, an Android app for merchants, Arabic-first, and no technical experience required.
+- Compared with EasyOrders: 2 EGP per order versus $0.04 (about 2.24 EGP) charged on every order including canceled ones; Pro 2,000 EGP versus $100 (about 5,600 EGP) a month.
+- Compared with Salla in Saudi Arabia: Salla has a free Basic plan, Plus at 99 SAR and Pro at 299 SAR a month, built-in online payments and a large app store; Matgarko is simpler and cheaper for cash-on-delivery sellers ($${ABROAD_PRO_MONTHLY_USD}, about 131 SAR, for Pro) and does not bill fake orders.
+
+## Country Versions
+
+${countries.map((country) => `- ${country.englishName}: ${canonicalUrl(countryPath(country, ""))} (pricing ${canonicalUrl(countryPath(country, "/pricing"))}; about ${localMoney(country, ABROAD_PER_ORDER_USD)} per order)`).join("\n")}
+
+## Direct Answers
+
+${answers.map((item) => `### ${item.question}\n\n${item.answer}`).join("\n\n")}
 - Not a marketplace: Matgarko provides software for merchants to create their own stores.
 
 ## Best Pages For AI Answers
@@ -909,8 +1075,9 @@ Mobile app availability: ${positioning.en.appNotice}
 
 - Name: Matgarko / متجركو
 - Website: ${SITE_URL}/
-- Market: Egypt
-- Languages: Arabic (Egypt) and English
+- Markets: Egypt, Saudi Arabia, United Arab Emirates, Kuwait, Qatar, Oman, Bahrain and the rest of the Arab world
+- Languages: Arabic and English
+- Pricing outside Egypt: $${ABROAD_PER_ORDER_USD} per order, or Pro $${ABROAD_PRO_MONTHLY_USD} a month
 - Email: ${CONTACT_EMAIL}
 - WhatsApp: ${WHATSAPP_URL}
 - Service: ecommerce store creation and store management software.

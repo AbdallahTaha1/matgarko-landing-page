@@ -7,6 +7,7 @@ import {
   alternateLinksForPage,
   breadcrumbSchema,
   canonicalUrl,
+  countryQuestionsSchema,
   faqSchema,
   getSeoPage,
   indexableSeoPages,
@@ -52,6 +53,7 @@ function schemaForPage(page: SeoPage) {
     ...(pageArticleSchema ? [pageArticleSchema] : []),
     ...(page.path === "/" || page.path === "/en" ? [faqSchema(page)] : []),
     ...(page.path === "/pricing" || page.path === "/en/pricing" ? [pricingFaqSchema(page)] : []),
+    ...(countryQuestionsSchema(page) ? [countryQuestionsSchema(page)] : []),
   ];
 }
 
