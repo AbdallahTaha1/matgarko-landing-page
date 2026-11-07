@@ -50,6 +50,29 @@ export type HomeContent = {
     compare: string;
     note: string;
   };
+  /** Three numbers right under the hero. */
+  proof: Array<{ value: string; label: string }>;
+  /** The fake-order shield, shown as an order list with warning chips. */
+  shield: {
+    kicker: string;
+    title: string;
+    lead: string;
+    points: string[];
+    orders: Array<{ number: string; place: string; amount: string; flag?: string; tone?: "warn" | "danger" }>;
+    listTitle: string;
+    free: string;
+  };
+  /** Matgarko against EasyOrders, the rival merchants compare with. */
+  versus: {
+    kicker: string;
+    title: string;
+    lead: string;
+    us: string;
+    them: string;
+    rows: Array<{ label: string; us: string; them: string }>;
+    note: string;
+    link: string;
+  };
   faq: {
     kicker: string;
     title: string;
@@ -73,7 +96,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "أضف منتجاتك، استقبل طلباتك، وتابع مبيعاتك في لوحة واحدة بالعربي، بدون خبرة تقنية أو فريق عمل.",
       primaryCta: "أنشئ متجرك مجاناً",
       secondaryCta: "شوف الأسعار",
-      trust: ["بدون بطاقة ائتمان", "ابدأ بـ 0 ج.م", "2 ج.م بس على الطلب"],
+      trust: ["بدون اشتراك شهري", "2 ج.م بس على الطلب", "الطلبات الوهمية ببلاش"],
       mock: {
         storeName: "متجر نور",
         storeTag: "عطور وعناية",
@@ -103,7 +126,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         { title: "الطلبات", text: "كل طلب جديد بحالته وبيانات العميل، مع زر اتصال وواتساب، فاتورة PDF، وتصدير الطلبات لملف Excel." },
         { title: "الدفع والشحن", text: "استقبل الطلبات بالدفع عند الاستلام، وحدد سعر التوصيل لكل محافظة ومنطقة." },
         { title: "العروض والكوبونات", text: "كوبونات خصم، أسعار قبل وبعد الخصم بمواعيد، وعداد تنازلي للعرض في الصفحة الرئيسية." },
-        { title: "إعلانات فيسبوك وإنستجرام", text: "اربط Meta Pixel وConversions API وGoogle Analytics بنفسك، والمشاهدات والإضافة للسلة والشراء توصل لإعلاناتك." },
+        { title: "إعلانات فيسبوك وإنستجرام", text: "اربط بكسل ميتا وتحليلات جوجل بنفسك، والمشاهدات والإضافة للسلة والشراء توصل لإعلاناتك، كمان من السيرفر (Conversions API)." },
         { title: "«اطلب الآن» بضغطة", text: "العميل يطلب من صفحة المنتج على طول، والمتجر خفيف ومتصمم يفتح في متصفح فيسبوك وتيك توك حتى على الموبايلات القديمة." },
         { title: "الإحصائيات والأرباح", text: "مبيعاتك وأرباحك بعد التكلفة، الزيارات جاية منين، الأكثر مبيعاً، واللي عملاءك بيدوروا عليه." },
         { title: "تصميم متجرك", text: "رتّب صفحتك الرئيسية من أكتر من 20 نوع قسم، واختار الألوان والخط وشكل الصور وزر واتساب العائم." },
@@ -133,6 +156,45 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       compare: "قارن الباقات بالتفصيل",
       note: "سعر ثابت على الطلب مهما كانت قيمته، والطلبات الوهمية وطلبات واتساب اللي بتسجلها بنفسك ببلاش.",
     },
+    proof: [
+      { value: "2 ج.م", label: "على الطلب، مهما كانت قيمته" },
+      { value: "0 ج.م", label: "على الطلب الوهمي" },
+      { value: "5 دقايق", label: "ومتجرك جاهز" },
+    ],
+    shield: {
+      kicker: "درع الطلبات الوهمية",
+      title: "اعرف الطلب الوهمي قبل ما تشحنه",
+      lead: "كل طلب بيتفحص لحظة ما يتعمل، وبيظهرلك تنبيه جنبه قبل ما تأكده. والطلب الوهمي اللي تلغيه مش بتدفع عليه حاجة.",
+      points: [
+        "«رقم مكرر»: نفس الرقم له طلب تاني مفتوح في آخر 24 ساعة.",
+        "«طلبات كتير»: 3 طلبات من نفس الرقم في يوم، أو 6 من نفس الاتصال في ساعة.",
+        "«رفض سابقًا»: صاحب الرقم رفض يستلم قبل كده.",
+        "احظر أي رقم بضغطة، فمايقدرش يطلب من متجرك تاني.",
+      ],
+      orders: [
+        { number: "#1048", place: "مدينة نصر", amount: "450 ج.م" },
+        { number: "#1049", place: "مدينة نصر", amount: "450 ج.م", flag: "رقم مكرر", tone: "warn" },
+        { number: "#1050", place: "الجيزة", amount: "780 ج.م", flag: "رفض سابقًا", tone: "danger" },
+        { number: "#1051", place: "الإسكندرية", amount: "320 ج.م" },
+      ],
+      listTitle: "طلبات النهارده",
+      free: "الطلب الوهمي اللي اتعلّم عليه واتلغى = 0 ج.م",
+    },
+    versus: {
+      kicker: "قبل ما تختار",
+      title: "قارن بنفسك مع إيزي أوردرز",
+      lead: "نفس فكرة الدفع على الطلب، بس أرخص، ومن غير ما تدفع على الطلبات الوهمية.",
+      us: "متجركو",
+      them: "إيزي أوردرز",
+      rows: [
+        { label: "رسوم الطلب", us: "2 ج.م", them: "4 سنت (حوالي 2.24 ج.م)" },
+        { label: "الطلب الوهمي الملغي", us: "ببلاش", them: "بيتحسب" },
+        { label: "باقة بدون رسوم على الطلب", us: "2,000 ج.م شهرياً", them: "100 دولار (حوالي 5,600 ج.م)" },
+        { label: "العملة", us: "جنيه مصري", them: "دولار" },
+      ],
+      note: "أسعار إيزي أوردرز من صفحة أسعارهم في 7 نوفمبر 2026، بسعر 56 ج.م للدولار.",
+      link: "المقارنة كاملة",
+    },
     faq: {
       kicker: "أسئلة شائعة",
       title: "أسئلة شائعة",
@@ -154,7 +216,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "Add products, take orders, and track sales in one Arabic dashboard, with no technical experience or team.",
       primaryCta: "Create your store free",
       secondaryCta: "See pricing",
-      trust: ["No credit card", "Start at 0 EGP", "Just 2 EGP per order"],
+      trust: ["No monthly fee", "Just 2 EGP per order", "Fake orders are free"],
       mock: {
         storeName: "Nour Store",
         storeTag: "Perfume and care",
@@ -213,6 +275,45 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       included: "Every plan includes",
       compare: "Compare plans in detail",
       note: "A flat fee per order whatever its value; fake orders and WhatsApp orders you record yourself are free.",
+    },
+    proof: [
+      { value: "2 EGP", label: "per order, whatever its value" },
+      { value: "0 EGP", label: "for a fake order" },
+      { value: "5 min", label: "to a ready store" },
+    ],
+    shield: {
+      kicker: "Fake-order shield",
+      title: "Spot a fake order before you ship it",
+      lead: "Every order is checked the moment it is placed, and a warning shows next to it before you confirm. A fake order you cancel costs you nothing.",
+      points: [
+        "“Repeated number”: the same number has another open order from the last 24 hours.",
+        "“Many orders”: 3 orders from one number in a day, or 6 from one connection in an hour.",
+        "“Refused before”: this number refused a delivery before.",
+        "Block any number in one tap so it can no longer order from your store.",
+      ],
+      orders: [
+        { number: "#1048", place: "Nasr City", amount: "450 EGP" },
+        { number: "#1049", place: "Nasr City", amount: "450 EGP", flag: "Repeated number", tone: "warn" },
+        { number: "#1050", place: "Giza", amount: "780 EGP", flag: "Refused before", tone: "danger" },
+        { number: "#1051", place: "Alexandria", amount: "320 EGP" },
+      ],
+      listTitle: "Today's orders",
+      free: "A flagged order you cancel = 0 EGP",
+    },
+    versus: {
+      kicker: "Before you choose",
+      title: "Compare with EasyOrders yourself",
+      lead: "The same pay-per-order idea, cheaper, and you never pay for fake orders.",
+      us: "Matgarko",
+      them: "EasyOrders",
+      rows: [
+        { label: "Fee per order", us: "2 EGP", them: "4 cents (about 2.24 EGP)" },
+        { label: "Canceled fake order", us: "Free", them: "Billed" },
+        { label: "Plan with no per-order fee", us: "2,000 EGP a month", them: "$100 (about 5,600 EGP)" },
+        { label: "Currency", us: "Egyptian pound", them: "US dollar" },
+      ],
+      note: "EasyOrders prices from their pricing page on 7 November 2026, at 56 EGP to the dollar.",
+      link: "Full comparison",
     },
     faq: {
       kicker: "FAQ",

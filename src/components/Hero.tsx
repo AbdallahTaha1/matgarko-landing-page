@@ -30,7 +30,7 @@ export function Hero({ language }: { language: AppLanguage }) {
 
       <div className="container-x relative pb-10 pt-8 sm:py-14 lg:py-20 xl:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-8">
-          <div className="text-start">
+          <div className="min-w-0 text-start">
             <span className="section-kicker">
               <span className="relative flex h-2 w-2" aria-hidden="true">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
@@ -48,6 +48,25 @@ export function Hero({ language }: { language: AppLanguage }) {
             </h1>
 
             <p className="mt-4 max-w-lg text-base leading-7 text-gray-600 sm:mt-5 sm:text-lg sm:leading-8">{t.lead}</p>
+
+            {/* Phones get a small live-order card; the full phone mockup is for wide screens. */}
+            <div className="mt-5 flex items-stretch gap-2.5 lg:hidden" aria-hidden="true">
+              <div className="flex min-w-0 flex-1 items-center gap-3 rounded-2xl border border-gray-200 bg-white/90 p-3 shadow-lg shadow-gray-950/5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+                  <ShoppingBag className="h-5 w-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="whitespace-nowrap text-sm font-bold text-gray-950">{t.mock.order.title}</p>
+                  <p className="truncate text-xs text-gray-500">{t.mock.order.place} · {t.mock.order.method}</p>
+                </div>
+                <span className="num ms-auto shrink-0 text-sm font-extrabold text-gray-950">{t.mock.order.amount}</span>
+              </div>
+              <div className="hidden shrink-0 flex-col justify-center rounded-2xl bg-gray-950 px-3 py-2 text-white shadow-lg shadow-gray-950/20 min-[420px]:flex">
+                <p className="text-[10px] text-gray-400">{t.mock.sales.label}</p>
+                <p className="num whitespace-nowrap text-sm font-extrabold">{t.mock.sales.value}</p>
+                <span className="mt-0.5 inline-flex items-center gap-0.5 text-[10px] font-bold text-emerald-300"><TrendingUp className="h-3 w-3" />{t.mock.sales.delta}</span>
+              </div>
+            </div>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a href={store?.adminUrl || (language === "en" ? "/en/register" : SIGNUP_URL)} className="btn btn-primary">
@@ -84,7 +103,7 @@ export function Hero({ language }: { language: AppLanguage }) {
                   <ShoppingBag className="h-5 w-5" />
                 </span>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-bold text-gray-950">{t.mock.order.title}</p>
+                  <p className="whitespace-nowrap text-sm font-bold text-gray-950">{t.mock.order.title}</p>
                   <p className="truncate text-xs text-gray-500">{t.mock.order.place}</p>
                 </div>
               </div>
