@@ -22,7 +22,7 @@ Pricing lives in one place, `src/data/pricing.ts`, and feeds the pricing pages, 
 
 | Plan    | Monthly fee | Commission per completed order |
 | ------- | ----------- | ------------------------------ |
-| Starter | 0 EGP       | 2 EGP per order                |
+| Starter | 0 EGP       | 3 EGP per order                |
 | Pro     | 2,000 EGP   | none                           |
 
 The Growth plan was retired on 2026-10-23. The pricing page also has a cost calculator (`src/components/PricingCalculator.tsx`) that reads the same data.

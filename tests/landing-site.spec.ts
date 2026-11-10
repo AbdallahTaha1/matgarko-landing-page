@@ -66,7 +66,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     await page.getByRole('navigation').getByRole('link', { name: 'الأسعار' }).click();
     await page.waitForURL('**/pricing');
-    await expect(page.getByRole('heading', { level: 1, name: '2 ج.م على الطلب، والطلبات الوهمية ببلاش' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '3 ج.م على الطلب، والطلبات الوهمية ببلاش' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'البداية', exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'احترافي', exact: true })).toBeVisible();
   });
@@ -112,7 +112,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(llmsText).toContain('## Best Pages For AI Answers');
     await expect(llmsText).toContain('https://matgarko.com/pricing');
     await expect(llmsText).toContain('Languages: Arabic (Egypt) and English');
-    await expect(llmsText).toContain('a flat 2 EGP per order, and fake orders are free');
+    await expect(llmsText).toContain('a flat 3 EGP per order, and fake orders are free');
     await expect(llmsText).toContain('https://matgarko.com/en/blog/how-to-create-online-store-egypt');
 
     const llmsFull = await request.get('/llms-full.txt');
@@ -191,7 +191,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
   test('english route family is crawlable with localized content', async ({ page }) => {
     await page.goto('/en/pricing');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/en/pricing');
-    await expect(page.getByRole('heading', { level: 1, name: '2 EGP per order, and fake orders are free' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '3 EGP per order, and fake orders are free' })).toBeVisible();
     await expect(page.getByText('Fake orders are free').first()).toBeVisible();
     await expect(page.getByText('2,000 EGP').first()).toBeVisible();
 

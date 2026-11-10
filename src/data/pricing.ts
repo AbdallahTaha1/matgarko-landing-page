@@ -36,7 +36,7 @@ export const plans: Plan[] = [
   {
     id: "free",
     monthly: 0,
-    perOrderFee: 2,
+    perOrderFee: 3,
     popular: true,
     name: { ar: "البداية", en: "Starter" },
     tagline: { ar: "ابدأ بدون أي رسوم شهرية", en: "Start with no monthly fee" },
@@ -70,12 +70,12 @@ export function formatEgp(value: number, language: AppLanguage) {
   return language === "ar" ? `${amount} ج.م` : `${amount} EGP`;
 }
 
-/** Per-order fee label such as "2 ج.م على الطلب" or "2 EGP per order". */
+/** Per-order fee label such as "3 ج.م على الطلب" or "3 EGP per order". */
 export function perOrderFeeLabel(plan: Plan, language: AppLanguage) {
   return language === "ar" ? `${formatEgp(plan.perOrderFee, language)} على الطلب` : `${formatEgp(plan.perOrderFee, language)} per order`;
 }
 
-/** Short price label such as "2,000 ج.م" or "0 EGP + 2 EGP per order". */
+/** Short price label such as "2,000 ج.م" or "0 EGP + 3 EGP per order". */
 export function planPriceLabel(plan: Plan, language: AppLanguage) {
   return plan.perOrderFee > 0 ? `${formatEgp(plan.monthly, language)} + ${perOrderFeeLabel(plan, language)}` : formatEgp(plan.monthly, language);
 }
@@ -101,12 +101,12 @@ export function breakevenOrders(current: Plan, upgrade: Plan) {
 const free = getPlan("free");
 const pro = getPlan("pro");
 
-/** Pro is cheaper than Starter above this many orders a month (2,000 ÷ 2 = 1,000); both cost the same at it. */
-export const PRO_CHEAPER_ABOVE_ORDERS = tieOrders(free, pro);
+/** Pro is cheaper than Starter above this many orders a month (2,000 ÷ 3 ≈ 666.7, so from the 667th order). */
+export const PRO_CHEAPER_ABOVE_ORDERS = Math.floor(tieOrders(free, pro));
 
 export const FREE_TO_PRO_ORDERS = breakevenOrders(free, pro);
 
-/** "1,000", for copy that quotes the tie point. */
+/** "666", for copy that quotes the break-even point. */
 export const PRO_CHEAPER_ABOVE_LABEL = PRO_CHEAPER_ABOVE_ORDERS.toLocaleString("en-US");
 
 export const costTableOrders = [50, 100, 250, 500, 1000, 2000];
@@ -142,7 +142,7 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     },
     {
       question: "متى أنتقل من البداية إلى احترافي؟",
-      answer: `احترافي بـ ${formatEgp(pro.monthly, "ar")} شهرياً بدون رسوم على الطلب، فيبقى أوفر من البداية لو طلباتك أكتر من ${PRO_CHEAPER_ABOVE_LABEL} طلب في الشهر (${formatEgp(pro.monthly, "ar")} ÷ ${formatEgp(free.perOrderFee, "ar")}). عند ${PRO_CHEAPER_ABOVE_LABEL} طلب التكلفة متساوية في الباقتين.`,
+      answer: `احترافي بـ ${formatEgp(pro.monthly, "ar")} شهرياً بدون رسوم على الطلب، فيبقى أوفر من البداية لو طلباتك أكتر من ${PRO_CHEAPER_ABOVE_LABEL} طلب في الشهر (${formatEgp(pro.monthly, "ar")} ÷ ${formatEgp(free.perOrderFee, "ar")}).`,
     },
     {
       question: "هل أقدر ألغي الاشتراك في أي وقت؟",
@@ -172,7 +172,7 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     },
     {
       question: "When should I move from Starter to Pro?",
-      answer: `Pro is ${formatEgp(pro.monthly, "en")} a month with no per-order fee, so it is cheaper than Starter above ${PRO_CHEAPER_ABOVE_LABEL} orders a month (${formatEgp(pro.monthly, "en")} ÷ ${formatEgp(free.perOrderFee, "en")}). At exactly ${PRO_CHEAPER_ABOVE_LABEL} orders both plans cost the same.`,
+      answer: `Pro is ${formatEgp(pro.monthly, "en")} a month with no per-order fee, so it is cheaper than Starter above ${PRO_CHEAPER_ABOVE_LABEL} orders a month (${formatEgp(pro.monthly, "en")} ÷ ${formatEgp(free.perOrderFee, "en")}).`,
     },
     {
       question: "Can I cancel at any time?",

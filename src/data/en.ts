@@ -77,7 +77,7 @@ export const englishFaqs = [
   {
     question: "Can I start before paying monthly?",
     answer:
-      "Yes. Starter has no monthly fee or expiring trial: a flat 2 EGP per order, and fake orders are free. Pro costs 2,000 EGP monthly with no per-order fee.",
+      "Yes. Starter has no monthly fee or expiring trial: a flat 3 EGP per order, and fake orders are free. Pro costs 2,000 EGP monthly with no per-order fee.",
   },
   {
     question: "Does Matgarko support cash on delivery?",
@@ -523,7 +523,7 @@ export const englishComparisons: Record<string, EnglishComparisonContent> = {
       "Choose Matgarko if you want a simple storefront, clear local pricing, and a launch path focused on small teams that are moving from social selling to structured ecommerce.",
     rows: [
       { factor: "Best fit", matgarko: "New and growing merchants that want an Arabic-first store.", competitor: "Merchants who already prefer the EasyOrders workflow." },
-      { factor: "Pricing context", matgarko: "Starts free at a flat 2 EGP per order, with fake orders free; Pro is 2,000 EGP a month with no per-order fee.", competitor: "$0.04 per order, charged on every order including canceled ones, or $100 a month (about 5,600 EGP). Review current EasyOrders pricing before deciding." },
+      { factor: "Pricing context", matgarko: "Starts free at a flat 3 EGP per order, with fake orders free; Pro is 2,000 EGP a month with no per-order fee.", competitor: "$0.04 per order, charged on every order including canceled ones, or $100 a month (about 5,600 EGP). Review current EasyOrders pricing before deciding." },
       { factor: "Setup style", matgarko: "No-code setup with storefront, products, orders, and local workflows.", competitor: "Platform-specific setup and feature set." },
       { factor: "Market focus", matgarko: "Egypt and Arabic-speaking commerce workflows.", competitor: "Egypt-focused ecommerce operations." },
     ],

@@ -1,3 +1,14 @@
+# Pricing update — 2026-11-10
+
+Starter goes from 2 to 3 EGP per order; nothing else changes (fake orders flagged by the shield
+and then canceled, and orders the merchant records by hand, stay free; Pro 2,000 EGP; stores
+outside Egypt $0.05). Pro is now cheaper than Starter from the 667th order a month. At 3 EGP
+Matgarko is no longer cheaper per order than EasyOrders ($0.04, about 2.24 EGP), so the site
+stops saying so: the EasyOrders comparison now leads with free fake orders and Pro at about a
+third of their $100 plan.
+
+---
+
 # Pricing update — 2026-11-07
 
 No more percentage. Starter: 0 EGP/month + a flat 2 EGP per order, whatever the order's value.

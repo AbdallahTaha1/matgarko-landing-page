@@ -14,26 +14,25 @@ test('Starter charges a flat fee per order and Pro none', () => {
   const pro = getPlan('pro');
   expect(plans.map(plan => plan.id)).toEqual(['free', 'pro']);
   expect(starter.monthly).toBe(0);
-  expect(starter.perOrderFee).toBe(2);
+  expect(starter.perOrderFee).toBe(3);
   expect(pro.monthly).toBe(2000);
   expect(pro.perOrderFee).toBe(0);
   expect(monthlyCost(starter, 0)).toBe(0);
-  expect(monthlyCost(starter, 100)).toBe(200);
+  expect(monthlyCost(starter, 100)).toBe(300);
   expect(monthlyCost(pro, 100)).toBe(2000);
   expect(monthlyCost(pro, 5000)).toBe(2000);
   expect(formatEgp(2.5, 'ar')).toBe('2.5 ج.م');
   expect(formatEgp(2000, 'en')).toBe('2,000 EGP');
 });
 
-test('Pro is cheaper than Starter above 1,000 orders a month', () => {
+test('Pro is cheaper than Starter from the 667th order a month', () => {
   const starter = getPlan('free');
   const pro = getPlan('pro');
-  expect(PRO_CHEAPER_ABOVE_ORDERS).toBe(1000);
-  expect(breakevenOrders(starter, pro)).toBe(1001);
-  expect(FREE_TO_PRO_ORDERS).toBe(1001);
-  expect(monthlyCost(starter, 999)).toBeLessThan(monthlyCost(pro, 999));
-  expect(monthlyCost(starter, 1000)).toBe(monthlyCost(pro, 1000));
-  expect(monthlyCost(starter, 1001)).toBeGreaterThan(monthlyCost(pro, 1001));
+  expect(PRO_CHEAPER_ABOVE_ORDERS).toBe(666);
+  expect(breakevenOrders(starter, pro)).toBe(667);
+  expect(FREE_TO_PRO_ORDERS).toBe(667);
+  expect(monthlyCost(starter, 666)).toBeLessThan(monthlyCost(pro, 666));
+  expect(monthlyCost(starter, 667)).toBeGreaterThan(monthlyCost(pro, 667));
 });
 
 for (const language of ['ar', 'en'] as const) {
@@ -46,7 +45,7 @@ for (const language of ['ar', 'en'] as const) {
     const main = page.locator('main');
     const cards = page.locator('article');
     await expect(cards).toHaveCount(2);
-    await expect(cards.nth(0)).toContainText(language === 'ar' ? '2 ج.م' : '2 EGP');
+    await expect(cards.nth(0)).toContainText(language === 'ar' ? '3 ج.م' : '3 EGP');
     await expect(cards.nth(0)).toContainText(language === 'ar' ? 'الطلب الوهمي ببلاش' : 'Fake orders are free');
     await expect(cards.nth(1)).toContainText(language === 'ar' ? 'بدون رسوم' : 'No fee');
     await expect(cards.nth(1)).toContainText('2,000');
@@ -59,15 +58,15 @@ for (const language of ['ar', 'en'] as const) {
     await expect(main).toContainText(language === 'ar' ? 'درع الطلبات الوهمية' : 'fake-order shield');
     await expect(main).toContainText(language === 'ar' ? '«طلب جديد»' : '«New order»');
 
-    // Defaults: 100 orders. Starter 200, Pro 2,000, so Starter saves 1,800.
+    // Defaults: 100 orders. Starter 300, Pro 2,000, so Starter saves 1,700.
     const calculator = page.locator('h3', { hasText: language === 'ar' ? 'احسب تكلفتك' : 'Work out your cost' }).locator('xpath=ancestor::div[contains(@class,"rounded-2xl")][1]');
-    await expect(calculator).toContainText(language === 'ar' ? 'باقة البداية أوفر لك بـ 1,800 ج.م' : 'Starter saves you 1,800 EGP');
+    await expect(calculator).toContainText(language === 'ar' ? 'باقة البداية أوفر لك بـ 1,700 ج.م' : 'Starter saves you 1,700 EGP');
     await expect(calculator.getByRole('slider')).toHaveCount(1);
     const orders = calculator.getByLabel(language === 'ar' ? 'عدد الطلبات في الشهر' : 'Orders per month');
     await orders.fill('1000');
-    await expect(calculator).toContainText(language === 'ar' ? 'التكلفة متساوية في الباقتين' : 'Both plans cost the same');
-    await orders.fill('1500');
     await expect(calculator).toContainText(language === 'ar' ? 'باقة احترافي توفر عليك 1,000 ج.م' : 'Pro saves you 1,000 EGP');
+    await orders.fill('1500');
+    await expect(calculator).toContainText(language === 'ar' ? 'باقة احترافي توفر عليك 2,500 ج.م' : 'Pro saves you 2,500 EGP');
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.screenshot({ path: `test-results/pricing-${language}-mobile.png`, fullPage: true });

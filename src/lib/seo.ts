@@ -60,7 +60,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/",
     title: "إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو",
     description:
-      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 2 ج.م بس على الطلب والطلبات الوهمية ببلاش.",
+      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 3 ج.م بس على الطلب والطلبات الوهمية ببلاش.",
     keywords: [
       "إنشاء متجر إلكتروني",
       "متجر إلكتروني مصر",
@@ -341,7 +341,7 @@ seoPages["/answers"] = {
   type: "website",
   title: "متجركو في أسئلة وإجابات: الأسعار والدول والطلبات الوهمية | متجركو",
   description: "إجابات مباشرة: كم تكلفة متجركو، هل هي متاحة في السعودية والخليج، ما بديل إيزي أوردرز، وكيف تقلل الطلبات الوهمية في متجر الدفع عند الاستلام.",
-  keywords: ["متجركو", "أرخص منصة متجر إلكتروني", "بديل إيزي أوردرز", "منصة متاجر الخليج", "الطلبات الوهمية"],
+  keywords: ["متجركو", "تكلفة متجر إلكتروني", "بديل إيزي أوردرز", "منصة متاجر الخليج", "الطلبات الوهمية"],
 };
 
 Object.assign(
@@ -999,7 +999,7 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
 - Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and style one ready mobile-first store look with their own colours (palettes grouped by business type), logo, font, and photos.
 - Differentiators: a flat fee per order with fake orders free, a fake-order shield for cash on delivery, Meta Pixel with Conversions API, an Android app for merchants, Arabic-first, and no technical experience required.
-- Compared with EasyOrders: 2 EGP per order versus $0.04 (about 2.24 EGP) charged on every order including canceled ones; Pro 2,000 EGP versus $100 (about 5,600 EGP) a month.
+- Compared with EasyOrders: 3 EGP per order versus $0.04 (about 2.24 EGP), but EasyOrders charges every order including canceled and fake ones while Matgarko does not bill shield-flagged fake orders; Pro 2,000 EGP versus $100 (about 5,600 EGP) a month.
 - Compared with Salla in Saudi Arabia: Salla has a free Basic plan, Plus at 99 SAR and Pro at 299 SAR a month, built-in online payments and a large app store; Matgarko is simpler and cheaper for cash-on-delivery sellers ($${ABROAD_PRO_MONTHLY_USD}, about 131 SAR, for Pro) and does not bill fake orders.
 
 ## Country Versions

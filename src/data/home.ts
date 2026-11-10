@@ -96,7 +96,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "أضف منتجاتك، استقبل طلباتك، وتابع مبيعاتك في لوحة واحدة بالعربي، بدون خبرة تقنية أو فريق عمل.",
       primaryCta: "أنشئ متجرك مجاناً",
       secondaryCta: "شوف الأسعار",
-      trust: ["بدون اشتراك شهري", "2 ج.م بس على الطلب", "الطلبات الوهمية ببلاش"],
+      trust: ["بدون اشتراك شهري", "3 ج.م بس على الطلب", "الطلبات الوهمية ببلاش"],
       mock: {
         storeName: "متجر نور",
         storeTag: "عطور وعناية",
@@ -157,7 +157,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       note: "سعر ثابت على الطلب مهما كانت قيمته، والطلبات الوهمية وطلبات واتساب اللي بتسجلها بنفسك ببلاش.",
     },
     proof: [
-      { value: "2 ج.م", label: "على الطلب، مهما كانت قيمته" },
+      { value: "3 ج.م", label: "على الطلب، مهما كانت قيمته" },
       { value: "0 ج.م", label: "على الطلب الوهمي" },
       { value: "5 دقايق", label: "ومتجرك جاهز" },
     ],
@@ -183,11 +183,10 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     versus: {
       kicker: "قبل ما تختار",
       title: "قارن بنفسك مع إيزي أوردرز",
-      lead: "نفس فكرة الدفع على الطلب، بس أرخص، ومن غير ما تدفع على الطلبات الوهمية.",
+      lead: "نفس فكرة الدفع على الطلب، بس الطلبات الوهمية ببلاش، والباقة الكبيرة بحوالي تلت سعرهم.",
       us: "متجركو",
       them: "إيزي أوردرز",
       rows: [
-        { label: "رسوم الطلب", us: "2 ج.م", them: "4 سنت (حوالي 2.24 ج.م)" },
         { label: "الطلب الوهمي الملغي", us: "ببلاش", them: "بيتحسب" },
         { label: "باقة بدون رسوم على الطلب", us: "2,000 ج.م شهرياً", them: "100 دولار (حوالي 5,600 ج.م)" },
         { label: "العملة", us: "جنيه مصري", them: "دولار" },
@@ -216,7 +215,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       lead: "Add products, take orders, and track sales in one Arabic dashboard, with no technical experience or team.",
       primaryCta: "Create your store free",
       secondaryCta: "See pricing",
-      trust: ["No monthly fee", "Just 2 EGP per order", "Fake orders are free"],
+      trust: ["No monthly fee", "Just 3 EGP per order", "Fake orders are free"],
       mock: {
         storeName: "Nour Store",
         storeTag: "Perfume and care",
@@ -277,7 +276,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
       note: "A flat fee per order whatever its value; fake orders and WhatsApp orders you record yourself are free.",
     },
     proof: [
-      { value: "2 EGP", label: "per order, whatever its value" },
+      { value: "3 EGP", label: "per order, whatever its value" },
       { value: "0 EGP", label: "for a fake order" },
       { value: "5 min", label: "to a ready store" },
     ],
@@ -303,11 +302,10 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     versus: {
       kicker: "Before you choose",
       title: "Compare with EasyOrders yourself",
-      lead: "The same pay-per-order idea, cheaper, and you never pay for fake orders.",
+      lead: "The same pay-per-order idea, but fake orders are free and the big plan costs about a third of theirs.",
       us: "Matgarko",
       them: "EasyOrders",
       rows: [
-        { label: "Fee per order", us: "2 EGP", them: "4 cents (about 2.24 EGP)" },
         { label: "Canceled fake order", us: "Free", them: "Billed" },
         { label: "Plan with no per-order fee", us: "2,000 EGP a month", them: "$100 (about 5,600 EGP)" },
         { label: "Currency", us: "Egyptian pound", them: "US dollar" },
