@@ -53,6 +53,7 @@ const footerColumns = [
     links: [
       { path: "/about", ar: "من نحن", en: "About" },
       { path: "/learn", ar: "مركز التعلّم", en: "Learn", arabicOnly: true },
+      { path: "/media-buyers", ar: "للميديا باير", en: "Media buyers", arabicOnly: true },
       { path: "/blog", ar: "المدونة", en: "Blog" },
       { path: "/contact", ar: "تواصل معنا", en: "Contact" },
       { path: "/terms", ar: "الشروط والأحكام", en: "Terms" },

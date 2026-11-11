@@ -364,6 +364,14 @@ seoPages["/answers"] = {
   keywords: ["متجركو", "تكلفة متجر إلكتروني", "بديل إيزي أوردرز", "منصة متاجر الخليج", "الطلبات الوهمية"],
 };
 
+seoPages["/media-buyers"] = {
+  path: "/media-buyers",
+  type: "website",
+  title: "للميديا باير والوكالات: اشتغل مع تجار متجركو | متجركو",
+  description: "قدّم كميديا باير أو وكالة على متجركو: لو اتقبلت هتظهر للتجار اللي بيدوّروا على حد يعلن لهم، ببلاش ومن غير نسبة. بيكسل ميتا وتيك توك ومصدر كل أوردر جاهزين.",
+  keywords: ["ميديا باير", "وظائف ميديا باير", "ميديا باير مصر", "منصة للميديا باير", "وكالة إعلانات متاجر"],
+};
+
 Object.assign(
   seoPages,
   Object.fromEntries(
@@ -433,6 +441,7 @@ const arabicOrderedSeoPages = [
   seoPages["/compare/salla"],
   seoPages["/compare/woocommerce"],
   seoPages["/answers"],
+  seoPages["/media-buyers"],
   // Country versions
   ...countries.flatMap((country) => countrySeoPages(country).map((page) => seoPages[page.path])),
   seoPages["/ar-sa/compare/salla"],

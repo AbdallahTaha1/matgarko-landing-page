@@ -10,7 +10,7 @@ export function AnswersPage() {
         <div className="container-x">
           <span className="section-kicker">إجابات سريعة</span>
           <h1 className="page-title mt-4">متجركو في أسئلة وإجابات</h1>
-          <p className="page-lead mt-4">إجابات مباشرة عن الأسعار والدول والدفع عند الاستلام والطلبات الوهمية. آخر تحديث: 7 نوفمبر 2026.</p>
+          <p className="page-lead mt-4">إجابات مباشرة عن الأسعار والدول والدفع عند الاستلام والطلبات الوهمية. آخر تحديث: 11 نوفمبر 2026.</p>
         </div>
       </section>
       <section className="section">

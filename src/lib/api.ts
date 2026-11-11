@@ -15,7 +15,9 @@ export interface SignupStatus {
 }
 export class ApiError extends Error {
   code: string; retryAfterSeconds: number; status: number;
-  constructor(code: string, retryAfterSeconds = 0, status = 0) { super(code); this.code = code; this.retryAfterSeconds = retryAfterSeconds; this.status = status; }
+  /** The form field the server found wrong, and for a rejected media buyer the day they may apply again. */
+  field?: string; retryOn?: string;
+  constructor(code: string, retryAfterSeconds = 0, status = 0, field?: string, retryOn?: string) { super(code); this.code = code; this.retryAfterSeconds = retryAfterSeconds; this.status = status; this.field = field; this.retryOn = retryOn; }
 }
 // AbortSignal.timeout needs iOS 16 and AbortSignal.any iOS 17.4; older iPhones threw before the
 // request left and saw "unable to connect". A plain controller works on every browser.
@@ -39,9 +41,22 @@ async function request<T>(path: string, options: { data?: unknown; token?: strin
     throw new ApiError(error instanceof DOMException && error.name === 'TimeoutError' ? 'RequestTimeout' : 'NetworkError');
   }
   const json = await response.json().catch(() => null);
-  if (!response.ok) throw new ApiError(json?.code || (response.status === 429 ? 'rate_limited' : 'InvalidRequest'), json?.retryAfterSeconds || Number(response.headers.get('Retry-After')) || 0, response.status);
+  if (!response.ok) throw new ApiError(json?.code || (response.status === 429 ? 'rate_limited' : 'InvalidRequest'), json?.retryAfterSeconds || Number(response.headers.get('Retry-After')) || 0, response.status, json?.field || undefined, json?.retryOn || undefined);
   if (!json || typeof json !== 'object') throw new ApiError('InvalidResponse');
   return json as T;
+}
+/** What matgarko.com/media-buyers sends; keys as in src/data/mediaBuyers.ts. */
+export interface MediaBuyerApplication {
+  isAgency: boolean; agencyName?: string; name: string; phone: string; email?: string;
+  country: string; city: string; worksIn: string[]; yearsExperience: number;
+  platforms: string[]; specialties: string[]; services: string[];
+  minMonthlyBudget: number; budgetCurrency: string; pricingModel?: string; priceNote?: string;
+  bio: string; facebookUrl?: string; linkedInUrl?: string; portfolioUrl?: string; matgarkoStores?: string;
+  portfolio: { field: string; duration?: string; work: string; result: string; link?: string }[];
+  acceptTerms: boolean;
+  /** Never shown; people leave it empty. */
+  website?: string;
+  source?: { source?: string; medium?: string; campaign?: string; content?: string };
 }
 export const api = {
   config: () => request<{ enabled: boolean; baseDomain: string }>('/config'),
@@ -55,4 +70,8 @@ export const api = {
   // A single-use link that signs the new owner into their dashboard. Callers fall back to the
   // plain dashboard address, which asks for the password, if this fails.
   signIn: (token: string) => request<{ url: string }>('/sign-in', { token, data: {} }),
+  // matgarko.com/media-buyers: apply, then the code that came on WhatsApp.
+  applyMediaBuyer: (data: MediaBuyerApplication) => request<{ token: string; state: 'verification'; retryAfterSeconds: number }>('/media-buyers', { data }),
+  verifyMediaBuyer: (token: string, code: string) => request<{ state: 'pending' }>('/media-buyers/verify', { token, data: { code } }),
+  resendMediaBuyer: (token: string) => request<{ retryAfterSeconds: number }>('/media-buyers/resend', { token, data: {} }),
 };
