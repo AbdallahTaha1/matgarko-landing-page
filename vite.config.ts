@@ -27,6 +27,9 @@ export default defineConfig({
     },
   },
   build: {
+    // Older engines than Vite's default: visitors arrive in the Facebook, Instagram and TikTok
+    // in-app browsers, which on an old iPhone are as old as its iOS.
+    target: ["es2019", "chrome80", "safari13.1"],
     rollupOptions: {
       output: {
         manualChunks: {

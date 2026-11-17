@@ -13,7 +13,8 @@ Core product message:
 - `/download` and `/en/download` always link to the published [Google Play app](https://play.google.com/store/apps/details?id=com.matgarko.merchant). Direct APK availability is read from `https://downloads.matgarko.com/android/latest.json`; missing or invalid metadata never blocks the Google Play link or web-admin access. Shared marketing copy lives in `src/data/positioning.ts`, with no hardcoded release number. Deployment/runbook and app context live separately in the sibling mobile repository: `matgarko_merchant/docs/android-release-runbook.md`.
 - Start free and pay only when you sell.
 - Manage products, cash-on-delivery orders, and customers from one dashboard.
-- Current checkout supports cash on delivery. Merchants arrange shipping directly with their couriers; payment gateways and shipping-company integrations are not currently offered. Keep public copy focused on available features without adding unnecessary limitation notices.
+- Stores take cash on delivery, InstaPay or wallet transfers with a screenshot, and cards through the merchant's own Paymob or Kashier account. Merchants arrange shipping directly with their couriers; shipping-company integrations are not offered. Keep public copy focused on available features without adding unnecessary limitation notices.
+- New stores get their first 20 orders free (`WELCOME_ORDERS` in `src/data/pricing.ts`); fees are then taken from a prepaid balance.
 - Designed for Arabic-speaking merchants and the Egyptian market, with a full English site under `/en`.
 
 ## Pricing
@@ -58,6 +59,21 @@ Since 2026-11-07 the per-order fee is the same for every order whatever its valu
 - Tailwind CSS
 - React Router
 - Lucide React icons
+
+## Look
+
+The site wears the dashboard's colours: deep teal, teal-tinted greys and the orange button, in Noto Kufi Arabic. They are plain hex values in `src/index.css`, laid over Tailwind's `emerald`, `teal`, `gray` and `amber` names, so every page picks them up and no colour depends on `oklch()`. The font is served from the site itself in three fixed weights (400, 700, 800), not as a variable font and not from Google Fonts.
+
+The home page (`src/pages/HomePage.tsx`, words in `src/data/home.ts`) runs: hero, real stores, «ما هي متجركو؟» with a fact sheet, tools, the fake-order shield, the six templates, three steps, prices, the EasyOrders table, questions, and a closing band where the visitor types the store link they want. The template pictures in `public/templates` are phone screenshots of the six demo stores, taken below the demo strip at 390 × 760 and saved 480 px wide.
+
+## In-app browsers
+
+Most visitors come from an ad and open the site inside the Facebook, Instagram or TikTok browser. So:
+
+- The page is complete without scripts: the scroll reveal hides an element only after its observer is attached (`src/components/motion/Reveal.tsx`), and the fixed signup bar is added by script after load.
+- The build targets older engines (`build.target` in `vite.config.ts`).
+- The signup button is on the first screen of a 360 × 600 window, and nothing is wider than the screen. `tests/home-in-app-browsers.spec.ts` checks both with the three apps' user agents.
+- `HOME_UPDATED` in `src/data/home.ts` is the day the home page's facts were last checked by hand; it shows in the fact sheet and in the page's structured data. Change it only when you recheck them.
 
 ## Local Development
 

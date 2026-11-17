@@ -21,6 +21,9 @@ export type Plan = {
 
 export const SIGNUP_URL = "/register";
 
+/** New stores get this many orders free, as welcome credit in their balance. */
+export const WELCOME_ORDERS = 20;
+
 const storeFeatures: LocalizedList = {
   ar: ["إدارة المنتجات والمخزون والطلبات", "كوبونات وخصومات للعملاء", "تحديد مناطق وأسعار الشحن", "دعم عبر واتساب"],
   en: ["Product, stock and order management", "Customer coupons and discounts", "Delivery areas and shipping rates", "WhatsApp support"],
@@ -138,7 +141,7 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     },
     {
       question: "كيف أسدد رسوم متجركو؟",
-      answer: "تظهر الرسوم في فاتورة داخل لوحة التحكم. تسدد باتباع تعليمات التحويل الموجودة في الفاتورة، ثم تبلغ عن السداد لمراجعته.",
+      answer: `رسوم متجركو بتتخصم من رصيد بتشحنه مقدماً. أول ${WELCOME_ORDERS} طلب علينا كرصيد ترحيبي، وبعدها تشحن رصيدك من «اشتراك متجركو» في لوحة التحكم بتحويل فودافون كاش أو إنستاباي وترفع صورة التحويل، وتشوف رصيدك يكفي كام طلب.`,
     },
     {
       question: "متى أنتقل من البداية إلى احترافي؟",
@@ -146,7 +149,7 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     },
     {
       question: "هل أقدر ألغي الاشتراك في أي وقت؟",
-      answer: `تواصل معنا لتغيير الباقة. يمكنك العودة إلى البداية بدون اشتراك شهري، بـ ${perOrderFeeLabel(free, "ar")}. الفواتير التي صدرت بالفعل تظل بمبالغها المسجلة.`,
+      answer: `تواصل معنا لتغيير الباقة. يمكنك العودة إلى البداية بدون اشتراك شهري، بـ ${perOrderFeeLabel(free, "ar")}. الرسوم اللي اتخصمت قبل التغيير بتفضل زي ما هي.`,
     },
     {
       question: "هل الأسعار تشمل ضريبة القيمة المضافة؟",
@@ -168,7 +171,7 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     },
     {
       question: "How do I pay Matgarko fees?",
-      answer: "Fees appear on an invoice in your dashboard. Follow its transfer instructions, then report your payment for review.",
+      answer: `Matgarko fees are taken from a balance you top up in advance. Your first ${WELCOME_ORDERS} orders are on us as welcome credit; after that you top up from “Matgarko subscription” in your dashboard with a Vodafone Cash or InstaPay transfer and its screenshot, and see how many orders your balance covers.`,
     },
     {
       question: "When should I move from Starter to Pro?",
@@ -176,7 +179,7 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
     },
     {
       question: "Can I cancel at any time?",
-      answer: `Contact us to change plans. You can return to Starter with no monthly fee and ${perOrderFeeLabel(free, "en")}. Previously issued invoices keep their recorded amounts.`,
+      answer: `Contact us to change plans. You can return to Starter with no monthly fee and ${perOrderFeeLabel(free, "en")}. Fees already charged stay as they are.`,
     },
     {
       question: "Do prices include VAT?",
@@ -188,8 +191,8 @@ export const pricingFaqs: Record<AppLanguage, Array<{ question: string; answer: 
 /** One-line pricing summary reused in meta descriptions and AI context files. */
 export function pricingSummary(language: AppLanguage) {
   if (language === "ar") {
-    return `البداية بدون اشتراك شهري: ${perOrderFeeLabel(free, "ar")}، والطلبات الوهمية ببلاش. الاحترافي ${formatEgp(pro.monthly, "ar")} شهرياً بدون رسوم على الطلب.`;
+    return `البداية بدون اشتراك شهري: ${perOrderFeeLabel(free, "ar")}، وأول ${WELCOME_ORDERS} طلب علينا، والطلبات الوهمية ببلاش. الاحترافي ${formatEgp(pro.monthly, "ar")} شهرياً بدون رسوم على الطلب.`;
   }
 
-  return `Starter has no monthly fee: a flat ${perOrderFeeLabel(free, "en")}, and fake orders are free. Pro is ${formatEgp(pro.monthly, "en")} per month with no per-order fee.`;
+  return `Starter has no monthly fee: a flat ${perOrderFeeLabel(free, "en")}, and fake orders are free; the first ${WELCOME_ORDERS} orders are on us. Pro is ${formatEgp(pro.monthly, "en")} per month with no per-order fee.`;
 }

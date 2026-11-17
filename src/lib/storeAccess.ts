@@ -1,6 +1,8 @@
 import { useSyncExternalStore } from 'react';
 
 const storageKey = 'matgarko-last-store';
+/** The store link typed on the home page, handed to the signup form in this tab only. */
+export const SIGNUP_LINK_KEY = 'matgarko-signup-link';
 const changeEvent = 'matgarko-store-changed';
 const baseDomain = 'matgarko.com';
 const reserved = new Set(['www', 'signup', 'auth', 'downloads', 'api', 'admin', 'mail', 'landing', 'support', 'host']);

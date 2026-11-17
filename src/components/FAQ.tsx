@@ -6,14 +6,15 @@ import { faqs } from "@/data/faqs";
 import { homeContent } from "@/data/home";
 import type { AppLanguage } from "@/lib/i18n";
 import { WHATSAPP_URL } from "@/lib/seo";
-import { MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function FAQ({ language }: { language: AppLanguage }) {
   const t = homeContent[language].faq;
   const items = language === "en" ? englishFaqs : faqs;
 
   return (
-    <section id="faq" className="section bg-white" aria-labelledby="faq-title">
+    <section id="faq" className="section band-soft" aria-labelledby="faq-title">
       <div className="container-x">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
           <Reveal>
@@ -27,6 +28,15 @@ export function FAQ({ language }: { language: AppLanguage }) {
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               {t.more}
             </a>
+            {/* The answers page exists in Arabic only. */}
+            {language === "ar" && (
+              <p>
+                <Link to="/answers" className="inline-flex items-center gap-1.5 py-2 text-sm font-bold text-emerald-700 hover:text-emerald-800">
+                  {t.all}
+                  <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
+                </Link>
+              </p>
+            )}
           </Reveal>
 
           <Reveal delay={80}>

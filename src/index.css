@@ -34,14 +34,118 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --font-sans: Alexandria, Cairo, "Segoe UI", Tahoma, sans-serif;
-  --font-heading: Alexandria, Cairo, "Segoe UI", Tahoma, sans-serif;
+  --font-sans: "Noto Kufi Arabic", Tahoma, "Segoe UI", Arial, sans-serif;
+  --font-heading: "Noto Kufi Arabic", Tahoma, "Segoe UI", Arial, sans-serif;
+
+  /*
+   * The dashboard's colours (new_matgarko admin tokens.css): deep teal, teal-tinted greys and the
+   * orange button. Written as plain hex, and laid over Tailwind's emerald, teal, gray and amber
+   * names, so every page picks them up and browsers without oklch() (older Facebook, Instagram
+   * and TikTok in-app browsers) still show colours.
+   */
+  --color-brand-50: #eef6f4;
+  --color-brand-100: #d5ebe6;
+  --color-brand-200: #abd6cc;
+  --color-brand-300: #78bbad;
+  --color-brand-400: #46998a;
+  --color-brand-500: #237a6c;
+  --color-brand-600: #0e5a52;
+  --color-brand-700: #0c4f48;
+  --color-brand-800: #0a443e;
+  --color-brand-900: #083933;
+  --color-brand-950: #052521;
+
+  --color-emerald-50: #eef6f4;
+  --color-emerald-100: #d5ebe6;
+  --color-emerald-200: #abd6cc;
+  --color-emerald-300: #78bbad;
+  --color-emerald-400: #46998a;
+  --color-emerald-500: #237a6c;
+  --color-emerald-600: #0e5a52;
+  --color-emerald-700: #0c4f48;
+  --color-emerald-800: #0a443e;
+  --color-emerald-900: #083933;
+  --color-emerald-950: #052521;
+
+  --color-teal-50: #eef6f4;
+  --color-teal-100: #d5ebe6;
+  --color-teal-200: #abd6cc;
+  --color-teal-300: #78bbad;
+  --color-teal-400: #46998a;
+  --color-teal-500: #237a6c;
+  --color-teal-600: #0e5a52;
+  --color-teal-700: #0c4f48;
+  --color-teal-800: #0a443e;
+  --color-teal-900: #083933;
+  --color-teal-950: #052521;
+
+  --color-gray-50: #f5f7f7;
+  --color-gray-100: #eef2f2;
+  --color-gray-200: #dfe3e2;
+  --color-gray-300: #c5cfd1;
+  --color-gray-400: #87959a;
+  --color-gray-500: #5f6f74;
+  --color-gray-600: #55666b;
+  --color-gray-700: #3d4d52;
+  --color-gray-800: #26393e;
+  --color-gray-900: #10302c;
+  --color-gray-950: #0a211e;
+
+  --color-sun-50: #fff6e5;
+  --color-sun-100: #ffe9c2;
+  --color-sun-200: #fbd58a;
+  --color-sun-300: #f9bd55;
+  --color-sun-400: #f8ab35;
+  --color-sun-500: #f79a1e;
+  --color-sun-600: #e08a00;
+  --color-sun-700: #b96c00;
+  --color-sun-800: #94500a;
+  --color-sun-900: #6b3a08;
+
+  --color-amber-50: #fff6e5;
+  --color-amber-100: #ffe9c2;
+  --color-amber-200: #fbd58a;
+  --color-amber-300: #f9bd55;
+  --color-amber-400: #f8ab35;
+  --color-amber-500: #f79a1e;
+  --color-amber-600: #e08a00;
+  --color-amber-700: #b96c00;
+  --color-amber-800: #94500a;
+  --color-amber-900: #6b3a08;
+
+  --color-orange-50: #fff6e5;
+  --color-orange-100: #ffe9c2;
+  --color-orange-700: #b96c00;
+
+  --color-red-50: #fef2f1;
+  --color-red-100: #fde3e1;
+  --color-red-400: #f0766c;
+  --color-red-500: #e5483c;
+  --color-red-600: #d92d20;
+  --color-red-700: #b42318;
+  --color-red-800: #912018;
+
+  --color-green-100: #dcf5e4;
+  --color-green-300: #86e0a6;
+  --color-green-500: #25d366;
+  --color-green-700: #15703d;
+  --color-blue-100: #dbe9fd;
+  --color-blue-700: #1d5fb8;
+  --color-purple-100: #ebe5ff;
+  --color-purple-700: #5b3cc4;
+  --color-sky-100: #e0f2fe;
+  --color-cyan-50: #ecfeff;
+  --color-rose-100: #ffe4e6;
+  --color-pink-50: #fdf2f8;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
 }
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 173 50% 13%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -49,16 +153,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 160 84% 30%; /* emerald-700 */
+    --primary: 174 73% 20%; /* brand-600 #0e5a52 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 152 76% 96%; /* emerald-50 */
+    --secondary: 165 31% 95%; /* brand-50 */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 152 76% 96%;
+    --accent: 165 31% 95%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -66,7 +170,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 160 84% 30%;
+    --ring: 174 73% 20%;
 
     --radius: 1rem;
   }
@@ -110,39 +214,60 @@
   }
 
   .section {
-    @apply py-12 sm:py-16 lg:py-20;
+    @apply py-14 sm:py-20 lg:py-24;
+  }
+
+  /* Section backgrounds: the page alternates white, a soft teal-grey and one deep teal band. */
+  .band-soft {
+    background-color: #f4f8f7;
+  }
+
+  .band-dark {
+    background-color: #0b3f39;
+    background-image:
+      radial-gradient(60% 70% at 100% 0%, rgba(120, 187, 173, 0.22) 0%, rgba(120, 187, 173, 0) 70%),
+      radial-gradient(45% 60% at 0% 100%, rgba(247, 154, 30, 0.14) 0%, rgba(247, 154, 30, 0) 70%);
+    color: #ffffff;
   }
 
   .section-kicker {
-    @apply inline-flex items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800;
+    @apply inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-bold text-emerald-700;
+  }
+
+  .band-dark .section-kicker {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #abd6cc;
   }
 
   .section-title {
-    @apply text-2xl font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-3xl;
+    @apply text-[1.6rem] font-extrabold leading-[1.5] text-gray-900 font-heading sm:text-[2rem] sm:leading-[1.45] lg:text-[2.25rem];
   }
 
   .section-lead {
-    @apply text-base leading-7 text-gray-600 sm:text-lg sm:leading-8;
+    @apply text-base leading-8 text-gray-600 sm:text-lg sm:leading-9;
   }
 
   .btn {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold transition-all duration-200 active:scale-[0.98] sm:text-base;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-bold transition-all duration-200 active:scale-[0.98] sm:text-base;
   }
 
+  /* The orange button is the one thing on every screen that asks for a tap. */
   .btn-primary {
-    @apply bg-gray-950 text-white shadow-lg shadow-gray-950/15 hover:-translate-y-0.5 hover:bg-emerald-700;
+    @apply bg-sun-500 text-gray-950 hover:-translate-y-0.5 hover:bg-sun-400;
+    box-shadow: 0 10px 24px -10px rgba(224, 138, 0, 0.75);
   }
 
   .btn-secondary {
-    @apply border border-gray-200 bg-white text-gray-900 hover:border-emerald-300 hover:bg-emerald-50;
+    @apply bg-white text-emerald-800 hover:bg-emerald-50;
+    box-shadow: inset 0 0 0 1px #dfe3e2;
   }
 
   .signup-form .btn-primary {
-    @apply bg-emerald-700 shadow-emerald-900/15 hover:bg-emerald-800 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-emerald-700;
+    @apply disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-sun-500;
   }
 
   .signup-form .btn-secondary {
-    @apply border-emerald-200 text-emerald-800 disabled:cursor-not-allowed;
+    @apply text-emerald-800 disabled:cursor-not-allowed;
   }
 
   .signup-form button:not(.btn) {
@@ -150,23 +275,38 @@
   }
 
   .btn-accent {
-    @apply bg-emerald-500 text-gray-950 shadow-lg shadow-emerald-500/25 hover:-translate-y-0.5 hover:bg-emerald-400;
+    @apply bg-sun-500 text-gray-950 hover:-translate-y-0.5 hover:bg-sun-400;
+    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.45);
   }
 
   .btn-ghost-dark {
-    @apply border border-white/20 bg-white/5 text-white hover:bg-white/10;
+    @apply text-white;
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+  }
+
+  .btn-ghost-dark:hover {
+    background-color: rgba(255, 255, 255, 0.16);
   }
 
   .card {
-    @apply rounded-2xl border border-gray-200 bg-white shadow-sm;
+    @apply rounded-3xl bg-white;
+    box-shadow: 0 0 0 1px #e3e8e7;
   }
 
   .premium-card {
-    @apply rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-900/5;
+    @apply rounded-3xl bg-white transition-all duration-300 hover:-translate-y-1;
+    box-shadow: 0 0 0 1px #e3e8e7;
+  }
+
+  .premium-card:hover {
+    box-shadow:
+      0 0 0 1px #abd6cc,
+      0 18px 40px -24px rgba(14, 90, 82, 0.45);
   }
 
   .icon-tile {
-    @apply flex items-center justify-center rounded-xl bg-emerald-50 text-emerald-700;
+    @apply flex items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600;
   }
 
   .num {
@@ -174,59 +314,101 @@
   }
 
   .hero-band {
-    background:
-      radial-gradient(60% 50% at 85% 10%, rgba(16, 185, 129, 0.16) 0%, rgba(16, 185, 129, 0) 70%),
-      radial-gradient(45% 40% at 10% 90%, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0) 70%),
-      linear-gradient(180deg, #f4fbf7 0%, #ffffff 70%);
+    background-color: #f4f8f7;
+    background-image:
+      radial-gradient(70% 55% at 100% 0%, rgba(171, 214, 204, 0.55) 0%, rgba(171, 214, 204, 0) 70%),
+      radial-gradient(50% 45% at 0% 35%, rgba(251, 213, 138, 0.4) 0%, rgba(251, 213, 138, 0) 70%),
+      linear-gradient(180deg, #f4f8f7 0%, #ffffff 100%);
   }
 
   .noise-grid {
     background-image:
-      linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+      linear-gradient(rgba(14, 90, 82, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14, 90, 82, 0.04) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
   .page-hero {
-    @apply relative overflow-hidden border-b border-emerald-100/80 pb-10 pt-10 sm:pb-14 sm:pt-16;
-    background:
-      radial-gradient(60% 50% at 85% 10%, rgba(16, 185, 129, 0.14) 0%, rgba(16, 185, 129, 0) 70%),
-      linear-gradient(180deg, #f4fbf7 0%, #ffffff 80%);
+    @apply relative overflow-hidden pb-10 pt-10 sm:pb-14 sm:pt-16;
+    background-color: #f4f8f7;
+    background-image:
+      radial-gradient(70% 60% at 100% 0%, rgba(171, 214, 204, 0.5) 0%, rgba(171, 214, 204, 0) 70%),
+      linear-gradient(180deg, #f4f8f7 0%, #ffffff 100%);
   }
 
   .page-title {
-    @apply mx-auto max-w-3xl text-[1.75rem] font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-4xl sm:leading-[1.35];
+    @apply mx-auto max-w-3xl text-[1.75rem] font-extrabold leading-[1.5] text-gray-900 font-heading sm:text-4xl sm:leading-[1.45];
   }
 
   .page-lead {
-    @apply mx-auto max-w-2xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8;
+    @apply mx-auto max-w-2xl text-base leading-8 text-gray-600 sm:text-lg sm:leading-9;
   }
 
+  /* Solid colour, not a clipped gradient: gradient text goes blank in some in-app browsers. */
   .text-conversion-gradient {
-    @apply bg-gradient-to-l from-emerald-700 via-emerald-600 to-teal-700 bg-clip-text text-transparent;
+    @apply text-emerald-600;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent;
+    @apply text-gray-900;
   }
 
   .tracking-tighter-heading {
     letter-spacing: 0;
   }
 
-  /* Scroll reveal: visible by default (prerendered HTML), animated once JS is on. */
-  html.js .reveal {
-    opacity: 0;
-    transform: translate3d(0, 18px, 0);
+  /* The orange swash behind the hero's key words. */
+  .mark-sun {
+    background-image: linear-gradient(transparent 62%, #fbd58a 62%, #fbd58a 92%, transparent 92%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  /*
+   * Scroll reveal. Nothing is hidden by CSS alone: the Reveal component marks an element as
+   * waiting only after its observer is attached, so a browser where scripts fail still shows
+   * the whole prerendered page.
+   */
+  .reveal {
     transition:
       opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
   }
 
-  html.js .reveal.is-visible {
-    opacity: 1;
-    transform: none;
+  .reveal[data-reveal="wait"] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  /* A row that slides sideways forever (feature chips, store logos). The track holds two copies. */
+  .marquee {
+    overflow: hidden;
+    direction: ltr;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 48s linear infinite;
+  }
+
+  .marquee-track.is-slow {
+    animation-duration: 70s;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
   }
 
   @keyframes float-panel {
@@ -266,8 +448,26 @@
     display: none;
   }
 
+  /* The floating WhatsApp button moves above the home page's fixed signup bar while it shows. */
+  .wa-float {
+    transition: bottom 0.25s ease, transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  @media (max-width: 1023px) {
+    html[data-signup-bar] .wa-float {
+      bottom: 5.75rem;
+    }
+  }
+
+  /* Room for the phone's home bar under the fixed signup bar. */
+  .safe-bottom {
+    padding-bottom: 0.75rem;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    html.js .reveal {
+    .reveal,
+    .reveal[data-reveal="wait"] {
       opacity: 1;
       transform: none;
       transition: none;
@@ -275,6 +475,14 @@
 
     .animate-float-panel,
     .animate-menu-in {
+      animation: none;
+    }
+
+    .marquee {
+      overflow-x: auto;
+    }
+
+    .marquee-track {
       animation: none;
     }
   }

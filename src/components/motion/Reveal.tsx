@@ -11,36 +11,36 @@ type RevealProps = {
 };
 
 /**
- * Progressive scroll reveal. Content is fully visible in the prerendered HTML;
- * once JavaScript runs (html.js) the element fades and slides in when it
- * enters the viewport. Respects prefers-reduced-motion through CSS.
+ * Progressive scroll reveal. The prerendered HTML is fully visible and stays so unless this
+ * effect runs: only then is an element that is still below the screen marked as waiting, and it
+ * fades in when it scrolls into view. A browser where scripts fail (some in-app browsers on old
+ * phones) therefore never ends up with hidden content. Respects prefers-reduced-motion in CSS.
  */
 export function Reveal({ children, className, delay = 0, as: Tag = "div", id }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || typeof IntersectionObserver === "undefined") return;
+    if (element.getBoundingClientRect().top < window.innerHeight * 0.92) return;
 
-    if (typeof IntersectionObserver === "undefined") {
-      element.classList.add("is-visible");
-      return;
-    }
-
+    const show = () => element.removeAttribute("data-reveal");
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            element.classList.add("is-visible");
-            observer.disconnect();
-          }
-        });
+        if (entries.some((entry) => entry.isIntersecting)) {
+          show();
+          observer.disconnect();
+        }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.1 },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.05 },
     );
 
+    element.setAttribute("data-reveal", "wait");
     observer.observe(element);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      show();
+    };
   }, []);
 
   const style: CSSProperties | undefined = delay ? { transitionDelay: `${delay}ms` } : undefined;

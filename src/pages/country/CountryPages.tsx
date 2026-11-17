@@ -89,11 +89,11 @@ export function CountryHomePage({ country }: { country: Country }) {
               <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
               متجركو {country.inName}
             </span>
-            <h1 id="country-hero-title" className="mt-5 text-[2rem] font-extrabold leading-[1.4] text-gray-950 font-heading sm:text-4xl sm:leading-[1.35] lg:text-[2.75rem] lg:leading-[1.3]">
+            <h1 id="country-hero-title" className="mt-4 text-[1.6rem] font-extrabold leading-[1.5] text-gray-900 font-heading min-[400px]:text-[1.8rem] sm:text-4xl sm:leading-[1.45] lg:text-[2.6rem]">
               متجر إلكتروني {country.inName} بالدفع عند الاستلام
               <span className="text-conversion-gradient block pb-2">{usd(ABROAD_PER_ORDER_USD)} على الطلب، والوهمي مجاناً</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8">
+            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-gray-600 sm:text-lg sm:leading-8">
               أنشئ متجرك في دقائق، واستقبل طلبات الدفع عند الاستلام من {country.cities.slice(0, 3).join(" و")} وكل مدن {country.name}، والأسعار ب{country.currencyName}. بدون اشتراك شهري: تدفع {perOrderText(country)} على كل طلب، والطلب الوهمي الذي يكشفه الدرع لا يُحتسب.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">

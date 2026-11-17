@@ -6,6 +6,7 @@ import { englishBlogArticles, englishFaqs, englishOrderedPaths, englishSeoPages 
 import { billableOrdersRule, formatEgp, perOrderFeeLabel, plans, pricingFaqs, pricingSummary } from "@/data/pricing";
 import { localizePath, stripLanguagePrefix } from "@/lib/i18n";
 import { answers } from "@/data/answers";
+import { HOME_UPDATED } from "@/data/home";
 import {
   ABROAD_PER_ORDER_USD,
   ABROAD_PRO_MONTHLY_USD,
@@ -36,6 +37,9 @@ const CORE_TOPICS = [
   "Delivery area pricing",
   "Store design with ready colour palettes",
   "Product and order management",
+  "Online card payments through Paymob and Kashier",
+  "Ready store templates and an AI store designer",
+  "Fake-order protection for cash on delivery",
 ];
 
 export type SeoPage = {
@@ -60,7 +64,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/",
     title: "إنشاء وإدارة متجر إلكتروني من الموبايل في مصر | متجركو",
     description:
-      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 3 ج.م بس على الطلب والطلبات الوهمية ببلاش.",
+      "ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 3 ج.م بس على الطلب، وأول 20 طلب علينا، والطلبات الوهمية ببلاش.",
     keywords: [
       "إنشاء متجر إلكتروني",
       "متجر إلكتروني مصر",
@@ -683,6 +687,8 @@ export function webPageSchema(page: SeoPage) {
       "@type": "Thing",
       name,
     })),
+    // Only the home pages carry a date: it is the day their facts were last checked by hand.
+    ...(page.path === "/" || page.path === "/en" ? { dateModified: HOME_UPDATED } : {}),
   };
 
   if (page.type === "article") {
@@ -804,7 +810,7 @@ export function softwareSchema(page?: SeoPage) {
     "@id": `${SITE_URL}/#software`,
     name: isEnglish ? "Matgarko" : SITE_NAME,
     applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
+    operatingSystem: "Web, Android",
     url: SITE_URL,
     inLanguage: page ? pageLocale(page) : "ar-EG",
     publisher: {
@@ -814,8 +820,11 @@ export function softwareSchema(page?: SeoPage) {
     featureList: isEnglish ? [
       "Create an online store without coding",
       "Manage products and orders",
-      "One ready store look with colour palettes by business type and a home page builder",
-      "Accept cash-on-delivery orders",
+      "Six ready store templates, a home page builder, and an AI designer that suggests a store look",
+      "Accept cash on delivery, InstaPay or wallet transfers, and cards through Paymob or Kashier",
+      "Fake-order shield: flagged fake orders are not billed",
+      "Ad page for every product, abandoned-checkout follow-up on WhatsApp",
+      "Product catalog feeds for Meta, TikTok and Google",
       "Order now button on product pages",
       "Set delivery prices by area",
       "Manage customers and discount coupons",
@@ -826,8 +835,11 @@ export function softwareSchema(page?: SeoPage) {
     ] : [
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
-      "شكل متجر جاهز بألوان حسب نشاطك ومنشئ للصفحة الرئيسية",
-      "استقبال طلبات الدفع عند الاستلام",
+      "ستة قوالب جاهزة للمتجر، ومنشئ للصفحة الرئيسية، و«صمّم متجري» بالذكاء الاصطناعي",
+      "الدفع عند الاستلام، وتحويل إنستاباي أو محفظة، والبطاقات عبر Paymob أو Kashier",
+      "درع الطلبات الوهمية: الطلب الوهمي لا تُخصم رسومه",
+      "صفحة إعلان لكل منتج، ومتابعة الطلبات غير المكتملة على واتساب",
+      "كتالوج منتجات لـMeta وTikTok وGoogle",
       "زر «اطلب الآن» في صفحة المنتج",
       "تحديد سعر التوصيل لكل منطقة",
       "إدارة العملاء وكوبونات الخصم",
@@ -997,8 +1009,11 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
-- Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and style one ready mobile-first store look with their own colours (palettes grouped by business type), logo, font, and photos.
-- Differentiators: a flat fee per order with fake orders free, a fake-order shield for cash on delivery, Meta Pixel with Conversions API, an Android app for merchants, Arabic-first, and no technical experience required.
+- Main jobs: create an ecommerce store, manage products and orders, organize customers, set delivery prices by governorate and area, launch coupons and quantity offers, and style the store from six ready mobile-first templates, a home page builder, or an AI designer that suggests a complete look.
+- Store payment methods: cash on delivery, InstaPay or mobile-wallet transfer with a screenshot, and online card payments through the merchant's own Paymob or Kashier account. Matgarko takes no share of sales.
+- Shipping: Matgarko does not deliver; the merchant ships with their own courier and sets delivery prices.
+- Welcome offer: the first 20 orders of a new store are free (welcome credit); fees are then taken from a prepaid balance topped up by Vodafone Cash or InstaPay.
+- Differentiators: a flat fee per order with fake orders free, a fake-order shield for cash on delivery, Meta Pixel with Conversions API, TikTok Pixel and product catalog feeds for Meta, TikTok and Google, an ad page for every product, abandoned-checkout follow-up on WhatsApp, an Android app for merchants, Arabic-first, and no technical experience required.
 - Compared with EasyOrders: 3 EGP per order versus $0.04 (about 2.24 EGP), but EasyOrders charges every order including canceled and fake ones while Matgarko does not bill shield-flagged fake orders; Pro 2,000 EGP versus $100 (about 5,600 EGP) a month.
 - Compared with Salla in Saudi Arabia: Salla has a free Basic plan, Plus at 99 SAR and Pro at 299 SAR a month, built-in online payments and a large app store; Matgarko is simpler and cheaper for cash-on-delivery sellers ($${ABROAD_PRO_MONTHLY_USD}, about 131 SAR, for Pro) and does not bill fake orders.
 

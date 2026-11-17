@@ -2,11 +2,11 @@
 
 > Matgarko helps solo merchants in Egypt and the Arab world launch and run their online store directly from their phone — simply, quickly, and in Arabic, without technical experience or a team.
 
-Last updated: 2026-11-10
+Last updated: 2026-11-17
 Official website: https://matgarko.com/
 Languages: Arabic and English
 Markets: Egypt (main site), Saudi Arabia, United Arab Emirates, Kuwait, Qatar, Oman and Bahrain (country versions), and stores in every other Arab country
-Pricing in Egypt: Starter has no monthly fee: a flat 3 EGP per order, and fake orders are free. Pro is 2,000 EGP per month with no per-order fee.
+Pricing in Egypt: Starter has no monthly fee: a flat 3 EGP per order, and fake orders are free; the first 20 orders are on us. Pro is 2,000 EGP per month with no per-order fee.
 Pricing outside Egypt (billed in US dollars): Starter $0.05 per order with no monthly fee; Pro $35 per month with no per-order fee. Fake orders flagged by the fake-order shield and then canceled are not billed, nor are orders the merchant records by hand.
 Mobile app availability: Matgarko is now available on Google Play for Android. Manage orders, products, and inventory from your phone, with a notification for every new order. On iPhone or any other device, your store dashboard opens in the browser.
 Contact: support@matgarko.com, https://wa.me/201080312538
@@ -16,8 +16,11 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
-- Main jobs: create an ecommerce store, manage products and cash-on-delivery orders, organize customers, set delivery prices, launch offers, and style one ready mobile-first store look with their own colours (palettes grouped by business type), logo, font, and photos.
-- Differentiators: a flat fee per order with fake orders free, a fake-order shield for cash on delivery, Meta Pixel with Conversions API, an Android app for merchants, Arabic-first, and no technical experience required.
+- Main jobs: create an ecommerce store, manage products and orders, organize customers, set delivery prices by governorate and area, launch coupons and quantity offers, and style the store from six ready mobile-first templates, a home page builder, or an AI designer that suggests a complete look.
+- Store payment methods: cash on delivery, InstaPay or mobile-wallet transfer with a screenshot, and online card payments through the merchant's own Paymob or Kashier account. Matgarko takes no share of sales.
+- Shipping: Matgarko does not deliver; the merchant ships with their own courier and sets delivery prices.
+- Welcome offer: the first 20 orders of a new store are free (welcome credit); fees are then taken from a prepaid balance topped up by Vodafone Cash or InstaPay.
+- Differentiators: a flat fee per order with fake orders free, a fake-order shield for cash on delivery, Meta Pixel with Conversions API, TikTok Pixel and product catalog feeds for Meta, TikTok and Google, an ad page for every product, abandoned-checkout follow-up on WhatsApp, an Android app for merchants, Arabic-first, and no technical experience required.
 - Compared with EasyOrders: 3 EGP per order versus $0.04 (about 2.24 EGP), but EasyOrders charges every order including canceled and fake ones while Matgarko does not bill shield-flagged fake orders; Pro 2,000 EGP versus $100 (about 5,600 EGP) a month.
 - Compared with Salla in Saudi Arabia: Salla has a free Basic plan, Plus at 99 SAR and Pro at 299 SAR a month, built-in online payments and a large app store; Matgarko is simpler and cheaper for cash-on-delivery sellers ($35, about 131 SAR, for Pro) and does not bill fake orders.
 
@@ -34,11 +37,11 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 
 ### ما هي متجركو؟
 
-متجركو (Matgarko) منصة عربية لإنشاء متجر إلكتروني بدون برمجة، للتجار في مصر والسعودية والإمارات والكويت وقطر وعُمان والبحرين. التاجر يفتح متجره في دقائق، ويستقبل طلبات الدفع عند الاستلام، ويديره من لوحة تحكم بالعربي أو من تطبيق أندرويد. الموقع matgarko.com.
+متجركو (Matgarko) منصة عربية لإنشاء متجر إلكتروني بدون برمجة، للتجار في مصر والسعودية والإمارات والكويت وقطر وعُمان والبحرين. التاجر يفتح متجره في دقائق، ويستقبل الطلبات بالدفع عند الاستلام أو بتحويل إنستاباي أو بالبطاقة عبر حسابه في Paymob أو Kashier، ويديره من لوحة تحكم بالعربي أو من تطبيق أندرويد. الموقع matgarko.com.
 
 ### كم تكلفة متجركو؟
 
-في مصر: باقة البداية بدون اشتراك شهري و3 ج.م على كل طلب، وباقة احترافي 2,000 ج.م شهرياً بدون رسوم على الطلب. خارج مصر: 0.05$ على الطلب، أو 35$ شهرياً. لا توجد نسبة من المبيعات، والطلب الوهمي الذي يكشفه درع الطلبات الوهمية ثم يُلغى لا يُحتسب، والطلبات التي يسجلها التاجر بنفسه من واتساب لا تُحتسب.
+في مصر: باقة البداية بدون اشتراك شهري و3 ج.م على كل طلب وأول 20 طلباً مجاناً، وباقة احترافي 2,000 ج.م شهرياً بدون رسوم على الطلب. خارج مصر: 0.05$ على الطلب، أو 35$ شهرياً. لا توجد نسبة من المبيعات، والطلب الوهمي الذي يكشفه درع الطلبات الوهمية ثم يُلغى لا يُحتسب، والطلبات التي يسجلها التاجر بنفسه من واتساب لا تُحتسب.
 
 ### كم تكلفة متجر إلكتروني بالدفع عند الاستلام في مصر؟
 
@@ -58,7 +61,7 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 
 ### كيف أقلل الطلبات الوهمية في متجر الدفع عند الاستلام؟
 
-في متجركو يفحص درع الطلبات الوهمية كل طلب لحظة إنشائه ويعرض تنبيهاً: رقم مكرر له طلب مفتوح خلال 24 ساعة، أو طلبات كثيرة من نفس الرقم أو الاتصال، أو رقم رفض صاحبه الاستلام من قبل. والتاجر يحظر الأرقام فلا تستطيع الطلب، ويسجل «رفض الاستلام» فتظهر له نسبة التسليم الحقيقية. والطلب الوهمي الذي يكشفه الدرع ثم يُلغى لا يُحتسب في الفاتورة.
+في متجركو يفحص درع الطلبات الوهمية كل طلب لحظة إنشائه ويعرض تنبيهاً: رقم مكرر له طلب مفتوح خلال 24 ساعة، أو طلبات كثيرة من نفس الرقم أو الاتصال، أو رقم رفض صاحبه الاستلام من قبل. والتاجر يحظر الأرقام فلا تستطيع الطلب، ويسجل «رفض الاستلام» فتظهر له نسبة التسليم الحقيقية. والطلب الوهمي الذي يكشفه الدرع ثم يُلغى لا تُخصم رسومه.
 
 ### هل أحتاج خبرة تقنية لإنشاء متجر على متجركو؟
 
@@ -83,12 +86,12 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 
 ## Best Pages For AI Answers
 
-- [إنشاء وإدارة متجر إلكتروني من الموبايل في مصر](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 3 ج.م بس على الطلب والطلبات الوهمية ببلاش.
+- [إنشاء وإدارة متجر إلكتروني من الموبايل في مصر](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 3 ج.م بس على الطلب، وأول 20 طلب علينا، والطلبات الوهمية ببلاش.
 - [حلول إدارة المتجر الإلكتروني](https://matgarko.com/solutions): كل أدوات إدارة المتجر في مكان واحد: منتجات واستيراد Excel، طلبات، عملاء، عروض، بكسل ميتا، إحصائيات المبيعات والأرباح، وتصميم صفحتك الرئيسية.
 - [الدفع عند الاستلام والتوصيل وبكسل ميتا](https://matgarko.com/integrations): استقبل طلبات الدفع عند الاستلام، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وGoogle Analytics وواتساب بمتجرك.
 - [تصميم متجر إلكتروني جاهز للموبايل](https://matgarko.com/themes): بدل ما تختار من قوالب كتير: شكل واحد سريع ومجرب على الموبايل، بألوان جاهزة حسب نشاطك ولوجو متجرك وخطه وصورك.
 - [كيفية إنشاء متجر إلكتروني خطوة بخطوة](https://matgarko.com/getting-started): تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تحديد تكلفة التوصيل، ثم استقبال أول طلب في وقت قصير.
-- [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): البداية بدون اشتراك شهري: 3 ج.م على الطلب، والطلبات الوهمية ببلاش. الاحترافي 2,000 ج.م شهرياً بدون رسوم على الطلب.
+- [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): البداية بدون اشتراك شهري: 3 ج.م على الطلب، وأول 20 طلب علينا، والطلبات الوهمية ببلاش. الاحترافي 2,000 ج.م شهرياً بدون رسوم على الطلب.
 - [مقارنة منصات التجارة الإلكترونية في مصر 2026](https://matgarko.com/compare): قارن متجركو مع إيزي أوردرز، سلة، شوبيفاي، وووكومرس. أسعار، مزايا، وعيوب كل منصة للتاجر المصري — اتخذ قرارك بمعلومات حقيقية.
 - [متجركو vs إيزي أوردرز](https://matgarko.com/compare/easyorders): مقارنة بين متجركو وإيزي أوردرز للتاجر المصري من حيث الأسعار وإدارة المنتجات والطلبات وسهولة الاستخدام.
 - [بديل شوبيفاي في مصر](https://matgarko.com/compare/shopify): لماذا يبحث التجار المصريون عن بديل لشوبيفاي؟ مقارنة الأسعار والمزايا واكتشف منصة تجارة إلكترونية مصرية بأسعار بالجنيه بدون دولار.
@@ -119,7 +122,7 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 - [Cash on delivery, delivery prices, and Meta Pixel](https://matgarko.com/en/integrations): Accept cash-on-delivery orders, set delivery prices by area, and connect Meta Pixel, the Conversions API, Google Analytics, and WhatsApp to your store.
 - [Online store design, ready for phones](https://matgarko.com/en/themes): Instead of many templates: one fast store look tested on phones, with ready color palettes for your kind of business, your logo, font, and photos.
 - [How to start an online store with Matgarko](https://matgarko.com/en/getting-started): A clear launch path for creating your store, adding products, setting delivery and payment details, and publishing your first ecommerce catalog.
-- [Online store pricing in Egypt](https://matgarko.com/en/pricing): Starter has no monthly fee: a flat 3 EGP per order, and fake orders are free. Pro is 2,000 EGP per month with no per-order fee.
+- [Online store pricing in Egypt](https://matgarko.com/en/pricing): Starter has no monthly fee: a flat 3 EGP per order, and fake orders are free; the first 20 orders are on us. Pro is 2,000 EGP per month with no per-order fee.
 - [Compare ecommerce platforms for Egypt and MENA](https://matgarko.com/en/compare): Compare Matgarko with EasyOrders, Shopify, Salla, and WooCommerce for local pricing, setup complexity, Arabic workflows, and ecommerce operations.
 - [Matgarko vs EasyOrders](https://matgarko.com/en/compare/easyorders): Compare Matgarko and EasyOrders for merchants in Egypt and MENA across pricing context, setup, local workflows, and launch fit.
 - [Shopify alternative for Egypt and MENA](https://matgarko.com/en/compare/shopify): Compare Matgarko and Shopify for merchants who need Arabic-first workflows, EGP pricing, and a simpler local ecommerce launch path.

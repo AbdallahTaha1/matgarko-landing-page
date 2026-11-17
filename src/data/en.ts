@@ -75,14 +75,19 @@ export const englishFaqs = [
       "No. You do not need to buy hosting, install plugins, or manage servers. Matgarko gives you the storefront, dashboard, product tools, order management, and setup flow in one platform.",
   },
   {
-    question: "Can I start before paying monthly?",
+    question: "How much does Matgarko cost? Is there a monthly fee?",
     answer:
-      "Yes. Starter has no monthly fee or expiring trial: a flat 3 EGP per order, and fake orders are free. Pro costs 2,000 EGP monthly with no per-order fee.",
+      "Starter has no monthly fee or expiring trial: a flat 3 EGP per order, your first 20 orders on us, and fake orders free. Pro costs 2,000 EGP monthly with no per-order fee. Matgarko takes no share of your sales.",
   },
   {
-    question: "Does Matgarko support cash on delivery?",
+    question: "Which payment methods can my Matgarko store accept?",
     answer:
-      "Yes. Cash on delivery is available on every plan. You can also set delivery prices for each area so customers see the cost before placing an order.",
+      "Cash on delivery on every plan, InstaPay or mobile-wallet transfer with a screenshot the shopper uploads, and online card payments through your own Paymob or Kashier account. The money goes straight to you, and Matgarko takes no share of it. You also set delivery prices for each area so customers see the cost before ordering.",
+  },
+  {
+    question: "Does Matgarko have ready store templates?",
+    answer:
+      "Yes. Matgarko has six ready templates you preview on your own store before using, a home page builder with more than 20 section types, and an AI designer that suggests a complete look from your description. Your products and words stay as they are when you change template.",
   },
   {
     question: "Can I connect Meta Pixel to my store?",

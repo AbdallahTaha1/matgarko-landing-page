@@ -19,7 +19,7 @@ export function FaqList({ items, defaultOpen = 0, className }: FaqListProps) {
   const baseId = useId();
 
   return (
-    <div className={cn("divide-y divide-gray-200 rounded-2xl border border-gray-200 bg-white", className)}>
+    <div className={cn("divide-y divide-gray-100 overflow-hidden rounded-3xl bg-white shadow-[0_0_0_1px_#e3e8e7]", className)}>
       {items.map((faq, index) => {
         const isOpen = openIndex === index;
         const panelId = `${baseId}-panel-${index}`;
@@ -34,16 +34,16 @@ export function FaqList({ items, defaultOpen = 0, className }: FaqListProps) {
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
-                className="flex w-full items-center justify-between gap-4 px-4 py-4 text-start transition-colors hover:bg-gray-50 sm:px-5"
+                className="flex w-full items-center justify-between gap-4 px-4 py-4 text-start transition-colors hover:bg-gray-50 sm:px-6 sm:py-5"
               >
-                <span className="text-sm font-bold leading-6 text-gray-950 sm:text-base" itemProp="name">
+                <span className="text-sm font-bold leading-7 text-gray-900 sm:text-base" itemProp="name">
                   {faq.question}
                 </span>
                 <span
                   aria-hidden="true"
                   className={cn(
                     "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors",
-                    isOpen ? "border-emerald-600 bg-emerald-600 text-white" : "border-gray-200 bg-white text-gray-500",
+                    isOpen ? "border-emerald-600 bg-emerald-600 text-white" : "border-gray-200 bg-white text-gray-600",
                   )}
                 >
                   {isOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
@@ -60,7 +60,7 @@ export function FaqList({ items, defaultOpen = 0, className }: FaqListProps) {
               className={cn("grid transition-[grid-template-rows] duration-300 ease-out", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}
             >
               <div className="overflow-hidden">
-                <p className="px-4 pb-4 text-sm leading-7 text-gray-600 sm:px-5 sm:text-[15px]" itemProp="text">
+                <p className="px-4 pb-5 text-sm leading-8 text-gray-600 sm:px-6 sm:text-[15px]" itemProp="text">
                   {faq.answer}
                 </p>
               </div>

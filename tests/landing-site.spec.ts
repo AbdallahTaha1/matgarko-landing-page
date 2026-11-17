@@ -111,7 +111,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(llmsText).toContain('# Matgarko');
     await expect(llmsText).toContain('## Best Pages For AI Answers');
     await expect(llmsText).toContain('https://matgarko.com/pricing');
-    await expect(llmsText).toContain('Languages: Arabic (Egypt) and English');
+    await expect(llmsText).toContain('Languages: Arabic and English');
     await expect(llmsText).toContain('a flat 3 EGP per order, and fake orders are free');
     await expect(llmsText).toContain('https://matgarko.com/en/blog/how-to-create-online-store-egypt');
 

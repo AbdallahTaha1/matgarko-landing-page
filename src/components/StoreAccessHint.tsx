@@ -7,9 +7,10 @@ export function StoreAccessHint({ language, compact = false }: { language: AppLa
   const en = language === 'en';
 
   if (compact) {
-    return <p className="mt-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-600">
+    return <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 text-sm text-gray-600">
       <span>{store ? (en ? 'Welcome back to your store' : 'متجرك مستنيك') : (en ? 'Already have a store?' : 'عملت متجر قبل كده؟')}</span>
       {store && <a href={store.storeUrl} dir="ltr" className="break-all py-2 font-medium text-emerald-800 underline underline-offset-4">{new URL(store.storeUrl).hostname}</a>}
+      {store && <a href={store.adminUrl} className="py-2 font-bold text-emerald-800 underline underline-offset-4">{en ? 'Open your dashboard' : 'افتح لوحة التحكم'}</a>}
       <Link to={localizePath('/login', language)} className="py-2 font-bold text-emerald-800 underline underline-offset-4">{store ? (en ? 'Store access options' : 'خيارات الدخول لمتجرك') : (en ? 'Access your store' : 'ادخل متجرك')}</Link>
     </p>;
   }

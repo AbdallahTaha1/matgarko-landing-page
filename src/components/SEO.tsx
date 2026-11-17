@@ -117,7 +117,7 @@ export function SEO() {
     upsertMeta("name", "keywords", page.keywords.join(", "));
     upsertMeta("name", "robots", page.noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1");
     upsertMeta("name", "author", siteName);
-    upsertMeta("name", "theme-color", "#0d9488");
+    upsertMeta("name", "theme-color", "#0e5a52");
     upsertMeta("property", "og:locale", pageOgLocale(page));
     upsertMeta("property", "og:type", page.type || "website");
     upsertMeta("property", "og:site_name", siteName);

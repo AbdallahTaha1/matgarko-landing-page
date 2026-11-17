@@ -9,14 +9,14 @@ import { metaBrowserIds } from '@/lib/metaPixel';
 import { suggestEmail } from '@/lib/emailTypos';
 import { getConsent, serverConsent, subscribeConsent } from '@/lib/consent';
 import { isEnglishPath } from '@/lib/i18n';
-import { readyStoreLinks, rememberStore, signupSignInUrl } from '@/lib/storeAccess';
+import { readyStoreLinks, rememberStore, signupSignInUrl, SIGNUP_LINK_KEY } from '@/lib/storeAccess';
 import { StoreAccessHint } from '@/components/StoreAccessHint';
 import { useSignupContactCheck } from '@/lib/useSignupContactCheck';
 import { normalizePhoneInput, parseSignupPhone, phoneCountries, signupPhoneNumber, type CountryCode } from '@/lib/phone';
 
 const tokenKey = 'matgarko-pending-signup';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-const inputClass = 'mt-2 block w-full rounded-lg border border-gray-300 bg-white px-3 py-3 text-base text-gray-950 focus:outline-emerald-600';
+const inputClass = 'mt-2 block w-full rounded-xl border border-gray-300 bg-white px-3.5 py-3 text-base text-gray-950 focus:outline-emerald-600';
 const subdomainPattern = '[a-z0-9]([a-z0-9]|-){1,38}[a-z0-9]';
 const validSubdomain = new RegExp(`^${subdomainPattern}$`);
 const messages: Record<string, [string, string]> = {
@@ -120,6 +120,16 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
     }
     void initialize();
     return () => { active = false; };
+  }, []);
+
+  // The store link typed on the home page's closing band arrives filled in.
+  useEffect(() => {
+    try {
+      const wanted = sessionStorage.getItem(SIGNUP_LINK_KEY);
+      if (!wanted) return;
+      sessionStorage.removeItem(SIGNUP_LINK_KEY);
+      if (/^[a-z0-9-]{1,40}$/.test(wanted)) setForm(value => value.subdomain ? value : { ...value, subdomain: wanted });
+    } catch { /* Optional storage. */ }
   }, []);
 
   useEffect(() => {
@@ -261,11 +271,18 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
 
   return <section className="signup-form hero-band min-h-[calc(100vh-4rem)] px-4 py-10 sm:py-14" dir={english ? 'ltr' : 'rtl'}>
     <div className="mx-auto max-w-lg">
-      <Store className="mx-auto h-9 w-9 text-emerald-700" aria-hidden="true" />
-      <h1 className="mt-4 text-center text-3xl font-black font-heading">{t('ابدأ متجرك مجانًا', 'Start your store free')}</h1>
+      <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-600 shadow-[0_0_0_1px_#d5ebe6]"><Store className="h-6 w-6" aria-hidden="true" /></span>
+      <h1 className="mt-4 text-center text-[1.75rem] font-extrabold leading-[1.5] text-gray-900 font-heading sm:text-3xl sm:leading-[1.5]">{t('ابدأ متجرك مجانًا', 'Start your store free')}</h1>
       <p className="mt-3 text-center text-sm leading-6 text-gray-600">{t('خطوتين وتبدأ تبيع من موبايلك. بدون بطاقة ائتمان.', 'Two steps and you are selling from your phone. No credit card.')}</p>
-      <div className="mt-7 rounded-xl border border-gray-200 bg-white p-5 shadow-xl sm:p-7">
-        {stepNumber > 0 && <p className="mb-4 text-xs font-bold text-emerald-700">{t(`خطوة ${stepNumber} من 2`, `Step ${stepNumber} of 2`)}</p>}
+      {/* What the merchant gets, before the first field. */}
+      {['store', 'account'].includes(stage) && <ul className="mt-4 flex flex-wrap justify-center gap-2 text-xs font-bold text-emerald-700">
+        {[t('بدون اشتراك شهري', 'No monthly fee'), t('أول 20 طلب علينا', 'First 20 orders on us'), t('الطلبات الوهمية ببلاش', 'Fake orders are free')].map(item => <li key={item} className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 shadow-[0_0_0_1px_#d5ebe6]"><CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />{item}</li>)}
+      </ul>}
+      <div className="mt-6 rounded-3xl bg-white p-5 shadow-[0_0_0_1px_#e3e8e7,0_30px_60px_-40px_rgba(14,90,82,0.5)] sm:p-7">
+        {stepNumber > 0 && <div className="mb-5">
+          <p className="text-xs font-bold text-emerald-700">{t(`خطوة ${stepNumber} من 2`, `Step ${stepNumber} of 2`)}</p>
+          <div className="mt-2 flex gap-1.5" aria-hidden="true"><span className="h-1.5 flex-1 rounded-full bg-emerald-600" /><span className={`h-1.5 flex-1 rounded-full ${stepNumber === 2 ? 'bg-emerald-600' : 'bg-gray-200'}`} /></div>
+        </div>}
         {!config && !error && <p role="status" className="sr-only">{t('جاري الاتصال…', 'Connecting…')}</p>}
         {config && !config.enabled && <p role="alert" className="mb-4 text-amber-800">{messages.Disabled[english ? 1 : 0]}</p>}
         {error && <div ref={errorAlert} tabIndex={-1} role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}{['EmailTaken', 'PhoneTaken'].includes(error) && <Link to={english ? '/en/login' : '/login'} className="mt-2 block font-bold underline">{t('ادخل متجرك الحالي', 'Access your existing store')}</Link>}</div>}

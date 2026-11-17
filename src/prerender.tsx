@@ -80,7 +80,7 @@ function renderHead(page: SeoPage) {
     <meta name="keywords" content="${escapeHtml(page.keywords.join(", "))}" />
     <meta name="robots" content="${page.noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"}" />
     <meta name="author" content="${escapeHtml(siteName)}" />
-    <meta name="theme-color" content="#0d9488" />
+    <meta name="theme-color" content="#0e5a52" />
     <link rel="canonical" href="${escapeHtml(canonical)}" />
     ${hreflangLinks}
     <link rel="manifest" href="/site.webmanifest" />

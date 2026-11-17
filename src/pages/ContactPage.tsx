@@ -62,15 +62,15 @@ export const ContactPage = () => {
 
       <section className="py-16">
         <div className="container px-4 mx-auto">
-          <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_0.9fr]">
-            <div className="grid gap-6 md:grid-cols-2">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+            <div className="grid min-w-0 grid-cols-1 gap-6 md:grid-cols-2">
               {contactMethods.map((method) => (
                 <a
                   key={method.title}
                   href={method.href}
                   target={method.href.startsWith("http") ? "_blank" : undefined}
                   rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="premium-card group p-6"
+                  className="premium-card group min-w-0 p-6"
                 >
                   <div className="icon-tile mb-5 h-12 w-12 transition-transform group-hover:scale-110">
                     {method.icon}
