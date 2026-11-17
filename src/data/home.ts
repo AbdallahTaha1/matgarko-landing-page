@@ -130,13 +130,13 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
   ar: {
     hero: {
       kicker: "منصة إنشاء متجر إلكتروني في مصر",
-      titleLine1: "اعمل متجرك الإلكتروني",
-      titleLine2: "وادِر شغلك كله",
-      titleMark: "من موبايلك",
+      titleLine1: "افتح متجرك الإلكتروني",
+      titleLine2: "مجاناً وأول",
+      titleMark: "20 طلب علينا",
       lead: "افتح متجر باسمك في دقايق، استقبل الطلبات بالدفع عند الاستلام أو أونلاين، وتابع كل حاجة من لوحة تحكم بالعربي. من غير مبرمج.",
       primaryCta: "أنشئ متجرك مجاناً",
       secondaryCta: "شوف الأسعار",
-      trust: ["بدون اشتراك شهري", "أول 20 طلب علينا", "الطلبات الوهمية ببلاش"],
+      trust: ["بدون اشتراك شهري", "3 ج.م بس على الطلب", "الطلبات الوهمية ببلاش"],
       chips: [
         "الدفع عند الاستلام",
         "بطاقات عبر Paymob وKashier",
@@ -317,13 +317,13 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
   en: {
     hero: {
       kicker: "Online store builder for Egypt",
-      titleLine1: "Create an online store",
-      titleLine2: "and run it all",
-      titleMark: "from your phone",
+      titleLine1: "Create an online store free",
+      titleLine2: "and your first",
+      titleMark: "20 orders are on us",
       lead: "Open a store in your name in minutes, take cash-on-delivery or online orders, and follow everything from one dashboard. No developer needed.",
       primaryCta: "Create your store free",
       secondaryCta: "See pricing",
-      trust: ["No monthly fee", "First 20 orders on us", "Fake orders are free"],
+      trust: ["No monthly fee", "Just 3 EGP per order", "Fake orders are free"],
       chips: [
         "Cash on delivery",
         "Cards via Paymob and Kashier",

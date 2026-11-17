@@ -30,7 +30,7 @@ for (const browser of inAppBrowsers) {
       await page.addInitScript(() => localStorage.setItem('matgarko-consent', 'declined'));
       await page.goto('/');
 
-      await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك الإلكتروني/ })).toBeVisible();
+      await expect(page.getByRole('heading', { level: 1, name: /افتح متجرك الإلكتروني مجاناً وأول 20 طلب علينا/ })).toBeVisible();
       const signup = page.locator('main').getByRole('link', { name: 'أنشئ متجرك مجاناً' }).first();
       await expect(signup).toHaveAttribute('href', '/register');
       const box = await signup.boundingBox();

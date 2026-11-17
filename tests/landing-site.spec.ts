@@ -17,7 +17,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     );
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://matgarko.com/');
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://matgarko.com/og-image.png');
-    await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك/ })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /افتح متجرك الإلكتروني مجاناً/ })).toBeVisible();
     await expect(page.getByText('تطبيق متجركو متاح دلوقتي على Google Play لأجهزة أندرويد.', { exact: false }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: 'تحميل من Google Play' })).toHaveAttribute('href', 'https://play.google.com/store/apps/details?id=com.matgarko.merchant');
     await expect(page.getByText('منصة إنشاء متجر إلكتروني في مصر')).toBeVisible();
@@ -32,7 +32,7 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');
 
-    await expect(page.getByRole('heading', { level: 1, name: /اعمل متجرك/ })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /افتح متجرك الإلكتروني مجاناً/ })).toBeVisible();
     await expect(page.getByRole('link', { name: /أنشئ متجرك مجاناً/ }).first()).toBeVisible();
 
     const hasHorizontalOverflow = await page.evaluate(
@@ -53,7 +53,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     await page.getByRole('navigation').getByRole('link', { name: 'تصميم المتجر' }).click();
     await page.waitForURL('**/themes');
-    await expect(page.getByRole('heading', { name: 'شكل جاهز مجرب على الموبايل، بألوانك أنت' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'ستة قوالب جاهزة لمتجرك، بألوانك وشعارك' })).toBeVisible();
+    await expect(page.locator('#themes-templates-title ~ div img')).toHaveCount(6);
 
     await page.getByRole('navigation').getByRole('link', { name: 'الدفع والشحن' }).click();
     await page.waitForURL('**/integrations');

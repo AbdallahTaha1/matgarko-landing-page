@@ -147,19 +147,19 @@ Type: Landing page
 Description: كل أدوات إدارة المتجر في مكان واحد: منتجات واستيراد Excel، طلبات، عملاء، عروض، بكسل ميتا، إحصائيات المبيعات والأرباح، وتصميم صفحتك الرئيسية.
 Keywords: إدارة متجر إلكتروني, إدارة الطلبات, إدارة المنتجات, لوحة تحكم متجر, إحصائيات المتجر, استيراد منتجات من Excel
 
-## الدفع عند الاستلام والتوصيل وبكسل ميتا
+## الدفع عند الاستلام وأونلاين والتوصيل وبكسل ميتا
 
 URL: https://matgarko.com/integrations
 Type: Landing page
-Description: استقبل طلبات الدفع عند الاستلام، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وGoogle Analytics وواتساب بمتجرك.
-Keywords: دفع عند الاستلام, أسعار التوصيل, مناطق الشحن, بكسل فيسبوك للمتجر, Conversions API, Google Analytics للمتجر
+Description: استقبل الطلبات بالدفع عند الاستلام أو بتحويل إنستاباي أو بالبطاقة عبر Paymob وKashier، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وبكسل TikTok وGoogle Analytics بمتجرك.
+Keywords: دفع عند الاستلام, بوابة دفع للمتجر الإلكتروني, Paymob, Kashier, تحويل إنستاباي, أسعار التوصيل, مناطق الشحن, بكسل فيسبوك للمتجر, بكسل تيك توك, Conversions API
 
-## تصميم متجر إلكتروني جاهز للموبايل
+## قوالب وتصميم متجر إلكتروني جاهز للموبايل
 
 URL: https://matgarko.com/themes
 Type: Landing page
-Description: بدل ما تختار من قوالب كتير: شكل واحد سريع ومجرب على الموبايل، بألوان جاهزة حسب نشاطك ولوجو متجرك وخطه وصورك.
-Keywords: تصميم متجر إلكتروني, شكل متجر إلكتروني, ألوان المتجر, متجر إلكتروني للموبايل, قوالب متجر إلكتروني
+Description: ستة قوالب جاهزة لمتجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.
+Keywords: قوالب متجر إلكتروني, تصميم متجر إلكتروني, قوالب متجر جاهزة, تصميم متجر بالذكاء الاصطناعي, شكل متجر إلكتروني, ألوان المتجر, متجر إلكتروني للموبايل
 
 ## كيفية إنشاء متجر إلكتروني خطوة بخطوة
 
@@ -539,19 +539,19 @@ Type: Landing page
 Description: Manage storefronts, products, Excel imports, orders, customers, offers, Meta Pixel, and sales and profit statistics in one Arabic-first ecommerce platform.
 Keywords: ecommerce store management, online store dashboard, product and order management, Arabic ecommerce software, store statistics
 
-## Cash on delivery, delivery prices, and Meta Pixel
+## Cash on delivery, online payment, delivery prices
 
 URL: https://matgarko.com/en/integrations
 Type: Landing page
-Description: Accept cash-on-delivery orders, set delivery prices by area, and connect Meta Pixel, the Conversions API, Google Analytics, and WhatsApp to your store.
-Keywords: cash on delivery ecommerce, store delivery prices, delivery areas, Meta Pixel for online store, Conversions API
+Description: Take orders by cash on delivery, InstaPay transfer, or card through Paymob and Kashier, set delivery prices by area, and connect Meta Pixel, the Conversions API, TikTok Pixel, and Google Analytics to your store.
+Keywords: cash on delivery ecommerce, online store payment gateway Egypt, Paymob, Kashier, store delivery prices, delivery areas, Meta Pixel for online store, Conversions API
 
-## Online store design, ready for phones
+## Online store templates and design, ready for phones
 
 URL: https://matgarko.com/en/themes
 Type: Landing page
-Description: Instead of many templates: one fast store look tested on phones, with ready color palettes for your kind of business, your logo, font, and photos.
-Keywords: online store design, mobile online store, store color palettes, online store templates, Arabic online store design
+Description: Six ready store templates you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.
+Keywords: online store templates, online store design, AI store designer, mobile online store, store color palettes, Arabic online store design
 
 ## How to start an online store with Matgarko
 
@@ -1049,7 +1049,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Pricing: https://matgarko.com/pricing
 - How to start: https://matgarko.com/getting-started
 - Store design: https://matgarko.com/themes
-- Cash on delivery and delivery prices: https://matgarko.com/integrations
+- Payment methods and delivery prices: https://matgarko.com/integrations
 - Company/entity details: https://matgarko.com/about
 - Contact/support: https://matgarko.com/contact
 - Comparisons: https://matgarko.com/compare

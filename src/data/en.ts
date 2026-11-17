@@ -162,27 +162,27 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
     kicker: "Payment and shipping",
     title: "Set clear payment and delivery details",
     lead:
-      "Accept cash-on-delivery orders, make delivery costs clear to your customers, and connect Meta Pixel, Google Analytics, and WhatsApp to your store.",
+      "Take orders by cash on delivery, InstaPay transfer, or card through your own Paymob or Kashier account, make delivery costs clear to your customers, and connect Meta Pixel, TikTok Pixel, Google Analytics, and WhatsApp to your store.",
     primaryCta: "Create your store",
     secondaryCta: "Compare plans",
     sections: [
       {
-        title: "Cash on delivery",
+        title: "Payment",
         text:
-          "Customers place an order through your store and pay when they receive it.",
-        items: ["Cash on delivery", "Available on every plan", "Optional collection fee", "Minimum and maximum order"],
+          "Shoppers pick how to pay as they order, and the money goes to your own account. Matgarko takes no share of it.",
+        items: ["Cash on delivery", "InstaPay or wallet transfer with a screenshot", "Cards through your Paymob or Kashier account", "Collection fee, minimum and maximum order"],
       },
       {
         title: "Shipping zones and fees",
         text:
-          "Define delivery areas, shipping prices, and rules so customers know what to expect before placing the order.",
-        items: ["Delivery zones", "Prices per governorate and area", "Free shipping", "Minimum order per area"],
+          "Group governorates into delivery zones with a price each, so customers know the cost before placing the order. Matgarko does not deliver: you ship with your own courier.",
+        items: ["Delivery zones with a price each", "A ready template for Egypt's governorates", "Free shipping above a minimum order", "A free-shipping progress bar in the cart"],
       },
       {
         title: "Marketing and analytics readiness",
         text:
-          "Connect Meta Pixel, the Conversions API, Google Analytics, and Google Search Console from your store design settings, without a developer. Views, add-to-carts, checkouts, and purchases reach your ads and reports, and store statistics show which sources bring visits.",
-        items: ["Meta Pixel", "Conversions API", "Google Analytics", "Google Search Console"],
+          "Connect your accounts from “Pixel and analytics” without a developer. Views, add-to-carts, checkouts, and purchases reach your ads from the browser and from the server, and store statistics show which sources bring visits and orders.",
+        items: ["Meta Pixel and Conversions API", "TikTok Pixel", "Google Analytics and Search Console", "Product catalog for Meta, TikTok and Google"],
       },
       {
         title: "WhatsApp",
@@ -199,12 +199,18 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
   },
   themes: {
     kicker: "Store design",
-    title: "One ready store look, built and tested for phones, in your colors",
+    title: "Six ready store templates, in your colors and logo",
     lead:
-      "Instead of picking from a long list of templates, you get one fast store look tested on phones, where most of your shoppers buy. You choose the colors for your kind of business, your logo, font, and photos.",
+      "Pick one of six templates and preview your store in it before you use it, or write what you sell and the AI designer suggests a complete look. Every template is built and tested for phones, where most of your shoppers buy, and your products and words stay as they are when you change template.",
     primaryCta: "Start your store",
     secondaryCta: "See pricing",
     sections: [
+      {
+        title: "Six templates and an AI designer",
+        text:
+          "Soft, Elegant, Bold, Natural, Market and Classic each change the header, headings and product cards. “Design my store” takes a short description of what you sell and proposes a full look you preview first.",
+        items: ["Soft", "Elegant", "Bold", "Natural", "Market", "Classic"],
+      },
       {
         title: "Ready colors for your business",
         text:
@@ -214,13 +220,18 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
       {
         title: "Your brand on every page",
         text:
-          "Add your logo and product photos, choose a font, a header style, and a button shape, so the store feels like your own.",
-        items: ["Logo and photos", "Font", "Header style", "Button shape"],
+          "Add your logo and product photos in square or portrait shape, choose a store font and a headings font, the header and footer style, and the button shape, so the store feels like your own.",
+        items: ["Logo and photos", "Fonts", "Header and footer", "Button shape"],
       },
       {
         title: "A home page you arrange",
         text:
-          "Build your home page from more than 20 section types: sliders, offers, categories, products, and customer reviews.",
+          "Build your home page from more than 20 section types: sliders, offers, categories, products, customer reviews, and questions, each with its own background tone. Save the look and go back to any earlier version in one tap.",
+      },
+      {
+        title: "For advanced users",
+        text:
+          "Add custom CSS, or a section of your own in HTML and CSS on the home page. The checkout page is never affected.",
       },
     ],
   },
@@ -809,16 +820,16 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
     keywords: ["ecommerce store management", "online store dashboard", "product and order management", "Arabic ecommerce software", "store statistics"],
   },
   "/en/integrations": {
-    title: "Cash on delivery, delivery prices, and Meta Pixel | Matgarko",
+    title: "Cash on delivery, online payment, delivery prices | Matgarko",
     description:
-      "Accept cash-on-delivery orders, set delivery prices by area, and connect Meta Pixel, the Conversions API, Google Analytics, and WhatsApp to your store.",
-    keywords: ["cash on delivery ecommerce", "store delivery prices", "delivery areas", "Meta Pixel for online store", "Conversions API"],
+      "Take orders by cash on delivery, InstaPay transfer, or card through Paymob and Kashier, set delivery prices by area, and connect Meta Pixel, the Conversions API, TikTok Pixel, and Google Analytics to your store.",
+    keywords: ["cash on delivery ecommerce", "online store payment gateway Egypt", "Paymob", "Kashier", "store delivery prices", "delivery areas", "Meta Pixel for online store", "Conversions API"],
   },
   "/en/themes": {
-    title: "Online store design, ready for phones | Matgarko",
+    title: "Online store templates and design, ready for phones | Matgarko",
     description:
-      "Instead of many templates: one fast store look tested on phones, with ready color palettes for your kind of business, your logo, font, and photos.",
-    keywords: ["online store design", "mobile online store", "store color palettes", "online store templates", "Arabic online store design"],
+      "Six ready store templates you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.",
+    keywords: ["online store templates", "online store design", "AI store designer", "mobile online store", "store color palettes", "Arabic online store design"],
   },
   "/en/getting-started": {
     title: "How to start an online store with Matgarko",

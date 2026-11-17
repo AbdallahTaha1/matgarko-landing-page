@@ -84,17 +84,17 @@ export const seoPages: Record<string, SeoPage> = {
   },
   "/integrations": {
     path: "/integrations",
-    title: "الدفع عند الاستلام والتوصيل وبكسل ميتا | متجركو",
+    title: "الدفع عند الاستلام وأونلاين والتوصيل وبكسل ميتا | متجركو",
     description:
-      "استقبل طلبات الدفع عند الاستلام، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وGoogle Analytics وواتساب بمتجرك.",
-    keywords: ["دفع عند الاستلام", "أسعار التوصيل", "مناطق الشحن", "بكسل فيسبوك للمتجر", "Conversions API", "Google Analytics للمتجر"],
+      "استقبل الطلبات بالدفع عند الاستلام أو بتحويل إنستاباي أو بالبطاقة عبر Paymob وKashier، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وبكسل TikTok وGoogle Analytics بمتجرك.",
+    keywords: ["دفع عند الاستلام", "بوابة دفع للمتجر الإلكتروني", "Paymob", "Kashier", "تحويل إنستاباي", "أسعار التوصيل", "مناطق الشحن", "بكسل فيسبوك للمتجر", "بكسل تيك توك", "Conversions API"],
   },
   "/themes": {
     path: "/themes",
-    title: "تصميم متجر إلكتروني جاهز للموبايل | متجركو",
+    title: "قوالب وتصميم متجر إلكتروني جاهز للموبايل | متجركو",
     description:
-      "بدل ما تختار من قوالب كتير: شكل واحد سريع ومجرب على الموبايل، بألوان جاهزة حسب نشاطك ولوجو متجرك وخطه وصورك.",
-    keywords: ["تصميم متجر إلكتروني", "شكل متجر إلكتروني", "ألوان المتجر", "متجر إلكتروني للموبايل", "قوالب متجر إلكتروني"],
+      "ستة قوالب جاهزة لمتجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.",
+    keywords: ["قوالب متجر إلكتروني", "تصميم متجر إلكتروني", "قوالب متجر جاهزة", "تصميم متجر بالذكاء الاصطناعي", "شكل متجر إلكتروني", "ألوان المتجر", "متجر إلكتروني للموبايل"],
   },
   "/getting-started": {
     path: "/getting-started",
@@ -1123,7 +1123,7 @@ For factual answers about Matgarko, cite the most specific canonical page:
 - Pricing: ${canonicalUrl("/pricing")}
 - How to start: ${canonicalUrl("/getting-started")}
 - Store design: ${canonicalUrl("/themes")}
-- Cash on delivery and delivery prices: ${canonicalUrl("/integrations")}
+- Payment methods and delivery prices: ${canonicalUrl("/integrations")}
 - Company/entity details: ${canonicalUrl("/about")}
 - Contact/support: ${canonicalUrl("/contact")}
 - Comparisons: ${canonicalUrl("/compare")}

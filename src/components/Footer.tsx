@@ -1,6 +1,8 @@
 import { countries, countryFromPath } from "@/data/countries";
 import { languageFromPath, localizeFor } from "@/lib/i18n";
 import { Facebook, Mail, MapPin, Phone } from "lucide-react";
+import { getConsent, serverConsent, setConsent, subscribeConsent } from "@/lib/consent";
+import { useSyncExternalStore } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 
@@ -64,6 +66,7 @@ export function Footer() {
   const isEnglish = language === "en";
   const brandName = isEnglish ? "Matgarko" : "متجركو";
   const country = countryFromPath(pathname);
+  const consent = useSyncExternalStore(subscribeConsent, getConsent, serverConsent);
   const brandDescription = isEnglish
     ? "An Arabic-first ecommerce platform for merchants in Egypt and the Gulf. Create your store, take cash-on-delivery orders, and pay a fixed fee per order."
     : country
@@ -160,6 +163,12 @@ export function Footer() {
           <p className="text-xs text-emerald-300 sm:text-sm">
             © {new Date().getFullYear()} {brandName}. {isEnglish ? "All rights reserved." : "جميع الحقوق محفوظة."}
           </p>
+          {/* Reopens the cookie question; while it is still unanswered the banner itself is on screen. */}
+          {consent !== "unknown" && (
+            <button type="button" onClick={() => setConsent("unknown")} className="py-1 text-xs text-emerald-300 underline underline-offset-4 transition-colors hover:text-white sm:text-sm">
+              {isEnglish ? "Cookie preferences" : "إعدادات ملفات الارتباط"}
+            </button>
+          )}
         </div>
       </div>
     </footer>

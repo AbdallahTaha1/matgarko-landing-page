@@ -119,6 +119,32 @@ export function FakeOrderShield({ language }: { language: AppLanguage }) {
   );
 }
 
+/** The six ready templates as phone screens: a row that scrolls sideways on phones, six across on wide screens. */
+export function TemplatePhones({ language }: { language: AppLanguage }) {
+  const t = homeContent[language].templates;
+  return (
+    <ul className="scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:gap-4 lg:overflow-visible lg:px-0">
+      {t.items.map((item) => (
+        <li key={item.key} className="w-[170px] shrink-0 snap-start sm:w-[190px] lg:w-auto">
+          <div className="overflow-hidden rounded-[1.5rem] border-[5px] border-gray-950 bg-gray-950 shadow-[0_20px_40px_-24px_rgba(10,33,30,0.55)]">
+            <img
+              src={`/templates/${item.key}.webp`}
+              alt={t.alt(item.name, item.kind)}
+              width={480}
+              height={935}
+              loading="lazy"
+              decoding="async"
+              className="block h-auto w-full rounded-[1.1rem]"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-extrabold text-gray-900">{item.name}</p>
+          <p className="text-center text-xs leading-6 text-gray-500">{item.kind}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /** The six ready templates as phone screens that scroll sideways, and the AI designer beside them. */
 export function Templates({ language }: { language: AppLanguage }) {
   const t = homeContent[language].templates;
@@ -130,25 +156,7 @@ export function Templates({ language }: { language: AppLanguage }) {
         </Reveal>
 
         <Reveal className="mt-9">
-          <ul className="scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:gap-4 lg:overflow-visible lg:px-0">
-            {t.items.map((item) => (
-              <li key={item.key} className="w-[170px] shrink-0 snap-start sm:w-[190px] lg:w-auto">
-                <div className="overflow-hidden rounded-[1.5rem] border-[5px] border-gray-950 bg-gray-950 shadow-[0_20px_40px_-24px_rgba(10,33,30,0.55)]">
-                  <img
-                    src={`/templates/${item.key}.webp`}
-                    alt={t.alt(item.name, item.kind)}
-                    width={480}
-                    height={935}
-                    loading="lazy"
-                    decoding="async"
-                    className="block h-auto w-full rounded-[1.1rem]"
-                  />
-                </div>
-                <p className="mt-3 text-center text-sm font-extrabold text-gray-900">{item.name}</p>
-                <p className="text-center text-xs leading-6 text-gray-500">{item.kind}</p>
-              </li>
-            ))}
-          </ul>
+          <TemplatePhones language={language} />
         </Reveal>
 
         <Reveal className="mx-auto mt-8 flex max-w-3xl items-start gap-4 rounded-3xl bg-white p-5 shadow-[0_0_0_1px_#e3e8e7] sm:items-center sm:p-6">
