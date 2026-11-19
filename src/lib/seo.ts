@@ -236,6 +236,14 @@ export const seoPages: Record<string, SeoPage> = {
     keywords: ["إنشاء متجر إلكتروني مجاني", "متجر إلكتروني مجاني مصر", "الفرق بين المجاني والمدفوع في المتجر الإلكتروني"],
     type: "article",
   },
+  "/blog/reduce-fake-cod-orders-egypt": {
+    path: "/blog/reduce-fake-cod-orders-egypt",
+    title: "إزاي تقلل الطلبات الوهمية في الدفع عند الاستلام | متجركو",
+    description:
+      "خطوات عملية لتقليل الطلبات الوهمية في الدفع عند الاستلام: وضوح السعر، فحص الرقم، تأكيد واتساب، حظر المزعجين وقياس نسبة التسليم.",
+    keywords: ["الطلبات الوهمية في الدفع عند الاستلام", "تقليل الطلبات الوهمية", "نسبة التسليم متجر إلكتروني مصر"],
+    type: "article",
+  },
   // Compare / competitor pages
   "/compare": {
     path: "/compare",
@@ -406,6 +414,7 @@ const arabicOrderedSeoPages = [
   seoPages["/blog/cost-of-online-store-egypt-2026"],
   seoPages["/blog/best-ecommerce-platform-egypt"],
   seoPages["/blog/free-online-store-pros-cons"],
+  seoPages["/blog/reduce-fake-cod-orders-egypt"],
   seoPages["/learn"],
   ...learnGuides.map((guide) => seoPages[`/learn/${guide.slug}`]),
   // Compare pages
