@@ -799,6 +799,60 @@ export const englishBlogArticles: BlogArticle[] = [
       },
     ],
   },
+  {
+    slug: "reduce-fake-cod-orders-egypt",
+    title: "How to reduce fake cash-on-delivery orders",
+    description:
+      "Practical steps to cut fake cash-on-delivery orders: clear pricing, number checks, WhatsApp confirmation, blocking repeat offenders, and tracking delivery rate.",
+    category: "Beginner guide",
+    readingTime: "6 min read",
+    publishDate: "2026-11-19",
+    content: [
+      {
+        type: "p",
+        text:
+          "A fake cash-on-delivery order is the most expensive order in your store: you paid for the ad, packed the parcel, shipped it, and it came back uncollected. You cannot remove them completely, but a few simple steps before and after shipping reduce them noticeably.",
+      },
+      {
+        type: "h2",
+        text: "Show the full price before the order",
+      },
+      {
+        type: "p",
+        text:
+          "Many refusals at the door come from surprise. Show the product price, the delivery fee for the customer's area, and the expected delivery time before the order is confirmed.",
+      },
+      {
+        type: "h2",
+        text: "Check every order when it arrives",
+      },
+      {
+        type: "ul",
+        items: ["Does the phone number look real?", "Does the same number already have an open order?", "Did several orders arrive from the same number or connection?", "Is the address clear and logical?"],
+      },
+      {
+        type: "p",
+        text:
+          "In Matgarko, the fake-order shield checks each order the moment it is created and warns you about a duplicate number with an open order in the last 24 hours, many orders from the same number or connection, or a number whose owner refused delivery before.",
+      },
+      {
+        type: "h2",
+        text: "Confirm on WhatsApp, block repeat offenders, and record refusals",
+      },
+      {
+        type: "ul",
+        items: [
+          "Send a short message with the product, the total, and the address, and ask the customer to confirm before shipping",
+          "Block numbers that repeat fake orders so they cannot order again",
+          "Record refused deliveries so you can see your real delivery rate",
+        ],
+      },
+      {
+        type: "callout",
+        text: "Tip: start with two steps this week, a clear total price and WhatsApp confirmation before shipping. Compare your delivery rate after two weeks and add the rest as needed.",
+      },
+    ],
+  },
 ];
 
 export const englishSeoPages: Record<string, EnglishSeoEntry> = {
@@ -945,6 +999,13 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
     keywords: ["free online store builder", "free ecommerce store Egypt", "online store commission", "start online store free"],
     type: "article",
   },
+  "/en/blog/reduce-fake-cod-orders-egypt": {
+    title: "How to reduce fake cash-on-delivery orders | Matgarko",
+    description:
+      "Practical steps to cut fake cash-on-delivery orders: clear pricing, number checks, WhatsApp confirmation, blocking repeat offenders, and tracking delivery rate.",
+    keywords: ["fake orders cash on delivery", "reduce fake orders Egypt", "delivery rate ecommerce Egypt"],
+    type: "article",
+  },
   "/en/compare": {
     title: "Compare ecommerce platforms for Egypt and MENA | Matgarko",
     description:
@@ -1001,6 +1062,7 @@ export const englishOrderedPaths = [
   "/en/blog/cost-of-online-store-egypt-2026",
   "/en/blog/best-ecommerce-platform-egypt",
   "/en/blog/free-online-store-pros-cons",
+  "/en/blog/reduce-fake-cod-orders-egypt",
   "/en/compare",
   "/en/compare/easyorders",
   "/en/compare/shopify",
