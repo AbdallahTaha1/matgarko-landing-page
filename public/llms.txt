@@ -2,7 +2,7 @@
 
 > Matgarko helps solo merchants in Egypt and the Arab world launch and run their online store directly from their phone — simply, quickly, and in Arabic, without technical experience or a team.
 
-Last updated: 2026-11-17
+Last updated: 2026-11-19
 Official website: https://matgarko.com/
 Languages: Arabic and English
 Markets: Egypt (main site), Saudi Arabia, United Arab Emirates, Kuwait, Qatar, Oman and Bahrain (country versions), and stores in every other Arab country
@@ -16,7 +16,7 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
-- Main jobs: create an ecommerce store, manage products and orders, organize customers, set delivery prices by governorate and area, launch coupons and quantity offers, and style the store from six ready mobile-first templates, a home page builder, or an AI designer that suggests a complete look.
+- Main jobs: create an ecommerce store, manage products and orders, organize customers, set delivery prices by governorate and area, launch coupons and quantity offers, and style the store from 21 ready mobile-first templates by kind of store, a home page builder, or an AI designer that suggests a complete look.
 - Store payment methods: cash on delivery, InstaPay or mobile-wallet transfer with a screenshot, and online card payments through the merchant's own Paymob or Kashier account. Matgarko takes no share of sales.
 - Shipping: Matgarko does not deliver; the merchant ships with their own courier and sets delivery prices.
 - Welcome offer: the first 20 orders of a new store are free (welcome credit); fees are then taken from a prepaid balance topped up by Vodafone Cash or InstaPay.
@@ -89,7 +89,7 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 - [إنشاء وإدارة متجر إلكتروني من الموبايل في مصر](https://matgarko.com/): ابدأ متجرك الإلكتروني مجاناً وادِر شغلك من موبايلك مع متجركو. منصة عربية للتاجر الصغير في مصر، بدون خبرة تقنية، بـ 3 ج.م بس على الطلب، وأول 20 طلب علينا، والطلبات الوهمية ببلاش.
 - [حلول إدارة المتجر الإلكتروني](https://matgarko.com/solutions): كل أدوات إدارة المتجر في مكان واحد: منتجات واستيراد Excel، طلبات، عملاء، عروض، بكسل ميتا، إحصائيات المبيعات والأرباح، وتصميم صفحتك الرئيسية.
 - [الدفع عند الاستلام وأونلاين والتوصيل وبكسل ميتا](https://matgarko.com/integrations): استقبل الطلبات بالدفع عند الاستلام أو بتحويل إنستاباي أو بالبطاقة عبر Paymob وKashier، حدد سعر التوصيل لكل منطقة، واربط Meta Pixel وConversions API وبكسل TikTok وGoogle Analytics بمتجرك.
-- [قوالب وتصميم متجر إلكتروني جاهز للموبايل](https://matgarko.com/themes): ستة قوالب جاهزة لمتجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.
+- [قوالب وتصميم متجر إلكتروني جاهز للموبايل](https://matgarko.com/themes): 21 قالب جاهز حسب نوع متجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.
 - [كيفية إنشاء متجر إلكتروني خطوة بخطوة](https://matgarko.com/getting-started): تعرف على خطوات إنشاء متجرك: اختيار الاسم والرابط، إضافة المنتجات، تحديد تكلفة التوصيل، ثم استقبال أول طلب في وقت قصير.
 - [تكلفة إنشاء متجر إلكتروني في مصر](https://matgarko.com/pricing): البداية بدون اشتراك شهري: 3 ج.م على الطلب، وأول 20 طلب علينا، والطلبات الوهمية ببلاش. الاحترافي 2,000 ج.م شهرياً بدون رسوم على الطلب.
 - [مقارنة منصات التجارة الإلكترونية في مصر 2026](https://matgarko.com/compare): قارن متجركو مع إيزي أوردرز، سلة، شوبيفاي، وووكومرس. أسعار، مزايا، وعيوب كل منصة للتاجر المصري — اتخذ قرارك بمعلومات حقيقية.
@@ -120,7 +120,7 @@ Contact: support@matgarko.com, https://wa.me/201080312538
 - [Run your online store from your phone](https://matgarko.com/en): Create and run your online store from your phone. An Arabic-first ecommerce platform for solo merchants in Egypt and the Arab world. Start free, without coding.
 - [Ecommerce store management solutions](https://matgarko.com/en/solutions): Manage storefronts, products, Excel imports, orders, customers, offers, Meta Pixel, and sales and profit statistics in one Arabic-first ecommerce platform.
 - [Cash on delivery, online payment, delivery prices](https://matgarko.com/en/integrations): Take orders by cash on delivery, InstaPay transfer, or card through Paymob and Kashier, set delivery prices by area, and connect Meta Pixel, the Conversions API, TikTok Pixel, and Google Analytics to your store.
-- [Online store templates and design, ready for phones](https://matgarko.com/en/themes): Six ready store templates you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.
+- [Online store templates and design, ready for phones](https://matgarko.com/en/themes): 21 ready store templates by kind of store that you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.
 - [How to start an online store with Matgarko](https://matgarko.com/en/getting-started): A clear launch path for creating your store, adding products, setting delivery and payment details, and publishing your first ecommerce catalog.
 - [Online store pricing in Egypt](https://matgarko.com/en/pricing): Starter has no monthly fee: a flat 3 EGP per order, and fake orders are free; the first 20 orders are on us. Pro is 2,000 EGP per month with no per-order fee.
 - [Compare ecommerce platforms for Egypt and MENA](https://matgarko.com/en/compare): Compare Matgarko with EasyOrders, Shopify, Salla, and WooCommerce for local pricing, setup complexity, Arabic workflows, and ecommerce operations.

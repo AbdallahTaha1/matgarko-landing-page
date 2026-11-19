@@ -87,7 +87,7 @@ export const englishFaqs = [
   {
     question: "Does Matgarko have ready store templates?",
     answer:
-      "Yes. Matgarko has six ready templates you preview on your own store before using, a home page builder with more than 20 section types, and an AI designer that suggests a complete look from your description. Your products and words stay as they are when you change template.",
+      "Yes. Matgarko has 21 ready templates by kind of store, each with an example store you can open, that you preview on your own store before using, a home page builder with more than 20 section types, and an AI designer that suggests a complete look from your description. Your products and words stay as they are when you change template.",
   },
   {
     question: "Can I connect Meta Pixel to my store?",
@@ -199,17 +199,17 @@ export const englishSimplePages: Record<string, EnglishPageContent> = {
   },
   themes: {
     kicker: "Store design",
-    title: "Six ready store templates, in your colors and logo",
+    title: "21 ready store templates by kind of store, in your colors and logo",
     lead:
-      "Pick one of six templates and preview your store in it before you use it, or write what you sell and the AI designer suggests a complete look. Every template is built and tested for phones, where most of your shoppers buy, and your products and words stay as they are when you change template.",
+      "Pick a template that suits what you sell, open its example store, and preview your own store in it before you use it, or write what you sell and the AI designer suggests a complete look. Every template is built and tested for phones, where most of your shoppers buy, and your products and words stay as they are when you change template.",
     primaryCta: "Start your store",
     secondaryCta: "See pricing",
     sections: [
       {
-        title: "Six templates and an AI designer",
+        title: "21 templates and an AI designer",
         text:
-          "Soft, Elegant, Bold, Natural, Market and Classic each change the header, headings and product cards. “Design my store” takes a short description of what you sell and proposes a full look you preview first.",
-        items: ["Soft", "Elegant", "Bold", "Natural", "Market", "Classic"],
+          "Templates for fashion, shoes, bags, jewellery, perfume, skin care, kids, electronics, sweets, coffee, groceries and furniture. Each changes the header, headings, product cards and home sections, and has an example store you can open. “Design my store” takes a short description of what you sell and proposes a full look you preview first.",
+        items: ["Fashion", "Shoes and bags", "Jewellery", "Perfume", "Skin care", "Kids", "Electronics", "Sweets and coffee", "Groceries", "Furniture"],
       },
       {
         title: "Ready colors for your business",
@@ -828,7 +828,7 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
   "/en/themes": {
     title: "Online store templates and design, ready for phones | Matgarko",
     description:
-      "Six ready store templates you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.",
+      "21 ready store templates by kind of store that you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.",
     keywords: ["online store templates", "online store design", "AI store designer", "mobile online store", "store color palettes", "Arabic online store design"],
   },
   "/en/getting-started": {

@@ -1,7 +1,7 @@
 import type { AppLanguage } from "@/lib/i18n";
 
 /** The day the home page's facts were last checked against the product; shown on the page and in its structured data. */
-export const HOME_UPDATED = "2026-11-17";
+export const HOME_UPDATED = "2026-11-19";
 
 export type HomeContent = {
   hero: {
@@ -57,6 +57,7 @@ export type HomeContent = {
     lead: string;
     items: Array<{ key: string; name: string; kind: string }>;
     alt: (name: string, kind: string) => string;
+    open: (name: string) => string;
     aiTitle: string;
     aiText: string;
     aiBadge: string;
@@ -145,7 +146,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         "Meta Pixel وConversions API",
         "بكسل TikTok",
         "كتالوج Meta وTikTok وGoogle",
-        "ستة قوالب جاهزة",
+        "21 قالب جاهز حسب نوع متجرك",
         "«صمّم متجري» بالذكاء الاصطناعي",
         "كوبونات وعروض كمية",
         "طلبات لم تكتمل",
@@ -220,9 +221,24 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     },
     templates: {
       kicker: "تصميم المتجر",
-      title: "ستة قوالب جاهزة، وغيّر الشكل وقت ما تحب",
-      lead: "اختار قالب وشوف متجرك بيه قبل ما تستخدمه. منتجاتك وكلامك بيفضلوا زي ما هما.",
+      title: "21 قالب جاهز حسب نوع متجرك، وغيّر الشكل وقت ما تحب",
+      lead: "قوالب للملابس والعطور والإلكترونيات والحلويات والبقالة وغيرها. افتح مثال أي قالب، وشوف متجرك بيه قبل ما تستخدمه. منتجاتك وكلامك بيفضلوا زي ما هما.",
       items: [
+        { key: "lamsa", name: "لمسة", kind: "ملابس حريمي" },
+        { key: "oud", name: "عود", kind: "عطور وبخور" },
+        { key: "volt", name: "فولت", kind: "إلكترونيات" },
+        { key: "sukkar", name: "سكّر", kind: "حلويات ومخبوزات" },
+        { key: "sayegh", name: "الصايغ", kind: "ذهب ومجوهرات" },
+        { key: "baqala", name: "بقالة", kind: "بقالة" },
+        { key: "khatwa", name: "خطوة", kind: "أحذية" },
+        { key: "nadara", name: "نضارة", kind: "عناية بالبشرة" },
+        { key: "sighar", name: "صغار", kind: "أطفال وألعاب" },
+        { key: "rukn", name: "ركن", kind: "أثاث وديكور" },
+        { key: "bunn", name: "بُن", kind: "قهوة" },
+        { key: "trend", name: "تريند", kind: "ملابس شبابي" },
+        { key: "sitr", name: "سِتر", kind: "عبايات" },
+        { key: "shanta", name: "شنطة", kind: "شنط وجلود" },
+        { key: "athar", name: "أثر", kind: "ساعات وإكسسوارات" },
         { key: "soft", name: "ناعم", kind: "عناية وتجميل" },
         { key: "elegant", name: "أنيق", kind: "ملابس" },
         { key: "bold", name: "قوي", kind: "إلكترونيات" },
@@ -231,11 +247,12 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         { key: "classic", name: "كلاسيك", kind: "بيت وديكور" },
       ],
       alt: (name, kind) => `قالب «${name}» لمتجر ${kind} على متجركو، من الموبايل`,
+      open: (name) => `افتح مثال قالب «${name}» في صفحة جديدة`,
       aiTitle: "«صمّم متجري»",
       aiText: "اكتب إنت بتبيع إيه والشكل اللي تحبه، ويقترحلك شكل كامل لمتجرك تشوفه قبل ما تستخدمه.",
       aiBadge: "بالذكاء الاصطناعي",
-      note: "الصور من متاجر تجريبية بكل قالب.",
-      more: "اعرف أكتر عن تصميم المتجر",
+      note: "كل صورة من متجر تجريبي بالقالب. اضغط عليها وافتحه.",
+      more: "شوف القوالب الـ21 كلها",
     },
     steps: {
       kicker: "طريقة البدء",
@@ -332,7 +349,7 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         "Meta Pixel and Conversions API",
         "TikTok Pixel",
         "Meta, TikTok and Google catalog",
-        "Six ready templates",
+        "21 ready templates by kind of store",
         "AI store designer",
         "Coupons and quantity offers",
         "Abandoned checkouts",
@@ -407,9 +424,24 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
     },
     templates: {
       kicker: "Store design",
-      title: "Six ready templates, and change the look whenever you like",
-      lead: "Pick a template and preview your store in it before you use it. Your products and words stay as they are.",
+      title: "21 ready templates by kind of store, and change the look whenever you like",
+      lead: "Templates for fashion, perfume, electronics, sweets, groceries and more. Open any template's example store, and preview your own store in it before you use it. Your products and words stay as they are.",
       items: [
+        { key: "lamsa", name: "Lamsa", kind: "Women's fashion" },
+        { key: "oud", name: "Oud", kind: "Perfume and incense" },
+        { key: "volt", name: "Volt", kind: "Electronics" },
+        { key: "sukkar", name: "Sukkar", kind: "Sweets and bakery" },
+        { key: "sayegh", name: "Sayegh", kind: "Gold and jewellery" },
+        { key: "baqala", name: "Baqala", kind: "Groceries" },
+        { key: "khatwa", name: "Khatwa", kind: "Shoes" },
+        { key: "nadara", name: "Nadara", kind: "Skin care" },
+        { key: "sighar", name: "Sighar", kind: "Kids and toys" },
+        { key: "rukn", name: "Rukn", kind: "Furniture and decor" },
+        { key: "bunn", name: "Bunn", kind: "Coffee" },
+        { key: "trend", name: "Trend", kind: "Streetwear" },
+        { key: "sitr", name: "Sitr", kind: "Abayas" },
+        { key: "shanta", name: "Shanta", kind: "Bags and leather" },
+        { key: "athar", name: "Athar", kind: "Watches and accessories" },
         { key: "soft", name: "Soft", kind: "Beauty and care" },
         { key: "elegant", name: "Elegant", kind: "Clothing" },
         { key: "bold", name: "Bold", kind: "Electronics" },
@@ -418,11 +450,12 @@ export const homeContent: Record<AppLanguage, HomeContent> = {
         { key: "classic", name: "Classic", kind: "Home and decor" },
       ],
       alt: (name, kind) => `The ${name} template for a ${kind.toLowerCase()} store on Matgarko, on a phone`,
+      open: (name) => `Open the ${name} template's example store in a new page`,
       aiTitle: "Design my store",
       aiText: "Write what you sell and the look you like, and it suggests a complete look for your store that you preview before using.",
       aiBadge: "AI",
-      note: "Pictures from demo stores, one per template.",
-      more: "More about store design",
+      note: "Each picture is a demo store in that template. Tap it to open the store.",
+      more: "See all 21 templates",
     },
     steps: {
       kicker: "How it works",

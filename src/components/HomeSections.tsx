@@ -119,14 +119,25 @@ export function FakeOrderShield({ language }: { language: AppLanguage }) {
   );
 }
 
-/** The six ready templates as phone screens: a row that scrolls sideways on phones, six across on wide screens. */
-export function TemplatePhones({ language }: { language: AppLanguage }) {
+/**
+ * The ready templates as phone screens, each opening its demo store: a row that scrolls sideways on phones, a
+ * grid on wide screens. The home page shows the first twelve (two rows of six), the store design page all of
+ * them (seven across).
+ */
+export function TemplatePhones({ language, limit }: { language: AppLanguage; limit?: number }) {
   const t = homeContent[language].templates;
+  const items = limit ? t.items.slice(0, limit) : t.items;
   return (
-    <ul className="scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:gap-4 lg:overflow-visible lg:px-0">
-      {t.items.map((item) => (
-        <li key={item.key} className="w-[170px] shrink-0 snap-start sm:w-[190px] lg:w-auto">
-          <div className="overflow-hidden rounded-[1.5rem] border-[5px] border-gray-950 bg-gray-950 shadow-[0_20px_40px_-24px_rgba(10,33,30,0.55)]">
+    <ul className={`scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:gap-x-4 lg:gap-y-8 lg:overflow-visible lg:px-0 ${limit ? "lg:grid-cols-6" : "lg:grid-cols-7"}`}>
+      {items.map((item) => (
+        <li key={item.key} className="relative w-[170px] shrink-0 snap-start sm:w-[190px] lg:w-auto">
+          <a
+            href={`https://demo-${item.key}.matgarko.com/`}
+            target="_blank"
+            rel="noopener"
+            aria-label={t.open(item.name)}
+            className="block overflow-hidden rounded-[1.5rem] border-[5px] border-gray-950 bg-gray-950 shadow-[0_20px_40px_-24px_rgba(10,33,30,0.55)] transition-transform hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+          >
             <img
               src={`/templates/${item.key}.webp`}
               alt={t.alt(item.name, item.kind)}
@@ -136,7 +147,7 @@ export function TemplatePhones({ language }: { language: AppLanguage }) {
               decoding="async"
               className="block h-auto w-full rounded-[1.1rem]"
             />
-          </div>
+          </a>
           <p className="mt-3 text-center text-sm font-extrabold text-gray-900">{item.name}</p>
           <p className="text-center text-xs leading-6 text-gray-500">{item.kind}</p>
         </li>
@@ -145,7 +156,7 @@ export function TemplatePhones({ language }: { language: AppLanguage }) {
   );
 }
 
-/** The six ready templates as phone screens that scroll sideways, and the AI designer beside them. */
+/** Twelve of the ready templates as phone screens, a way to the rest, and the AI designer beside them. */
 export function Templates({ language }: { language: AppLanguage }) {
   const t = homeContent[language].templates;
   return (
@@ -156,7 +167,7 @@ export function Templates({ language }: { language: AppLanguage }) {
         </Reveal>
 
         <Reveal className="mt-9">
-          <TemplatePhones language={language} />
+          <TemplatePhones language={language} limit={12} />
         </Reveal>
 
         <Reveal className="mx-auto mt-8 flex max-w-3xl items-start gap-4 rounded-3xl bg-white p-5 shadow-[0_0_0_1px_#e3e8e7] sm:items-center sm:p-6">

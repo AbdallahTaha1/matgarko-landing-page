@@ -93,7 +93,7 @@ export const seoPages: Record<string, SeoPage> = {
     path: "/themes",
     title: "قوالب وتصميم متجر إلكتروني جاهز للموبايل | متجركو",
     description:
-      "ستة قوالب جاهزة لمتجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.",
+      "21 قالب جاهز حسب نوع متجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.",
     keywords: ["قوالب متجر إلكتروني", "تصميم متجر إلكتروني", "قوالب متجر جاهزة", "تصميم متجر بالذكاء الاصطناعي", "شكل متجر إلكتروني", "ألوان المتجر", "متجر إلكتروني للموبايل"],
   },
   "/getting-started": {
@@ -820,7 +820,7 @@ export function softwareSchema(page?: SeoPage) {
     featureList: isEnglish ? [
       "Create an online store without coding",
       "Manage products and orders",
-      "Six ready store templates, a home page builder, and an AI designer that suggests a store look",
+      "21 ready store templates by kind of store, a home page builder, and an AI designer that suggests a store look",
       "Accept cash on delivery, InstaPay or wallet transfers, and cards through Paymob or Kashier",
       "Fake-order shield: flagged fake orders are not billed",
       "Ad page for every product, abandoned-checkout follow-up on WhatsApp",
@@ -835,7 +835,7 @@ export function softwareSchema(page?: SeoPage) {
     ] : [
       "إنشاء متجر إلكتروني بدون برمجة",
       "إدارة المنتجات والطلبات",
-      "ستة قوالب جاهزة للمتجر، ومنشئ للصفحة الرئيسية، و«صمّم متجري» بالذكاء الاصطناعي",
+      "21 قالب جاهز حسب نوع المتجر، ومنشئ للصفحة الرئيسية، و«صمّم متجري» بالذكاء الاصطناعي",
       "الدفع عند الاستلام، وتحويل إنستاباي أو محفظة، والبطاقات عبر Paymob أو Kashier",
       "درع الطلبات الوهمية: الطلب الوهمي لا تُخصم رسومه",
       "صفحة إعلان لكل منتج، ومتابعة الطلبات غير المكتملة على واتساب",
@@ -1009,7 +1009,7 @@ Contact: ${CONTACT_EMAIL}, ${WHATSAPP_URL}
 - Brand: Matgarko / متجركو
 - Category: Arabic ecommerce platform and no-code online store builder.
 - Audience: solo merchants and small businesses in Egypt and the Arab world, including restaurants, clothing, electronics, cosmetics, and furniture stores.
-- Main jobs: create an ecommerce store, manage products and orders, organize customers, set delivery prices by governorate and area, launch coupons and quantity offers, and style the store from six ready mobile-first templates, a home page builder, or an AI designer that suggests a complete look.
+- Main jobs: create an ecommerce store, manage products and orders, organize customers, set delivery prices by governorate and area, launch coupons and quantity offers, and style the store from 21 ready mobile-first templates by kind of store, a home page builder, or an AI designer that suggests a complete look.
 - Store payment methods: cash on delivery, InstaPay or mobile-wallet transfer with a screenshot, and online card payments through the merchant's own Paymob or Kashier account. Matgarko takes no share of sales.
 - Shipping: Matgarko does not deliver; the merchant ships with their own courier and sets delivery prices.
 - Welcome offer: the first 20 orders of a new store are free (welcome credit); fees are then taken from a prepaid balance topped up by Vodafone Cash or InstaPay.

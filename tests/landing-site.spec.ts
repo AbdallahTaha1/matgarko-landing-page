@@ -53,8 +53,8 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
 
     await page.getByRole('navigation').getByRole('link', { name: 'تصميم المتجر' }).click();
     await page.waitForURL('**/themes');
-    await expect(page.getByRole('heading', { name: 'ستة قوالب جاهزة لمتجرك، بألوانك وشعارك' })).toBeVisible();
-    await expect(page.locator('#themes-templates-title ~ div img')).toHaveCount(6);
+    await expect(page.getByRole('heading', { name: '21 قالب جاهز حسب نوع متجرك، بألوانك وشعارك' })).toBeVisible();
+    await expect(page.locator('#themes-templates-title ~ div img')).toHaveCount(21);
 
     await page.getByRole('navigation').getByRole('link', { name: 'الدفع والشحن' }).click();
     await page.waitForURL('**/integrations');

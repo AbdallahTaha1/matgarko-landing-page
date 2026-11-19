@@ -69,10 +69,10 @@ export function ThemesPage() {
             تصميم المتجر
           </div>
           <h1 className="page-title mb-5">
-            ستة قوالب جاهزة لمتجرك، بألوانك وشعارك
+            21 قالب جاهز حسب نوع متجرك، بألوانك وشعارك
           </h1>
           <p className="page-lead">
-            اختار قالب من ستة وشوف متجرك بيه قبل ما تستخدمه، أو اكتب إنت بتبيع إيه
+            اختار قالب يناسب اللي بتبيعه، وافتح مثاله، وشوف متجرك بيه قبل ما تستخدمه، أو اكتب إنت بتبيع إيه
             و«صمّم متجري» يقترحلك شكل كامل. كل القوالب مجربة على الموبايل، لأن أغلب
             عملائك بيشتروا منه، ومنتجاتك وكلامك بيفضلوا زي ما هما لما تغيّر القالب.
           </p>
@@ -85,14 +85,14 @@ export function ThemesPage() {
 
       <section className="band-soft overflow-hidden py-12 sm:py-16" aria-labelledby="themes-templates-title">
         <div className="container-x">
-          <h2 id="themes-templates-title" className="section-title text-center">القوالب الستة</h2>
+          <h2 id="themes-templates-title" className="section-title text-center">القوالب الـ21</h2>
           <p className="section-lead mx-auto mt-3 max-w-2xl text-center">
-            ناعم، أنيق، قوي، طبيعي، سوق وكلاسيك. كل قالب بشكل مختلف لأعلى المتجر والعناوين وكروت المنتجات.
+            للملابس والأحذية والشنط والذهب والعطور والعناية والأطفال والإلكترونيات والحلويات والقهوة والبقالة والأثاث. كل قالب بشكل مختلف لأعلى المتجر والعناوين وكروت المنتجات وأقسام الصفحة.
           </p>
           <div className="mt-9">
             <TemplatePhones language="ar" />
           </div>
-          <p className="mt-4 text-center text-xs text-gray-400">الصور من متاجر تجريبية بكل قالب.</p>
+          <p className="mt-4 text-center text-xs text-gray-400">كل صورة من متجر تجريبي بالقالب. اضغط عليها وافتحه.</p>
         </div>
       </section>
 

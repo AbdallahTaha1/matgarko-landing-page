@@ -1,6 +1,6 @@
 # Matgarko Full AI Context
 
-Last updated: 2026-11-17
+Last updated: 2026-11-19
 Canonical site: https://matgarko.com/
 
 Matgarko helps solo merchants in Egypt and the Arab world launch and run their online store directly from their phone — simply, quickly, and in Arabic, without technical experience or a team. This file contains product information, public guide text, and canonical page URLs.
@@ -50,7 +50,7 @@ Mobile app availability: Matgarko is now available on Google Play for Android. M
 
 ### هل متجركو فيه قوالب جاهزة لشكل المتجر؟
 
-نعم. في متجركو ستة قوالب جاهزة تشوف متجرك بيها قبل ما تستخدمها، ومنشئ للصفحة الرئيسية بأكتر من 20 نوع قسم، و«صمّم متجري» اللي بيقترح بالذكاء الاصطناعي شكل كامل لمتجرك من وصفك. منتجاتك وكلامك بيفضلوا زي ما هما لما تغيّر القالب.
+نعم. في متجركو 21 قالب جاهز حسب نوع متجرك، لكل قالب متجر تجريبي تفتحه، وتشوف متجرك بيه قبل ما تستخدمها، ومنشئ للصفحة الرئيسية بأكتر من 20 نوع قسم، و«صمّم متجري» اللي بيقترح بالذكاء الاصطناعي شكل كامل لمتجرك من وصفك. منتجاتك وكلامك بيفضلوا زي ما هما لما تغيّر القالب.
 
 ### هل أقدر أحدد سعر شحن مختلف لكل محافظة؟
 
@@ -106,7 +106,7 @@ Cash on delivery on every plan, InstaPay or mobile-wallet transfer with a screen
 
 ### Does Matgarko have ready store templates?
 
-Yes. Matgarko has six ready templates you preview on your own store before using, a home page builder with more than 20 section types, and an AI designer that suggests a complete look from your description. Your products and words stay as they are when you change template.
+Yes. Matgarko has 21 ready templates by kind of store, each with an example store you can open, that you preview on your own store before using, a home page builder with more than 20 section types, and an AI designer that suggests a complete look from your description. Your products and words stay as they are when you change template.
 
 ### Can I connect Meta Pixel to my store?
 
@@ -158,7 +158,7 @@ Keywords: دفع عند الاستلام, بوابة دفع للمتجر الإ�
 
 URL: https://matgarko.com/themes
 Type: Landing page
-Description: ستة قوالب جاهزة لمتجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.
+Description: 21 قالب جاهز حسب نوع متجرك تشوفها قبل ما تستخدمها، و«صمّم متجري» بالذكاء الاصطناعي، وألوان حسب نشاطك ولوجو وخطوط وأكتر من 20 نوع قسم للصفحة الرئيسية.
 Keywords: قوالب متجر إلكتروني, تصميم متجر إلكتروني, قوالب متجر جاهزة, تصميم متجر بالذكاء الاصطناعي, شكل متجر إلكتروني, ألوان المتجر, متجر إلكتروني للموبايل
 
 ## كيفية إنشاء متجر إلكتروني خطوة بخطوة
@@ -550,7 +550,7 @@ Keywords: cash on delivery ecommerce, online store payment gateway Egypt, Paymob
 
 URL: https://matgarko.com/en/themes
 Type: Landing page
-Description: Six ready store templates you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.
+Description: 21 ready store templates by kind of store that you preview before using, an AI designer that suggests a full look, color palettes for your kind of business, your logo, fonts, and a home page builder.
 Keywords: online store templates, online store design, AI store designer, mobile online store, store color palettes, Arabic online store design
 
 ## How to start an online store with Matgarko

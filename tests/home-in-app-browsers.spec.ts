@@ -38,7 +38,7 @@ for (const browser of inAppBrowsers) {
       expect(box!.height).toBeGreaterThanOrEqual(48);
 
       // Every section is on the page and none pushes it sideways.
-      for (const heading of ['ما هي متجركو؟', 'أدوات بسيطة تخلي متجرك يبيع', 'اعرف الطلب الوهمي قبل ما تشحنه', 'ستة قوالب جاهزة، وغيّر الشكل وقت ما تحب', 'ابدأ مجاناً، وادفع لما تبيع', 'أسئلة شائعة', 'رابط متجرك مستنيك']) {
+      for (const heading of ['ما هي متجركو؟', 'أدوات بسيطة تخلي متجرك يبيع', 'اعرف الطلب الوهمي قبل ما تشحنه', '21 قالب جاهز حسب نوع متجرك، وغيّر الشكل وقت ما تحب', 'ابدأ مجاناً، وادفع لما تبيع', 'أسئلة شائعة', 'رابط متجرك مستنيك']) {
         await expect(page.getByRole('heading', { name: heading })).toBeAttached();
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
@@ -75,7 +75,7 @@ test('the home page states what Matgarko is, with facts a search engine or an AI
   await expect(facts.getByText('السعر في مصر')).toBeVisible();
   await expect(facts.getByText('الدفع عند الاستلام، تحويل إنستاباي أو محفظة، وبطاقات عبر Paymob أو Kashier')).toBeVisible();
   await expect(page.locator('#what-is time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
-  await expect(page.locator('#templates img')).toHaveCount(6);
+  await expect(page.locator('#templates img')).toHaveCount(12);
   for (const image of await page.locator('#templates img').all()) await expect(image).toHaveAttribute('alt', /قالب «.+» لمتجر/);
 
   const schema = await page.locator('#matgarko-route-schema').textContent();
