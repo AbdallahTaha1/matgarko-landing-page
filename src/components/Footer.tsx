@@ -4,7 +4,8 @@ import { Facebook, Mail, MapPin, Phone } from "lucide-react";
 import { getConsent, serverConsent, setConsent, subscribeConsent } from "@/lib/consent";
 import { useSyncExternalStore } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.png";
+// The dark footer takes the white-M logo.
+import logo from "../assets/logo-light.png";
 
 const FACEBOOK_URL = "https://www.facebook.com/matgarko2/";
 const EMAIL = "support@matgarko.com";

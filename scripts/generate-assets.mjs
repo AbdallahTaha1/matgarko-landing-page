@@ -11,9 +11,12 @@ const rootDir = path.resolve(__dirname, "..");
 const publicDir = path.join(rootDir, "public");
 const logoPath = path.join(rootDir, "src", "assets", "logo.png");
 const iconPath = path.join(rootDir, "src", "assets", "app-icon.png");
+// The logo for dark backgrounds, made with ../brand/make-logo.mjs.
+const lightLogoPath = path.join(rootDir, "src", "assets", "logo-light.png");
 
-const BRAND_DARK = "#0b1220";
-const BRAND_GREEN = "#059669";
+const BRAND_DARK = "#062b27";
+const BRAND_GREEN = "#0e5a52";
+const BRAND_ORANGE = "#f79a1e";
 
 async function generateIcons() {
   const sizes = [
@@ -24,9 +27,10 @@ async function generateIcons() {
   ];
 
   for (const { name, size } of sizes) {
-    await sharp(iconPath)
-      .resize(size, size, { fit: "contain", background: { r: 255, g: 255, b: 255, alpha: 1 } })
-      .flatten({ background: "#ffffff" })
+    // The tab icon is the coloured mark on its own; installed icons are the full teal square.
+    const source = name.startsWith("favicon") ? logoPath : iconPath;
+    await sharp(source)
+      .resize(size, size, { fit: "contain", background: { r: 255, g: 255, b: 255, alpha: 0 } })
       .png()
       .toFile(path.join(publicDir, name));
     console.log(`generated ${name}`);
@@ -34,7 +38,7 @@ async function generateIcons() {
 
   // ICO directory containing PNG frames for browser tab and desktop sizes.
   const icoSizes = [16, 32, 48, 64];
-  const frames = await Promise.all(icoSizes.map((size) => sharp(iconPath).resize(size, size).png().toBuffer()));
+  const frames = await Promise.all(icoSizes.map((size) => sharp(logoPath).resize(size, size).png().toBuffer()));
   const directory = Buffer.alloc(6 + frames.length * 16);
   directory.writeUInt16LE(1, 2);
   directory.writeUInt16LE(frames.length, 4);
@@ -62,11 +66,11 @@ async function generateOgImage() {
       <defs>
         <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stop-color="${BRAND_DARK}" />
-          <stop offset="1" stop-color="#0f2a24" />
+          <stop offset="1" stop-color="#0b3f39" />
         </linearGradient>
         <radialGradient id="glow" cx="0.85" cy="0.15" r="0.6">
-          <stop offset="0" stop-color="${BRAND_GREEN}" stop-opacity="0.55" />
-          <stop offset="1" stop-color="${BRAND_GREEN}" stop-opacity="0" />
+          <stop offset="0" stop-color="#46998a" stop-opacity="0.45" />
+          <stop offset="1" stop-color="#46998a" stop-opacity="0" />
         </radialGradient>
         <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
           <path d="M36 0H0V36" fill="none" stroke="#ffffff" stroke-opacity="0.06" />
@@ -81,16 +85,16 @@ async function generateOgImage() {
       <rect x="832" y="102" width="246" height="496" rx="30" fill="#ffffff" />
       <rect x="856" y="130" width="90" height="14" rx="7" fill="#111827" />
       <rect x="856" y="152" width="60" height="9" rx="4.5" fill="#94a3b8" />
-      <rect x="856" y="184" width="198" height="60" rx="14" fill="${BRAND_GREEN}" />
+      <rect x="856" y="184" width="198" height="60" rx="14" fill="${BRAND_ORANGE}" />
       <rect x="872" y="204" width="110" height="10" rx="5" fill="#ffffff" fill-opacity="0.9" />
       <rect x="856" y="262" width="93" height="112" rx="14" fill="#ecfdf5" />
       <rect x="961" y="262" width="93" height="112" rx="14" fill="#fff7ed" />
       <rect x="856" y="388" width="93" height="112" rx="14" fill="#eff6ff" />
       <rect x="961" y="388" width="93" height="112" rx="14" fill="#fdf2f8" />
-      <rect x="866" y="344" width="50" height="8" rx="4" fill="#047857" />
-      <rect x="971" y="344" width="50" height="8" rx="4" fill="#047857" />
-      <rect x="866" y="470" width="50" height="8" rx="4" fill="#047857" />
-      <rect x="971" y="470" width="50" height="8" rx="4" fill="#047857" />
+      <rect x="866" y="344" width="50" height="8" rx="4" fill="${BRAND_GREEN}" />
+      <rect x="971" y="344" width="50" height="8" rx="4" fill="${BRAND_GREEN}" />
+      <rect x="866" y="470" width="50" height="8" rx="4" fill="${BRAND_GREEN}" />
+      <rect x="971" y="470" width="50" height="8" rx="4" fill="${BRAND_GREEN}" />
       <rect x="856" y="520" width="198" height="46" rx="14" fill="#111827" />
 
       <!-- Floating order card -->
@@ -101,16 +105,16 @@ async function generateOgImage() {
       <rect x="716" y="214" width="198" height="6" rx="3" fill="#e5e7eb" />
 
       <!-- Copy (Latin, rendered reliably on every build machine) -->
-      <text x="80" y="200" fill="#a7f3d0" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="2">MATGARKO</text>
+      <text x="80" y="200" fill="#fbd58a" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="2">MATGARKO</text>
       <text x="80" y="290" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">Create your</text>
       <text x="80" y="370" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="66" font-weight="700">online store in Egypt</text>
       <text x="80" y="430" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="30">Start free. Just 3 EGP per order, fake orders free.</text>
-      <rect x="80" y="480" width="330" height="64" rx="18" fill="${BRAND_GREEN}" />
-      <text x="245" y="522" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" text-anchor="middle">matgarko.com</text>
+      <rect x="80" y="480" width="330" height="64" rx="32" fill="${BRAND_ORANGE}" />
+      <text x="245" y="522" fill="#0a211e" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" text-anchor="middle">matgarko.com</text>
     </svg>
   `;
 
-  const logo = await sharp(logoPath).resize(120, 120, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+  const logo = await sharp(lightLogoPath).resize(120, 120, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
 
   await sharp(Buffer.from(background))
     .composite([{ input: logo, left: 80, top: 60 }])
