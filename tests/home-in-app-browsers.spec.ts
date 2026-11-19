@@ -75,7 +75,7 @@ test('the home page states what Matgarko is, with facts a search engine or an AI
   await expect(facts.getByText('السعر في مصر')).toBeVisible();
   await expect(facts.getByText('الدفع عند الاستلام، تحويل إنستاباي أو محفظة، وبطاقات عبر Paymob أو Kashier')).toBeVisible();
   await expect(page.locator('#what-is time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
-  await expect(page.locator('#templates img')).toHaveCount(12);
+  await expect(page.locator('#templates img')).toHaveCount(10);
   for (const image of await page.locator('#templates img').all()) await expect(image).toHaveAttribute('alt', /قالب «.+» لمتجر/);
 
   const schema = await page.locator('#matgarko-route-schema').textContent();

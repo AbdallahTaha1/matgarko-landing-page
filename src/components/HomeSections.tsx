@@ -120,17 +120,17 @@ export function FakeOrderShield({ language }: { language: AppLanguage }) {
 }
 
 /**
- * The ready templates as phone screens, each opening its demo store: a row that scrolls sideways on phones, a
- * grid on wide screens. The home page shows the first twelve (two rows of six), the store design page all of
- * them (seven across).
+ * The ready templates as phone screens, each opening its demo store: a row that scrolls sideways on phones,
+ * rows of five on wide screens with a short last row centred. The home page shows the first ten, the store
+ * design page all of them.
  */
 export function TemplatePhones({ language, limit }: { language: AppLanguage; limit?: number }) {
   const t = homeContent[language].templates;
   const items = limit ? t.items.slice(0, limit) : t.items;
   return (
-    <ul className={`scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:gap-x-4 lg:gap-y-8 lg:overflow-visible lg:px-0 ${limit ? "lg:grid-cols-6" : "lg:grid-cols-7"}`}>
+    <ul className="scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-3 sm:-mx-6 sm:px-6 lg:mx-0 lg:flex-wrap lg:justify-center lg:gap-x-5 lg:gap-y-9 lg:overflow-visible lg:px-0">
       {items.map((item) => (
-        <li key={item.key} className="relative w-[170px] shrink-0 snap-start sm:w-[190px] lg:w-auto">
+        <li key={item.key} className="relative w-[215px] shrink-0 snap-start sm:w-[230px] lg:w-[calc(20%-1rem)]">
           <a
             href={`https://demo-${item.key}.matgarko.com/`}
             target="_blank"
@@ -156,7 +156,7 @@ export function TemplatePhones({ language, limit }: { language: AppLanguage; lim
   );
 }
 
-/** Twelve of the ready templates as phone screens, a way to the rest, and the AI designer beside them. */
+/** Ten of the ready templates as phone screens, a way to the rest, and the AI designer beside them. */
 export function Templates({ language }: { language: AppLanguage }) {
   const t = homeContent[language].templates;
   return (
@@ -167,7 +167,7 @@ export function Templates({ language }: { language: AppLanguage }) {
         </Reveal>
 
         <Reveal className="mt-9">
-          <TemplatePhones language={language} limit={12} />
+          <TemplatePhones language={language} limit={10} />
         </Reveal>
 
         <Reveal className="mx-auto mt-8 flex max-w-3xl items-start gap-4 rounded-3xl bg-white p-5 shadow-[0_0_0_1px_#e3e8e7] sm:items-center sm:p-6">
