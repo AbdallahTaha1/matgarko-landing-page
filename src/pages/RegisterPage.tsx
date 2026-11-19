@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { readReferral } from '@/lib/referral';
 import { Loader2, Store, CheckCircle2, CircleAlert, Eye, EyeOff, Globe2 } from 'lucide-react';
 import { api, ApiError, type SignupModel, type SignupStatus } from '@/lib/api';
 import { getAcquisition } from '@/lib/attribution';
@@ -54,6 +55,9 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
   const consent = useSyncExternalStore(subscribeConsent, getConsent, serverConsent);
   const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false, country });
   const [phoneCountry, setPhoneCountry] = useState<CountryCode>(country);
+  // Read after the first render: the page is also prerendered, where there is no address bar.
+  const [referral, setReferral] = useState<string | null>(null);
+  useEffect(() => setReferral(readReferral()), []);
   const internationalPhone = signupPhoneNumber(form.phone, phoneCountry);
   const [config, setConfig] = useState<{ enabled: boolean; baseDomain: string } | null>(null);
   const [stage, setStage] = useState<'store' | 'account' | SignupStatus['state']>('store');
@@ -210,7 +214,7 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
     try {
       if (stage === 'account') {
         // The page asks for the password once and shows the terms under the button it agrees by.
-        const result = await api.signup({ ...form, confirmPassword: form.password, acceptTerms: true, phone: internationalPhone!, acquisition: getAcquisition(), meta: metaBrowserIds() });
+        const result = await api.signup({ ...form, confirmPassword: form.password, acceptTerms: true, phone: internationalPhone!, acquisition: getAcquisition(), meta: metaBrowserIds(), ref: referral ?? undefined });
         if (!uuid.test(result.token)) throw new ApiError('InvalidResponse');
         setToken(result.token);
         try { sessionStorage.setItem(tokenKey, result.token); } catch { /* Still usable in this tab. */ }
@@ -288,6 +292,7 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
         {error && <div ref={errorAlert} tabIndex={-1} role="alert" className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-800">{errorMessage}{['EmailTaken', 'PhoneTaken'].includes(error) && <Link to={english ? '/en/login' : '/login'} className="mt-2 block font-bold underline">{t('ادخل متجرك الحالي', 'Access your existing store')}</Link>}</div>}
         {!config && error && <button className="btn btn-secondary mb-4" onClick={() => window.location.reload()}>{t('حاول تاني', 'Retry connection')}</button>}
         {notice && <p role="status" className="mb-4 text-sm text-emerald-700">{notice}</p>}
+        {referral && stage === 'store' && <p className="mb-4 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800" data-referral-note>{t('🎁 جيت من دعوة تاجر على متجركو: لما متجرك يوصله أول طلب ويتسلّم، هتاخد طلبات ببلاش زيادة في رصيدك.', '🎁 A merchant invited you: once your store gets its first delivered order, you get extra free orders in your balance.')}</p>}
         {['store', 'account', 'verification'].includes(stage) && <form onSubmit={submit} className="space-y-5">
           {stage === 'store' && <>
             {field('storeName', t('اسم المتجر', 'Store name'), 'text', { maxLength: 200, autoComplete: 'organization', placeholder: t('مثال: متجر نور', 'e.g. Nour Store') })}

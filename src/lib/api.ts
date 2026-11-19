@@ -6,6 +6,8 @@ export interface SignupModel {
   /** The country the store sells in (prices in its currency, deliveries inside it), apart from the owner's phone. */
   country?: string;
   meta?: { sourceUrl: string; fbp?: string; fbc?: string };
+  /** The subdomain of the store whose invitation link («ادعُ تاجر») brought the visitor. */
+  ref?: string;
 }
 export interface SignupStatus {
   state: 'verification' | 'provisioning' | 'ready' | 'unavailable';

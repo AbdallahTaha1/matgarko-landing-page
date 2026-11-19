@@ -90,6 +90,20 @@ test.describe('Matgarko Arabic ecommerce SaaS landing site', () => {
     await expect(page.locator('input[name="subdomain"]')).toBeVisible();
   });
 
+  test('an invitation link says so on the signup page and keeps its code for the tab', async ({ page }) => {
+    await page.goto('/register?ref=PionKaword&utm_source=referral');
+    await expect(page.locator('[data-referral-note]')).toContainText('دعوة تاجر');
+    expect(await page.evaluate(() => sessionStorage.getItem('matgarko-referral'))).toBe('pionkaword');
+    await page.goto('/register');
+    await expect(page.locator('[data-referral-note]')).toBeVisible();
+  });
+
+  test('a plain signup page shows no invitation note', async ({ page }) => {
+    await page.goto('/register');
+    await expect(page.locator('input[name="storeName"]')).toBeVisible();
+    await expect(page.locator('[data-referral-note]')).toHaveCount(0);
+  });
+
   test('crawl files are available from public assets', async ({ request }) => {
     const robots = await request.get('/robots.txt');
     await expect(robots).toBeOK();
