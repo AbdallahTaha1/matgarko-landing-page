@@ -14,6 +14,7 @@ import { readyStoreLinks, rememberStore, signupSignInUrl, SIGNUP_LINK_KEY } from
 import { StoreAccessHint } from '@/components/StoreAccessHint';
 import { useSignupContactCheck } from '@/lib/useSignupContactCheck';
 import { normalizePhoneInput, parseSignupPhone, phoneCountries, signupPhoneNumber, type CountryCode } from '@/lib/phone';
+import { suggestStoreLink } from '../lib/storeLink';
 
 const tokenKey = 'matgarko-pending-signup';
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -54,6 +55,8 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
   const t = (ar: string, en: string) => english ? en : ar;
   const consent = useSyncExternalStore(subscribeConsent, getConsent, serverConsent);
   const [form, setForm] = useState<SignupModel>({ storeName: '', subdomain: '', email: '', phone: '', password: '', confirmPassword: '', acceptTerms: false, country });
+  // Until the merchant types a link of their own, it follows the store name. Clearing it hands it back.
+  const [linkTouched, setLinkTouched] = useState(false);
   const [phoneCountry, setPhoneCountry] = useState<CountryCode>(country);
   // Read after the first render: the page is also prerendered, where there is no address bar.
   const [referral, setReferral] = useState<string | null>(null);
@@ -132,9 +135,17 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
       const wanted = sessionStorage.getItem(SIGNUP_LINK_KEY);
       if (!wanted) return;
       sessionStorage.removeItem(SIGNUP_LINK_KEY);
-      if (/^[a-z0-9-]{1,40}$/.test(wanted)) setForm(value => value.subdomain ? value : { ...value, subdomain: wanted });
+      if (/^[a-z0-9-]{1,40}$/.test(wanted)) { setLinkTouched(true); setForm(value => value.subdomain ? value : { ...value, subdomain: wanted }); }
     } catch { /* Optional storage. */ }
   }, []);
+
+  // A link made from the name that someone already has gets a number, -2 up to -9, before the merchant sees "taken".
+  useEffect(() => {
+    if (linkTouched || availability.value !== form.subdomain || availability.state !== 'SubdomainTaken') return;
+    const numbered = /^(.*)-([2-8])$/.exec(form.subdomain);
+    const next = numbered ? `${numbered[1]}-${Number(numbered[2]) + 1}` : /-9$/.test(form.subdomain) ? '' : `${form.subdomain}-2`;
+    if (next && next.length <= 40) setForm(value => ({ ...value, subdomain: next }));
+  }, [availability, form.subdomain, linkTouched]);
 
   useEffect(() => {
     if (!validSubdomain.test(form.subdomain) || !config?.enabled || stage !== 'store') return;
@@ -255,6 +266,11 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
         }
       }
     }
+    if (name === 'storeName' && !linkTouched) {
+      const link = suggestStoreLink(value);
+      setForm(previous => ({ ...previous, storeName: value, subdomain: link }));
+      return;
+    }
     setForm(previous => ({ ...previous, [name]: value }));
   }
   const field = (name: 'storeName' | 'email' | 'phone' | 'password' | 'confirmPassword', label: string, type = 'text', extra = {}, hint = '') => {
@@ -304,10 +320,11 @@ export default function RegisterPage({ country = 'EG' }: { country?: CountryCode
                   placeholder="my-store" autoCapitalize="none" autoComplete="off" autoCorrect="off" spellCheck={false}
                   aria-describedby="subdomain-status" aria-invalid={subdomainHasError || undefined}
                   className="min-w-0 flex-1 bg-transparent px-3 py-3.5 text-left text-base text-gray-950 outline-none placeholder:text-gray-400"
-                  value={form.subdomain} onChange={event => setForm(value => ({ ...value, subdomain: event.target.value.toLowerCase() }))}
+                  value={form.subdomain} onChange={event => { const typed = event.target.value.toLowerCase(); setLinkTouched(typed !== ''); setForm(value => ({ ...value, subdomain: typed })); }}
                 />
                 <span aria-hidden="true" className="flex shrink-0 items-center border-l border-gray-200 bg-gray-50 px-3 text-xs font-medium text-gray-500 sm:text-sm">.{baseDomain}</span>
               </div>
+              {!linkTouched && form.subdomain && !subdomainHasError && <p className="mt-2 text-xs leading-5 text-gray-500">{t('اتكتب لوحده من اسم المتجر، وتقدر تغيّره.', 'Made from your store name. You can change it.')}</p>}
               {/* Whether the address is free; the rules appear only as the error for one that breaks them. */}
               <p id="subdomain-status" role="status" aria-atomic="true" className={`mt-2 flex items-start gap-2 text-xs leading-5 ${subdomainHasError ? 'text-red-600' : available ? 'text-emerald-700' : 'text-gray-500'}`}>
                 {subdomainHasError ? <><CircleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span>{(messages[subdomainState] || messages.InvalidRequest)[english ? 1 : 0]}</span></>

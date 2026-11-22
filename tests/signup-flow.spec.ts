@@ -13,14 +13,15 @@ async function mockSignup(page: Page, consent: 'accepted' | 'declined' | 'unknow
   ` }));
   await page.route('https://connect.facebook.net/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }));
   await page.route('https://www.facebook.com/tr**', route => route.abort());
-  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, baseDomain: 'matgarko.com', subdomainTaken: false, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false, whatsApp: false };
+  const state = { submissions: [] as Record<string, unknown>[], verified: false, ready: false, enabled: true, baseDomain: 'matgarko.com', subdomainTaken: false, networkFailure: false, emailTaken: false, phoneTaken: false, contactNetworkFailure: false, emailDeliveryFailed: false, whatsApp: false, takenLinks: [] as string[] };
   await page.route('**/api/signup/v1/**', async route => {
     const url = new URL(route.request().url());
     const action = url.pathname.split('/').pop();
     if (action === 'config') return route.fulfill({ json: { enabled: state.enabled, baseDomain: state.baseDomain } });
     if (action === 'check-subdomain') {
       if (state.networkFailure) return route.abort();
-      return route.fulfill({ json: { available: !state.subdomainTaken, code: state.subdomainTaken ? 'SubdomainTaken' : 'Ok' } });
+      const taken = state.subdomainTaken || state.takenLinks.includes(url.searchParams.get('value') ?? '');
+      return route.fulfill({ json: { available: !taken, code: taken ? 'SubdomainTaken' : 'Ok' } });
     }
     if (action === 'check-email' || action === 'check-phone') {
       expect(route.request().method()).toBe('POST');
@@ -135,6 +136,38 @@ test('store address preview follows the configured domain and a taken address st
   await expect(address).toHaveAttribute('aria-invalid', 'true');
   await expect(page.locator('#subdomain-preview')).toHaveText('nour-store.shops.example.com');
   await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeDisabled();
+});
+
+test('the store link follows an Arabic store name until the merchant types one', async ({ page }) => {
+  await mockSignup(page, 'declined');
+  await page.goto('/register');
+  const name = page.getByLabel('اسم المتجر', { exact: true });
+  const address = page.getByLabel('رابط المتجر (بالإنجليزي)', { exact: true });
+  await name.fill('متجر نور');
+  await expect(address).toHaveValue('nour');
+  await expect(page.getByText('اتكتب لوحده من اسم المتجر')).toBeVisible();
+  await expect(page.locator('#subdomain-status')).toContainText('الرابط متاح');
+  await name.fill('محمود ستور');
+  await expect(address).toHaveValue('mhmoud-store');
+  await address.fill('my-own-link');
+  await name.fill('متجر تاني');
+  await expect(address).toHaveValue('my-own-link');
+  await expect(page.getByText('اتكتب لوحده من اسم المتجر')).toHaveCount(0);
+  // Clearing the link hands it back to the name.
+  await address.fill('');
+  await name.fill('دوما');
+  await expect(address).toHaveValue('douma');
+});
+
+test('a link made from the name that is taken gets a number instead of an error', async ({ page }) => {
+  const state = await mockSignup(page, 'declined');
+  state.takenLinks = ['nour', 'nour-2'];
+  await page.goto('/register');
+  await page.getByLabel('اسم المتجر', { exact: true }).fill('نور');
+  const address = page.getByLabel('رابط المتجر (بالإنجليزي)', { exact: true });
+  await expect(address).toHaveValue('nour-3');
+  await expect(page.locator('#subdomain-status')).toContainText('الرابط متاح');
+  await expect(page.getByRole('button', { name: 'التالي', exact: true })).toBeEnabled();
 });
 
 test('Arabic store address and its preview fit narrow mobile screens', async ({ page }) => {
