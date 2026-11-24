@@ -178,9 +178,15 @@ export function MediaBuyersPage() {
     return () => clearTimeout(timer);
   }, [cooldown]);
 
-  const set = <K extends keyof Form>(key: K, value: Form[K]) => setForm((current) => ({ ...current, [key]: value }));
-  const setWork = (index: number, key: keyof Work, value: string) =>
+  // Any edit takes the last error away: it described the form as it was.
+  const set = <K extends keyof Form>(key: K, value: Form[K]) => {
+    setError(null);
+    setForm((current) => ({ ...current, [key]: value }));
+  };
+  const setWork = (index: number, key: keyof Work, value: string) => {
+    setError(null);
     setForm((current) => ({ ...current, portfolio: current.portfolio.map((work, i) => (i === index ? { ...work, [key]: value } : work)) }));
+  };
 
   const fail = (text: string, field?: string) => {
     setError({ text, field });
@@ -269,7 +275,7 @@ export function MediaBuyersPage() {
           <span className="section-kicker">للميديا باير والوكالات</span>
           <h1 className="page-title mt-4">اشتغل مع تجار متجركو</h1>
           <p className="page-lead mt-4">
-            قدّم مرة واحدة، ولو اتقبلت هتظهر للتجار اللي بيدوّروا على حد يعلن لهم جوه لوحة تحكم متجركو. ببلاش، ومن غير نسبة من شغلك.
+            قدّم مرة واحدة، ولو اتقبلت هنرشّحك لتجار متجركو اللي بيدوّروا على حد يعلن لهم، وقريب هتظهر لهم في صفحة الميديا باير جوه لوحة التحكم. ببلاش، ومن غير نسبة من شغلك.
           </p>
           <a href="#apply" className="btn btn-primary mt-7">قدّم دلوقتي</a>
         </div>
@@ -280,7 +286,7 @@ export function MediaBuyersPage() {
           <h2 className="section-title text-center">هتاخد إيه؟</h2>
           <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2">
             <Benefit icon={<Users className="h-5 w-5" aria-hidden="true" />} title="عملاء من تجار متجركو">
-              التاجر بيختار من الميديا باير المقبولين حسب المجال والمنصة والميزانية، ولما يطلبك بيوصلك رقمه واللي محتاجه.
+              بنرشّحك للتجار اللي محتاجين حد في مجالك. وقريب هيختاروا بنفسهم من صفحة الميديا باير جوه لوحة التحكم، حسب المجال والمنصة والميزانية.
             </Benefit>
             <Benefit icon={<BadgeCheck className="h-5 w-5" aria-hidden="true" />} title="نتايجك من المنصة، مش سكرينشوتات" soon>
               كل أوردر في متجركو مكتوب عليه جه من أنهي إعلان. هنحسب لك الأوردرات اللي اتسلّمت من شغلك، بموافقة التاجر، وتظهر في بروفايلك.
@@ -302,7 +308,7 @@ export function MediaBuyersPage() {
             {[
               { icon: <Send className="h-5 w-5" aria-hidden="true" />, title: "قدّم في 5 دقايق", text: "اكتب خبرتك وسابقة أعمالك، وأكّد رقمك بكود على واتساب." },
               { icon: <Search className="h-5 w-5" aria-hidden="true" />, title: "بنراجع طلبك", text: "بنقرا شغلك، وممكن نكلمك على واتساب. لو اتقبلت بنبعتلك رسالة." },
-              { icon: <MessageCircle className="h-5 w-5" aria-hidden="true" />, title: "التجار يوصلولك", text: "تظهر في صفحة الميديا باير جوه لوحة التاجر، وطلباتهم توصلك على رقمك." },
+              { icon: <MessageCircle className="h-5 w-5" aria-hidden="true" />, title: "التجار يوصلولك", text: "بنرشّحك للتجار المناسبين، وقريب هتظهر لهم في صفحة الميديا باير جوه لوحة التحكم." },
             ].map((step, index) => (
               <li key={step.title} className="card p-5">
                 <div className="flex items-center gap-3">
