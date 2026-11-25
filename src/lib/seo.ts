@@ -244,6 +244,14 @@ export const seoPages: Record<string, SeoPage> = {
     keywords: ["الطلبات الوهمية في الدفع عند الاستلام", "تقليل الطلبات الوهمية", "نسبة التسليم متجر إلكتروني مصر"],
     type: "article",
   },
+  "/blog/confirm-orders-whatsapp-before-shipping": {
+    path: "/blog/confirm-orders-whatsapp-before-shipping",
+    title: "تأكيد الطلبات على واتساب قبل الشحن: رسائل جاهزة | متجركو",
+    description:
+      "رسائل واتساب جاهزة لتأكيد طلبات الدفع عند الاستلام قبل الشحن: متى ترسل، ماذا تكتب، كيف تتابع من لا يرد، وكيف تقيس أثر التأكيد على التسليم.",
+    keywords: ["تأكيد الطلبات على واتساب", "رسائل تأكيد الطلب", "الدفع عند الاستلام واتساب"],
+    type: "article",
+  },
   // Compare / competitor pages
   "/compare": {
     path: "/compare",
@@ -415,6 +423,7 @@ const arabicOrderedSeoPages = [
   seoPages["/blog/best-ecommerce-platform-egypt"],
   seoPages["/blog/free-online-store-pros-cons"],
   seoPages["/blog/reduce-fake-cod-orders-egypt"],
+  seoPages["/blog/confirm-orders-whatsapp-before-shipping"],
   seoPages["/learn"],
   ...learnGuides.map((guide) => seoPages[`/learn/${guide.slug}`]),
   // Compare pages

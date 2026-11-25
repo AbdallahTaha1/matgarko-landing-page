@@ -853,6 +853,85 @@ export const englishBlogArticles: BlogArticle[] = [
       },
     ],
   },
+  {
+    slug: "confirm-orders-whatsapp-before-shipping",
+    title: "Confirm orders on WhatsApp before shipping: ready messages",
+    description:
+      "Ready-to-use WhatsApp messages to confirm cash-on-delivery orders before shipping: when to send, what to write, how to follow up, and how to measure the effect.",
+    category: "Beginner guide",
+    readingTime: "6 min read",
+    publishDate: "2026-11-25",
+    content: [
+      {
+        type: "p",
+        text: "A short WhatsApp message before shipping is the cheapest way to protect your orders. It does not guarantee delivery, but it exposes unserious orders, fixes missing addresses, and lets the customer know the amount before the courier arrives.",
+      },
+      {
+        type: "h2",
+        text: "Why confirm before shipping?",
+      },
+      {
+        type: "p",
+        text: "With cash on delivery the risk is yours: the ad is paid, the product is packed, and shipping is charged. Confirming first costs two minutes instead of a full return.",
+      },
+      {
+        type: "ul",
+        items: ["Check that the phone owner really placed the order", "Review product, size, colour and quantity", "Fix the address and get a backup number for the courier"],
+      },
+      {
+        type: "h2",
+        text: "When to send it",
+      },
+      {
+        type: "p",
+        text: "Within the first hour after the order, while the customer still remembers the ad. If the order arrives at night, send the message in the morning.",
+      },
+      {
+        type: "h2",
+        text: "Message 1: confirm the order",
+      },
+      {
+        type: "p",
+        text: "Include the store name, product and quantity, the total with delivery, the address, and ask the customer to reply \"confirm\" so you can prepare the shipment.",
+      },
+      {
+        type: "h2",
+        text: "Message 2: fix the address",
+      },
+      {
+        type: "p",
+        text: "If the address is incomplete, ask directly for the area, street, building, floor and a nearby landmark, plus a second contact number.",
+      },
+      {
+        type: "h2",
+        text: "Message 3: follow up with no reply",
+      },
+      {
+        type: "ol",
+        items: ["Wait a reasonable few hours", "Send one short follow-up", "Try one call for larger orders", "After two attempts, hold or cancel the order and record the reason"],
+      },
+      {
+        type: "h2",
+        text: "After shipping",
+      },
+      {
+        type: "p",
+        text: "Tell the customer the delivery window and the amount to have ready, so the courier is not turned away at the door.",
+      },
+      {
+        type: "h2",
+        text: "Stay organised and measure",
+      },
+      {
+        type: "p",
+        text: "Save the messages as templates and mark each order as confirmed or waiting. In Matgarko you can track each order's status from the dashboard or the app, and record a refused delivery to see your real delivery rate. Orders you record yourself from WhatsApp are not counted. Compare two weeks of orders received, confirmed and delivered against the two weeks before.",
+      },
+      {
+        type: "callout",
+        text: "Tip: start with one confirmation message that includes the total with delivery and the address, and run it for a full week before adding more templates.",
+      },
+    ],
+  },
 ];
 
 export const englishSeoPages: Record<string, EnglishSeoEntry> = {
@@ -1006,6 +1085,13 @@ export const englishSeoPages: Record<string, EnglishSeoEntry> = {
     keywords: ["fake orders cash on delivery", "reduce fake orders Egypt", "delivery rate ecommerce Egypt"],
     type: "article",
   },
+  "/en/blog/confirm-orders-whatsapp-before-shipping": {
+    title: "Confirm orders on WhatsApp before shipping: ready messages | Matgarko",
+    description:
+      "Ready-to-use WhatsApp messages to confirm cash-on-delivery orders before shipping: when to send, what to write, how to follow up, and how to measure the effect.",
+    keywords: ["confirm orders on WhatsApp", "cash on delivery order confirmation", "WhatsApp message templates for orders"],
+    type: "article",
+  },
   "/en/compare": {
     title: "Compare ecommerce platforms for Egypt and MENA | Matgarko",
     description:
@@ -1063,6 +1149,7 @@ export const englishOrderedPaths = [
   "/en/blog/best-ecommerce-platform-egypt",
   "/en/blog/free-online-store-pros-cons",
   "/en/blog/reduce-fake-cod-orders-egypt",
+  "/en/blog/confirm-orders-whatsapp-before-shipping",
   "/en/compare",
   "/en/compare/easyorders",
   "/en/compare/shopify",
