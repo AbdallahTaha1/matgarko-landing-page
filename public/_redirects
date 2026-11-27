@@ -1,3 +1,12 @@
 # Egypt is the main site at "/"; /ar-eg is an alias for people who guess the country prefix.
 /ar-eg          /           301
 /ar-eg/*        /:splat     301
+
+# Short links for posts, groups and messages: matgarko.com/<name> opens a page with its utm tags,
+# so signups from it show up under that source in the statistics. Short because people distrust a
+# long link full of «utm». 302 on purpose: browsers do not remember it, so a line can be changed later.
+# To add one: a new line here, then push to main.
+/g              /register?utm_source=facebook&utm_medium=group&utm_campaign=outreach        302
+/p              /register?utm_source=facebook&utm_medium=page&utm_campaign=posts            302
+/w              /register?utm_source=whatsapp&utm_medium=message&utm_campaign=outreach      302
+/ig             /register?utm_source=instagram&utm_medium=social&utm_campaign=posts         302

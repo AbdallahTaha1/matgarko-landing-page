@@ -123,6 +123,8 @@ Egypt is the main Arabic site at `/` (`ar-EG`); `/ar-eg` redirects there (`publi
 
 ## Deployment Notes
 
+Short links for posts live in `public/_redirects`: `matgarko.com/g` (Facebook groups), `/p` (page posts), `/w` (WhatsApp), `/ig` (Instagram) each open `/register` with their own utm tags, so signups from them are counted under that source. They are 302s so a line can change later; add a new one as a new line there.
+
 Deploy to Cloudflare Pages with the React (Vite) preset, production branch `main`, build command `npm run build`, output directory `dist`, and an empty root directory.
 
 The build prerenders every public Arabic and English route to HTML. Serve those files directly so search crawlers can read the content without executing JavaScript. Cloudflare Pages automatically uses the generated `404.html` and `en/404.html` files to return localized HTTP 404 responses for unknown paths. No `_redirects` rules are needed for these responses; Cloudflare Pages does not support status 404 in that file. Do not restore a blanket `/* /index.html 200` rewrite: it turns nonexistent URLs into soft 404s.
