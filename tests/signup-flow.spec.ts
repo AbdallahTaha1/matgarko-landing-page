@@ -246,6 +246,20 @@ test('verified signup preserves sources, converts once, then opens the dashboard
   expect(await metaRegistrations(page)).toHaveLength(0);
   expect(state.submissions).toHaveLength(1);
 });
+for (const consent of ['unknown', 'declined'] as const) {
+  test(`a short link's tags reach the signup with consent ${consent}, without ad click ids or anything stored`, async ({ page }) => {
+    const state = await mockSignup(page, consent);
+    await page.goto('/en/register?utm_source=facebook&utm_medium=group&utm_campaign=outreach&gclid=click-123');
+    await enterDetails(page);
+    await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
+    const acquisition = state.submissions[0].acquisition as { first: Record<string, unknown>; last: Record<string, unknown> };
+    expect(acquisition).toMatchObject({ first: { source: 'facebook', medium: 'group', campaign: 'outreach', landingPath: '/en/register' }, last: { source: 'facebook', medium: 'group' } });
+    expect(acquisition.first.gclid).toBeUndefined();
+    expect(acquisition.last.gclid).toBeUndefined();
+    expect(await page.evaluate(() => localStorage.getItem('matgarko-acquisition'))).toBeNull();
+  });
+}
 test('signup works without analytics consent or the optional discovery answer', async ({ page }) => {
   const state = await mockSignup(page, 'declined');
   await page.route('https://testshop.matgarko.com/admin', route => route.fulfill({ contentType: 'text/html', body: '<h1>Store dashboard</h1>' }));
@@ -253,7 +267,9 @@ test('signup works without analytics consent or the optional discovery answer', 
   await enterDetails(page);
   await page.getByRole('button', { name: 'Send verification code', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Verify your email' })).toBeVisible();
-  expect(state.submissions[0].acquisition).toBeUndefined();
+  // Without consent the signup still says where this visit came from, as a direct visit here.
+  expect(state.submissions[0].acquisition).toMatchObject({ first: { source: 'direct', medium: 'none' }, last: { source: 'direct' } });
+  expect(await page.evaluate(() => localStorage.getItem('matgarko-acquisition'))).toBeNull();
   expect(state.submissions[0].discoverySource).toBeUndefined();
   state.ready = true;
   await page.getByLabel('Verification code', { exact: true }).fill('123456');

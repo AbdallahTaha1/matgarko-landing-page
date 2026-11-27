@@ -49,9 +49,17 @@ export function aiAssistant(hostOrSource?: string) {
   return hostOrSource && aiHosts.test(hostOrSource.toLowerCase()) ? hostOrSource.toLowerCase() : undefined;
 }
 
-export function getAcquisition() {
+/**
+ * What the signup carries. With consent: the saved first touch and the last campaign. Without it
+ * (most visitors never press the banner, so 80% of signups had no source): only this visit's own
+ * link tags, kept in memory and sent with the form, never stored on the device, without ad click ids.
+ */
+export function getAcquisition(): Acquisition | undefined {
   captureAcquisition();
-  return getConsent() === 'accepted' ? current : undefined;
+  if (getConsent() === 'accepted') return current;
+  if (!initial) return undefined;
+  const visit: AcquisitionTouch = { ...initial, gclid: undefined, gbraid: undefined, wbraid: undefined };
+  return { first: visit, last: visit };
 }
 
 // Retain campaign information in memory when consent is given after internal navigation.
