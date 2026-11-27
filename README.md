@@ -123,7 +123,7 @@ Egypt is the main Arabic site at `/` (`ar-EG`); `/ar-eg` redirects there (`publi
 
 ## Deployment Notes
 
-Short links for posts live in `public/_redirects`: `matgarko.com/g` (Facebook groups), `/p` (page posts), `/w` (WhatsApp), `/ig` (Instagram) each open `/register` with their own utm tags, so signups from them are counted under that source. They are 302s so a line can change later; add a new one as a new line there.
+Short links for posts live in `public/_redirects`: `matgarko.com/g` (Facebook groups), `/p` (page posts), `/w` (WhatsApp), `/ig` (Instagram) each open `/register` with their own utm tags, so signups from them are counted under that source. They are 302s so a line can change later; add a new one as a new line there. `/g1`–`/g4` are the four group-post versions, told apart by `utm_content`.
 
 Deploy to Cloudflare Pages with the React (Vite) preset, production branch `main`, build command `npm run build`, output directory `dist`, and an empty root directory.
 

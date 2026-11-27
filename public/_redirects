@@ -10,3 +10,9 @@
 /p              /register?utm_source=facebook&utm_medium=page&utm_campaign=posts            302
 /w              /register?utm_source=whatsapp&utm_medium=message&utm_campaign=outreach      302
 /ig             /register?utm_source=instagram&utm_medium=social&utm_campaign=posts         302
+
+# One link per group-post version (marketing/media-buyers-post/outreach-post.md), told apart by utm_content.
+/g1             /register?utm_source=facebook&utm_medium=group&utm_campaign=outreach&utm_content=v1-messages   302
+/g2             /register?utm_source=facebook&utm_medium=group&utm_campaign=outreach&utm_content=v2-price      302
+/g3             /register?utm_source=facebook&utm_medium=group&utm_campaign=outreach&utm_content=v3-start      302
+/g4             /register?utm_source=facebook&utm_medium=group&utm_campaign=outreach&utm_content=v4-fake       302
