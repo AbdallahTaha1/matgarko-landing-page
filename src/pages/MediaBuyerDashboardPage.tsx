@@ -165,6 +165,7 @@ export function MediaBuyerDashboardPage() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState(params.get("welcome") ? "رقمك اتأكد وحسابك اتعمل. كمّل بروفايلك عشان تظهر للتجار." : "");
   const errorBox = useRef<HTMLDivElement>(null);
+  const top = useRef<HTMLDivElement>(null);
 
   const load = (next: MediaBuyerProfile, keepForm = false) => {
     setProfile(next);
@@ -214,6 +215,8 @@ export function MediaBuyerDashboardPage() {
     try {
       load(await mediaBuyerApi.save(toInput(next)));
       setNotice(done);
+      // The button is at the foot of a long form; where the profile stands now is at its head.
+      requestAnimationFrame(() => top.current?.scrollIntoView({ block: "start", behavior: "smooth" }));
     } catch (caught) {
       const problem = signedOut(caught);
       fail(problem.text, problem.field?.startsWith("services.") ? `service-${problem.field.split(".")[1]}-title` : problem.field ? `mb-${problem.field}` : undefined);
@@ -279,7 +282,8 @@ export function MediaBuyerDashboardPage() {
           </button>
         </div>
 
-        <div className="mt-5 space-y-3">
+        <div ref={top} className="mt-5 scroll-mt-24 space-y-3">
+          {notice && <p role="status" className="rounded-xl bg-emerald-50 p-3 text-sm leading-6 text-emerald-800">{notice}</p>}
           <Status profile={profile} />
           <div className="rounded-xl border border-gray-200 bg-white p-4">
             <div className="flex items-center justify-between text-sm font-bold text-gray-800">
@@ -294,7 +298,6 @@ export function MediaBuyerDashboardPage() {
 
         <form onSubmit={(event: FormEvent) => { event.preventDefault(); void save(form); }} noValidate className="mt-5 space-y-7 rounded-xl border border-gray-200 bg-white p-5 shadow-xl sm:p-7">
           {error && <div ref={errorBox} tabIndex={-1} role="alert" className="rounded-lg bg-red-50 p-3 text-sm leading-6 text-red-800">{error}</div>}
-          {notice && <p role="status" className="rounded-lg bg-emerald-50 p-3 text-sm leading-6 text-emerald-800">{notice}</p>}
 
           <Section title="إنت مين">
             <div className="flex items-center gap-4">
