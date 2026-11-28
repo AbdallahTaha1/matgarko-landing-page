@@ -19,7 +19,7 @@ function emptyProfile() {
 }
 
 /** Answers the media buyer API the way the server does, keeping one profile between calls. */
-async function mockApi(page: Page, profile = emptyProfile()) {
+async function mockApi(page: Page, profile = emptyProfile(), account: Record<string, unknown> = {}) {
   const sent: Sent[] = [];
   let verifyCalls = 0;
   const complete = () => {
@@ -58,7 +58,7 @@ async function mockApi(page: Page, profile = emptyProfile()) {
     }
     if (path === '/me/photo') { profile.photoUrl = `data:image/png;base64,${png.toString('base64')}`; complete(); return json(200, { profile }); }
     if (path === '/me/work-photos') { profile.workPhotos.push({ id: profile.workPhotos.length + 1, url: `data:image/png;base64,${png.toString('base64')}` }); return json(200, { profile }); }
-    return json(200, { profile });
+    return json(200, { profile, ...account });
   });
   return { sent, profile };
 }
@@ -205,4 +205,49 @@ test('a hidden profile says so and why, and a busy one says it is not shown', as
   await page.locator('#mb-isAvailable').uncheck();
   await page.getByRole('button', { name: 'احفظ التعديلات' }).click();
   await expect(page.getByText('إنت معلّم إنك مشغول.')).toBeVisible();
+});
+
+test('the dashboard lists the merchants who got in touch and what the platform shows for it', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  const errors = await quiet(page);
+  const profile = { ...emptyProfile(), photoUrl: `data:image/png;base64,${png.toString('base64')}`, city: 'القاهرة', headline: 'ميديا باير لمتاجر الملابس', platforms: ['meta'], specialties: ['fashion'], monthlyFee: 5000, missing: [], percent: 70, visible: true };
+  await mockApi(page, profile, {
+    directoryOpen: true,
+    standing: { workedWith: 2, rating: null, ratings: 1 },
+    requests: [
+      { store: 'متجر النور', storeUrl: 'https://alnoor.matgarko.com', service: 'إعلانك الأول', on: '2026-11-28', outcome: 'waiting', rating: null },
+      { store: 'كيوت كيدز', storeUrl: 'https://cute-kids.matgarko.com', service: null, on: '2026-11-20', outcome: 'agreed', rating: 5 },
+      { store: 'بيت العطور', storeUrl: null, service: null, on: '2026-11-18', outcome: 'no_reply', rating: null },
+    ],
+  });
+  await page.addInitScript(() => localStorage.setItem('matgarko-media-buyer-session', 'session-1'));
+  await page.goto('/media-buyers/dashboard');
+  // The merchants' page is open, so a complete profile is shown, not «هيظهر».
+  await expect(page.getByText('وظاهر لتجار متجركو في صفحة الميديا باير.')).toBeVisible();
+  const asks = page.locator('[data-slot="asks"]');
+  await expect(asks.getByRole('heading', { name: 'تجار تواصلوا معاك' })).toBeVisible();
+  await expect(asks).toContainText('اشتغلت مع 2 من تجار متجركو');
+  // One rating is not an average yet.
+  await expect(asks).not.toContainText('تقييمك');
+  const rows = asks.getByRole('listitem');
+  await expect(rows).toHaveCount(3);
+  await expect(rows.nth(0)).toContainText('إعلانك الأول');
+  await expect(rows.nth(0)).toContainText('التاجر لسه ما قالش حصل إيه');
+  await expect(rows.nth(0).getByRole('link', { name: 'متجر النور' })).toHaveAttribute('href', 'https://alnoor.matgarko.com');
+  await expect(rows.nth(1)).toContainText('قيّمك 5 من 5');
+  await expect(rows.nth(2)).toContainText('التاجر قال إنك ما رديتش');
+  if (shots) await asks.screenshot({ path: `${shots}/phone-asks.png` });
+  await noSidewaysScroll(page);
+  expect(errors).toEqual([]);
+});
+
+test('with nobody in touch yet, and an older server, the dashboard shows no list', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  const errors = await quiet(page);
+  await mockApi(page);
+  await page.addInitScript(() => localStorage.setItem('matgarko-media-buyer-session', 'session-1'));
+  await page.goto('/media-buyers/dashboard');
+  await expect(page.getByRole('heading', { level: 1, name: 'لوحة الميديا باير' })).toBeVisible();
+  await expect(page.locator('[data-slot="asks"]')).toHaveCount(0);
+  expect(errors).toEqual([]);
 });

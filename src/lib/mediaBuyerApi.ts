@@ -18,6 +18,19 @@ export interface MediaBuyerProfile {
   percent: number; missing: string[];
   hidden: boolean; hiddenReason?: string | null; visible: boolean;
 }
+/** A merchant who opened this buyer's WhatsApp from the dashboard, and what the merchant later said came of it. */
+export interface MediaBuyerAsk {
+  store?: string | null; storeUrl?: string | null; service?: string | null; on: string;
+  outcome: "waiting" | "agreed" | "not_agreed" | "no_reply"; rating?: number | null;
+}
+/** What the platform shows merchants about this buyer: stores that agreed, and the rating once three have rated. */
+export interface MediaBuyerStanding { workedWith: number; rating?: number | null; ratings: number }
+/** The dashboard's read. An older server sends the profile alone. */
+export interface MediaBuyerAccount {
+  profile: MediaBuyerProfile; standing?: MediaBuyerStanding; requests?: MediaBuyerAsk[];
+  /** Whether merchants see the page of media buyers yet. */
+  directoryOpen?: boolean;
+}
 /** What the dashboard saves: the profile's own fields, without what the server works out. */
 export type MediaBuyerProfileInput = Omit<MediaBuyerProfile, "phone" | "photoUrl" | "workPhotos" | "percent" | "missing" | "hidden" | "hiddenReason" | "visible">;
 export interface MediaBuyerSource { source?: string; medium?: string; campaign?: string; content?: string }
@@ -80,7 +93,7 @@ export const mediaBuyerApi = {
   signOut: () => request<unknown>("/logout", { signedIn: true }).catch(() => undefined).then(() => setSession(null)),
   forgotPassword: (phone: string) => request<Awaiting>("/password/forgot", { data: { phone } }),
   resetPassword: (token: string, code: string, password: string) => request<SignedIn>("/password/reset", { token, data: { code, password } }).then(keep),
-  me: () => request<{ profile: MediaBuyerProfile }>("/me", { signedIn: true, get: true }).then((result) => result.profile),
+  account: () => request<MediaBuyerAccount>("/me", { signedIn: true, get: true }),
   save: (data: MediaBuyerProfileInput) => request<{ profile: MediaBuyerProfile }>("/me", { signedIn: true, data }).then((result) => result.profile),
   setPhoto: (file: Blob) => request<{ profile: MediaBuyerProfile }>("/me/photo", { signedIn: true, file }).then((result) => result.profile),
   addWorkPhoto: (file: Blob) => request<{ profile: MediaBuyerProfile }>("/me/work-photos", { signedIn: true, file }).then((result) => result.profile),

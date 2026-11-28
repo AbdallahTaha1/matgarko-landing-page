@@ -6,7 +6,7 @@ import { phoneCountries } from "@/lib/phone";
 import { mbFieldClass, mbHintClass, mbInputClass, mbLabelClass } from "@/lib/mediaBuyerUi";
 import {
   getSession, mediaBuyerApi, mediaBuyerError, shrinkPhoto,
-  type MediaBuyerProfile, type MediaBuyerProfileInput,
+  type MediaBuyerAccount, type MediaBuyerAsk, type MediaBuyerProfile, type MediaBuyerProfileInput, type MediaBuyerStanding,
 } from "@/lib/mediaBuyerApi";
 import {
   DIRECTORY_OPEN, currencies, currencyFor, currencyNames, missingLabels, platforms, pricingMethods, serviceSuggestions, specialties,
@@ -114,7 +114,7 @@ function Section({ title, note, children }: { title: string; note?: string; chil
 }
 
 /** Where the profile stands, in one coloured line with what to do next. */
-function Status({ profile }: { profile: MediaBuyerProfile }) {
+function Status({ profile, open }: { profile: MediaBuyerProfile; open: boolean }) {
   if (profile.hidden) {
     return (
       <div role="status" className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm leading-7 text-red-900">
@@ -144,8 +144,48 @@ function Status({ profile }: { profile: MediaBuyerProfile }) {
       <CheckCircle2 className="mt-1 h-5 w-5 shrink-0" aria-hidden="true" />
       <p>
         <strong>بروفايلك مكتمل.</strong>{" "}
-        {DIRECTORY_OPEN ? "وظاهر لتجار متجركو في صفحة الميديا باير." : "هيظهر لتجار متجركو أول ما صفحة الميديا باير تفتح في لوحة التحكم، وده قريب."}
+        {open ? "وظاهر لتجار متجركو في صفحة الميديا باير." : "هيظهر لتجار متجركو أول ما صفحة الميديا باير تفتح في لوحة التحكم، وده قريب."}
       </p>
+    </div>
+  );
+}
+
+const askOutcome: Record<MediaBuyerAsk["outcome"], { text: string; tone: string }> = {
+  waiting: { text: "التاجر لسه ما قالش حصل إيه", tone: "bg-gray-100 text-gray-700" },
+  agreed: { text: "اتفقتوا", tone: "bg-emerald-100 text-emerald-800" },
+  not_agreed: { text: "ما اتفقتوش", tone: "bg-gray-100 text-gray-700" },
+  no_reply: { text: "التاجر قال إنك ما رديتش", tone: "bg-red-100 text-red-800" },
+};
+
+/** Merchants who opened this buyer's WhatsApp from their dashboard, and what the platform shows for it. */
+function Asks({ standing, requests }: { standing?: MediaBuyerStanding; requests: MediaBuyerAsk[] }) {
+  if (requests.length === 0 && !standing?.workedWith) return null;
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white p-4" data-slot="asks">
+      <h2 className="text-base font-extrabold text-gray-950 font-heading">تجار تواصلوا معاك</h2>
+      {standing && standing.workedWith > 0 && (
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-800">
+          <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+          اشتغلت مع {standing.workedWith} من تجار متجركو
+          {standing.rating != null && <span className="font-normal">· تقييمك <span dir="ltr">{standing.rating}</span> من 5</span>}
+        </p>
+      )}
+      <ul className="mt-3 divide-y divide-gray-100">
+        {requests.map((ask, index) => (
+          <li key={index} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 py-2.5 text-sm">
+            <div className="min-w-0">
+              {ask.storeUrl
+                ? <a href={ask.storeUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-800 underline">{ask.store}</a>
+                : <span className="font-bold text-gray-900">{ask.store ?? "متجر"}</span>}
+              <span className="text-gray-500">{ask.service ? ` · ${ask.service}` : ""} · <span dir="ltr">{ask.on}</span></span>
+            </div>
+            <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold ${askOutcome[ask.outcome]?.tone ?? ""}`}>
+              {ask.rating ? `قيّمك ${ask.rating} من 5` : askOutcome[ask.outcome]?.text}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p className={mbHintClass}>التاجر بيكلمك على واتساب من رقمه، وبعدها بيقول لمتجركو حصل إيه. الرقم ده بيظهر في بروفايلك لما متجر بيبيع فعلًا يقول «اتفقنا». ولو 3 تجار قالوا إنك ما رديتش، بروفايلك بيختفي لحد ما تفتح لوحتك تاني.</p>
     </div>
   );
 }
@@ -159,6 +199,7 @@ export function MediaBuyerDashboardPage() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [profile, setProfile] = useState<MediaBuyerProfile | null>(null);
+  const [account, setAccount] = useState<MediaBuyerAccount | null>(null);
   const [form, setForm] = useState<Form | null>(null);
   const [saved, setSaved] = useState("");
   const [busy, setBusy] = useState<"" | "save" | "photo" | "work">("");
@@ -179,7 +220,7 @@ export function MediaBuyerDashboardPage() {
   useEffect(() => {
     if (!getSession()) { navigate("/media-buyers/login", { replace: true }); return; }
     let alive = true;
-    mediaBuyerApi.me().then((next) => { if (alive) load(next); }).catch((caught) => {
+    mediaBuyerApi.account().then((next) => { if (alive) { setAccount(next); load(next.profile); } }).catch((caught) => {
       if (!alive) return;
       const problem = mediaBuyerError(caught);
       if (problem.code === "SignedOut") navigate("/media-buyers/login", { replace: true });
@@ -284,7 +325,8 @@ export function MediaBuyerDashboardPage() {
 
         <div ref={top} className="mt-5 scroll-mt-24 space-y-3">
           {notice && <p role="status" className="rounded-xl bg-emerald-50 p-3 text-sm leading-6 text-emerald-800">{notice}</p>}
-          <Status profile={profile} />
+          <Status profile={profile} open={account?.directoryOpen ?? DIRECTORY_OPEN} />
+          <Asks standing={account?.standing} requests={account?.requests ?? []} />
           <div className="rounded-xl border border-gray-200 bg-white p-4">
             <div className="flex items-center justify-between text-sm font-bold text-gray-800">
               <span>اكتمال البروفايل</span><span dir="ltr">{profile.percent}%</span>
