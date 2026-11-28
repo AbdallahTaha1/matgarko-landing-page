@@ -4,6 +4,8 @@ import { CountryCodPage, CountryHomePage, CountryPricingPage, CountryRegisterPag
 import { SaudiVsSallaPage } from "./pages/country/SaudiVsSallaPage";
 import { AnswersPage } from "./pages/AnswersPage";
 import { MediaBuyersPage } from "./pages/MediaBuyersPage";
+import { MediaBuyerLoginPage } from "./pages/MediaBuyerLoginPage";
+import { MediaBuyerDashboardPage } from "./pages/MediaBuyerDashboardPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import { HomePage } from "./pages/HomePage";
@@ -121,6 +123,8 @@ export function AppRoutes() {
           <Route path="ar-sa/compare/salla" element={<SaudiVsSallaPage />} />
           <Route path="answers" element={<AnswersPage />} />
           <Route path="media-buyers" element={<MediaBuyersPage />} />
+          <Route path="media-buyers/login" element={<MediaBuyerLoginPage />} />
+          <Route path="media-buyers/dashboard" element={<MediaBuyerDashboardPage />} />
           {/* English localized pages */}
           <Route path="en" element={<EnglishHomePage />} />
           <Route path="en/solutions" element={<EnglishSolutionsPage />} />

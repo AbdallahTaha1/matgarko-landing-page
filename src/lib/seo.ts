@@ -368,8 +368,23 @@ seoPages["/media-buyers"] = {
   path: "/media-buyers",
   type: "website",
   title: "للميديا باير والوكالات: اشتغل مع تجار متجركو | متجركو",
-  description: "قدّم كميديا باير أو وكالة على متجركو: لو اتقبلت هنرشّحك للتجار اللي بيدوّروا على حد يعلن لهم، ببلاش ومن غير نسبة. بيكسل ميتا وتيك توك ومصدر كل أوردر جاهزين.",
+  description: "اعمل حسابك كميديا باير أو وكالة على متجركو: اكتب خبرتك وأسعارك وخدماتك، والتاجر اللي محتاج حد يعلن له يشوف بروفايلك ويكلّمك. ببلاش ومن غير نسبة.",
   keywords: ["ميديا باير", "وظائف ميديا باير", "ميديا باير مصر", "منصة للميديا باير", "وكالة إعلانات متاجر"],
+};
+// The buyer's own pages: nothing for a search engine to read.
+seoPages["/media-buyers/login"] = {
+  path: "/media-buyers/login",
+  title: "دخول الميديا باير | متجركو",
+  description: "ادخل حسابك كميديا باير على متجركو برقم الواتساب والباسورد.",
+  keywords: ["دخول ميديا باير متجركو"],
+  noindex: true,
+};
+seoPages["/media-buyers/dashboard"] = {
+  path: "/media-buyers/dashboard",
+  title: "لوحة الميديا باير | متجركو",
+  description: "عدّل بروفايلك وأسعارك وخدماتك كميديا باير على متجركو.",
+  keywords: ["لوحة ميديا باير متجركو"],
+  noindex: true,
 };
 
 Object.assign(
@@ -442,6 +457,8 @@ const arabicOrderedSeoPages = [
   seoPages["/compare/woocommerce"],
   seoPages["/answers"],
   seoPages["/media-buyers"],
+  seoPages["/media-buyers/login"],
+  seoPages["/media-buyers/dashboard"],
   // Country versions
   ...countries.flatMap((country) => countrySeoPages(country).map((page) => seoPages[page.path])),
   seoPages["/ar-sa/compare/salla"],

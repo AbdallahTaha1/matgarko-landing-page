@@ -14,7 +14,9 @@ assert(!sitemap.includes('<lastmod>'), 'Do not claim a new modification date on 
 const origin = urls[0].origin;
 // Signup pages are noindex, so not in the sitemap: the main ones and one per country version.
 const countrySignups = [...new Set(urls.map((url) => /^\/(ar-[a-z]{2})(?:\/|$)/.exec(url.pathname)?.[1]).filter(Boolean))].map((slug) => `/${slug}/register`);
-const routes = new Set([...urls.map((url) => url.pathname), '/register', '/en/register', ...countrySignups, '/login', '/en/login', '/404', '/en/404']);
+const routes = new Set([...urls.map((url) => url.pathname), '/register', '/en/register', ...countrySignups, '/login', '/en/login', '/404', '/en/404',
+  // A media buyer's own sign-in and dashboard: noindex too.
+  '/media-buyers/login', '/media-buyers/dashboard']);
 const browser = await chromium.launch();
 const page = await browser.newPage();
 const titles = new Set();
@@ -38,7 +40,7 @@ try {
         images: [...doc.querySelectorAll('img')].map((el) => ({ src: el.getAttribute('src'), alt: el.getAttribute('alt') })),
       };
     }, html);
-    const noindex = /\/(register|login|404)$/.test(route);
+    const noindex = /\/(register|login|404|media-buyers\/dashboard)$/.test(route);
     assert(data.title && data.description, `${route}: missing title or description`);
     assert(!titles.has(data.title), `${route}: duplicate title`);
     titles.add(data.title);

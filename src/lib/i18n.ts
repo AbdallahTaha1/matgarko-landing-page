@@ -54,7 +54,7 @@ export function alternateLanguagePath(pathname: string) {
   }
   const language = languageFromPath(pathname);
   // The learning center is Arabic only, so its English switch lands on the English home page.
-  if (language === "ar" && (pathname === "/learn" || pathname.startsWith("/learn/") || pathname === "/answers" || pathname === "/media-buyers")) return ENGLISH_PREFIX;
+  if (language === "ar" && (pathname === "/learn" || pathname.startsWith("/learn/") || pathname === "/answers" || pathname === "/media-buyers" || pathname.startsWith("/media-buyers/"))) return ENGLISH_PREFIX;
   return localizePath(pathname, language === "en" ? "ar" : "en");
 }
 
